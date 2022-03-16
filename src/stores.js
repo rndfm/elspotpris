@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { tariffs } from "./prices.js";
 
 let storedPriceRegion = localStorage.getItem("priceRegion");
 if (!storedPriceRegion)
@@ -30,10 +31,11 @@ tax.subscribe(value => {
     localStorage.setItem("tax", value);
 });
 
-const storedTariff = localStorage.getItem("tariff");
-export const tariff = writable(!storedTariff || storedTariff == "true"); // Default to true when not stored.
+const storedTariffId = localStorage.getItem("tariff");
+const storedTariff = storedTariffId ? tariffs.find(t => t.id == storedTariffId) : tariffs[0];
+export const tariff = writable(storedTariff ? storedTariff : tariffs[0]);
 tariff.subscribe(value => {
-    localStorage.setItem("tariff", value);
+    localStorage.setItem("tariff", value.id);
 });
 
 

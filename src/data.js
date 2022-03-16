@@ -1,7 +1,7 @@
 import { priceNow, prices, co2EmissionNow, co2Emissions, co2EmissionsPrognosis, priceRegion, electricityTax, tax, tariff } from "./stores.js";
 
 let region = "DK2";
-let includeTariff = false;
+let selectedTariff;
 
 let includeElectricityTax = false;
 const electicityTaxAmount = .9;
@@ -17,15 +17,14 @@ const calculateTariff = (datetime) => {
     // Peak load october to march between 17 to 20. 
     let peakLoad = (month >= 10 || month <= 3) && (hour >= 17 && hour < 20);
 
-    return peakLoad ? .6307 : .2363;
+    return peakLoad ? selectedTariff.peak : selectedTariff.normal;
 };
 
 const calculatePrice = (electricityPrice, datetime) => 
 {
-    console.log(includeTax);
     const pricePerKwh = (electricityPrice / 1000
         + (includeElectricityTax ? electicityTaxAmount : 0)
-        + (includeTariff ? calculateTariff(datetime) : 0))
+        + (selectedTariff ? calculateTariff(datetime) : 0))
         * (includeTax ? taxRate : 1);
 
     return Math.round((pricePerKwh + Number.EPSILON) * 100) / 100;
@@ -162,9 +161,6 @@ const calculatePrices = (result) => {
         now.setMilliseconds(0);
         
         var priceEntry = result.filter(x => new Date(x.HourUTC) >= now)[0];
-        console.log(priceEntry);
-        console.log(new Date(priceEntry.HourUTC));
-        console.log(new Date(priceEntry.HourDK));
         priceNow.set(calculatePrice(priceEntry.SpotPriceDKK, new Date(priceEntry.HourUTC)))
     }
 };
@@ -200,7 +196,7 @@ tax.subscribe((value) => {
 });
 
 tariff.subscribe((value) => {
-    includeTariff = value;
+    selectedTariff = value;
     if (elspotpricesResult)
         calculatePrices(elspotpricesResult);
 });
