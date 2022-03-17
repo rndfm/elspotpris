@@ -1,7 +1,7 @@
 export const tariffs = [
     {
         id: "none",
-        name: "ingen",
+        name: "uden tarif",
         normal: 0,
         peak: 0
     },
@@ -22,7 +22,7 @@ export const tariffs = [
 export const electricityTax = [
     {
         id: "none",
-        name: "ingen",
+        name: "uden elafgift",
         value: 0
     },
     {
