@@ -1,9 +1,11 @@
 import svelte from 'rollup-plugin-svelte';
+import sveltePreprocess from 'svelte-preprocess';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
+import scss from 'rollup-plugin-scss';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -41,11 +43,13 @@ export default {
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
-			}
+			},
+			preprocess: sveltePreprocess()
 		}),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
 		css({ output: 'bundle.css' }),
+		scss({ output: 'public/build/global.css'}),
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In

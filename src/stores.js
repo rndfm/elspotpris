@@ -39,8 +39,14 @@ tariff.subscribe(value => {
 });
 
 
-const storedTheme = localStorage.getItem("theme");
-export const theme = writable(storedTheme);
-theme.subscribe(value => {
-    localStorage.setItem("theme", value === 'dark' ? 'dark' : 'light');
+const storedDarkMode = localStorage.getItem("darkMode");
+export const darkMode = writable(storedDarkMode == "true"); // Default to false when not stored.
+darkMode.subscribe(value => {
+    localStorage.setItem("darkMode", value);
+});
+
+const menuClosedStored = localStorage.getItem("menuClosed");
+export const menuClosed = writable(menuClosedStored == "true"); // Default to false when not stored.
+menuClosed.subscribe(value => {
+    localStorage.setItem("menuClosed", value);
 });

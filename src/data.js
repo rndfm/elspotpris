@@ -44,7 +44,7 @@ const elspotprices = (async () => {
     `;
 
     var startDate = new Date();
-    startDate.setHours(startDate.getHours() - 24);
+    startDate.setHours(startDate.getHours() - 24, 0, 0, 0);
 
     const variables = { "startDate": startDate };
     const response = await fetch(apiUrl,
@@ -77,7 +77,7 @@ const co2emis = (async () => {
     `;
 
     var startDate = new Date();
-    startDate.setHours(startDate.getHours() - 24);
+    startDate.setHours(startDate.getHours() - 24, 0, 0, 0);
 
     const variables = { "startDate": startDate };
     const response = await fetch(apiUrl,
@@ -175,7 +175,7 @@ const update = (async () => {
 });
 
 
-let ms = 10000;
+let ms = 60000;
 setInterval(updatePrices, ms);
 
 priceRegion.subscribe(value => {

@@ -1,4 +1,5 @@
 <script>
+	import "./global.scss";
 	import { chart } from "svelte-apexcharts";
 	import {
 		priceNow,
@@ -10,9 +11,12 @@
 		electricityTax,
 		tax,
 		tariff,
+		darkMode,
+		menuClosed
 	} from "./stores.js";
 	import {} from "./data.js";
 	import { tariffs } from "./prices.js";
+	import { onMount } from 'svelte';
 
 	let options = {
 		series: [
@@ -34,6 +38,7 @@
 		],
 		colors: ["#ff3e00", "#4DEBC6", "#4DEBC6"],
 		chart: {
+			foreColor: '#bbb',
 			type: "line",
 			height: 500,
 			toolbar: {
@@ -82,10 +87,17 @@
 				datetimeUTC: false,
 			},
 		},
+		grid: {
+			padding: {
+				left: -50,
+				right: -50
+			},
+		},
 		yaxis: [
 			{
 				opposite: true,
 				labels: {
+					offsetY:-10,
 					formatter: function (value) {
 						return Math.round(value * 100) / 100 + " kr";
 					},
@@ -94,8 +106,9 @@
 			{
 				seriesName: "Co2",
 				labels: {
+					offsetY:-10,
 					formatter: function (value) {
-						return value + " g/kWh";
+						return value + " g";
 					},
 				},
 			},
@@ -116,11 +129,29 @@
 
 	setInterval(() => {
 		options.annotations.xaxis[0].x = new Date().getTime();
+		
 	}, 10000);
 
+	setInterval(() => {
+		gtag('event', 'keepalive');
+	}, 240000);
+	
 	let region;
 	priceRegion.subscribe((value) => {
 		region = value;
+	});
+
+	darkMode.subscribe((value) => {
+		if (value)
+		{
+			document.body.classList.add('dark')
+			options.chart.foreColor = '#bbb';
+		}
+		else
+		{
+			document.body.classList.remove('dark')
+			options.chart.foreColor = '#333';
+		}
 	});
 
 	function updateRegion() {
@@ -150,30 +181,61 @@
 	co2EmissionsPrognosis.subscribe((value) => {
 		options.series[2].data = value;
 	});
+
+	
+	function onResize()
+	{
+		if (document.getElementById('nav'))
+		{
+			// find height of nav.
+			const navHeight = document.getElementById('nav').clientHeight - 30;
+			const metersHeight = document.getElementById('meters').clientHeight;
+			const offset = 40;
+			var height = window.innerHeight - navHeight - metersHeight - offset;
+
+			if (height > 500)
+			{
+				height = 500;
+			}
+
+			if (height < 200)
+			{
+				height = 200;
+			}
+			options.chart.height = height;
+		}
+	}
+
+	menuClosed.subscribe(() => {
+		setTimeout(() => {
+			onResize();	
+		}, 500);
+	});
+
+	onMount(() => {
+		onResize();
+	});
 </script>
 
+<svelte:window on:resize="{onResize}"/>
 <main>
-	<nav>
+	<nav id="nav" class:closed="{$menuClosed}">
 		<ul>
 			<li>
-				<label for="priceAreaDK1"
-					><input
+				<label for="priceAreaDK1">
+					<input
 						id="priceAreaDK1"
 						type="radio"
 						bind:group={region}
 						value="DK1"
-						on:change={updateRegion}
-					/> DK1(vest)</label
-				>
-				<label for="priceAreaDK2"
-					><input
+						on:change={updateRegion}/> DK1(vest)</label>
+				<label for="priceAreaDK2">
+					<input
 						id="priceAreaDK2"
 						type="radio"
 						bind:group={region}
 						value="DK2"
-						on:change={updateRegion}
-					/> DK2(øst)</label
-				>
+						on:change={updateRegion}/> DK2(øst)</label>
 			</li>
 			<li>
 				<label for="electricityTax">
@@ -192,22 +254,22 @@
 				</select>
 			</li>
 			<li>
-				<label for="tax"
-					><input type="checkbox" id="tax" bind:checked={$tax} /> moms</label
-				>
+				<label for="tax"><input type="checkbox" id="tax" bind:checked={$tax} /> moms</label>
 			</li>
-			
+			<li>
+				<label for="darkMode"><input type="checkbox" id="darkMode" bind:checked={$darkMode} /> dark mode</label>
+			</li>
 		</ul>
+		<button class="tab" on:click="{() => $menuClosed = !$menuClosed}"><span class="chevron up"></span></button>
 	</nav>
-	<div class="flexgrid meters">
+	<div class="flexgrid meters" id="meters">
 		<div class="col">
-			<h2>{spotPriceNow} <small>kr</small></h2>
+			<h2>{spotPriceNow} <small>kr/kWh</small></h2>
 			<p>Spotpris lige nu</p>
 		</div>
 		<div class="col">
-			<h2>{emisNow} <small>g</small></h2>
+			<h2>{emisNow} <small>g/kWh</small></h2>
 			<p>Co2 lige nu</p>
-			
 		</div>
 	</div>
 	{#if options.series[0].data}
@@ -221,42 +283,87 @@
 	</div>
 	<div class="github">
 		<p>
-			<img src="github.png" alt="github" />Hjælp med at forbedre denne
-			side.
-			<a href="https://github.com/rndfm/elspotpris" target="_blank"
-				>https://github.com/rndfm/elspotpris</a
-			>
+			{#if $darkMode}<img src="github-dark.png" alt="github" />{:else}<img src="github.png" alt="github" />{/if}Hjælp med at forbedre denne side.
+			<a href="https://github.com/rndfm/elspotpris" target="_blank">https://github.com/rndfm/elspotpris</a>
 		</p>
 	</div>
 </main>
 
-<style>
+<style lang="scss">
 	nav {
-		overflow: auto;
-		margin-bottom: 1em;
-	}
+		margin-bottom: -20px;
 
-	nav ul {
-		display: block;
-		list-style: none;
-		margin: 0;
-		padding: 0;
-		display: flex;
-		justify-content: space-around;
-	}
+		> ul {
+			overflow-x: auto;
+			overflow-y: hidden;
+			display: block;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			max-height: 200px;
+			transition: max-height 0.15s ease-out;
+			
+			@media only screen and (min-width: 768px) {
+				justify-content: center;
+			}
 
-	nav ul li {
-		padding: 10px;
-		display: flex;
-		align-items: center;
-	}
+			> li {
+				padding: 10px 10px 0 10px;
+				display: flex;
+				align-items: center;
+				
 
-	nav ul li label {
-		margin-right: 10px;
-	}
+				> label {
+					margin-right: 10px;
+				}
 
-	nav ul li select {
-		margin: 0;
+				> select {
+					margin: 0;
+				}
+			}
+		}
+
+		.tab {
+			display: block;
+			position: relative;
+			border: none;
+			border-bottom-left-radius: 33%;
+			border-bottom-right-radius: 33%;
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+			margin: 0 auto;
+			width: 50px;
+			height: 30px;
+			cursor: pointer;
+
+			.chevron::before {
+				border-style: solid;
+				border-width: 0.25em 0.25em 0 0;
+				content: '';
+				display: inline-block;
+				height: 0.45em;
+				position: relative;
+				top: 0.15em;
+				transform: rotate(-45deg);
+				vertical-align: top;
+				width: 0.45em;
+			}
+		}
+
+		&.closed {
+			ul {
+				max-height: 0px;
+				overflow: hidden;
+			}
+			.tab {
+				.chevron:before {
+					top: 0;
+					transform: rotate(135deg);
+				}
+			}
+		}
+
 	}
 
 	main {
@@ -273,13 +380,22 @@
 		display: flex;
 	}
 
-	.meters p {
-		padding: 0;
-		margin: 0;
+	.meters {
+		p {
+			padding: 0;
+			margin: 0;
+		}
+
+		h2 {
+			font-weight: 400;
+		}
 	}
 
-	h1,
-	h2 {
+	small {
+		font-size: .5em;
+	}
+
+	h1,	h2 {
 		color: #ff3e00;
 		font-size: 3em;
 		font-weight: 100;
@@ -291,7 +407,7 @@
 		font-size: 2em;
 	}
 
-	@media only screen and (min-width: 768px) {
+	@media only screen and (min-width: 500px) {
 		h1 {
 			font-size: 4em;
 		}
@@ -307,13 +423,15 @@
 	.info {
 		max-width: 800px;
 		margin: 0 auto;
-	}
-	.github {
-		padding: 5em 0;
+		padding: 0 1em;
 	}
 
-	.github img {
-		vertical-align: middle;
-		padding-right: 10px;
+	.github {
+		padding: 5em 1em;
+
+		img {
+			vertical-align: middle;
+			padding-right: 10px;
+		}
 	}
 </style>
