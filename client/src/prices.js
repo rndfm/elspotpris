@@ -8,8 +8,8 @@ export const tariffs = [
     {
         id: "radius_c",
         name: "Radius C",
-        normal: .2363,
-        peak: .6307
+        normal: .3003,
+        peak: .7651
     },
     {
         id: "n1_c",
@@ -28,7 +28,7 @@ export const electricityTax = [
     {
         id: "90",
         name: "90 øre",
-        value: .9
+        value: .9030
     },
     {
         id: "reduced",

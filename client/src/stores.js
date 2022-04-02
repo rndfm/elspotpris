@@ -1,6 +1,8 @@
 import { writable } from 'svelte/store';
 import { tariffs } from "./prices.js";
 
+export const userCount = writable(0);
+
 let storedPriceRegion = localStorage.getItem("priceRegion");
 if (!storedPriceRegion)
 {

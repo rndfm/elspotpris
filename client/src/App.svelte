@@ -2,6 +2,7 @@
 	import "./global.scss";
 	import { chart } from "svelte-apexcharts";
 	import {
+		userCount,
 		priceNow,
 		prices,
 		co2EmissionNow,
@@ -17,6 +18,7 @@
 	import {} from "./data.js";
 	import { tariffs } from "./prices.js";
 	import { onMount } from 'svelte';
+
 
 	let options = {
 		series: [
@@ -59,7 +61,7 @@
 
 				opacityFrom: 0.8,
 				opacityTo: 0.8,
-				stops: [50, 100],
+				stops: [15, 80],
 			},
 		},
 		annotations: {
@@ -280,6 +282,7 @@
 		<p class="lead">Få overblik over spot priserne på el det næste døgn.</p>
 		<p>Har du en elaftale med variabel pris betaler du den pris pr. kWh som er fastsat dagen forinden ved Nordpool. Den såkaldte spotpris. Prisen for næste dag bliver frigivet omkring kl. 13.00.</p>
 		<p>Vælg om prisen skal vises for DK1 eller DK2 som er henholdvis vest og øst for storebælt. Det vil sige at DK1 er Jylland og Fyn mens DK2 er Sjælland. Prisen i grafen kan vises med elafgift, tariffer/transport og moms.<br /> Alle indstillinger bliver husket til næste gang du besøger siden.</p>
+		<p>Lige nu kigger {$userCount} på elpriserne her på siden. Del gerne linket med venner og bekendte så vi sammen kan bruge strømmen når den er billigst og grønnest.</p>
 	</div>
 	<div class="github">
 		<p>
