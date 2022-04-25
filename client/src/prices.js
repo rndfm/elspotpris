@@ -16,6 +16,12 @@ export const tariffs = [
         name: "N1 C",
         normal: .1832,
         peak: .5437
+    },
+    {
+        id: "dinel_c",
+        name: "Dinel C",
+        normal: .1112,
+        peak: .3462
     }
 ]
 
