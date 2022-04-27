@@ -31,3 +31,13 @@ jobs:
       
     - run: npm run build
       working-directory: client
+      
+    - name: Copy files to server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        port: ${{ secrets.PORT }}
+        passphrase: ${{ secrets.PASSWORD }}
+        source: "./"
+        target: "/var/elspotpris.dk/"
