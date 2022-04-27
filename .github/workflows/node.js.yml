@@ -38,6 +38,6 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         port: ${{ secrets.PORT }}
-        passphrase: ${{ secrets.PASSWORD }}
+        password: ${{ secrets.PASSWORD }}
         source: "./"
         target: "/var/elspotpris.dk/"
