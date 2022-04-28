@@ -24,7 +24,7 @@ const calculateTariff = (datetime) => {
 
 const calculatePrice = (electricityPrice, datetime) => 
 {
-    const pricePerKwh = (electricityPrice / 1000
+    const pricePerKwh = (electricityPrice / 100
         + (includeElectricityTax ? electicityTaxAmount : 0)
         + (selectedTariff ? calculateTariff(datetime) : 0))
         * (includeTax ? taxRate : 1);
