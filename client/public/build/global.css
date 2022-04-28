@@ -35,6 +35,10 @@ body.dark nav > ul {
 body.dark nav .tab {
   background-color: #222;
 }
+body.dark .apexcharts-tooltip-title, body.dark .apexcharts-tooltip, body.dark .apexcharts-xaxistooltip {
+  background: #333 !important;
+  color: #bbb;
+}
 
 a {
   color: #0064c8;

@@ -44,6 +44,11 @@ body {
 				background-color: #222;
 			}			
 		}
+
+		.apexcharts-tooltip-title, .apexcharts-tooltip, .apexcharts-xaxistooltip {
+			background: #333 !important; 
+			color: #bbb;
+		  }
 	}
 }
 
