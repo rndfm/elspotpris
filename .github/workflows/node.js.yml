@@ -47,4 +47,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: PM2 restart elspotpris.dk
+        script: pm2 restart elspotpris.dk
