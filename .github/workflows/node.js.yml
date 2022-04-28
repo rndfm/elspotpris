@@ -39,3 +39,12 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         source: "./"
         target: "/var/elspotpris.dk"
+    
+    - name: Restart nodejs server with pm2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: PM2 restart elspotpris.dk
