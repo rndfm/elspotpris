@@ -35,7 +35,7 @@ async function getPrices() {
 async function getPricesForDate(date)
 {
     var datestring = ("0" + date.getDate()).slice(-2) + "-" + ("0"+(date.getMonth()+1)).slice(-2) + "-" + date.getFullYear();
-    var url = `${apiUrl}?enddate=${datestring}&currency=dkk`;
+    var url = `${apiUrl}?enddate=${datestring}&currency=DKK`;
     console.log(url);
 
     var response = await getData(url);
