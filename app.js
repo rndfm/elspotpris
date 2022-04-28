@@ -19,7 +19,7 @@ io.on('connection', function(socket) {
   io.emit('prices', prices);
   io.emit('co2emis', co2emis);
   io.emit('co2emisprog', co2emisprog);
-  //Whenever someone disconnects this piece of code executed
+
   socket.on('disconnect', function () {
     io.emit('users', io.engine.clientsCount);
     console.log('A user disconnected');
@@ -64,16 +64,20 @@ var nordpool = require('./integrations/nordpool.js');
 var prices, pricesDate, co2emisprog, co2emis;
 
 function updatePrices(){
-  var dateNow = new Date().setHours(0,0,0,0);
-  if (pricesDate == null || dateNow > pricesDate)
+  var today = new Date();
+  today.setHours(0,0,0,0);
+  var tomorrow = today.addDays(1);
+  if (pricesDate == null || (pricesDate < tomorrow && new Date().getHours() >= 13) || dateNow > pricesDate)
   {
-    console.log(`prices stale. Getting prices for ${dateNow}`);
+    console.log(`Prices stale. Getting prices for ${tomorrow}`);
     nordpool.getPrices().then((data) => {
-      prices = data;
-      pricesDate = dateNow;
-      io.emit('prices', data);
+      console.log(`Got prices for ${data.lastDate}`);
+      prices = data.prices;
+      pricesDate = data.lastDate;
     });
   }
+
+  io.emit('prices', prices);
 }
 
 function updateCo2Emis()

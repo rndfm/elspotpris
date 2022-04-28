@@ -75,7 +75,7 @@ async function postGraph(query, variables)
           'Content-Type': 'application/json',
           'Content-Length': bodyData.length,
         },
-        timeout: 1000, // in ms
+        timeout: 10000, // in ms
       }
     
     return new Promise((resolve, reject) => {

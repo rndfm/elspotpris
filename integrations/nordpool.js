@@ -1,3 +1,4 @@
+const { Console } = require('console');
 const https = require('https');
 
 Date.prototype.addDays = function(days) {
@@ -10,15 +11,25 @@ const apiUrl = 'https://www.nordpoolgroup.com/api/marketdata/page/41';
 
 async function getPrices() {
 
-    //get today
+    // get today
     var today = new Date();
+    today.setHours(0,0,0,0);
     var pricesToday = await getPricesForDate(today);
 
-    //get tomorrow
+    // get tomorrow
     var tomorrow = today.addDays(1);
     var pricesTomorrow = await getPricesForDate(tomorrow);
+    console.log(pricesTomorrow[0].prices[0]);
+    if (pricesTomorrow.some(p => p.prices.some(ap => isNaN(ap.price))))
+    {
+        console.log("Some prices for tomorrow are NaN.");
+        // get prices for yesterday
+        var yesterday = today.addDays(-1);
+        pricesYesterday = await getPricesForDate(yesterday);
+        return { prices: pricesYesterday.concat(pricesToday), lastDate: today };
+    }
 
-    return pricesToday.concat(pricesTomorrow);
+    return { prices: pricesToday.concat(pricesTomorrow), lastDate: tomorrow };
 }
 
 async function getPricesForDate(date)
