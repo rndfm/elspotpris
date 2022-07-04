@@ -63,14 +63,16 @@ var nordpool = require('./integrations/nordpool.js');
 
 var prices, pricesDate, co2emisprog, co2emis;
 
-function updatePrices(){
+async function update()
+{
+  // update prices.
   var today = new Date();
   today.setHours(0,0,0,0);
   var tomorrow = today.addDays(1);
   if (pricesDate == null || (pricesDate < tomorrow && new Date().getHours() >= 13) || pricesDate < today)
   {
     console.log(`Prices stale. Getting prices for ${tomorrow}`);
-    nordpool.getPrices().then((data) => {
+    await nordpool.getPrices().then((data) => {
       console.log(`Got prices for ${data.lastDate}`);
       prices = data.prices;
       pricesDate = data.lastDate;
@@ -78,10 +80,8 @@ function updatePrices(){
   }
 
   io.emit('prices', prices);
-}
-
-function updateCo2Emis()
-{
+  
+  // update co2 emis.
   energidataservice.getCo2Emis().then((data) => {
     co2emis = JSON.parse(data).data.co2emis;
     co2emis = co2emis.filter(o => new Date(o.Minutes5UTC).getUTCMinutes() % 10 == 0);
@@ -95,11 +95,6 @@ function updateCo2Emis()
   });
 }
 
-updatePrices();
-updateCo2Emis();
-
-setInterval(() => {
-  updatePrices();
-  updateCo2Emis();
-}, 300000);
+update();
+setInterval(update, 300000);
 module.exports = app;

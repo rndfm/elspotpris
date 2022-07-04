@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { tariffs } from "./prices.js";
+import { tariffs, products } from "./prices.js";
 
 export const userCount = writable(0);
 
@@ -38,6 +38,13 @@ const storedTariff = storedTariffId ? tariffs.find(t => t.id == storedTariffId) 
 export const tariff = writable(storedTariff ? storedTariff : tariffs[0]);
 tariff.subscribe(value => {
     localStorage.setItem("tariff", value.id);
+});
+
+const storedProductId = localStorage.getItem("product");
+const storedProduct = storedProductId ? products.find(t => t.id == storedProductId) : products[0];
+export const product = writable(storedProduct ? storedProduct : products[0]);
+product.subscribe(value => {
+    localStorage.setItem("product", value.id);
 });
 
 

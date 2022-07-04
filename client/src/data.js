@@ -1,8 +1,9 @@
-import { userCount, priceNow, prices, co2EmissionNow, co2Emissions, co2EmissionsPrognosis, priceRegion, electricityTax, tax, tariff } from "./stores.js";
+import { userCount, priceNow, prices, co2EmissionNow, co2Emissions, co2EmissionsPrognosis, priceRegion, electricityTax, tax, tariff, product } from "./stores.js";
 import { io } from "socket.io-client";
 
 let region = "DK2";
 let selectedTariff;
+let selectedProduct;
 let priceData, co2EmisData, co2EmisProgData;
 
 let includeElectricityTax = false;
@@ -10,8 +11,6 @@ const electicityTaxAmount = .9;
 
 let includeTax = false;
 const taxRate = 1.25;
-
-const apiUrl = 'https://data-api.energidataservice.dk/v1/graphql';
 
 const calculateTariff = (datetime) => {
     let month = datetime.getMonth() + 1;
@@ -22,15 +21,29 @@ const calculateTariff = (datetime) => {
     return peakLoad ? selectedTariff.peak : selectedTariff.normal;
 };
 
-const calculatePrice = (electricityPrice, datetime) => 
+const calculateProductPrice = (spotPrice) =>
 {
-    const pricePerKwh = (electricityPrice / 1000
+    return selectedProduct.prices.reduce((previous, current) => {
+        console.log(current.region);
+        if (current.region != null && current.region !== region)
+             return previous;
+        
+        if (current.amount === null)
+            return previous + spotPrice;
+
+        return previous + current.amount;
+    }, 0);
+};
+
+const calculateTotalPrice = (spotPrice, datetime) => 
+{
+    const pricePerKwh = (calculateProductPrice(spotPrice, region)
         + (includeElectricityTax ? electicityTaxAmount : 0)
         + (selectedTariff ? calculateTariff(datetime) : 0))
         * (includeTax ? taxRate : 1);
 
     return Math.round((pricePerKwh + Number.EPSILON) * 100) / 100;
-}
+};
 
 const calculatePrices = () => {
     if (priceData)
@@ -39,7 +52,7 @@ const calculatePrices = () => {
             priceData.map(o => 
             [
                 new Date(o.hour),
-                calculatePrice(o.prices.filter(p => p.area == region)[0].price, new Date(o.hour))
+                calculateTotalPrice(o.prices.filter(p => p.area == region)[0].price / 1000, new Date(o.hour))
             ])
         );
 
@@ -52,7 +65,7 @@ const calculatePrices = () => {
             now.setMilliseconds(0);
             
             var priceEntry = priceData.filter(x => new Date(x.hour) >= now)[0];
-            priceNow.set(calculatePrice(priceEntry.prices.filter(p => p.area == region)[0].price, new Date(priceEntry.hour)))
+            priceNow.set(calculateTotalPrice(priceEntry.prices.filter(p => p.area == region)[0].price / 1000, new Date(priceEntry.hour)))
         }
     }
 };
@@ -108,5 +121,10 @@ tax.subscribe((value) => {
 
 tariff.subscribe((value) => {
     selectedTariff = value;
+    calculatePrices();
+});
+
+product.subscribe((value) => {
+    selectedProduct = value;
     calculatePrices();
 });

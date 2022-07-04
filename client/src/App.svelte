@@ -12,11 +12,12 @@
 		electricityTax,
 		tax,
 		tariff,
+		product,
 		darkMode,
 		menuClosed
 	} from "./stores.js";
 	import {} from "./data.js";
-	import { tariffs } from "./prices.js";
+	import { tariffs, products } from "./prices.js";
 	import { onMount } from 'svelte';
 
 
@@ -256,6 +257,15 @@
 				</select>
 			</li>
 			<li>
+				<select bind:value={$product}>
+					{#each products as product}
+						<option value={product}>
+							{product.name}
+						</option>
+					{/each}
+				</select>
+			</li>
+			<li>
 				<label for="tax"><input type="checkbox" id="tax" bind:checked={$tax} /> moms</label>
 			</li>
 			<li>
@@ -280,9 +290,11 @@
 	<div class="info">
 		<h1>elspotpris.dk</h1>
 		<p class="lead">Få overblik over spot priserne på el det næste døgn.</p>
-		<p>Har du en elaftale med variabel pris betaler du den pris pr. kWh som er fastsat dagen forinden ved Nordpool. Den såkaldte spotpris. Prisen for næste dag bliver frigivet omkring kl. 13.00.</p>
+		<p>Har du en elaftale med variabel pris er din pris pr. kWh baseret på spot prisen som er fastsat dagen forinden ved <a href="https://www.nordpoolgroup.com" target="_blank">Nordpool</a>.<br>
+			Prisen for næste dag bliver frigivet omkring kl. 13.00.</p>
 		<p>Vælg om prisen skal vises for DK1 eller DK2 som er henholdvis vest og øst for storebælt. Det vil sige at DK1 er Jylland og Fyn mens DK2 er Sjælland. Prisen i grafen kan vises med elafgift, tariffer/transport og moms.<br /> Alle indstillinger bliver husket til næste gang du besøger siden.</p>
-		<p>Lige nu kigger {$userCount} på elpriserne her på siden. Del gerne linket med venner og bekendte så vi sammen kan bruge strømmen når den er billigst og grønnest.</p>
+		<h3>Indkøbspris/kostpris</h3>
+		<p>Bemærk at indkøbsprisen/kostprisen i din elaftale som regel tillægges fortjeneste mv. oveni spotprisen.</p>
 	</div>
 	<div class="github">
 		<p>
@@ -408,6 +420,10 @@
 
 	h2 {
 		font-size: 2em;
+	}
+
+	h3 {
+		margin-bottom: -.5em;
 	}
 
 	@media only screen and (min-width: 500px) {
