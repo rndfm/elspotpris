@@ -41,7 +41,7 @@ body.dark .apexcharts-tooltip-title, body.dark .apexcharts-tooltip, body.dark .a
 }
 
 a {
-  color: #0064c8;
+  color: rgb(0, 100, 200);
   text-decoration: none;
 }
 
@@ -50,7 +50,7 @@ a:hover {
 }
 
 a:visited {
-  color: #0050a0;
+  color: rgb(0, 80, 160);
 }
 
 label {
