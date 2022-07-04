@@ -23,11 +23,13 @@ Serveren er NodeJS.,
 Byg klienten i /client mappen.
 ```bash
 cd .\client\
+npm install
 npm run build
 ```
 
 Start server
 ```bash
+npm install
 npm run start
 ```
 
