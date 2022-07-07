@@ -7,7 +7,7 @@ let selectedProduct;
 let priceData, co2EmisData, co2EmisProgData;
 
 let includeElectricityTax = false;
-const electicityTaxAmount = .9;
+const electicityTaxAmount = .903;
 
 let includeTax = false;
 const taxRate = 1.25;
