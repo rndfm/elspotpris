@@ -33,11 +33,6 @@ export const governmentTariffs = [
         amount: .903,
     },
     {
-        id: "pso",
-        name: "PSO-tarif",
-        amount: .044,
-    },
-    {
         id: "balance",
         name: "Balancetarif for forbrug",
         amount: .00229,
