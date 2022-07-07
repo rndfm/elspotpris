@@ -24,7 +24,6 @@ const calculateTariff = (datetime) => {
 const calculateProductPrice = (spotPrice) =>
 {
     return selectedProduct.prices.reduce((previous, current) => {
-        console.log(current.region);
         if (current.region != null && current.region !== region)
              return previous;
         

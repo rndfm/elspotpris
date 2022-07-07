@@ -2,7 +2,6 @@
 	import "./global.scss";
 	import { chart } from "svelte-apexcharts";
 	import {
-		userCount,
 		priceNow,
 		prices,
 		co2EmissionNow,

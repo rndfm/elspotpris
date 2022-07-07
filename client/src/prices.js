@@ -37,6 +37,12 @@ export const companies = [
         name: "nettopower",
         description: "",
         website: "https://nettopower.dk"
+    },
+    {
+        id: "vindstoed",
+        name: "vindstød",
+        description: "",
+        website: "https://www.vindstoed.dk/"
     }
 ]
 
@@ -215,6 +221,31 @@ export const products = [
             {
                 name: "Månedlig betaling pr. regning.",
                 amount: 19
+            }
+        ]
+    },
+    {
+        id: "vindstoed_elforbundet",
+        name: "Vindstød Elforbundet",
+        companyId: "vindstoed",
+        prices: [
+            {
+                name: "spotpris",
+                amount: null
+            },
+            {
+                name: "fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: .0
+            }
+        ],
+        fees: [
+            {
+                name: "abonnement",
+                amount: 0
+            },
+            {
+                name: "Månedlig betaling pr. regning.",
+                amount: null
             }
         ]
     }
