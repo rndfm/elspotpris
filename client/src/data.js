@@ -35,6 +35,9 @@ const calculateProductPrice = (spotPrice) =>
         if (current.amount === null)
             return previous + spotPrice;
 
+        if (current.amount === undefined)
+            return previous;
+            
         return previous + current.amount;
     }, 0);
 };

@@ -66,7 +66,14 @@ export const companies = [
         id: "vindstoed",
         name: "vindstød",
         description: "",
-        website: "https://www.vindstoed.dk/"
+        website: "https://www.vindstoed.dk"
+    },
+    ,
+    {
+        id: "ewii",
+        name: "EWII",
+        description: "",
+        website: "https://www.ewii.dk"
     }
 ]
 
@@ -275,7 +282,34 @@ export const products = [
                 amount: 0
             },
             {
-                name: "omkostning/gebyr pr. regning.",
+                name: "omkostning/gebyr pr. regning."
+            }
+        ]
+    },
+    {
+        id: "ewii_groen_indkoebspris",
+        name: "EWII Grøn Indkøbspris",
+        companyId: "ewii",
+        prices: [
+            {
+                name: "spotpris",
+                amount: null
+            },
+            {
+                name: "Tillæg for certificeret grøn strøm",
+                amount: .015
+            },
+            {
+                name: "fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+            }
+        ],
+        fees: [
+            {
+                name: "abonnement",
+                amount: 23.2
+            },
+            {
+                name: "omkostning/gebyr pr. regning."
             }
         ]
     }

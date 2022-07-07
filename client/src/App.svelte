@@ -294,7 +294,7 @@
 	{#if selectedProduct }
 	<div class="calculation">
 		<h2>
-			{#if selectedProduct.prices.some(e => e.conditions === null | e.calculated)}<img src="warning.svg" class="warning" alt="Advarsel" title="Dele af udregningen er ugarranteret eller uden betingelser."/>{/if}
+			{#if selectedProduct.prices.some(e => e.conditions === null | e.calculated || e.amount === undefined)}<img src="warning.svg" class="warning" alt="Advarsel" title="Dele af udregningen er ugarranteret eller uden betingelser."/>{/if}
 			Sådan er prisen udregnet.
 		</h2>
 		<p class="lead">{selectedProduct.name}</p>
@@ -304,7 +304,7 @@
 				{item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
 				{#if item.calculated}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Prisen er regnet baglens og er ikke bekræftet af elselskabet.">{/if}
 				{#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel">{/if}
-				{#if item.conditions}<img class="item-warning" src="info.svg" alt="Info" title="{item.condition}">{/if}
+				{#if item.conditions}<img class="item-warning" src="info.svg" alt="Info" title="{item.conditions}">{/if}
 				{#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt">{/if}
 			</li>
 		{/each}
