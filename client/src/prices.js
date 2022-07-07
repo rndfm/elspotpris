@@ -1,7 +1,7 @@
 export const tariffs = [
     {
         id: "none",
-        name: "uden netselskab",
+        name: "Uden netselskab",
         normal: 0,
         peak: 0
     },
@@ -58,13 +58,13 @@ export const companies = [
     },
     {
         id: "nettopower",
-        name: "nettopower",
+        name: "Nettopower",
         description: "",
         website: "https://nettopower.dk"
     },
     {
         id: "vindstoed",
-        name: "vindstød",
+        name: "Vindstød",
         description: "",
         website: "https://www.vindstoed.dk"
     },
@@ -84,7 +84,7 @@ export const products = [
         companyId: null,
         prices: [
             {
-                name: "spotpris",
+                name: "Spotpris",
                 amount: null
             }
         ]
@@ -92,27 +92,28 @@ export const products = [
     {
         id: "nrgi_bevarmigel",
         name: "NRGi - Bevar-Mig-El",
+        link: "https://nrgi.dk/privat/stroem/produkter/bestil-stroem/bevar-mig-el",
         companyId: "nrgi",
         prices: [
             {
-                name: "spotpris",
+                name: "Spotpris",
                 amount: null,
             },
             {
-                name: "fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
                 amount: .037,
                 calculated: true,
                 conditions: null
             },
             {
-                name: "grønt tiltag - plate træer",
+                name: "Grønt tiltag - plate træer",
                 amount: .08,
                 conditions: "fast pris i aftalen"
             }
         ],
         fees: [
             {
-                name: "abonnement",
+                name: "Abonnement",
                 amount: 16.25
             },
             {
@@ -144,14 +145,15 @@ export const products = [
     {
         id: "nrgi_indkoebspris",
         name: "NRGi - Indkøbspris",
+        link: "https://nrgi.dk/privat/stroem/produkter/bestil-stroem/indkoebspris-bestil/elpris/",
         companyId: "nrgi",
         prices: [
             {
-                name: "spotpris",
+                name: "Spotpris",
                 amount: null,
             },
             {
-                name: "fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
                 amount: .037,
                 calculated: true,
                 conditions: null
@@ -159,7 +161,7 @@ export const products = [
         ],
         fees: [
             {
-                name: "abonnement",
+                name: "Abonnement",
                 amount: 16.25
             },
             {
@@ -191,22 +193,23 @@ export const products = [
     {
         id: "nrgi_kvartal",
         name: "NRGi - Kvartal med klima",
+        link: "https://nrgi.dk/privat/stroem/produkter/bestil-stroem/kvartal-med-klima/",
         companyId: "nrgi",
         prices: [
             {
-                name: "elpris kvartal",
+                name: "Elpris kvartal",
                 amount: 1.896,
                 region: "DK1"
             },
             {
-                name: "elpris kvartal",
+                name: "Elpris kvartal",
                 amount: 1.92,
                 region: "DK2"
             }
         ],
         fees: [
             {
-                name: "abonnement",
+                name: "Abonnement",
                 amount: 16.25
             },
             {
@@ -238,21 +241,22 @@ export const products = [
     {
         id: "nettopower",
         name: "nettopower",
+        link: "https://www.nettopower.dk/",
         companyId: "nettopower",
         prices: [
             {
-                name: "spotpris",
+                name: "Spotpris",
                 amount: null
             },
             {
-                name: "fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
                 amount: .10,
                 conditions: null
             }
         ],
         fees: [
             {
-                name: "abonnement",
+                name: "Abonnement",
                 amount: 0
             },
             {
@@ -264,35 +268,40 @@ export const products = [
     {
         id: "vindstoed_elforbundet",
         name: "Vindstød Elforbundet",
+        link: "https://www.elforbundet.dk/",
         companyId: "vindstoed",
         prices: [
             {
-                name: "spotpris",
+                name: "Spotpris",
                 amount: null
             },
             {
-                name: "fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
                 amount: .0,
                 conditions: "Prisen udløber ved aftalens afslutning."
             }
         ],
         fees: [
             {
-                name: "abonnement",
+                name: "Abonnement",
                 amount: 0
             },
             {
-                name: "omkostning/gebyr pr. regning."
+                name: "Omkostning/gebyr pr. regning."
+            },
+            {
+                name: "Bemærk forudbetaling"
             }
         ]
     },
     {
         id: "ewii_groen_indkoebspris",
         name: "EWII Grøn Indkøbspris",
+        link: "https://www.ewii.dk/privat/el/groen-el/groen-indkoebspris/",
         companyId: "ewii",
         prices: [
             {
-                name: "spotpris",
+                name: "Spotpris",
                 amount: null
             },
             {
@@ -300,16 +309,16 @@ export const products = [
                 amount: .015
             },
             {
-                name: "fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                name: "Eventuel fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
             }
         ],
         fees: [
             {
-                name: "abonnement",
+                name: "Abonnement",
                 amount: 23.2
             },
             {
-                name: "omkostning/gebyr pr. regning."
+                name: "Omkostning/gebyr pr. regning."
             }
         ]
     }

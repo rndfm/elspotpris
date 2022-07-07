@@ -270,10 +270,10 @@
 				</select>
 			</li>
 			<li>
-				<label for="tax"><input type="checkbox" id="tax" bind:checked={$tax} /> moms</label>
+				<label for="tax"><input type="checkbox" id="tax" bind:checked={$tax} /> Moms</label>
 			</li>
 			<li>
-				<label for="darkMode"><input type="checkbox" id="darkMode" bind:checked={$darkMode} /> dark mode</label>
+				<label for="darkMode"><input type="checkbox" id="darkMode" bind:checked={$darkMode} /> Dark mode</label>
 			</li>
 		</ul>
 		<button class="tab" on:click="{() => $menuClosed = !$menuClosed}"><span class="chevron up"></span></button>
@@ -299,6 +299,7 @@
 				Sådan er prisen udregnet.
 			</h2>
 			<p class="lead">{selectedProduct.name}</p>
+			{#if selectedProduct.link}<a href={selectedProduct.link}>{selectedProduct.link}</a>{/if}
 			<ul>
 			{#each selectedProduct.prices as item}
 				<li>
@@ -309,14 +310,16 @@
 					{#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt">{/if}
 				</li>
 			{/each}
+			</ul>
+			<ul>
 			{#each governmentTariffs as item}
 				<li>
 					{item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
 				</li>
 			{/each}
-				<li>transport - { selectedTariff.name } - lavlast: {selectedTariff.normal} kr - spidslast: {selectedTariff.peak} kr</li>
-				{#if withTax}<li>moms 25%</li>{/if}
-				{#if !withTax}<li>uden moms</li>{/if}
+				<li>Netselskab - { selectedTariff.name } - lavlast: {selectedTariff.normal} kr - spidslast: {selectedTariff.peak} kr</li>
+				{#if withTax}<li>Moms 25%</li>{/if}
+				{#if !withTax}<li>Uden moms</li>{/if}
 			</ul>
 			{#if selectedProduct.fees}
 			<p>Ud over prisen pr. kWh er der følgende udgifter ved {selectedProduct.name}</p>
