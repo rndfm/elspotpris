@@ -291,58 +291,62 @@
 	{#if options.series[0].data}
 		<div use:chart={options} />
 	{/if}
-	{#if selectedProduct }
-	<div class="calculation">
-		<h2>
-			{#if selectedProduct.prices.some(e => e.conditions === null | e.calculated || e.amount === undefined)}<img src="warning.svg" class="warning" alt="Advarsel" title="Dele af udregningen er ugarranteret eller uden betingelser."/>{/if}
-			Sådan er prisen udregnet.
-		</h2>
-		<p class="lead">{selectedProduct.name}</p>
-		<ul>
-		{#each selectedProduct.prices as item}
-			<li>
-				{item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
-				{#if item.calculated}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Prisen er regnet baglens og er ikke bekræftet af elselskabet.">{/if}
-				{#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel">{/if}
-				{#if item.conditions}<img class="item-warning" src="info.svg" alt="Info" title="{item.conditions}">{/if}
-				{#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt">{/if}
-			</li>
-		{/each}
-		{#each governmentTariffs as item}
-			<li>
-				{item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
-			</li>
-		{/each}
-			<li>transport - { selectedTariff.name } - lavlast: {selectedTariff.normal} kr - spidslast: {selectedTariff.peak} kr</li>
-			{#if withTax}<li>moms 25%</li>{/if}
-			{#if !withTax}<li>uden moms</li>{/if}
-		</ul>
-		{#if selectedProduct.fees}
-		<p>Ud over prisen pr. kWh er der følgende udgifter ved {selectedProduct.name}</p>
-		<ul>
-			{#each selectedProduct.fees as item}
-			<li>
-				{item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
-				{#if item.calculated}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Prisen er regnet baglens og er ikke bekræftet af elselskabet.">{/if}
-				{#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel">{/if}
-				{#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt">{/if}
-			</li>
+	<div class="flexgrid responsive">
+		{#if selectedProduct }
+		<div class="calculation col">
+			<h2>
+				{#if selectedProduct.prices.some(e => e.conditions === null | e.calculated || e.amount === undefined)}<img src="warning.svg" class="warning" alt="Advarsel" title="Dele af udregningen er ugarranteret eller uden betingelser."/>{/if}
+				Sådan er prisen udregnet.
+			</h2>
+			<p class="lead">{selectedProduct.name}</p>
+			<ul>
+			{#each selectedProduct.prices as item}
+				<li>
+					{item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
+					{#if item.calculated}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Prisen er regnet baglens og er ikke bekræftet af elselskabet.">{/if}
+					{#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel">{/if}
+					{#if item.conditions}<img class="item-warning" src="info.svg" alt="Info" title="{item.conditions}">{/if}
+					{#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt">{/if}
+				</li>
 			{/each}
-		</ul>
+			{#each governmentTariffs as item}
+				<li>
+					{item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
+				</li>
+			{/each}
+				<li>transport - { selectedTariff.name } - lavlast: {selectedTariff.normal} kr - spidslast: {selectedTariff.peak} kr</li>
+				{#if withTax}<li>moms 25%</li>{/if}
+				{#if !withTax}<li>uden moms</li>{/if}
+			</ul>
+			{#if selectedProduct.fees}
+			<p>Ud over prisen pr. kWh er der følgende udgifter ved {selectedProduct.name}</p>
+			<ul>
+				{#each selectedProduct.fees as item}
+				<li>
+					{item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
+					{#if item.calculated}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Prisen er regnet baglens og er ikke bekræftet af elselskabet.">{/if}
+					{#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel">{/if}
+					{#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt">{/if}
+				</li>
+				{/each}
+			</ul>
+			{/if}
+			<p>Priserne i udregningen er opgivet ex. moms.<br/>Er der fejl i udregningen eller satserne rapporteres dette her: <a href="https://github.com/rndfm/elspotpris/issues/new/choose" target="_blank">github</a>.</p>
+		</div>
 		{/if}
-	</div>
-	{/if}
-	<div class="info">
-		<h1>elspotpris.dk</h1>
-		<p class="lead">Få overblik over spot priserne på el det næste døgn.</p>
-		<p>Har du en elaftale med variabel pris er din pris pr. kWh baseret på spotprisen ved <a href="https://www.nordpoolgroup.com" target="_blank">Nordpool</a>.<br>
-			Prisen for næste dag bliver frigivet omkring kl. 13.00.</p>
-		<p>Vælg om prisen skal vises for DK1 eller DK2 som er henholdvis vest og øst for storebælt. DK1 er Jylland og Fyn mens DK2 er Sjælland. Prisen i grafen kan vises med elafgift, tariffer/transport og moms.<br /> Alle indstillinger bliver husket til næste gang du besøger siden.</p>
-		<h3>Variabel pris &#8800; spotpris</h3>
-		<p>Bemærk at indkøbsprisen/kostprisen, i din elaftale med variable pris, som regel er baseret på spotprisen men tillægges fortjeneste med mere.<br />
-			Vælg et produkt i menuen øverst for at se prisen med alle tillæg.<br />Bemærk at priser på produkter vedligeholdes manuelt. Hvis dit produkt mangler eller det er udregnet forkert så opret et punkt på <a href="https://github.com/rndfm/elspotpris/issues/new/choose" target="_blank">github</a>.
-			Der garanteres ikke for korrektheden af udregningen på produkterne og elselskaberne kan i mange tilfælde ændre prisen uden varsel.
-		</p>
+		<div class="info col">
+			<h1>elspotpris.dk</h1>
+			<p class="lead">Få overblik over spot priserne på el det næste døgn.</p>
+			<p>Har du en elaftale med variabel pris er din pris pr. kWh baseret på spotprisen ved <a href="https://www.nordpoolgroup.com" target="_blank">Nordpool</a>.<br>
+				Prisen for næste dag bliver frigivet omkring kl. 13.00.</p>
+			<p>Vælg om prisen skal vises for DK1 eller DK2 som er henholdvis vest og øst for storebælt. DK1 er Jylland og Fyn mens DK2 er Sjælland. Prisen i grafen kan vises med elafgift, tariffer/transport og moms.<br /> Alle indstillinger bliver husket til næste gang du besøger siden.</p>
+			<h3>Variabel pris &#8800; spotpris</h3>
+			<p>Bemærk at indkøbsprisen/kostprisen, i din elaftale med variable pris, som regel er baseret på spotprisen men tillægges fortjeneste med mere.<br />
+				Vælg et produkt i menuen øverst for at se prisen med alle tillæg.<br />Bemærk at priser på produkter vedligeholdes manuelt. Hvis dit produkt mangler eller det er udregnet forkert så opret et punkt på <a href="https://github.com/rndfm/elspotpris/issues/new/choose" target="_blank">github</a>.
+				Der garanteres ikke for korrektheden af udregningen på produkterne og elselskaberne kan i mange tilfælde ændre prisen uden varsel.
+			</p>
+			
+		</div>
 	</div>
 	<div class="github">
 		<p>
@@ -441,6 +445,12 @@
 
 	.flexgrid {
 		display: flex;
+	}
+
+	@media (max-width: 1000px) {
+		.flexgrid.responsive {
+			display: block;
+		}
 	}
 
 	.meters {
