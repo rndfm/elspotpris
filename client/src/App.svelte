@@ -8,7 +8,6 @@
 		co2Emissions,
 		co2EmissionsPrognosis,
 		priceRegion,
-		electricityTax,
 		tax,
 		tariff,
 		product,
@@ -16,9 +15,23 @@
 		menuClosed
 	} from "./stores.js";
 	import {} from "./data.js";
-	import { tariffs, products } from "./prices.js";
+	import { tariffs, products, governmentTariffs } from "./prices.js";
 	import { onMount } from 'svelte';
 
+	let selectedProduct;
+	product.subscribe((value) => {
+    	selectedProduct = value;
+	});
+
+	let selectedTariff;
+	tariff.subscribe((value) => {
+    	selectedTariff = value;
+	});
+
+	let withTax;
+	tax.subscribe((value) => {
+    	withTax = value;
+	});
 
 	let options = {
 		series: [
@@ -131,7 +144,6 @@
 
 	setInterval(() => {
 		options.annotations.xaxis[0].x = new Date().getTime();
-		
 	}, 10000);
 
 	setInterval(() => {
@@ -240,13 +252,6 @@
 						on:change={updateRegion}/> DK2(øst)</label>
 			</li>
 			<li>
-				<label for="electricityTax">
-					<input
-						type="checkbox"
-						id="electricityTax"
-						bind:checked={$electricityTax}/> elafgift</label>
-			</li>
-			<li>
 				<select bind:value={$tariff}>
 					{#each tariffs as item}
 						<option value={item}>
@@ -285,6 +290,47 @@
 	</div>
 	{#if options.series[0].data}
 		<div use:chart={options} />
+	{/if}
+	{#if selectedProduct }
+	<div class="calculation">
+		<h2>
+			{#if selectedProduct.prices.some(e => e.conditions === null | e.calculated)}<img src="warning.svg" class="warning" alt="Advarsel" title="Dele af udregningen er ugarranteret eller uden betingelser."/>{/if}
+			Sådan er prisen udregnet.
+		</h2>
+		<p class="lead">{selectedProduct.name}</p>
+		<ul>
+		{#each selectedProduct.prices as item}
+			<li>
+				{item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
+				{#if item.calculated}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Prisen er regnet baglens og er ikke bekræftet af elselskabet.">{/if}
+				{#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel">{/if}
+				{#if item.conditions}<img class="item-warning" src="info.svg" alt="Info" title="{item.condition}">{/if}
+				{#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt">{/if}
+			</li>
+		{/each}
+		{#each governmentTariffs as item}
+			<li>
+				{item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
+			</li>
+		{/each}
+			<li>transport - { selectedTariff.name } - lavlast: {selectedTariff.normal} kr - spidslast: {selectedTariff.peak} kr</li>
+			{#if withTax}<li>moms 25%</li>{/if}
+			{#if !withTax}<li>uden moms</li>{/if}
+		</ul>
+		{#if selectedProduct.fees}
+		<p>Ud over prisen pr. kWh er der følgende udgifter ved {selectedProduct.name}</p>
+		<ul>
+			{#each selectedProduct.fees as item}
+			<li>
+				{item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
+				{#if item.calculated}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Prisen er regnet baglens og er ikke bekræftet af elselskabet.">{/if}
+				{#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel">{/if}
+				{#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt">{/if}
+			</li>
+			{/each}
+		</ul>
+		{/if}
+	</div>
 	{/if}
 	<div class="info">
 		<h1>elspotpris.dk</h1>
@@ -439,6 +485,25 @@
 
 	.col {
 		flex: 1;
+	}
+
+	.calculation {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 1em;
+
+		.warning {
+			width: 32px;
+			padding-right: 10px;
+		}
+		ul {
+			text-align: left;
+			.item-warning
+			{
+				width: 16px;
+				padding-left: .5em;
+			}
+		}
 	}
 
 	.info {

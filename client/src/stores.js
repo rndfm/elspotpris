@@ -21,12 +21,6 @@ export const co2Emissions = writable();
 export const co2EmissionsPrognosis = writable();
 
 
-const storedElectricityTax = localStorage.getItem("electricityTax");
-export const electricityTax = writable(!storedElectricityTax || storedElectricityTax == "true"); // Default to true when not stored.
-electricityTax.subscribe(value => {
-    localStorage.setItem("electricityTax", value);
-});
-
 const storedTax = localStorage.getItem("tax");
 export const tax = writable(!storedTax || storedTax == "true"); // Default to true when not stored.
 tax.subscribe(value => {
@@ -46,7 +40,6 @@ export const product = writable(storedProduct ? storedProduct : products[0]);
 product.subscribe(value => {
     localStorage.setItem("product", value.id);
 });
-
 
 const storedDarkMode = localStorage.getItem("darkMode");
 export const darkMode = writable(storedDarkMode == "true"); // Default to false when not stored.

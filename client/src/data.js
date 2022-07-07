@@ -1,4 +1,5 @@
-import { userCount, priceNow, prices, co2EmissionNow, co2Emissions, co2EmissionsPrognosis, priceRegion, electricityTax, tax, tariff, product } from "./stores.js";
+import { userCount, priceNow, prices, co2EmissionNow, co2Emissions, co2EmissionsPrognosis, priceRegion, tax, tariff, product } from "./stores.js";
+import { governmentTariffs } from './prices';
 import { io } from "socket.io-client";
 
 let region = "DK2";
@@ -6,19 +7,23 @@ let selectedTariff;
 let selectedProduct;
 let priceData, co2EmisData, co2EmisProgData;
 
-let includeElectricityTax = false;
-const electicityTaxAmount = .903;
-
 let includeTax = false;
 const taxRate = 1.25;
 
-const calculateTariff = (datetime) => {
+export const calculateTariff = (datetime) => {
+    if (datetime == null)
+        datetime = new Date();
+
+    let amount = governmentTariffs.reduce((previous, current) => {
+        return previous + current.amount;
+    }, 0);
+
     let month = datetime.getMonth() + 1;
     let hour = datetime.getHours();
     // Peak load october to march between 17 to 20. 
     let peakLoad = (month >= 10 || month <= 3) && (hour >= 17 && hour < 20);
 
-    return peakLoad ? selectedTariff.peak : selectedTariff.normal;
+    return amount + (peakLoad ? selectedTariff.peak : selectedTariff.normal);
 };
 
 const calculateProductPrice = (spotPrice) =>
@@ -37,7 +42,6 @@ const calculateProductPrice = (spotPrice) =>
 const calculateTotalPrice = (spotPrice, datetime) => 
 {
     const pricePerKwh = (calculateProductPrice(spotPrice, region)
-        + (includeElectricityTax ? electicityTaxAmount : 0)
         + (selectedTariff ? calculateTariff(datetime) : 0))
         * (includeTax ? taxRate : 1);
 
@@ -106,11 +110,6 @@ priceRegion.subscribe(value => {
     region = value;
     calculatePrices();
     updateCo2Emis();
-});
-
-electricityTax.subscribe((value) => {
-    includeElectricityTax = value;
-    calculatePrices();
 });
 
 tax.subscribe((value) => {

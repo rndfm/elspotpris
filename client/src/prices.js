@@ -1,7 +1,7 @@
 export const tariffs = [
     {
         id: "none",
-        name: "uden tarif",
+        name: "uden netselskab",
         normal: 0,
         peak: 0
     },
@@ -23,6 +23,35 @@ export const tariffs = [
         normal: .1112,
         peak: .3462
     }
+]
+
+export const governmentTariffs = [
+    
+    {
+        id: "elafgift",
+        name: "Elafgift",
+        amount: .903,
+    },
+    {
+        id: "pso",
+        name: "PSO-tarif",
+        amount: .044,
+    },
+    {
+        id: "balance",
+        name: "Balancetarif for forbrug",
+        amount: .00229,
+    },
+    {
+        id: "systemtarif",
+        name: "Systemtarif",
+        amount: .061,
+    },
+    {
+        id: "transmissionsnettarif",
+        name: "Transmissions nettarif",
+        amount: .0049,
+    },
 ]
 
 export const companies = [
@@ -54,7 +83,7 @@ export const products = [
         prices: [
             {
                 name: "spotpris",
-                amount: null,
+                amount: null
             }
         ]
     },
@@ -69,11 +98,14 @@ export const products = [
             },
             {
                 name: "fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
-                amount: .037
+                amount: .037,
+                calculated: true,
+                conditions: null
             },
             {
                 name: "grønt tiltag - plate træer",
-                amount: .08
+                amount: .08,
+                conditions: "fast pris i aftalen"
             }
         ],
         fees: [
@@ -118,7 +150,9 @@ export const products = [
             },
             {
                 name: "fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
-                amount: .037
+                amount: .037,
+                calculated: true,
+                conditions: null
             }
         ],
         fees: [
@@ -210,7 +244,8 @@ export const products = [
             },
             {
                 name: "fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
-                amount: .10
+                amount: .10,
+                conditions: null
             }
         ],
         fees: [
@@ -219,7 +254,7 @@ export const products = [
                 amount: 0
             },
             {
-                name: "Månedlig betaling pr. regning.",
+                name: "Månedlig betaling/gebyr pr. regning.",
                 amount: 19
             }
         ]
@@ -235,7 +270,8 @@ export const products = [
             },
             {
                 name: "fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
-                amount: .0
+                amount: .0,
+                conditions: "Prisen udløber ved aftalens afslutning."
             }
         ],
         fees: [
@@ -244,27 +280,8 @@ export const products = [
                 amount: 0
             },
             {
-                name: "Månedlig betaling pr. regning.",
-                amount: null
+                name: "omkostning/gebyr pr. regning.",
             }
         ]
-    }
-]
-
-export const electricityTax = [
-    {
-        id: "none",
-        name: "uden elafgift",
-        value: 0
-    },
-    {
-        id: "90",
-        name: "90 øre",
-        value: .9030
-    },
-    {
-        id: "reduced",
-        name: "reduceret (elvarme)",
-        value: .008
     }
 ]
