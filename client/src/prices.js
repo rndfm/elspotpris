@@ -106,7 +106,7 @@ export const products = [
                 conditions: null
             },
             {
-                name: "Grønt tiltag - plate træer",
+                name: "Grønt tiltag - plante træer",
                 amount: .08,
                 conditions: "fast pris i aftalen"
             }
