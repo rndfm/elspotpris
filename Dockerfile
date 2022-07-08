@@ -1,12 +1,12 @@
 FROM node:16
 
 # Create app directory
-WORKDIR /var/elspotpris.dk
+WORKDIR /usr/src/app
 
 COPY . .
 
 RUN npm ci
-WORKDIR /var/elspotpris.dk/client
+WORKDIR /usr/src/app/client
 RUN npm ci
 RUN npm run build
 
