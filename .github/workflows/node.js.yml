@@ -9,7 +9,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -47,4 +46,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: pm2 restart elspotpris.dk
+        script: pm2 stop elspotpris.dk && docker build . -t rndfm/elspotpris && docker compose up -d
