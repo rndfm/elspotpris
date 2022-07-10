@@ -4,10 +4,6 @@ import { tariffs, products } from "./prices.js";
 export const userCount = writable(0);
 
 let storedPriceRegion = localStorage.getItem("priceRegion");
-if (!storedPriceRegion)
-{
-    storedPriceRegion = "DK2";
-}
 export const priceRegion = writable(storedPriceRegion);
 priceRegion.subscribe(value => {
     localStorage.setItem("priceRegion", value);
