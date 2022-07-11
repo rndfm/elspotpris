@@ -7,6 +7,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api');
 
+const ipApi = require('./integrations/ipapi');
+
 var app = express();
 
 const http = require('http').Server(app);
@@ -19,6 +21,15 @@ io.on('connection', function(socket) {
   io.emit('prices', prices);
   io.emit('co2emis', co2emis);
   io.emit('co2emisprog', co2emisprog);
+
+  socket.on('region', function () {
+    // https://stackoverflow.com/questions/11182980/not-getting-remote-address-while-using-proxy-in-socket-io/11187053#11187053
+    const remoteIp = socket.handshake.headers['x-forwarded-for'] || socket.request.connection.remoteAddress;
+    ipApi
+      .getRegion(remoteIp)
+      .then((region) => socket.emit('region', region))
+      .catch((err) => console.error(err))
+  });
 
   socket.on('disconnect', function () {
     io.emit('users', io.engine.clientsCount);

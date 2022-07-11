@@ -94,6 +94,10 @@ socket.on('users', function(data) {
     userCount.set(data);
 });
 
+socket.on('region', function(data) {
+    priceRegion.set(data);
+});
+
 socket.on('prices', function(data) {
     priceData = data;
     calculatePrices();
@@ -110,9 +114,13 @@ socket.on('co2emisprog', function(data) {
 });
 
 priceRegion.subscribe(value => {
-    region = value;
-    calculatePrices();
-    updateCo2Emis();
+    if (typeof value !== 'undefined' && !value) {
+        socket.emit('region');
+    } else {
+        region = value;
+        calculatePrices();
+        updateCo2Emis();
+    }
 });
 
 tax.subscribe((value) => {
