@@ -267,7 +267,7 @@ export const products = [
     },
     {
         id: "vindstoed_elforbundet",
-        name: "Vindstød Elforbundet 2022",
+        name: "Elforbundet.dk 2022 – Vindstød",
         link: "https://www.elforbundet.dk/",
         companyId: "vindstoed",
         prices: [
