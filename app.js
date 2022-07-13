@@ -94,15 +94,21 @@ async function update()
   
   // update co2 emis.
   energidataservice.getCo2Emis().then((data) => {
-    co2emis = JSON.parse(data).data.co2emis;
-    co2emis = co2emis.filter(o => new Date(o.Minutes5UTC).getUTCMinutes() % 10 == 0);
-    io.emit('co2emis', co2emis);
+    if (data)
+    {
+      co2emis = JSON.parse(data).data.co2emis;
+      co2emis = co2emis.filter(o => new Date(o.Minutes5UTC).getUTCMinutes() % 10 == 0);
+      io.emit('co2emis', co2emis);
+    }
   });
   
   energidataservice.getCo2EmisPrognosis().then((data) => {
-    co2emisprog = JSON.parse(data).data.co2emisprog;
-    co2emisprog = co2emisprog.filter(o => new Date(o.Minutes5UTC).getUTCMinutes() == 0);
-    io.emit('co2emisprog', co2emisprog);
+    if (data)
+    {
+      co2emisprog = JSON.parse(data).data.co2emisprog;
+      co2emisprog = co2emisprog.filter(o => new Date(o.Minutes5UTC).getUTCMinutes() == 0);
+      io.emit('co2emisprog', co2emisprog);
+    }
   });
 }
 

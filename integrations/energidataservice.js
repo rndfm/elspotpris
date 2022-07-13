@@ -1,3 +1,4 @@
+const { Console } = require('console');
 const https = require('https');
 
 const apiUrl = 'https://data-api.energidataservice.dk/v1/graphql';
@@ -19,7 +20,9 @@ async function getPrices() {
 
     const variables = { "startDate": startDate };
 
-    return await postGraph(query, variables);
+    return await postGraph(query, variables).catch(e => {
+        console.log(e);
+    });;
 }
 
 async function getCo2Emis() {
@@ -39,7 +42,9 @@ async function getCo2Emis() {
 
     const variables = { "startDate": startDate };
 
-    return await postGraph(query, variables);
+    return await postGraph(query, variables).catch(e => {
+        console.log(e);
+    });
 }
 
 async function getCo2EmisPrognosis() {
@@ -58,7 +63,11 @@ async function getCo2EmisPrognosis() {
     startDate.setHours(startDate.getHours() - 1);
     const variables = { "startDate": startDate };
 
-    return await postGraph(query, variables);
+    result = await postGraph(query, variables).catch(e => {
+        console.log(e);
+    });
+
+    return result;
 }
 
 async function postGraph(query, variables)
@@ -81,14 +90,14 @@ async function postGraph(query, variables)
     return new Promise((resolve, reject) => {
     const req = https.request(apiUrl, options, (res) => {
         if (res.statusCode < 200 || res.statusCode > 299) {
-        return reject(new Error(`HTTP status code ${res.statusCode}`))
+            return reject(new Error(`HTTP status code ${res.statusCode}`))
         }
 
         const body = []
         res.on('data', (chunk) => body.push(chunk))
         res.on('end', () => {
         const resString = Buffer.concat(body).toString()
-        resolve(resString)
+            resolve(resString)
         })
     })
 
