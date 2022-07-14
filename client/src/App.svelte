@@ -119,7 +119,7 @@
 				},
 			},
 			{
-				seriesName: "Co2",
+				seriesName: "CO2",
 				labels: {
 					offsetY:-10,
 					formatter: function (value) {
@@ -128,7 +128,7 @@
 				},
 			},
 			{
-				seriesName: "Co2",
+				seriesName: "CO2",
 				show: false,
 			},
 		],
