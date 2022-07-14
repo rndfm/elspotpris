@@ -41,12 +41,12 @@
 				data: null,
 			},
 			{
-				name: "Co2",
+				name: "CO2",
 				type: "line",
 				data: null,
 			},
 			{
-				name: "Co2 prognosis",
+				name: "CO2 prognosis",
 				type: "line",
 				data: null,
 			},
@@ -285,7 +285,7 @@
 		</div>
 		<div class="col">
 			<h2>{emisNow} <small>g/kWh</small></h2>
-			<p>Co2 lige nu</p>
+			<p>CO<sub>2</sub> lige nu</p>
 		</div>
 	</div>
 	{#if options.series[0].data}
