@@ -81,11 +81,11 @@ const updateCo2Emis = () =>
     if (co2EmisData)
     {
         co2EmissionNow.set(co2EmisData.filter(e => e.PriceArea == region).reverse()[0].CO2Emission);
-        co2Emissions.set(co2EmisData.filter(e => e.PriceArea == region).map(o => [new Date(o.Minutes5UTC), o.CO2Emission]));
+        co2Emissions.set(co2EmisData.filter(e => e.PriceArea == region).map(o => [new Date(o.Minutes5DK), o.CO2Emission]));
     }
 
     if (co2EmisProgData)
-        co2EmissionsPrognosis.set(co2EmisProgData.filter(e => e.PriceArea == region).map(o => [new Date(o.Minutes5UTC), o.CO2Emission]));
+        co2EmissionsPrognosis.set(co2EmisProgData.filter(e => e.PriceArea == region).map(o => [new Date(o.Minutes5DK), o.CO2Emission]));
 };
 
 var socket = io();
