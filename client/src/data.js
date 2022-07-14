@@ -80,7 +80,7 @@ const updateCo2Emis = () =>
 {
     if (co2EmisData)
     {
-        co2EmissionNow.set(co2EmisData.filter(e => e.PriceArea == region).reverse()[0].CO2Emission);
+        co2EmissionNow.set(co2EmisData.filter(e => e.PriceArea == region)[0].CO2Emission);
         co2Emissions.set(co2EmisData.filter(e => e.PriceArea == region).map(o => [new Date(o.Minutes5DK), o.CO2Emission]));
     }
 
