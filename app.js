@@ -96,7 +96,7 @@ async function update()
   energidataservice.getCo2Emis().then((data) => {
     if (data)
     {
-      co2emis = JSON.parse(data).data.co2emis;
+      co2emis = JSON.parse(data).records;
       co2emis = co2emis.filter(o => new Date(o.Minutes5UTC).getUTCMinutes() % 10 == 0);
       io.emit('co2emis', co2emis);
     }
@@ -105,7 +105,7 @@ async function update()
   energidataservice.getCo2EmisPrognosis().then((data) => {
     if (data)
     {
-      co2emisprog = JSON.parse(data).data.co2emisprog;
+      co2emisprog = JSON.parse(data).records;
       co2emisprog = co2emisprog.filter(o => new Date(o.Minutes5UTC).getUTCMinutes() == 0);
       io.emit('co2emisprog', co2emisprog);
     }
