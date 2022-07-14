@@ -24,6 +24,15 @@
 	gtag('js', new Date());
 
 	gtag('config', 'G-FKM1MQ9EM1');
+
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('service-worker.js')
+		.then(function(reg){
+			
+		}).catch(function(err) {
+			
+		});
+	}
 	</script>
 </head>
 
