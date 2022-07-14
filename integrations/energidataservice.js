@@ -15,7 +15,7 @@ async function getPrices() {
 }
 
 async function getCo2Emis() {
-    var startDate = new Date();
+    var startDate = getDateInTimezone("Europe/Copenhagen");
     startDate.setHours(0, 0, 0, 0);
 
     const query = `start=${toCustomISOString(startDate)}`;
@@ -26,7 +26,7 @@ async function getCo2Emis() {
 }
 
 async function getCo2EmisPrognosis() {
-    var startDate = new Date();
+    var startDate = getDateInTimezone("Europe/Copenhagen");
     startDate.setHours(startDate.getHours() - 1);
 
     const query = `start=${toCustomISOString(startDate)}`;
@@ -72,58 +72,18 @@ async function request(dataset, query)
     });
 }
 
-async function postGraph(query, variables)
+function getDateInTimezone(timezone)
 {
-    bodyData = JSON.stringify({
-        query: query,
-        variables: variables,
-        operationName: 'Dataset'
-    });
+    let nz_date_string = new Date().toLocaleString("en-US", { timeZone: timezone });
 
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': bodyData.length,
-        },
-        timeout: 10000, // in ms
-    }
-    
-    return new Promise((resolve, reject) => {
-        const req = https.request(apiUrl, options, (res) => {
-            if (res.statusCode < 200 || res.statusCode > 299) {
-                return reject(new Error(`HTTP status code ${res.statusCode}`))
-            }
-
-            const body = []
-            res.on('data', (chunk) => body.push(chunk))
-            res.on('end', () => {
-            const resString = Buffer.concat(body).toString()
-                resolve(resString)
-            })
-        })
-
-        req.on('error', (err) => {
-            reject(err)
-        })
-
-        req.on('timeout', () => {
-            req.destroy()
-            reject(new Error('Request time out'))
-        })
-
-        req.write(bodyData)
-        req.end()
-    });
+    // Date object initialized from the above datetime string
+    return new Date(nz_date_string);
 }
 
 function toCustomISOString(date) {
     var pad = function(num) {
         return (num < 10 ? '0' : '') + num;
     };
-
-    console.log(date.getTimezoneOffset());
-    //date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
   
     return date.getFullYear() +
         '-' + pad(date.getMonth() + 1) +
