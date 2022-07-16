@@ -262,6 +262,9 @@ export const products = [
             {
                 name: "Månedlig betaling/gebyr pr. regning.",
                 amount: 19
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
             }
         ]
     },
@@ -287,10 +290,11 @@ export const products = [
                 amount: 0
             },
             {
-                name: "Omkostning/gebyr pr. regning."
+                name: "Omkostning/gebyr pr. regning. ved betaling via netbank.",
+                amount: 0
             },
             {
-                name: "Bemærk forudbetaling"
+                name: "Bemærk forudbetaling (aconto)"
             }
         ]
     },
