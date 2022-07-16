@@ -49,34 +49,6 @@ export const governmentTariffs = [
     },
 ]
 
-export const companies = [
-    {
-        id: "nrgi",
-        name: "NRGi",
-        description: "",
-        website: "https://nrgi.dk"
-    },
-    {
-        id: "nettopower",
-        name: "Nettopower",
-        description: "",
-        website: "https://nettopower.dk"
-    },
-    {
-        id: "vindstoed",
-        name: "Vindstød",
-        description: "",
-        website: "https://www.vindstoed.dk"
-    },
-    ,
-    {
-        id: "ewii",
-        name: "EWII",
-        description: "",
-        website: "https://www.ewii.dk"
-    }
-]
-
 export const products = [
     {
         id: "spotpris",
@@ -93,7 +65,6 @@ export const products = [
         id: "nrgi_bevarmigel",
         name: "NRGi - Bevar-Mig-El",
         link: "https://nrgi.dk/privat/stroem/produkter/bestil-stroem/bevar-mig-el",
-        companyId: "nrgi",
         prices: [
             {
                 name: "Spotpris",
@@ -146,7 +117,6 @@ export const products = [
         id: "nrgi_indkoebspris",
         name: "NRGi - Indkøbspris",
         link: "https://nrgi.dk/privat/stroem/produkter/bestil-stroem/indkoebspris-bestil/elpris/",
-        companyId: "nrgi",
         prices: [
             {
                 name: "Spotpris",
@@ -191,58 +161,9 @@ export const products = [
         ]
     },
     {
-        id: "nrgi_kvartal",
-        name: "NRGi - Kvartal med klima",
-        link: "https://nrgi.dk/privat/stroem/produkter/bestil-stroem/kvartal-med-klima/",
-        companyId: "nrgi",
-        prices: [
-            {
-                name: "Elpris kvartal",
-                amount: 1.896,
-                region: "DK1"
-            },
-            {
-                name: "Elpris kvartal",
-                amount: 1.92,
-                region: "DK2"
-            }
-        ],
-        fees: [
-            {
-                name: "Abonnement",
-                amount: 16.25
-            },
-            {
-                name: "Indbetalingskort pr. regning",
-                amount: 49
-            },
-            {
-                name: "Betalingsservice pr. regning",
-                amount: 8
-            },
-            {
-                name: "Gebyr ved kundens skift af leverandør i bindingsperiode",
-                amount: 500
-            },
-            {
-                name: "Ekstra opgørelse / flytteopgørelse",
-                amount: 81.25
-            },
-            {
-                name: "Kopi af faktura",
-                amount: 43.75
-            },
-            {
-                name: "Rykkergebyr",
-                amount: 100
-            }
-        ]
-    },
-    {
         id: "nettopower",
         name: "nettopower",
         link: "https://www.nettopower.dk/",
-        companyId: "nettopower",
         prices: [
             {
                 name: "Spotpris",
@@ -272,7 +193,6 @@ export const products = [
         id: "vindstoed_danskvind",
         name: "Vindstød DanskVind",
         link: "https://www.vindstoed.dk/",
-        companyId: "vindstoed",
         prices: [
             {
                 name: "Spotpris",
@@ -297,12 +217,10 @@ export const products = [
             }
         ]
     },
-    
     {
         id: "vindstoed_lokalvind",
         name: "Vindstød LokalVind",
         link: "https://www.vindstoed.dk/",
-        companyId: "vindstoed",
         prices: [
             {
                 name: "Spotpris",
@@ -328,10 +246,37 @@ export const products = [
         ]
     },
     {
+        id: "vindstoed_spotvind",
+        name: "Vindstød SpotVind",
+        link: "https://www.vindstoed.dk/",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: .19
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 23.20
+            },
+            {
+                name: "Omkostning/gebyr pr. regning. ved betaling via netbank.",
+                amount: 0
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
+            }
+        ]
+    },
+    {
         id: "vindstoed_elforbundet",
         name: "Elforbundet.dk 2022 – Vindstød",
         link: "https://www.elforbundet.dk/",
-        companyId: "vindstoed",
         prices: [
             {
                 name: "Spotpris",
@@ -361,7 +306,6 @@ export const products = [
         id: "ewii_groen_indkoebspris",
         name: "EWII Grøn Indkøbspris",
         link: "https://www.ewii.dk/privat/el/groen-el/groen-indkoebspris/",
-        companyId: "ewii",
         prices: [
             {
                 name: "Spotpris",
@@ -376,6 +320,30 @@ export const products = [
             {
                 name: "Abonnement",
                 amount: 23.2
+            },
+            {
+                name: "Omkostning/gebyr pr. regning."
+            }
+        ]
+    },
+    {
+        id: "gasel",
+        name: "Gasel",
+        link: "https://www.gasel.dk/",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: .008
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement pr dag",
+                amount: .8
             },
             {
                 name: "Omkostning/gebyr pr. regning."
