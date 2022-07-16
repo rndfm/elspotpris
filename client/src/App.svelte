@@ -292,6 +292,19 @@
 		<div use:chart={options} />
 	{/if}
 	<div class="flexgrid responsive">
+		<div class="info col">
+			<h1>elspotpris.dk</h1>
+			<p class="lead">Få overblik over spot priserne på el det næste døgn.</p>
+			<p>Har du en elaftale med variabel pris er din pris pr. kWh baseret på spotprisen ved <a href="https://www.nordpoolgroup.com" target="_blank">Nordpool</a>.<br>
+				Prisen for næste dag bliver frigivet omkring kl. 13.00.</p>
+			<p>Vælg om prisen skal vises for DK1 eller DK2 som er henholdvis vest og øst for storebælt. DK1 er Jylland og Fyn mens DK2 er Sjælland. Prisen i grafen kan vises med elafgift, tariffer/transport og moms.<br /> Alle indstillinger bliver husket til næste gang du besøger siden.</p>
+			<h3>Variabel pris &#8800; spotpris</h3>
+			<p>Bemærk at indkøbsprisen/kostprisen, i din elaftale med variable pris, som regel er baseret på spotprisen men tillægges fortjeneste med mere.<br />
+				Vælg et produkt i menuen øverst for at se prisen med alle tillæg.<br />Bemærk at priser på produkter vedligeholdes manuelt. Hvis dit produkt mangler eller det er udregnet forkert så opret et punkt på <a href="https://github.com/rndfm/elspotpris/issues/new/choose" target="_blank">github</a>.
+				Der garanteres ikke for korrektheden af udregningen på produkterne og elselskaberne kan i mange tilfælde ændre prisen uden varsel.
+			</p>
+			
+		</div>
 		{#if selectedProduct }
 		<div class="calculation col">
 			<h2>
@@ -337,19 +350,6 @@
 			<p>Priserne i udregningen er opgivet ex. moms.<br/>Er der fejl i udregningen eller satserne rapporteres dette her: <a href="https://github.com/rndfm/elspotpris/issues/new/choose" target="_blank">github</a>.</p>
 		</div>
 		{/if}
-		<div class="info col">
-			<h1>elspotpris.dk</h1>
-			<p class="lead">Få overblik over spot priserne på el det næste døgn.</p>
-			<p>Har du en elaftale med variabel pris er din pris pr. kWh baseret på spotprisen ved <a href="https://www.nordpoolgroup.com" target="_blank">Nordpool</a>.<br>
-				Prisen for næste dag bliver frigivet omkring kl. 13.00.</p>
-			<p>Vælg om prisen skal vises for DK1 eller DK2 som er henholdvis vest og øst for storebælt. DK1 er Jylland og Fyn mens DK2 er Sjælland. Prisen i grafen kan vises med elafgift, tariffer/transport og moms.<br /> Alle indstillinger bliver husket til næste gang du besøger siden.</p>
-			<h3>Variabel pris &#8800; spotpris</h3>
-			<p>Bemærk at indkøbsprisen/kostprisen, i din elaftale med variable pris, som regel er baseret på spotprisen men tillægges fortjeneste med mere.<br />
-				Vælg et produkt i menuen øverst for at se prisen med alle tillæg.<br />Bemærk at priser på produkter vedligeholdes manuelt. Hvis dit produkt mangler eller det er udregnet forkert så opret et punkt på <a href="https://github.com/rndfm/elspotpris/issues/new/choose" target="_blank">github</a>.
-				Der garanteres ikke for korrektheden af udregningen på produkterne og elselskaberne kan i mange tilfælde ændre prisen uden varsel.
-			</p>
-			
-		</div>
 	</div>
 	<div class="github">
 		<p>
