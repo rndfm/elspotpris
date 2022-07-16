@@ -349,5 +349,77 @@ export const products = [
                 name: "Omkostning/gebyr pr. regning."
             }
         ]
+    },
+    {
+        id: "aura_flexel",
+        name: "AURA FlexEl",
+        link: "https://www.aura.dk/",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: .05
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 16.664
+            },
+            {
+                name: "Omkostning/gebyr pr. regning."
+            }
+        ]
+    },
+    {
+        id: "ok_el_flex",
+        name: "OK El Flex",
+        link: "https://www.ok.dk/",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: .1057
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 0
+            },
+            {
+                name: "Omkostning/gebyr pr. regning."
+            }
+        ]
+    },
+    {
+        id: "groen_ok_el_flex",
+        name: "Grøn OK El Flex",
+        link: "https://www.ok.dk/",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: .2057
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 0
+            },
+            {
+                name: "Omkostning/gebyr pr. regning."
+            }
+        ]
     }
 ]
