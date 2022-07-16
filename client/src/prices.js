@@ -472,7 +472,6 @@ export const products = [
             }
         ]
     },
-    ,
     {
         id: "clever",
         name: "Clever Power",
