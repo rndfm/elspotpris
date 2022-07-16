@@ -421,5 +421,81 @@ export const products = [
                 name: "Omkostning/gebyr pr. regning."
             }
         ]
+    },
+    {
+        id: "norlys_flexel",
+        name: "Norlys FlexEl",
+        link: "https://norlys.dk/",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: .036,
+                calculated: true
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 23.2
+            },
+            {
+                name: "Omkostning/gebyr pr. regning."
+            }
+        ]
+    },
+    {
+        id: "andel_energi_variabel_pris",
+        name: "andel energi - Variabel pris",
+        link: "https://andelenergi.dk/",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: 0.004,
+                calculated: true
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 31.96
+            },
+            {
+                name: "Omkostning/gebyr pr. regning."
+            }
+        ]
+    },
+    ,
+    {
+        id: "clever",
+        name: "Clever Power",
+        link: "https://clever.dk/produkter/clever-power/",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: 0.004,
+                calculated: true
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 39.2
+            },
+            {
+                name: "Omkostning/gebyr pr. regning."
+            }
+        ]
     }
 ]
