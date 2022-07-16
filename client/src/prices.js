@@ -368,11 +368,8 @@ export const products = [
                 amount: null
             },
             {
-                name: "Tillæg for certificeret grøn strøm",
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
                 amount: .015
-            },
-            {
-                name: "Eventuel fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
             }
         ],
         fees: [
