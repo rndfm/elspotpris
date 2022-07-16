@@ -269,6 +269,65 @@ export const products = [
         ]
     },
     {
+        id: "vindstoed_danskvind",
+        name: "Vindstød DanskVind",
+        link: "https://www.vindstoed.dk/",
+        companyId: "vindstoed",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: .005
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 0
+            },
+            {
+                name: "Omkostning/gebyr pr. regning. ved betaling via netbank.",
+                amount: 0
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
+            }
+        ]
+    },
+    
+    {
+        id: "vindstoed_lokalvind",
+        name: "Vindstød LokalVind",
+        link: "https://www.vindstoed.dk/",
+        companyId: "vindstoed",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: .005
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 10
+            },
+            {
+                name: "Omkostning/gebyr pr. regning. ved betaling via netbank.",
+                amount: 0
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
+            }
+        ]
+    },
+    {
         id: "vindstoed_elforbundet",
         name: "Elforbundet.dk 2022 – Vindstød",
         link: "https://www.elforbundet.dk/",
