@@ -252,7 +252,7 @@ export const products = [
             },
             {
                 name: "Betaling via betalingsservice",
-                amount: 4.6,
+                amount: 8,
                 frequency: 'monthly'
             },
             {
@@ -286,7 +286,7 @@ export const products = [
             },
             {
                 name: "Betaling via betalingsservice",
-                amount: 4.6,
+                amount: 8,
                 frequency: 'monthly'
             },
             {
@@ -320,7 +320,7 @@ export const products = [
             },
             {
                 name: "Betaling via betalingsservice",
-                amount: 4.6,
+                amount: 8,
                 frequency: 'monthly'
             },
             {
@@ -354,7 +354,7 @@ export const products = [
             },
             {
                 name: "Betaling via betalingsservice",
-                amount: 4.6,
+                amount: 8,
                 frequency: 'monthly'
             },
             {
