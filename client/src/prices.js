@@ -26,7 +26,6 @@ export const tariffs = [
 ]
 
 export const governmentTariffs = [
-    
     {
         id: "elafgift",
         name: "Elafgift",
@@ -49,17 +48,50 @@ export const governmentTariffs = [
     },
 ]
 
+export const consumptionTypes = [
+    {
+        id: "apartment_small",
+        name: "Lejlighed op til 80 kvm (ca 2000kWh)",
+        amount: 2000
+    },
+    {
+        id: "apartment_large",
+        name: "Lejlighed over 80 kvm (ca 3000kWh)",
+        amount: 3000
+    },
+    {
+        id: "house_small",
+        name: "Hus op til 130 kvm (ca 4000kWh)",
+        amount: 4000
+    },
+    {
+        id: "house_large",
+        name: "Hus over 80 kvm (ca 6000kWh)",
+        amount: 6000
+    },
+    {
+        id: "house_large_electric_heat",
+        name: "Hus med elvarme (ca 18000Wh)",
+        amount: 18000
+    },
+    {
+        id: "cottage",
+        name: "Sommerhus (ca. 2000kWh)",
+        amount: 2000
+    }
+]
+
 export const products = [
     {
         id: "spotpris",
         name: "ren spotpris",
-        companyId: null,
         prices: [
             {
                 name: "Spotpris",
                 amount: null
             }
-        ]
+        ],
+        excludeInComparison: true
     },
     {
         id: "nrgi_bevarmigel",
@@ -85,7 +117,8 @@ export const products = [
         fees: [
             {
                 name: "Abonnement",
-                amount: 16.25
+                amount: 16.25,
+                frequency: 'monthly'
             },
             {
                 name: "Indbetalingskort pr. regning",
@@ -93,7 +126,8 @@ export const products = [
             },
             {
                 name: "Betalingsservice pr. regning",
-                amount: 8
+                amount: 8,
+                frequency: 'monthly'
             },
             {
                 name: "Gebyr ved kundens skift af leverandør i bindingsperiode",
@@ -132,7 +166,8 @@ export const products = [
         fees: [
             {
                 name: "Abonnement",
-                amount: 16.25
+                amount: 16.25,
+                frequency: 'monthly'
             },
             {
                 name: "Indbetalingskort pr. regning",
@@ -140,7 +175,8 @@ export const products = [
             },
             {
                 name: "Betalingsservice pr. regning",
-                amount: 8
+                amount: 8,
+                frequency: 'monthly'
             },
             {
                 name: "Gebyr ved kundens skift af leverandør i bindingsperiode",
@@ -182,7 +218,8 @@ export const products = [
             },
             {
                 name: "Månedlig betaling/gebyr pr. regning.",
-                amount: 19
+                amount: 19,
+                frequency: 'monthly'
             },
             {
                 name: "Bemærk forudbetaling (aconto)"
@@ -234,7 +271,8 @@ export const products = [
         fees: [
             {
                 name: "Abonnement",
-                amount: 10
+                amount: 10,
+                frequency: 'monthly'
             },
             {
                 name: "Omkostning/gebyr pr. regning. ved betaling via netbank.",
@@ -262,7 +300,8 @@ export const products = [
         fees: [
             {
                 name: "Abonnement",
-                amount: 23.20
+                amount: 23.20,
+                frequency: 'monthly'
             },
             {
                 name: "Omkostning/gebyr pr. regning. ved betaling via netbank.",
@@ -319,10 +358,20 @@ export const products = [
         fees: [
             {
                 name: "Abonnement",
-                amount: 23.2
+                amount: 23.2,
+                frequency: 'monthly'
             },
             {
-                name: "Omkostning/gebyr pr. regning."
+                name: "Betaling via betalingsservice",
+                amount: 4.6
+            },
+            {
+                name: "Betaling via mobilepay",
+                amount: 0
+            },
+            {
+                name: "Betaling via girokort",
+                amount: 39.2
             }
         ]
     },
@@ -342,11 +391,16 @@ export const products = [
         ],
         fees: [
             {
-                name: "Abonnement pr dag",
-                amount: .8
+                name: "Abonnement pr. måned(gennemsnit)",
+                amount: 24.3333,
+                frequency: 'monthly'
             },
             {
-                name: "Omkostning/gebyr pr. regning."
+                name: "Betaling via betalingsservice",
+                amount: 4.656
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
             }
         ]
     },
@@ -367,7 +421,11 @@ export const products = [
         fees: [
             {
                 name: "Abonnement",
-                amount: 16.664
+                amount: 16.664,
+                frequency: 'monthly'
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
             },
             {
                 name: "Omkostning/gebyr pr. regning."
@@ -392,6 +450,9 @@ export const products = [
             {
                 name: "Abonnement",
                 amount: 0
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
             },
             {
                 name: "Omkostning/gebyr pr. regning."
@@ -419,6 +480,9 @@ export const products = [
             },
             {
                 name: "Omkostning/gebyr pr. regning."
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
             }
         ]
     },
@@ -440,10 +504,19 @@ export const products = [
         fees: [
             {
                 name: "Abonnement",
-                amount: 23.2
+                amount: 23.2,
+                frequency: 'monthly'
             },
             {
-                name: "Omkostning/gebyr pr. regning."
+                name: "Betaling via betalingsservice",
+                amount: 0
+            },
+            {
+                name: "Betaling via indbetalingskort",
+                amount: 39.2
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
             }
         ]
     },
@@ -465,10 +538,15 @@ export const products = [
         fees: [
             {
                 name: "Abonnement",
-                amount: 31.96
+                amount: 31.96,
+                frequency: 'monthly'
             },
             {
-                name: "Omkostning/gebyr pr. regning."
+                name: "Betaling via betalingsservice",
+                amount: 5
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
             }
         ]
     },
@@ -490,10 +568,12 @@ export const products = [
         fees: [
             {
                 name: "Abonnement",
-                amount: 39.2
+                amount: 39.2,
+                frequency: 'monthly'
             },
             {
-                name: "Omkostning/gebyr pr. regning."
+                name: "Betaling via betalingsservice",
+                amount: 0
             }
         ]
     }

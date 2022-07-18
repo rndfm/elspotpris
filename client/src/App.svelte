@@ -12,15 +12,23 @@
 		tariff,
 		product,
 		darkMode,
-		menuClosed
+		menuClosed,
+		calculatedProducts,
+		consumption,
+		electricityTax,
 	} from "./stores.js";
 	import {} from "./data.js";
-	import { tariffs, products, governmentTariffs } from "./prices.js";
+	import { tariffs, products, governmentTariffs, consumptionTypes } from "./prices.js";
 	import { onMount } from 'svelte';
 
 	let selectedProduct;
 	product.subscribe((value) => {
     	selectedProduct = value;
+	});
+
+	let productCalculations;
+	calculatedProducts.subscribe((value) =>  {
+		productCalculations = value;
 	});
 
 	let selectedTariff;
@@ -31,6 +39,11 @@
 	let withTax;
 	tax.subscribe((value) => {
     	withTax = value;
+	});
+
+	let includeElectricityTax = false;
+	electricityTax.subscribe((value) => {
+    	includeElectricityTax = value;
 	});
 
 	let options = {
@@ -220,6 +233,17 @@
 		}
 	}
 
+	function round(amount)
+	{
+		return (Math.round((amount + Number.EPSILON) * 100) / 100).toFixed(2);
+	}
+
+	function shouldWarn(product)
+	{
+		return product.prices.some(p => p.conditions === null || p.calculated || p.amount === undefined) ||
+			product.fees.some(f => f.amount === undefined || f.conditions === null);
+	}
+
 	menuClosed.subscribe(() => {
 		setTimeout(() => {
 			onResize();	
@@ -252,6 +276,13 @@
 						on:change={updateRegion}/> DK2(øst)</label>
 			</li>
 			<li>
+				<label for="electricityTax">
+					<input
+						type="checkbox"
+						id="electricityTax"
+						bind:checked={$electricityTax}/> elafgift</label>
+			</li>
+			<li>
 				<select bind:value={$tariff}>
 					{#each tariffs as item}
 						<option value={item}>
@@ -262,7 +293,7 @@
 			</li>
 			<li>
 				<select bind:value={$product}>
-					{#each products as product}
+					{#each products.sort((a, b) => a.name.localeCompare(b.name)) as product}
 						<option value={product}>
 							{product.name}
 						</option>
@@ -307,10 +338,10 @@
 		</div>
 		{#if selectedProduct }
 		<div class="calculation col">
-			<h2>
-				{#if selectedProduct.prices.some(e => e.conditions === null | e.calculated || e.amount === undefined)}<img src="warning.svg" class="warning" alt="Advarsel" title="Dele af udregningen er ugarranteret eller uden betingelser."/>{/if}
+			<a id="info"><h2>
+				{#if shouldWarn(selectedProduct)}<img src="warning.svg" class="warning" alt="Advarsel" title="Dele af udregningen er ugarranteret eller uden betingelser."/>{/if}
 				Sådan er prisen udregnet.
-			</h2>
+			</h2></a>
 			<p class="lead">{selectedProduct.name}</p>
 			{#if selectedProduct.link}<a href={selectedProduct.link}>{selectedProduct.link}</a>{/if}
 			<ul>
@@ -325,11 +356,13 @@
 			{/each}
 			</ul>
 			<ul>
+			{#if includeElectricityTax}
 			{#each governmentTariffs as item}
 				<li>
 					{item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
 				</li>
 			{/each}
+			{/if}
 				<li>Netselskab - { selectedTariff.name } - lavlast: {selectedTariff.normal} kr - spidslast: {selectedTariff.peak} kr</li>
 				{#if withTax}<li>Moms 25%</li>{/if}
 				{#if !withTax}<li>Uden moms</li>{/if}
@@ -340,7 +373,6 @@
 				{#each selectedProduct.fees as item}
 				<li>
 					{item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
-					{#if item.calculated}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Prisen er regnet baglens og er ikke bekræftet af elselskabet.">{/if}
 					{#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel">{/if}
 					{#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt">{/if}
 				</li>
@@ -349,6 +381,35 @@
 			{/if}
 			<p>Priserne i udregningen er opgivet ex. moms.<br/>Er der fejl i udregningen eller satserne rapporteres dette her: <a href="https://github.com/rndfm/elspotpris/issues/new/choose" target="_blank">github</a>.</p>
 		</div>
+		{/if}
+	</div>
+	<div class="compare">
+		<h3>Billigste elprodukt med variabel pris lige nu</h3>
+		<p>Priserne herunder vises uden spotpris, elafgift, transport mv og er kun selve tillæg til spotprisen, abonnement mv. Altså den del du betaler ekstra til et elselskab for at købe strømmen hos dem.</p>
+		<p>Bemærk at flere selskaber har aconto/forudbetaling. Klik på produktet for at se mere information.</p>
+		<span>Ved forbrug pr år.:</span>
+		<select bind:value={$consumption}>
+			{#each consumptionTypes as item}
+				<option value={item}>
+					{item.name}
+				</option>
+			{/each}
+		</select>
+
+		{#if productCalculations}
+		<table>
+			<thead>
+				<tr><td>Produkt</td><td>Tillæg til spotpris</td><td>Andre omkostninger</td><td>Total</td></tr>
+			</thead>
+			{#each productCalculations.sort((a,b) => a.calculatedPrices.total - b.calculatedPrices.total) as item}
+				<tr>
+					<td><a href="#info" on:click="{product.set(item)}">{item.name}{#if shouldWarn(item)}<img class="warning" src="warning.svg" alt="Advarsel" title="Der er bemærkninger til prisen. Klik for mere info.">{/if}</a></td>
+					<td class="right">{round(item.calculatedPrices.surcharges)} kr</td>
+					<td class="right">{round(item.calculatedPrices.fees)} kr</td>
+					<td class="right"><strong>{round(item.calculatedPrices.total)} kr</strong></td>
+				</tr>
+			{/each}
+		</table>
 		{/if}
 	</div>
 	<div class="github">
@@ -523,6 +584,34 @@
 		max-width: 800px;
 		margin: 0 auto;
 		padding: 0 1em;
+	}
+
+	.compare
+	{
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 1em;
+		
+		table {
+			margin: 1em auto;
+			thead {
+				font-weight: bold;
+			}
+			td {
+				text-align: left;
+				padding: .1em .5em;
+
+				img.warning
+				{
+					width: 16px;
+					padding-left: .5em;
+				}
+			}
+
+			td.right {
+				text-align: right;
+			}
+		}
 	}
 
 	.github {
