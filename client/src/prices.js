@@ -251,8 +251,9 @@ export const products = [
                 amount: 0
             },
             {
-                name: "Omkostning/gebyr pr. regning. ved betaling via netbank.",
-                amount: 0
+                name: "Betaling via betalingsservice",
+                amount: 4.6,
+                frequency: 'monthly'
             },
             {
                 name: "Bemærk forudbetaling (aconto)"
