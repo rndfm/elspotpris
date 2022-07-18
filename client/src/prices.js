@@ -91,6 +91,7 @@ export const products = [
                 amount: null
             }
         ],
+        fees: [],
         excludeInComparison: true
     },
     {

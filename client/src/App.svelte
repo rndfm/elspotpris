@@ -240,6 +240,10 @@
 
 	function shouldWarn(product)
 	{
+		if (!product)
+		{
+			return false;
+		}
 		return product.prices.some(p => p.conditions === null || p.calculated || p.amount === undefined) ||
 			product.fees.some(f => f.amount === undefined || f.conditions === null);
 	}
