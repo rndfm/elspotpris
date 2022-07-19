@@ -72,7 +72,7 @@ export const consumptionTypes = [
     },
     {
         id: "house_large",
-        name: "Hus over 80 kvm (ca 6000kWh)",
+        name: "Hus over 130 kvm (ca 6000kWh)",
         amount: 6000
     },
     {
