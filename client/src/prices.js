@@ -12,6 +12,12 @@ export const tariffs = [
         peak: .7651
     },
     {
+        id: "cerius_c",
+        name: "Cerius C",
+        normal: .3028,
+        peak: .7885
+    },
+    {
         id: "n1_c",
         name: "N1 C",
         normal: .1832,
