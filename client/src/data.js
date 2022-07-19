@@ -69,6 +69,7 @@ const calculatePrices = () => {
 
         calculatedProducts.set(
             products.filter(p => !p.excludeInComparison).map(p => {
+
                 p.calculatedPrices = {
                     prices: priceData.map(o => 
                         [
@@ -81,7 +82,7 @@ const calculatePrices = () => {
                 p.calculatedPrices.surcharges = calculateProductPrice(p, 0, region) * selectedConsumption.amount;
 
                 p.calculatedPrices.total = p.calculatedPrices.surcharges;
-                p.calculatedPrices.fees = p.fees.filter(f => f.frequency == 'monthly').reduce((total, next) => total + (isNaN(next.amount) ? 0 : next.amount), 0) * 12;
+                p.calculatedPrices.fees = p.fees.reduce((total, next) => total + ((next.amount || 0) * (next.paymentsPerYear || 0)), 0);
                 if (!isNaN(p.calculatedPrices.fees))
                 {
                     p.calculatedPrices.total+= p.calculatedPrices.fees;

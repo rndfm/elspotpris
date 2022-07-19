@@ -119,7 +119,7 @@ export const products = [
             {
                 name: "Abonnement",
                 amount: 16.25,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Indbetalingskort pr. regning",
@@ -128,7 +128,7 @@ export const products = [
             {
                 name: "Betalingsservice pr. regning",
                 amount: 8,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Gebyr ved kundens skift af leverandør i bindingsperiode",
@@ -168,7 +168,7 @@ export const products = [
             {
                 name: "Abonnement",
                 amount: 16.25,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Indbetalingskort pr. regning",
@@ -177,7 +177,7 @@ export const products = [
             {
                 name: "Betalingsservice pr. regning",
                 amount: 8,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Gebyr ved kundens skift af leverandør i bindingsperiode",
@@ -220,7 +220,7 @@ export const products = [
             {
                 name: "Månedlig betaling/gebyr pr. regning.",
                 amount: 19,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Bemærk forudbetaling (aconto)"
@@ -253,7 +253,7 @@ export const products = [
             {
                 name: "Betaling via betalingsservice",
                 amount: 8,
-                frequency: 'monthly'
+                paymentsPerYear: 4
             },
             {
                 name: "Bemærk forudbetaling (aconto)"
@@ -278,7 +278,7 @@ export const products = [
             {
                 name: "Abonnement",
                 amount: 10,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Omkostning/gebyr pr. regning. ved betaling via netbank.",
@@ -287,7 +287,7 @@ export const products = [
             {
                 name: "Betaling via betalingsservice",
                 amount: 8,
-                frequency: 'monthly'
+                paymentsPerYear: 4
             },
             {
                 name: "Bemærk forudbetaling (aconto)"
@@ -312,7 +312,7 @@ export const products = [
             {
                 name: "Abonnement",
                 amount: 23.20,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Omkostning/gebyr pr. regning. ved betaling via netbank.",
@@ -321,7 +321,7 @@ export const products = [
             {
                 name: "Betaling via betalingsservice",
                 amount: 8,
-                frequency: 'monthly'
+                paymentsPerYear: 4
             },
             {
                 name: "Bemærk forudbetaling (aconto)"
@@ -355,7 +355,7 @@ export const products = [
             {
                 name: "Betaling via betalingsservice",
                 amount: 8,
-                frequency: 'monthly'
+                paymentsPerYear: 4
             },
             {
                 name: "Bemærk forudbetaling (aconto)"
@@ -380,12 +380,12 @@ export const products = [
             {
                 name: "Abonnement",
                 amount: 23.2,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Betaling via betalingsservice",
                 amount: 4.6,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Betaling via mobilepay",
@@ -415,7 +415,7 @@ export const products = [
             {
                 name: "Abonnement pr. måned(gennemsnit)",
                 amount: 24.3333,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Betaling via betalingsservice",
@@ -444,7 +444,7 @@ export const products = [
             {
                 name: "Abonnement",
                 amount: 16.664,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Bemærk forudbetaling (aconto)"
@@ -527,7 +527,7 @@ export const products = [
             {
                 name: "Abonnement",
                 amount: 23.2,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Betaling via betalingsservice",
@@ -561,7 +561,7 @@ export const products = [
             {
                 name: "Abonnement",
                 amount: 31.96,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Betaling via betalingsservice",
@@ -591,7 +591,7 @@ export const products = [
             {
                 name: "Abonnement",
                 amount: 39.2,
-                frequency: 'monthly'
+                paymentsPerYear: 12
             },
             {
                 name: "Betaling via betalingsservice",
