@@ -604,5 +604,35 @@ export const products = [
                 amount: 0
             }
         ]
+    },
+    {
+        id: "watts",
+        name: "Watts",
+        link: "https://watts.dk/",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: 0
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 23.2,
+                paymentsPerYear: 12
+            },
+            {
+                name: "Betaling via betalingskort",
+                amount: 0
+            },
+            {
+                name: "Betaling via betalingsservice",
+                amount: 5
+            }
+        ]
     }
 ]
