@@ -632,6 +632,9 @@ export const products = [
             {
                 name: "Betaling via betalingsservice",
                 amount: 5
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
             }
         ]
     }
