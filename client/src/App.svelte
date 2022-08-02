@@ -389,7 +389,7 @@
 	</div>
 	<div class="compare">
 		<h3>Billigste elprodukt med variabel pris lige nu</h3>
-		<p>Priserne herunder vises uden spotpris, elafgift, transport mv og er kun selve tillæg til spotprisen, abonnement mv. Altså den del du betaler ekstra til et elselskab for at købe strømmen hos dem.</p>
+		<p><strong>Priserne herunder vises uden spotpris, elafgift, transport mv og er kun selve tillæg til spotprisen, abonnement mv. Altså den del du betaler ekstra til et elselskab for at købe strømmen hos dem.</strong></p>
 		<p>Bemærk at flere selskaber har aconto/forudbetaling. Klik på produktet for at se mere information.</p>
 		<span>Ved forbrug pr år.:</span>
 		<select bind:value={$consumption}>
@@ -403,7 +403,7 @@
 		{#if productCalculations}
 		<table>
 			<thead>
-				<tr><td>Produkt</td><td>Tillæg til spotpris</td><td>Andre omkostninger</td><td>Total</td></tr>
+				<tr><td>Produkt</td><td>Tillæg til spotpris</td><td>Andre omkostninger</td><td>Total (ekskl. spotpris)</td></tr>
 			</thead>
 			{#each productCalculations.sort((a,b) => a.calculatedPrices.total - b.calculatedPrices.total) as item}
 				<tr>

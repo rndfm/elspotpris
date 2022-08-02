@@ -635,6 +635,9 @@ export const products = [
             },
             {
                 name: "Bemærk forudbetaling (aconto)"
+            },
+            {
+                name: "Watts tager ikke nye kunder"
             }
         ]
     }
