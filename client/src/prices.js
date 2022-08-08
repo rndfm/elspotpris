@@ -240,6 +240,36 @@ export const products = [
         ]
     },
     {
+        id: "velkommen",
+        name: "Velkommen",
+        link: "https://velkommen.dk/",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: .15,
+                conditions: null
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 0
+            },
+            {
+                name: "Månedlig betaling/gebyr pr. regning.",
+                amount: 19,
+                paymentsPerYear: 12
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
+            }
+        ]
+    },
+    {
         id: "vindstoed_danskvind",
         name: "Vindstød DanskVind",
         link: "https://www.vindstoed.dk/",
