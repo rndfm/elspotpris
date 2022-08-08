@@ -20,14 +20,20 @@ export const tariffs = [
     {
         id: "n1_c",
         name: "N1 C",
-        normal: .1832,
-        peak: .5437
+        normal: .2951,
+        peak: .7791
     },
     {
         id: "dinel_c",
         name: "Dinel C",
         normal: .1112,
         peak: .3462
+    },
+    {
+        id: "trefor_el-net_oest_c",
+        name: "Trefor El-Net Øst C",
+        normal: .4131,
+        peak: 1.1598
     }
 ]
 
