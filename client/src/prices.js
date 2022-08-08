@@ -56,7 +56,7 @@ export const governmentTariffs = [
     {
         id: "transmissionsnettarif",
         name: "Transmissions nettarif",
-        amount: .0049,
+        amount: .049,
     },
 ]
 
