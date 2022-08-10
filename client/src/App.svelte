@@ -71,6 +71,9 @@
 			height: 500,
 			toolbar: {
 				show: false
+			},
+			animations: {
+				enabled: false
 			}
 		},
 		stroke: {
