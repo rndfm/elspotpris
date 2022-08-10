@@ -343,7 +343,7 @@
 		{#if selectedProduct }
 		<div class="calculation col">
 			<a id="info"><h2>
-				{#if shouldWarn(selectedProduct)}<img src="warning.svg" class="warning" alt="Advarsel" title="Dele af udregningen er ugarranteret eller uden betingelser."/>{/if}
+				{#if shouldWarn(selectedProduct)}<img src="warning.svg" width="32" height="32" class="warning" alt="Advarsel" title="Dele af udregningen er ugarranteret eller uden betingelser."/>{/if}
 				Sådan er prisen udregnet.
 			</h2></a>
 			<p class="lead">{selectedProduct.name}</p>
@@ -352,10 +352,10 @@
 			{#each selectedProduct.prices as item}
 				<li>
 					{item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
-					{#if item.calculated}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Prisen er regnet baglens og er ikke bekræftet af elselskabet.">{/if}
-					{#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel">{/if}
-					{#if item.conditions}<img class="item-warning" src="info.svg" alt="Info" title="{item.conditions}">{/if}
-					{#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt">{/if}
+					{#if item.calculated}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Prisen er regnet baglens og er ikke bekræftet af elselskabet." width="16" height="16">{/if}
+					{#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel" width="16" height="16">{/if}
+					{#if item.conditions}<img class="item-warning" src="info.svg" alt="Info" title="{item.conditions}" width="16" height="16">{/if}
+					{#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt" width="16" height="16">{/if}
 				</li>
 			{/each}
 			</ul>
@@ -377,8 +377,8 @@
 				{#each selectedProduct.fees as item}
 				<li>
 					{item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
-					{#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel">{/if}
-					{#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt">{/if}
+					{#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel" width="16" height="16">{/if}
+					{#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt" width="16" height="16">{/if}
 				</li>
 				{/each}
 			</ul>
@@ -407,7 +407,7 @@
 			</thead>
 			{#each productCalculations.sort((a,b) => a.calculatedPrices.total - b.calculatedPrices.total) as item}
 				<tr>
-					<td><a href="#info" on:click="{product.set(item)}">{item.name}{#if shouldWarn(item)}<img class="warning" src="warning.svg" alt="Advarsel" title="Der er bemærkninger til prisen. Klik for mere info.">{/if}</a></td>
+					<td><a href="#info" on:click="{product.set(item)}">{item.name}{#if shouldWarn(item)}<img class="warning" src="warning.svg" alt="Advarsel" title="Der er bemærkninger til prisen. Klik for mere info." width="16" height="16">{/if}</a></td>
 					<td class="right">{round(item.calculatedPrices.surcharges)} kr</td>
 					<td class="right">{round(item.calculatedPrices.fees)} kr</td>
 					<td class="right"><strong>{round(item.calculatedPrices.total)} kr</strong></td>
@@ -418,7 +418,7 @@
 	</div>
 	<div class="github">
 		<p>
-			{#if $darkMode}<img src="github-dark.png" alt="github" />{:else}<img src="github.png" alt="github" />{/if}Hjælp med at forbedre denne side.
+			{#if $darkMode}<img src="github-dark.png" alt="github" />{:else}<img src="github.png" alt="github" width="32" height="32"/>{/if}Hjælp med at forbedre denne side.
 			<a href="https://github.com/rndfm/elspotpris" target="_blank">https://github.com/rndfm/elspotpris</a>
 		</p>
 	</div>
