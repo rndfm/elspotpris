@@ -598,6 +598,10 @@
 		margin: 0 auto;
 		padding: 0 1em;
 		
+		.table-scroll {
+			overflow-x: auto;
+		}
+		
 		table {
 			margin: 1em auto;
 			thead {
