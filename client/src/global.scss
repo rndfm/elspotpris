@@ -33,6 +33,15 @@ body {
 			color: #bbb;
 			border: 1px solid #666;
 		}
+		
+		a {
+			color: rgb(0,150,250);
+			text-decoration: none;
+		}
+		
+		a:visited {
+			color: rgb(0,130,210);
+		}
 
 
 		nav {
