@@ -311,7 +311,7 @@
 				<label for="darkMode"><input type="checkbox" id="darkMode" bind:checked={$darkMode} /> Dark mode</label>
 			</li>
 		</ul>
-		<button class="tab" on:click="{() => $menuClosed = !$menuClosed}"><span class="chevron up"></span></button>
+		<button class="tab" on:click="{() => $menuClosed = !$menuClosed}" aria-label="Åben og luk menu"><span class="chevron up"></span></button>
 	</nav>
 	<div class="flexgrid meters" id="meters">
 		<div class="col">
@@ -401,24 +401,26 @@
 		</select>
 
 		{#if productCalculations}
-		<table>
-			<thead>
-				<tr><td>Produkt</td><td>Tillæg til spotpris</td><td>Andre omkostninger</td><td>Total (ekskl. spotpris)</td></tr>
-			</thead>
-			{#each productCalculations.sort((a,b) => a.calculatedPrices.total - b.calculatedPrices.total) as item}
-				<tr>
-					<td><a href="#info" on:click="{product.set(item)}">{item.name}{#if shouldWarn(item)}<img class="warning" src="warning.svg" alt="Advarsel" title="Der er bemærkninger til prisen. Klik for mere info." width="16" height="16">{/if}</a></td>
-					<td class="right">{round(item.calculatedPrices.surcharges)} kr</td>
-					<td class="right">{round(item.calculatedPrices.fees)} kr</td>
-					<td class="right"><strong>{round(item.calculatedPrices.total)} kr</strong></td>
-				</tr>
-			{/each}
-		</table>
+		<div class="table-scroll">
+			<table>
+				<thead>
+					<tr><td>Produkt</td><td>Tillæg til spotpris</td><td>Andre omkostninger</td><td>Total (ekskl. spotpris)</td></tr>
+				</thead>
+				{#each productCalculations.sort((a,b) => a.calculatedPrices.total - b.calculatedPrices.total) as item}
+					<tr>
+						<td><a href="#info" on:click="{product.set(item)}">{item.name}{#if shouldWarn(item)}<img class="warning" src="warning.svg" alt="Advarsel" title="Der er bemærkninger til prisen. Klik for mere info." width="16" height="16">{/if}</a></td>
+						<td class="right">{round(item.calculatedPrices.surcharges)} kr</td>
+						<td class="right">{round(item.calculatedPrices.fees)} kr</td>
+						<td class="right"><strong>{round(item.calculatedPrices.total)} kr</strong></td>
+					</tr>
+				{/each}
+			</table>
+		</div>
 		{/if}
 	</div>
 	<div class="github">
 		<p>
-			{#if $darkMode}<img src="github-dark.png" alt="github" />{:else}<img src="github.png" alt="github" width="32" height="32"/>{/if}Hjælp med at forbedre denne side.
+			{#if $darkMode}<img src="github-dark.png" alt="github" width="32" height="32" />{:else}<img src="github.png" alt="github" width="32" height="32"/>{/if}Hjælp med at forbedre denne side.
 			<a href="https://github.com/rndfm/elspotpris" target="_blank">https://github.com/rndfm/elspotpris</a>
 		</p>
 	</div>
