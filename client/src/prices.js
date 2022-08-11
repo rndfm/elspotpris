@@ -303,6 +303,36 @@ export const products = [
         ]
     },
     {
+        id: "vindstoed_vestroem",
+        name: "Vindstød VEstrøm",
+        link: "https://www.vindstoed.dk/",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: .015
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 0
+            },
+            {
+                name: "Omkostning/gebyr pr. regning. ved betaling via netbank.",
+                amount: 0
+            },
+            {
+                name: "Betaling via betalingsservice",
+                amount: 8,
+                paymentsPerYear: 4
+            }
+        ]
+    },
+    {
         id: "vindstoed_lokalvind",
         name: "Vindstød LokalVind",
         link: "https://www.vindstoed.dk/",
