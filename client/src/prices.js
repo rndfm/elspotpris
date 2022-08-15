@@ -456,12 +456,12 @@ export const products = [
             },
             {
                 name: "Betaling via betalingsservice",
-                amount: 4.6,
-                paymentsPerYear: 12
+                amount: 4.6
             },
             {
                 name: "Betaling via mobilepay",
-                amount: 0
+                amount: 0,
+                paymentsPerYear: 12
             },
             {
                 name: "Betaling via girokort",
@@ -638,6 +638,79 @@ export const products = [
             {
                 name: "Betaling via betalingsservice",
                 amount: 5
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
+            }
+        ]
+    },
+    {
+        id: "gnp_energy_fordel_plus_el",
+        name: "GNP Energy - Fordel Plus el",
+        link: "https://dk.gnp.energy/produkter/fordel-plus/",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Spotpris tillæg",
+                amount: 0.048,
+                calculated: true
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 20,
+                paymentsPerYear: 12
+            },
+            {
+                name: "Betaling - pr. udstedt faktura - kun frem til kunden tilmelder sig NETS-betaling af faktura, herefter bortfalder hele gebyret.",
+                amount: 23.2
+
+            },
+            {
+                name: "Betaling via betalingsservice",
+                amount: 0
+            },
+            {
+                name: "Bemærk forudbetaling (aconto)"
+            },
+            {
+                name: "Binding i 6 måneder!"
+            }
+        ]
+    },
+    {
+        id: "sef_energi_as_fleksvind",
+        name: "SEF Energi A/S - FleksVIND",
+        link: "https://www.sef.dk/privat/el/fleksvind/",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Spotpris tillæg",
+                amount: 0.22,
+                calculated: true
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 23.2,
+                paymentsPerYear: 12
+            },
+            {
+                name: "Betaling - pr. udstedt faktura - kun frem til kunden tilmelder sig NETS-betaling af faktura, herefter bortfalder hele gebyret.",
+                amount: 39.2
+
+            },
+            {
+                name: "Betaling via betalingsservice",
+                amount: 4.8
             },
             {
                 name: "Bemærk forudbetaling (aconto)"
