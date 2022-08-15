@@ -710,7 +710,8 @@ export const products = [
             },
             {
                 name: "Betaling via betalingsservice",
-                amount: 4.8
+                amount: 4.8,
+                paymentsPerYear: 12
             },
             {
                 name: "Bemærk forudbetaling (aconto)"
