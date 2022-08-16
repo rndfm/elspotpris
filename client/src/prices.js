@@ -261,7 +261,7 @@ export const products = [
             },
             {
                 name: "Betaling via betalingsservice",
-                amount: 8.25,
+                amount: 6.6,
                 paymentsPerYear: 4
             },
             {
