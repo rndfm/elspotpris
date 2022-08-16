@@ -16,57 +16,57 @@ Bemærk at udregningen ligger samtlige priser sammen. Vil der gøres opmærksom 
 Hvis der står null ved amount bruges spotprisen.
 
 {
-    name: "Navn på elselskab og produktnavn",
+    name: "Jysk Energi FDM Strøm",
     prices: [
         {
-            name: "spotpris",
+            name: "FDM Grøn Strøm (kræver FDM medlemsskab)",
             amount: null,
         },
         {
             name: "fortjeneste,",
-            amount: .037
+            amount: .02
         },
         {
             name: "balanceomkostninger",
-            amount: .037
+            amount: .0
         },
         {
             name: "profilomkostninger",
-            amount: .037
+            amount: .0
         },
         {
             name: "handelsomkostninger",
-            amount: .037
+            amount: .0025
         },
         {
             name: "evt grønt tiltag",
-            amount: .08
+            amount: .0
         }
     ],
     fees: [
         {
-            name: "abonnement",
-            amount: 16.25
+            name: "abonnement inkl FDM Bonus",
+            amount: 18
         },
         {
             name: "Indbetalingskort pr. regning",
-            amount: 49
+            amount: 39.2
         },
         {
             name: "Betalingsservice pr. regning",
-            amount: 8
+            amount: 6
         },
         {
             name: "Gebyr ved kundens skift af leverandør i bindingsperiode",
-            amount: 500
+            amount: 0
         },
         {
             name: "Ekstra opgørelse / flytteopgørelse",
-            amount: 81.25
+            amount: 80.00
         },
         {
             name: "Kopi af faktura",
-            amount: 43.75
+            amount: 39,2
         },
         {
             name: "Rykkergebyr",
