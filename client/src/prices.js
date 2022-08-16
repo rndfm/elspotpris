@@ -230,9 +230,9 @@ export const products = [
                 amount: 0
             },
             {
-                name: "Månedlig betaling/gebyr pr. regning.",
-                amount: 19,
-                paymentsPerYear: 12
+                name: "Betaling via betalingsservice",
+                amount: 0,
+                paymentsPerYear: 4
             },
             {
                 name: "Bemærk forudbetaling (aconto)"
@@ -260,9 +260,9 @@ export const products = [
                 amount: 0
             },
             {
-                name: "Månedlig betaling/gebyr pr. regning.",
-                amount: 19,
-                paymentsPerYear: 12
+                name: "Betaling via betalingsservice",
+                amount: 6.6,
+                paymentsPerYear: 4
             },
             {
                 name: "Bemærk forudbetaling (aconto)"
