@@ -40,6 +40,12 @@ export const tariffs = [
         name: "Trefor El-Net Øst C",
         normal: .4131,
         peak: 1.1598
+    },
+    {
+        id: "elektrus_c",
+        name: "Elektrus C",
+        normal: .2858,
+        peak: .6461
     }
 ]
 
