@@ -17,6 +17,7 @@ async function getPrices() {
 async function getCo2Emis() {
     var startDate = getDateInTimezone("Europe/Copenhagen");
     startDate.setHours(0, 0, 0, 0);
+    startDate = convertToUtc(startDate);
 
     const query = `start=${toCustomISOString(startDate)}`;
 
@@ -28,8 +29,9 @@ async function getCo2Emis() {
 async function getCo2EmisPrognosis() {
     var startDate = getDateInTimezone("Europe/Copenhagen");
     startDate.setHours(startDate.getHours() - 1);
+    startDate = convertToUtc(startDate);
 
-    const query = `start=${toCustomISOString(startDate)}`;
+    const query = `start=${toCustomISOString(startDate)}&sort=Minutes5DK`;
 
     return await request('CO2EmisProg', query).catch(e => {
         console.log(e);
@@ -70,6 +72,14 @@ async function request(dataset, query)
 
         req.end()
     });
+}
+
+function convertToUtc(date)
+{
+    let nz_date_string = date.toLocaleString("en-US", { timeZone: "UTC" });
+
+    // Date object initialized from the above datetime string
+    return new Date(nz_date_string);
 }
 
 function getDateInTimezone(timezone)
