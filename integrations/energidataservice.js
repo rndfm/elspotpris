@@ -16,7 +16,7 @@ async function getPrices() {
 
 async function getCo2Emis() {
     var startDate = new Date();
-    startDate.setHours(startDate.getHours() - 24);
+    startDate.setHours(startDate.getHours() - 12);
 
     const query = `start=${toCustomISOString(startDate)}`;
 
