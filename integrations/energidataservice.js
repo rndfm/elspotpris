@@ -15,9 +15,8 @@ async function getPrices() {
 }
 
 async function getCo2Emis() {
-    var startDate = getDateInTimezone("Europe/Copenhagen");
-    startDate.setHours(0, 0, 0, 0);
-    startDate = convertToUtc(startDate);
+    var startDate = new Date();
+    startDate.setHours(startDate.getHours() - 24);
 
     const query = `start=${toCustomISOString(startDate)}`;
 
@@ -27,9 +26,8 @@ async function getCo2Emis() {
 }
 
 async function getCo2EmisPrognosis() {
-    var startDate = getDateInTimezone("Europe/Copenhagen");
+    var startDate = new Date();
     startDate.setHours(startDate.getHours() - 1);
-    startDate = convertToUtc(startDate);
 
     const query = `start=${toCustomISOString(startDate)}&sort=Minutes5DK`;
 
@@ -74,32 +72,16 @@ async function request(dataset, query)
     });
 }
 
-function convertToUtc(date)
-{
-    let nz_date_string = date.toLocaleString("en-US", { timeZone: "UTC" });
-
-    // Date object initialized from the above datetime string
-    return new Date(nz_date_string);
-}
-
-function getDateInTimezone(timezone)
-{
-    let nz_date_string = new Date().toLocaleString("en-US", { timeZone: timezone });
-
-    // Date object initialized from the above datetime string
-    return new Date(nz_date_string);
-}
-
 function toCustomISOString(date) {
     var pad = function(num) {
         return (num < 10 ? '0' : '') + num;
     };
   
     return date.getFullYear() +
-        '-' + pad(date.getMonth() + 1) +
-        '-' + pad(date.getDate()) +
-        'T' + pad(date.getHours()) +
-        ':' + pad(date.getMinutes());
+        '-' + pad(date.getUTCMonth() + 1) +
+        '-' + pad(date.getUTCDate()) +
+        'T' + pad(date.getUTCHours()) +
+        ':' + pad(date.getUTCMinutes());
   }
 
 

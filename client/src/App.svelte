@@ -96,7 +96,7 @@
 		annotations: {
 			xaxis: [
 				{
-					x: new Date().getTime(),
+					x: getDateInTimezone("Europe/Copenhagen").getTime(),
 					borderColor: "#333333",
 					strokeDashArray: 5,
 					borderWidth: 3,
@@ -159,7 +159,7 @@
 	};
 
 	setInterval(() => {
-		options.annotations.xaxis[0].x = new Date().getTime();
+		options.annotations.xaxis[0].x = getDateInTimezone("Europe/Copenhagen").getTime();
 	}, 10000);
 
 	setInterval(() => {
@@ -212,7 +212,15 @@
 		options.series[2].data = value;
 	});
 
-	
+	function getDateInTimezone(timezone)
+	{
+		let nz_date_string = new Date().toLocaleString("en-US", { timeZone: timezone });
+		// Date object initialized from the above datetime string
+		const date = new Date(nz_date_string);
+		date.timeZone = timezone;
+		return date;
+	}
+
 	function onResize()
 	{
 		if (document.getElementById('nav'))

@@ -94,7 +94,7 @@ const calculatePrices = () => {
         // Extract current price.
         if (priceData && priceData.length > 0)
         {
-            var now = new Date();
+            var now = getDateInTimezone("Europe/Copenhagen");
             now.setMinutes(0);
             now.setSeconds(0);
             now.setMilliseconds(0);
@@ -104,6 +104,15 @@ const calculatePrices = () => {
         }
     }
 };
+
+function getDateInTimezone(timezone)
+	{
+		let nz_date_string = new Date().toLocaleString("en-US", { timeZone: timezone });
+		// Date object initialized from the above datetime string
+		const date = new Date(nz_date_string);
+		date.timeZone = timezone;
+		return date;
+	}
 
 const updateCo2Emis = () => 
 {
