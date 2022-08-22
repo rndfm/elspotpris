@@ -29,7 +29,7 @@ async function getCo2EmisPrognosis() {
     var startDate = new Date();
     startDate.setHours(startDate.getHours() - 1);
 
-    const query = `start=${toCustomISOString(startDate)}&sort=Minutes5DK`;
+    const query = `start=${toCustomISOString(startDate)}`;
 
     return await request('CO2EmisProg', query).catch(e => {
         console.log(e);
