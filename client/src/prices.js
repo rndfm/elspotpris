@@ -12,6 +12,12 @@ export const tariffs = [
         peak: .7651
     },
     {
+        id: "rah_c",
+        name: "RAH C",
+        normal: .1592,
+        peak: .4595
+    },
+    {
         id: "konstant_c",
         name: "Konstant C",
         normal: .1432,
