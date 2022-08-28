@@ -28,6 +28,12 @@ export const tariffs = [
         name: "N1 C",
         normal: .2951,
         peak: .7791
+    },    
+    {
+        id: "n1_evonet_c",
+        name: "N1 (tidl. Evonet) C",
+        normal: .2114,
+        peak: .6933
     },
     {
         id: "dinel_c",
