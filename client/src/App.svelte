@@ -434,6 +434,7 @@
 			{#if $darkMode}<img src="github-dark.png" alt="github" width="32" height="32" />{:else}<img src="github.png" alt="github" width="32" height="32"/>{/if}Hjælp med at forbedre denne side.
 			<a href="https://github.com/rndfm/elspotpris" target="_blank">https://github.com/rndfm/elspotpris</a>
 		</p>
+		<p><a href="/privatlivspolitik">Privatlivspolitik</a></p>
 	</div>
 </main>
 
