@@ -58,6 +58,12 @@ export const tariffs = [
         name: "Elektrus C",
         normal: .2858,
         peak: .6461
+    },
+    {
+        id: "elnet_midt_c",
+        name: "Elnet midt C",
+        normal: .1725,
+        peak: .5167
     }
 ]
 
