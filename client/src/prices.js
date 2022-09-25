@@ -71,6 +71,7 @@ export const tariffs = [
     {
         id: "elvrk_c",
         name: "Elværk C",
+        // From 2023-01-01 decrease:  normal: .2330;, peak: .7206
         // Updated 2022-09-24 - https://www.elvrk.dk/forside/priser/
         normal: .3947,
         peak: 1.2997
