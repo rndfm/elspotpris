@@ -126,7 +126,7 @@ const updateCo2Emis = () =>
         co2EmissionsPrognosis.set(co2EmisProgData.filter(e => e.PriceArea == region).map(o => [new Date(o.Minutes5DK), o.CO2Emission]));
 };
 
-var socket = io(':3000');
+var socket = io();
 
 socket.on('users', function(data) {
     userCount.set(data);
