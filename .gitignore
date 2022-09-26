@@ -1,4 +1,4 @@
-/node_modules/
-/client/node_modules/
-/client/public/build/
+/elspotpris.api/node_modules/
+/elspotpris.app/node_modules/
+/elspotpris.app/build/
 .DS_Store

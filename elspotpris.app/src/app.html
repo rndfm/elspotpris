@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+	<meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>elspotpris.dk - Se din elpris pr. kWh time for time - i dag og det næste døgn frem.</title>
+	<meta name="description" content="Se elprisen inkl. transport tariffer, elafgift og moms i overskuelig graf så du kan planlægge dit strømforbrug. Se også nuværende og prognose for Co2 udledning.">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-FKM1MQ9EM1"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-FKM1MQ9EM1');
+
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('/service-worker.js')
+		.then(function(reg){
+			
+		}).catch(function(err) {
+			
+		});
+	}
+	</script>
+	%sveltekit.head%
+</head>
+
+<body>
+	%sveltekit.body%
+</body>
+</html>

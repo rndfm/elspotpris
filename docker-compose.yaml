@@ -1,10 +1,15 @@
 version: '3'
 services:
-  elspotpris:
+  elspotpris_api:
     restart: always
-    image: rndfm/elspotpris
+    image: rndfm/elspotpris_api
     ports:
       - "3000:3000"
+  elspotpris_app:
+    restart: always
+    image: rndfm/elspotpris_app
+    ports:
+      - "4000:4000"
   nginx:
     restart: always
     image: nginx:1.15-alpine
@@ -13,7 +18,8 @@ services:
       - "80:80"
       - "443:443"
     depends_on:
-      - elspotpris
+      - elspotpris_api
+      - elspotpris_app
     volumes:
       - ./data/nginx:/etc/nginx/conf.d
       - ./data/certbot/conf:/etc/letsencrypt

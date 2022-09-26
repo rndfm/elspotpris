@@ -1,0 +1,210 @@
+html, body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	color: #333;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+	display: flex;
+
+	nav#navigation
+	{
+		background-color: #cfcfcf;
+		.tab {
+			background-color: #cfcfcf;
+		}
+
+		div > ul > li {
+			background-color: #c0c0c0;
+
+			&:hover{
+				background-color: #b0b0b0;
+			}
+		}
+	}
+    
+    nav#options {
+        > ul {
+            
+            border-bottom: 10px solid #cfcfcf;
+            background-color: #cfcfcf;
+        }
+        .tab {
+            background-color: #cfcfcf;
+        }			
+    }
+
+	table {
+		border-spacing: 0;
+		width: 100%;
+		tr {
+			background-color: #cfcfcf;
+		}
+		tr:nth-child(even) {background: #c0c0c0}
+	
+		thead {
+			font-weight: bold;
+		}
+		td {
+			text-align: left;
+			padding: .5em 1em;
+		}
+	
+		td.right {
+			text-align: right;
+		}
+	}
+
+    &.dark {
+		color: #bbb;
+		background-color: #111;
+
+		input, button, select, textarea {
+			background-color: #333;
+			color: #bbb;
+			border: 1px solid #666;
+		}
+		
+		a {
+			color: rgb(0,150,250);
+			text-decoration: none;
+		}
+		
+		a:visited {
+			color: rgb(0,130,210);
+		}
+
+		nav#navigation
+		{
+			background-color: #222;
+			.tab {
+				background-color: #222;
+			}
+
+			div > ul > li {
+				background-color: #1e1e1e;
+	
+				&:hover{
+					background-color: #333;
+				}
+			}
+		}
+
+		main {
+			nav#options {
+				> ul {
+					border-bottom-color: #222;
+					background-color: #222;
+				}
+				.tab {
+					background-color: #222;
+				}			
+			}
+		}
+
+		.apexcharts-tooltip-title, .apexcharts-tooltip, .apexcharts-xaxistooltip {
+			background: #333 !important; 
+			color: #bbb;
+		}
+
+		table {
+			tr {
+				background-color: #222;
+			}
+			tr:nth-child(even) {background: #1B1b1b}
+		}
+	}
+}
+
+
+a {
+	color: rgb(0,100,200);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:visited {
+	color: rgb(0,80,160);
+}
+
+
+label {
+	display: block;
+}
+
+input, button, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	-webkit-padding: 0.4em 0;
+	padding: 0.4em;
+	margin: 0 0 0.5em 0;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+
+input:disabled {
+	color: #ccc;
+}
+
+button {
+	color: #333;
+	background-color: #f4f4f4;
+	outline: none;
+}
+
+button:disabled {
+	color: #999;
+}
+
+button:not(:disabled):active {
+	background-color: #ddd;
+}
+
+button:focus {
+	border-color: #666;
+}
+
+
+small {
+	font-size: .5em;
+}
+
+h1,	h2 {
+	color: #ff3e00;
+	font-size: 3em;
+	font-weight: 100;
+	margin: 0;
+	padding: 0;
+}
+
+h2 {
+	font-size: 2em;
+}
+
+h3 {
+	margin-bottom: -.5em;
+}
+
+@media only screen and (min-width: 500px) {
+	h1 {
+		font-size: 4em;
+	}
+	h2 {
+		font-size: 3em;
+	}
+}
+
+.table-scroll {
+	overflow-x: auto;
+}
+

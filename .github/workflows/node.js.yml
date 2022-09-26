@@ -41,4 +41,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: cd /var/elspotpris.dk && docker build . -t rndfm/elspotpris && docker compose up -d
+        script: cd /var/elspotpris.dk && docker build ./elspotpris.app -t rndfm/elspotpris_app && docker build ./elspotpris.api -t rndfm/elspotpris_api && docker compose up -d
