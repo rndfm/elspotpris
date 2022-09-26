@@ -32,6 +32,9 @@ export const tariffs = [
     {
         id: "n1_c",
         name: "N1 C",
+        // from 2022-11-01 increase: https://n1.dk/priser-og-vilkaar/kommende-priser-1-11-2022 
+        // from 2023-01-01 increase: https://n1.dk/priser-og-vilkaar/kommende-priser-1-1-2023
+        // Updated 2022-09-24 - https://n1.dk/priser-og-vilkaar
         normal: .2951,
         peak: .7791
     },    
@@ -64,7 +67,23 @@ export const tariffs = [
         name: "Elnet midt C",
         normal: .1725,
         peak: .5167
+    },
+    {
+        id: "elvrk_c",
+        name: "Elværk C",
+        // From 2023-01-01 decrease:  normal: .2330;, peak: .7206
+        // Updated 2022-09-24 - https://www.elvrk.dk/forside/priser/
+        normal: .3947,
+        peak: 1.2997
+    },
+    {
+        id: "hurup_elvrk_net_c",
+        name: "Hurup Elværk Net C",
+        // Updated 2022-09-24 - http://www.hev.dk/faste-afgifter/
+        normal: .15,
+        peak: .15
     }
+
 ]
 
 export const governmentTariffs = [
@@ -110,6 +129,11 @@ export const consumptionTypes = [
         id: "house_large",
         name: "Hus over 130 kvm (ca 6000kWh)",
         amount: 6000
+    },
+    {
+        id: "house_large_heatpump",
+        name: "Hus med varmepumpe (ca 10000Wh)",
+        amount: 10000
     },
     {
         id: "house_large_electric_heat",
