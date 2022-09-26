@@ -107,8 +107,8 @@
 		<ul>
 			<li><a href="/">Live</a></li>
 			<li><a href="/sammenlign">Sammenlign</a></li>
-			<li><a href="/automatisering">Automatisering</a></li>
-			<li><a href="/om-elspotpris">Om elspotpris.dk</a></li>
+			<!-- <li><a href="/automatisering">Automatisering</a></li>
+			<li><a href="/om-elspotpris">Om elspotpris.dk</a></li> -->
 		</ul>
 	</div>
 </nav>
