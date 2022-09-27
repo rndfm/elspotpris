@@ -844,7 +844,8 @@ export const products = [
             },
             {
                 name: "Betaling via betalingsservice",
-                amount: 8
+                amount: 8,
+		paymentsPerYear: 12
             },
  	    {
                 name: "Rykkergebyr",
@@ -880,7 +881,8 @@ export const products = [
             },
             {
                 name: "Betaling via betalingsservice",
-                amount: 9.95
+                amount: 9.95,
+		paymentsPerYear: 12
             },
 	    {
                 name: "Betaling via Bankoverførsel",
