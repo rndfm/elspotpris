@@ -82,6 +82,13 @@ export const tariffs = [
         // Updated 2022-09-24 - http://www.hev.dk/faste-afgifter/
         normal: .15,
         peak: .15
+    }, 
+    {
+        id: "veksel",
+        name: "Veksel",
+        // kilde: https://www.veksel.dk/priser/nettarif-og-abonnementer/
+        normal: .2199,
+        peak: .6564
     }
 
 ]
