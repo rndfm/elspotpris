@@ -829,7 +829,7 @@ export const products = [
             },
             {
                 name: "Spotpris tillæg",
-                amount: 0.4, //?den her jeg er usikker på
+                amount: 0.03, //?den her jeg er usikker p, den er 3 øre/kwh
                 calculated: true
             }
         ],
@@ -846,6 +846,47 @@ export const products = [
             {
                 name: "Betaling via betalingsservice",
                 amount: 8
+            },
+ 	    {
+                name: "Rykkergebyr",
+                amount: 100
+            }
+        ]
+    },
+    {
+        id: "modstroem_g",
+        name: "Modstrøm Grundprodukt",
+        link: "https://www.modstroem.dk/privat/bliv-kunde/",
+	//jeg er ikke hundrede på hvordan skal skrives ind her, men har gjort mit bedste
+        payments: Forbrugsafregnet månedligt",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Spotpris tillæg",
+                amount: 0.1875, //?den her jeg er usikker på
+                calculated: true
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 49,
+                paymentsPerYear: 12
+            },
+            {
+                name: "Betaling via betalingskort", 
+                amount: 50
+            },
+            {
+                name: "Betaling via betalingsservice",
+                amount: 9.95
+            },
+	    {
+                name: "Betaling via Bankoverførsel",
+                amount: 100
             },
  	    {
                 name: "Rykkergebyr",
