@@ -828,7 +828,7 @@ export const products = [
             },
             {
                 name: "Spotpris tillæg",
-                amount: .03,
+                amount: .024,
                 calculated: true
             }
         ],
