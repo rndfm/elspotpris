@@ -215,7 +215,7 @@
 
 	function onResize()
 	{
-		if (document.getElementById('nav'))
+		if (document.getElementById('options'))
 		{
 			// find height of options.
 			const optionsHeight = document.getElementById('options').clientHeight - 30;
