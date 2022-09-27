@@ -820,8 +820,7 @@ export const products = [
         id: "kernfull",
         name: "Kärnfull",
         link: "https://dk.karnfull.com/",
-	//jeg er ikke hundrede på hvordan skal skrives ind her, men har gjort mit bedste
-        payments: Forbrugsafregnet månedligt",
+        payments: "Forbrugsafregnet månedligt",
         prices: [
             {
                 name: "Spotpris",
@@ -829,7 +828,7 @@ export const products = [
             },
             {
                 name: "Spotpris tillæg",
-                amount: 0.03, //?den her jeg er usikker p, den er 3 øre/kwh
+                amount: .03,
                 calculated: true
             }
         ],
@@ -840,7 +839,7 @@ export const products = [
                 paymentsPerYear: 12
             },
             {
-                name: "Betaling via betalingskort", //første er gratis
+                name: "Betaling via betalingskort",
                 amount: 35
             },
             {
@@ -857,8 +856,7 @@ export const products = [
         id: "modstroem_g",
         name: "Modstrøm Grundprodukt",
         link: "https://www.modstroem.dk/privat/bliv-kunde/",
-	//jeg er ikke hundrede på hvordan skal skrives ind her, men har gjort mit bedste
-        payments: Forbrugsafregnet månedligt",
+        payments: "Forbrugsafregnet månedligt",
         prices: [
             {
                 name: "Spotpris",
@@ -866,7 +864,7 @@ export const products = [
             },
             {
                 name: "Spotpris tillæg",
-                amount: 0.1875, //?den her jeg er usikker på
+                amount: .1875,
                 calculated: true
             }
         ],
