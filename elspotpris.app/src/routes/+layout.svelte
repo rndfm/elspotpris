@@ -2,15 +2,21 @@
 	import "./global.scss";
 	import {
 		mainMenuClosed,
+		darkMode
 	} from "./stores.js";
 
 	let menuActive = false;
 
-	function closeMenu()
-	{
-		menuActive = false;
-		$mainMenuClosed = true;
-	}
+	darkMode.subscribe((value) => {
+		if (value)
+		{
+			document.body.classList.add('dark')
+		}
+		else
+		{
+			document.body.classList.remove('dark')
+		}
+	});
 </script>
 
 <style lang="scss">
@@ -172,7 +178,7 @@
 </nav>
 <div id="menu-backdrop" class:active="{menuActive}" on:click="{() => menuActive = false}"></div>
 <div id="menu-container">
-	<img src="menu-icon.svg" height="25px" alt="menu" id="menu-toggle" on:click="{() => menuActive = true}" />
+	<img src="/menu-icon.svg" height="25px" alt="menu" id="menu-toggle" on:click="{() => menuActive = true}" />
 </div>	
 <main>
 	<slot />

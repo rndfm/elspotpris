@@ -167,12 +167,10 @@
 	darkMode.subscribe((value) => {
 		if (value)
 		{
-			document.body.classList.add('dark')
 			options.chart.foreColor = '#bbb';
 		}
 		else
 		{
-			document.body.classList.remove('dark')
 			options.chart.foreColor = '#333';
 		}
 	});
@@ -356,7 +354,7 @@
         {#each selectedProduct.prices as item}
             <li>
                 {item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
-                {#if item.calculated}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Prisen er regnet baglens og er ikke bekræftet af elselskabet." width="16" height="16">{/if}
+                {#if item.calculated}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Prisen er regnet baglæns og er ikke bekræftet af elselskabet." width="16" height="16">{/if}
                 {#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel" width="16" height="16">{/if}
                 {#if item.conditions}<img class="item-warning" src="info.svg" alt="Info" title="{item.conditions}" width="16" height="16">{/if}
                 {#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt" width="16" height="16">{/if}
