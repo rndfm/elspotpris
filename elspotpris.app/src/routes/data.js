@@ -163,7 +163,7 @@ socket.on('co2emisprog', function(data) {
 });
 
 priceRegion.subscribe(value => {
-    if (typeof value !== 'undefined' && !value) {
+    if (value == null || value == undefined || value == 'undefined' || value == 'null') {
         socket.emit('region');
     } else {
         region = value;
