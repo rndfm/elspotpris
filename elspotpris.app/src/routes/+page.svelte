@@ -17,6 +17,7 @@
 	import {} from "./data.js";
 	import { tariffs, products, governmentTariffs } from "./prices.js";
 	import { onMount } from 'svelte';
+	import { intros } from "svelte/internal";
 
 	let selectedProduct;
 	product.subscribe((value) => {
@@ -381,6 +382,7 @@
                 {item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
                 {#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel" width="16" height="16">{/if}
                 {#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt" width="16" height="16">{/if}
+				{#if item.paymentsPerYear}<small>({item.paymentsPerYear} betalinger om året)</small>{/if}
             </li>
             {/each}
         </ul>
