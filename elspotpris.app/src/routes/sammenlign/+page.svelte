@@ -25,6 +25,11 @@ function shouldWarn(product)
 
 </script>
 
+<svelte:head>
+	<title>elspotpris.dk - Sammenlign priserne hos elselskaberne.</title>
+	<meta name="description" content="Her kan du sammenligne de reelle udgifter hos elselskaberne. Her vises spotpristillæg, betalingsgebyrer mv.">
+</svelte:head>
+
 <style lang="scss">
     .table-scroll {
         overflow-x: auto;
