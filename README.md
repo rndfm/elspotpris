@@ -8,11 +8,11 @@ Som noget nyt kan websitet også vise prisen for et specifik produkt hos en el-l
 ## Tilføj produkter fra elselskaber eller tariffer fra netselskaber.
 Ønsker du at tilføje eller rette i priser fra elselskaber eller netselskaber kan dette gøres nemt!
 
-I filen [/client/src/prices.js](https://github.com/rndfm/elspotpris/blob/master/client/src/prices.js) findes alle definitionerne for priserne på både tariffer og el produkter.  
+I filen [/client/src/routes/prices.js](https://github.com/rndfm/elspotpris/blob/master/elspotpris.app/src/routes/prices.js) findes alle definitionerne for priserne på både tariffer og el produkter.  
 Rediger filen og lav et pull request.  
 Det er nemmere end det lyder og man kan ikke ødelægge noget. Rettelsen bliver tjekket inden den går live.
 
-[Link til prisfilen](https://github.com/rndfm/elspotpris/blob/master/client/src/prices.js)
+[Link til prisfilen](https://github.com/rndfm/elspotpris/blob/master/elspotpris.app/src/routes/prices.js)
 
 ## Installation
 
