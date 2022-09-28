@@ -14,22 +14,29 @@ Det er nemmere end det lyder og man kan ikke ødelægge noget. Rettelsen bliver 
 
 [Link til prisfilen](https://github.com/rndfm/elspotpris/blob/master/client/src/prices.js)
 
-## Installation
+## Lokalt udviklingsmiljø
 
 Brug [NPM](https://www.npmjs.com/) til at starte projektet.
-For at køre hele projektet skal både klient og server startes.
-Klienten består af en svelte app.
-Serveren er NodeJS.,
+For at køre hele projektet skal både app og api startes.
+Klienten(app) består af en sveltekit app.
+Api er NodeJS.
 
-Byg klienten i /client mappen.
+For at projektet kan kører lokalt skal porten til socketio sættes til 3000 i /elspotpris.app/src/routes/data.js.
+Find stedet med (omkring linje 140)
+var socket = io();
+erstat med
+var socket = io(':3000');
+
+Kør app'en i /elspotpris.app mappen.
 ```bash
-cd .\client\
+cd .\elspotpris.app\
 npm install
-npm run build
+npm run dev
 ```
 
 Start server
 ```bash
+cd .\elspotpris.api\
 npm install
 npm run start
 ```
