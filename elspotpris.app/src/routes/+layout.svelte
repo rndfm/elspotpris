@@ -4,22 +4,30 @@
 		mainMenuClosed,
 	} from "./stores.js";
 
+	let menuActive = false;
+
+	function closeMenu()
+	{
+		menuActive = false;
+		$mainMenuClosed = true;
+	}
 </script>
 
 <style lang="scss">
 	nav#navigation {
-		padding: 0 1em;
-
 		position: absolute;
 		height: 100%;
 		z-index: 9999;
+		right:0;
 
-		max-width: 999px;
+		max-width: 0;
 		transition: max-width 0.15s ease-out;
 		transition: padding 0.15s ease-out;
 
 		@media only screen and (min-width: 1200px) {
 			position: relative;
+			padding: 0 1em;
+			max-width: 300px;
 		}
 
 		> div {
@@ -52,18 +60,23 @@
 		}
 
 		.tab {
-			display: block;
-			position: absolute;
-			top: 1px;
-			right: -12px;
-			border: none;
-			border-bottom-left-radius: 0;
-			border-bottom-right-radius: 33%;
-			border-top-left-radius: 0;
-			border-top-right-radius: 33%;
-			width: 30px;
-			height: 50px;
 			cursor: pointer;
+			margin: 0;
+			display: none;
+
+			@media only screen and (min-width: 1200px) {
+				display: block;
+				position: absolute;
+				top: 1px;
+				right: -12px;
+				border: none;
+				border-bottom-left-radius: 0;
+				border-bottom-right-radius: 33%;
+				border-top-left-radius: 0;
+				border-top-right-radius: 33%;
+				width: 30px;
+				height: 50px;
+			}
 
 			.chevron::before {
 				border-style: solid;
@@ -72,24 +85,69 @@
 				display: inline-block;
 				position: relative;
 				top: 0.25em;
-				transform: rotate(-135deg);
 				vertical-align: top;
 				width: 0.45em;
 				height: 0.45em;
+				transform: rotate(-135deg);
 			}
 		}
 
+		&.active {
+			max-width: 300px;
+			padding: 0 1em;
+		}
+
 		&.closed {
-			max-width: 0px;
-			padding: 0 .5em;
-			.tab {
-				right: -12px;
-				.chevron:before {
-					left: -0.25em;
-					top: 0.25em;
-					transform: rotate(45deg);
+			@media only screen and (min-width: 1200px) {
+				max-width: 0px;
+				padding: 0 .5em;
+
+				.tab {
+					right: -12px;
+					.chevron:before {
+						left: -0.25em;
+						top: 0.25em;
+						transform: rotate(45deg);
+					}
 				}
 			}
+		}
+	}
+
+	#menu-container {
+		position: relative;
+		height: 0;
+
+		#menu-toggle {
+			position: absolute;
+			top: 1.5em;
+			right: 1.5em;
+			cursor: pointer;
+			
+			@media only screen and (min-width: 1200px) {
+				display: none;
+			}
+		}
+	}
+
+	#menu-backdrop {
+		display: none;
+		position: absolute;
+		top: 0;
+		left:0;
+		width:100%;
+		height:100%;
+		background-color: rgba(0,0,0,.4);
+		z-index: 999;
+		&.active {
+			display: block;
+		}
+
+		@media only screen and (min-width: 1200px) {
+			&.active {
+				display: none;
+			}
+		
 		}
 	}
 
@@ -100,18 +158,22 @@
 	}
 </style>
 
-<nav id="navigation" class:closed="{$mainMenuClosed}">
+<nav id="navigation" class:closed="{$mainMenuClosed}" class:active="{menuActive}">
 	<button on:click="{() => $mainMenuClosed = !$mainMenuClosed}" class="tab" aria-label="Åben og luk menu"><span class="chevron up"></span></button>
 	<div>
 		<span class="logo">elspotpris.dk</span>
 		<ul>
-			<li><a href="/">Live</a></li>
-			<li><a href="/sammenlign">Sammenlign</a></li>
+			<li><a href="/" on:click="{() => menuActive = false}">Live</a></li>
+			<li><a href="/sammenlign" on:click="{() => menuActive = false}">Sammenlign</a></li>
 			<!-- <li><a href="/automatisering">Automatisering</a></li>
 			<li><a href="/om-elspotpris">Om elspotpris.dk</a></li> -->
 		</ul>
 	</div>
 </nav>
+<div id="menu-backdrop" class:active="{menuActive}" on:click="{() => menuActive = false}"></div>
+<div id="menu-container">
+	<img src="menu-icon.svg" height="25px" alt="menu" id="menu-toggle" on:click="{() => menuActive = true}" />
+</div>	
 <main>
-<slot />
+	<slot />
 </main>

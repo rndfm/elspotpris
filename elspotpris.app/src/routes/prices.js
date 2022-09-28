@@ -157,7 +157,7 @@ export const consumptionTypes = [
 export const products = [
     {
         id: "spotpris",
-        name: "ren spotpris",
+        name: "Spotpris",
         prices: [
             {
                 name: "Spotpris",

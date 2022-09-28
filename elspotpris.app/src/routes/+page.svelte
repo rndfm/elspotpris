@@ -264,6 +264,20 @@
 </svelte:head>
 
 <svelte:window on:resize="{onResize}"/>
+
+<div class="flexgrid meters" id="meters">
+    <div class="col">
+        <h2>{spotPriceNow} <small>kr/kWh</small></h2>
+        <p>Spotpris lige nu</p>
+    </div>
+    <div class="col">
+        <h2>{emisNow} <small>g/kWh</small></h2>
+        <p>CO<sub>2</sub> lige nu</p>
+    </div>
+</div>
+{#if options.series[0].data}
+    <div use:chart={options} />
+{/if}
 <nav id="options" class:closed="{$menuClosed}">
     <ul>
         <li>
@@ -289,7 +303,10 @@
                     id="electricityTax"
                     bind:checked={$electricityTax}/> Elafgift</label>
         </li>
-        <li>
+		<li>
+            <label for="tax"><input type="checkbox" id="tax" bind:checked={$tax} /> Moms</label>
+        </li>
+        <li class="full">
             <select bind:value={$tariff}>
                 {#each tariffs as item}
                     <option value={item}>
@@ -298,7 +315,7 @@
                 {/each}
             </select>
         </li>
-        <li>
+        <li class="full">
             <select bind:value={$product}>
                 {#each products.sort((a, b) => a.name.localeCompare(b.name)) as product}
                     <option value={product}>
@@ -308,27 +325,11 @@
             </select>
         </li>
         <li>
-            <label for="tax"><input type="checkbox" id="tax" bind:checked={$tax} /> Moms</label>
-        </li>
-        <li>
             <label for="darkMode"><input type="checkbox" id="darkMode" bind:checked={$darkMode} /> Dark mode</label>
         </li>
     </ul>
     <button class="tab" on:click="{() => $menuClosed = !$menuClosed}" aria-label="Åben og luk menu"><span class="chevron up"></span></button>
 </nav>
-<div class="flexgrid meters" id="meters">
-    <div class="col">
-        <h2>{spotPriceNow} <small>kr/kWh</small></h2>
-        <p>Spotpris lige nu</p>
-    </div>
-    <div class="col">
-        <h2>{emisNow} <small>g/kWh</small></h2>
-        <p>CO<sub>2</sub> lige nu</p>
-    </div>
-</div>
-{#if options.series[0].data}
-    <div use:chart={options} />
-{/if}
 <div class="flexgrid responsive">
     <div class="info col">
         <h1>elspotpris.dk</h1>
@@ -400,37 +401,42 @@
 
 <style lang="scss">
 	nav#options {
-		margin-bottom: -20px;
-
 		> ul {
-			overflow-x: auto;
-			overflow-y: hidden;
 			display: block;
 			list-style: none;
 			margin: 0;
 			padding: 0;
 			display: flex;
-			max-height: 200px;
 			transition: max-height 0.15s ease-out;
-			border-bottom-left-radius: 10px;
-			border-bottom-right-radius: 10px;
+			border-radius: 10px;
 			
 			@media only screen and (min-width: 768px) {
 				justify-content: center;
 			}
 
+			flex-wrap: wrap;
+
 			> li {
 				padding: 10px 10px 0 10px;
 				display: flex;
+				&.full {
+					width: 100%;
+				}
 				align-items: center;
-				
 
+				@media only screen and (min-width: 1200px) {
+					&.full {
+						width: unset;
+					}
+				}
+				
 				> label {
 					margin-right: 10px;
 				}
 
 				> select {
 					margin: 0;
+					width: 100%;
 				}
 			}
 		}
@@ -482,20 +488,29 @@
 		font-size: 1.4em;
 	}
 
-	.flexgrid {
+	.flexgrid
+	{
 		display: flex;
 	}
 
-	@media (max-width: 1000px) {
+	.flexgrid.responsive {
+		display: block;
+
+		.col {
+			flex: 1;
+		}
+	}
+	
+	@media only screen and (min-width: 1200px) {
 		.flexgrid.responsive {
-			display: block;
+			display: flex;
 		}
 	}
 
 	.meters {
 		overflow-x: auto;
 		> * {
-			margin: 1em;
+			margin: 1em 1em 0 0;
 		}
 		p {
 			padding: 0;
@@ -506,15 +521,12 @@
 			font-weight: 400;
 		}
 
-		.col
-		{
-			text-align: center;
+		@media only screen and (min-width: 1200px) {
+			justify-content: space-around;
 		}
 	}
 
-	.col {
-		flex: 1;
-	}
+	
 
 	.calculation {
 		max-width: 800px;
