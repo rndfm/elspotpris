@@ -101,7 +101,7 @@ body {
 		#menu-toggle {
 			filter: invert(70%);
 		}
-		
+
 		main {
 			nav#options {
 				> ul {
@@ -187,26 +187,26 @@ small {
 
 h1,	h2 {
 	color: #ff3e00;
-	font-size: 3em;
+	font-size: 2em;
 	font-weight: 100;
 	margin: 0;
 	padding: 0;
 }
 
 h2 {
-	font-size: 2em;
+	font-size: 1.5em;
 }
 
 h3 {
 	margin-bottom: -.5em;
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 1200px) {
 	h1 {
-		font-size: 4em;
+		font-size: 3em;
 	}
 	h2 {
-		font-size: 3em;
+		font-size: 2em;
 	}
 }
 

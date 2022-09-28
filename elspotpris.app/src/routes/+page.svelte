@@ -267,11 +267,11 @@
 
 <div class="flexgrid meters" id="meters">
     <div class="col">
-        <h2>{spotPriceNow} <small>kr/kWh</small></h2>
+        <span>{spotPriceNow} <small>kr/kWh</small></span>
         <p>Spotpris lige nu</p>
     </div>
     <div class="col">
-        <h2>{emisNow} <small>g/kWh</small></h2>
+        <span>{emisNow} <small>g/kWh</small></span>
         <p>CO<sub>2</sub> lige nu</p>
     </div>
 </div>
@@ -346,10 +346,10 @@
     </div>
     {#if selectedProduct }
     <div class="calculation col">
-        <a id="info"><h2>
+        <h2>
             {#if shouldWarn(selectedProduct)}<img src="warning.svg" width="32" height="32" class="warning" alt="Advarsel" title="Dele af udregningen er ugarranteret eller uden betingelser."/>{/if}
             Sådan er prisen udregnet
-        </h2></a>
+        </h2>
         <p class="lead">{selectedProduct.name}</p>
         {#if selectedProduct.link}<a href={selectedProduct.link}>{selectedProduct.link}</a>{/if}
         <ul>
@@ -512,17 +512,22 @@
 		> * {
 			margin: 1em 1em 0 0;
 		}
+
+		span {
+			font-size: 2em;
+			color: #ff3e00;
+		}
+
 		p {
 			padding: 0;
 			margin: 0;
 		}
 
-		h2 {
-			font-weight: 400;
-		}
-
 		@media only screen and (min-width: 1200px) {
 			justify-content: space-around;
+			span {
+				font-size: 2.5em;
+			}
 		}
 	}
 
