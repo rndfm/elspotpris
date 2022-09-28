@@ -1,6 +1,7 @@
 import { userCount, priceNow, prices, co2EmissionNow, co2Emissions, co2EmissionsPrognosis, priceRegion, tax, tariff, product, calculatedProducts, consumption, electricityTax } from "./stores.js";
 import { governmentTariffs, products } from './prices';
 import { io } from "socket.io-client";
+import { get } from 'svelte/store';
 
 let region = "DK2";
 let selectedTariff;
@@ -123,7 +124,17 @@ const updateCo2Emis = () =>
     }
 
     if (co2EmisProgData)
-        co2EmissionsPrognosis.set(co2EmisProgData.filter(e => e.PriceArea == region).map(o => [new Date(o.Minutes5DK), o.CO2Emission]));
+    {
+        // Limit prog data to price data date range.
+        const lastestPriceDate = new Date(Math.max.apply(null, get(prices).map(p => p[0])));
+        co2EmissionsPrognosis.set(
+            co2EmisProgData
+                .filter(e => e.PriceArea == region)
+                .map(o => [new Date(o.Minutes5DK), o.CO2Emission])
+                .filter(o => o[0] <= lastestPriceDate)
+        );
+    }
+        
 };
 
 var socket = io();
