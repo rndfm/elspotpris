@@ -835,21 +835,21 @@ export const products = [
         fees: [
             {
                 name: "Abonnement",
-                amount: 39,
+                amount: 31.2,
                 paymentsPerYear: 12
             },
             {
                 name: "Betaling via betalingskort",
-                amount: 35
+                amount: 28
             },
             {
                 name: "Betaling via betalingsservice",
-                amount: 8,
+                amount: 6.4,
 		paymentsPerYear: 12
             },
  	    {
                 name: "Rykkergebyr",
-                amount: 100
+                amount: 80
             }
         ]
     },
@@ -877,20 +877,20 @@ export const products = [
             },
             {
                 name: "Betaling via betalingskort", 
-                amount: 50
+                amount: 32
             },
             {
                 name: "Betaling via betalingsservice",
-                amount: 9.95,
+                amount: 7.96,
 		paymentsPerYear: 12
             },
 	    {
                 name: "Betaling via Bankoverførsel",
-                amount: 100
+                amount: 80
             },
  	    {
                 name: "Rykkergebyr",
-                amount: 100
+                amount: 80
             }
         ]
     }
