@@ -893,5 +893,57 @@ export const products = [
                 amount: 80
             }
         ]
+    },
+    {
+        id: "jysk_energi_fdm-stroem",
+        name: "Jysk Energi - FDM Strøm",
+        link: "https://fdm.dk/vi-tilbyder/groen-el-fdm-stroem",
+        payments: "Acontobetaling kvartalsvis",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "handelsomkostninger",
+                amount: .0025
+            },
+            {
+                name: "grønt tiltag",
+                amount: .025
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 16,
+                paymentsPerYear: 12
+            },
+            {
+                name: "Indbetalingskort pr. regning",
+                amount: 39.2
+            },
+            {
+                name: "Betalingsservice pr. regning",
+                paymentsPerYear: 4,
+                amount: 6
+            },
+            {
+                name: "Gebyr ved kundens skift af leverandør i bindingsperiode",
+                amount: 400
+            },
+            {
+                name: "Ekstra opgørelse / flytteopgørelse",
+                amount: 80
+            },
+            {
+                name: "Kopi af faktura (e-mail)",
+                amount: 0
+            },
+            {
+                name: "Rykkergebyr",
+                amount: 100
+            }
+        ]
     }
 ]
