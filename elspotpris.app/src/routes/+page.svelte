@@ -1,4 +1,5 @@
 <script>
+	import ApexCharts from "apexcharts";
 	import { chart } from "svelte-apexcharts";
 	import {
 		priceNow,
@@ -13,6 +14,7 @@
 		darkMode,
 		menuClosed,
 		electricityTax,
+		legendsEnabled,
 	} from "./stores.js";
 	import {} from "./data.js";
 	import { tariffs, products, governmentTariffs } from "./prices.js";
@@ -39,6 +41,7 @@
     	includeElectricityTax = value;
 	});
 
+	const chartId = 'elSpotPrisChart';
 	let options = {
 		series: [
 			{
@@ -59,6 +62,7 @@
 		],
 		colors: ["#ff3e00", "#4DEBC6", "#4DEBC6"],
 		chart: {
+			id: chartId,
 			foreColor: '#bbb',
 			type: "line",
 			height: 500,
@@ -67,7 +71,30 @@
 			},
 			animations: {
 				enabled: false
-			}
+			},
+			events: {
+				legendClick: function(_, seriesIndex, config) {
+					let legendsEnabledValues = {};
+
+					for (let i = 0; i < config.config.series.length; i++) {
+						const seriesName = config.config.series[i].name
+						let isHidden = apexChartsIsSeriesHidden(seriesName);
+						// If it is the clicked series we are reading out, the returned value is inverted
+						// because the event is fired before the state is written.
+						isHidden = seriesIndex == i ? !isHidden : isHidden;
+						legendsEnabledValues[seriesName] = !isHidden;
+					}
+
+					legendsEnabled.set(legendsEnabledValues);
+				},
+				mounted: () => {
+					legendsEnabled.subscribe((value) => {
+						for (const seriesName in value) {
+							ApexCharts.exec(chartId, value[seriesName] ? 'showSeries' : 'hideSeries', seriesName);
+						}
+					});
+				},
+			},
 		},
 		stroke: {
 			curve: ["stepline", "smooth", "smooth"],
@@ -150,6 +177,27 @@
 			enabled: false,
 		},
 	};
+
+	// Apex Charts functions start
+	// Duplicated internal functions from Apex Charts to support finding the shwon state of a series
+	// https://github.com/apexcharts/apexcharts.js/blob/ff248b4a38ee21e993e38ef9a3e1318e59a6ea32/src/utils/Utils.js#L305
+	function apexChartsEscapeString(str) {
+		return str.toString().slice().replace(/[` ~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi, 'x');
+  	}
+
+	// https://github.com/apexcharts/apexcharts.js/blob/ff248b4a38ee21e993e38ef9a3e1318e59a6ea32/src/modules/Series.js#L22
+	function apexChartsGetSeriesByName(seriesName) {
+		return document.querySelector(`.apexcharts-inner .apexcharts-series[seriesName='${apexChartsEscapeString(seriesName)}']`);
+	}
+	
+	// https://github.com/apexcharts/apexcharts.js/blob/ff248b4a38ee21e993e38ef9a3e1318e59a6ea32/src/modules/Series.js#L30
+	function apexChartsIsSeriesHidden(seriesName) {
+		const targetElement = apexChartsGetSeriesByName(seriesName);
+		let isHidden = targetElement.classList.contains('apexcharts-series-collapsed');
+
+		return isHidden;
+  	}
+	// Apex Charts functions end
 
 	setInterval(() => {
 		options.annotations.xaxis[0].x = getDateInTimezone("Europe/Copenhagen").getTime();

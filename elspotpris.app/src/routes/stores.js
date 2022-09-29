@@ -70,3 +70,9 @@ export const consumption = writable(storedConsumption ? storedConsumption : cons
 consumption.subscribe(value => {
     localStorage.setItem("consumption", value.id);
 });
+
+const storedLegendsEnabled = localStorage.getItem("legendsEnabled");
+export const legendsEnabled = writable(storedLegendsEnabled ? JSON.parse(storedLegendsEnabled) : {}); // Default no filter
+legendsEnabled.subscribe(value => {
+    localStorage.setItem("legendsEnabled", JSON.stringify(value));
+});
