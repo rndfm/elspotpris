@@ -137,7 +137,11 @@ const updateCo2Emis = () =>
         
 };
 
-var socket = io();
+const environment = process.env.NODE_ENV;
+if (environment == 'development')
+    var socket = io(':3000');
+else
+    var socket = io();
 
 socket.on('users', function(data) {
     userCount.set(data);

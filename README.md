@@ -21,12 +21,6 @@ For at køre hele projektet skal både app og api startes.
 Klienten(app) består af en sveltekit app.
 Api er NodeJS.
 
-For at projektet kan kører lokalt skal porten til socketio sættes til 3000 i /elspotpris.app/src/routes/data.js.
-Find stedet med (omkring linje 140)
-var socket = io();
-erstat med
-var socket = io(':3000');
-
 Kør app'en i /elspotpris.app mappen.
 ```bash
 cd .\elspotpris.app\
@@ -40,6 +34,8 @@ cd .\elspotpris.api\
 npm install
 npm run start
 ```
+
+Sitet kan nu ses på http://localhost:4000
 
 ## Bidrag til udviklingen og vedligeholdelsen af elspotpris.dk
 Pull requests er meget velkomne. For større ændringer, åben gerne et issue først for at afklare hvad du ønsker at ændre eller udvikle.

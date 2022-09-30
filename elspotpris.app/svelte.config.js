@@ -3,7 +3,9 @@ import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: preprocess({}),
+	preprocess: preprocess({
+		replace: [[/process\.env\.NODE_ENV/g, JSON.stringify(process.env.NODE_ENV)]],
+	}),
 	kit: {
 		adapter: adapter(),
 		prerender: {
