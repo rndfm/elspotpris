@@ -943,5 +943,33 @@ export const products = [
                 amount: 100
             }
         ]
+    },
+    {
+        id: "oe_stroem",
+        name: "Ø-Strøm - SpotEL",
+        link: "https://www.xn---strm-uuae.dk/elprodukter-fra-oe/stroem/spotel/",
+        payments: "Forbrugs afregnet månedlig",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: 0.8,
+                calculated: true
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 10,
+                paymentsPerYear: 12
+            },
+            {
+                name: "Betaling via betalingsservice",
+                amount: 5
+            }
+        ]
     }
 ]
