@@ -956,7 +956,7 @@ export const products = [
             },
             {
                 name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
-                amount: 0.8,
+                amount: 0.08,
                 calculated: true
             }
         ],
