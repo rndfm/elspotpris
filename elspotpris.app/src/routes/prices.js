@@ -97,7 +97,7 @@ export const governmentTariffs = [
     {
         id: "elafgift",
         name: "Elafgift",
-        amount: .763,
+        amount: .723,
     },
     {
         id: "balance",
