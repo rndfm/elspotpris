@@ -65,8 +65,9 @@ export const tariffs = [
     {
         id: "elnet_midt_c",
         name: "Elnet midt C",
-        normal: .1725,
-        peak: .5167
+        // Updated 2023-10-05 - https://www.elnetmidt.dk/priser
+        normal: .2191,
+        peak: .6562
     },
     {
         id: "elvrk_c",
