@@ -949,7 +949,7 @@ export const products = [
         id: "oe_stroem",
         name: "Ø-Strøm - SpotEL",
         link: "https://www.xn---strm-uuae.dk/elprodukter-fra-oe/stroem/spotel/",
-        payments: "Forbrugs afregnet månedlig",
+        payments: "Forbrugsafregnet månedligt",
         prices: [
             {
                 name: "Spotpris",
@@ -969,7 +969,8 @@ export const products = [
             },
             {
                 name: "Betaling via betalingsservice",
-                amount: 5
+                amount: 5,
+                paymentsPerYear: 12
             }
         ]
     }
