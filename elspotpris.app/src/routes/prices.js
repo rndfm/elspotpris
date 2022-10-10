@@ -90,6 +90,12 @@ export const tariffs = [
         // kilde: https://www.veksel.dk/priser/nettarif-og-abonnementer/
         normal: .2199,
         peak: .6564
+    },
+    {
+        id: "vores_elnet",
+        name: "Vores Elnet",
+        normal: .3676,
+        peak: .8995
     }
 
 ]
@@ -949,6 +955,35 @@ export const products = [
         id: "oe_stroem",
         name: "Ø-Strøm - SpotEL",
         link: "https://www.xn---strm-uuae.dk/elprodukter-fra-oe/stroem/spotel/",
+        payments: "Forbrugsafregnet månedligt",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: 0.08,
+                calculated: true
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 10,
+                paymentsPerYear: 12
+            },
+            {
+                name: "Betaling via betalingsservice",
+                amount: 5,
+                paymentsPerYear: 12
+            }
+        ]
+    },
+    {
+        id: "energi_fyn_spotel",
+        name: "Energi Fyn - SpotEl",
+        link: "https://www.energifyn.dk/privat/el/spotel/",
         payments: "Forbrugsafregnet månedligt",
         prices: [
             {
