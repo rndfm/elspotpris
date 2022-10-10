@@ -46,8 +46,8 @@ function shouldWarn(product)
 </style>
 
     <h1>Sammenlign elprodukter med variabel pris</h1>
-    <p><strong>Priserne herunder vises uden spotpris, elafgift, transport m.v. og er kun selve tillæg til spotprisen, abonnement m.v. Altså den del, du betaler ekstra til et elselskab for at købe strømmen hos dem.</strong></p>
-    <p>Bemærk at flere selskaber har aconto/forudbetaling. Klik på produktet for at se mere information.</p>
+    <p><strong>Der sammenlignes på tillæg til spotprisen, abonnement og gebyrer. Altså den del, du betaler ekstra til et elselskab for at købe strømmen hos dem.</strong></p>
+    <p>Priserne vises uden elspotpris, elafgift og transport da disse ikke påvirkes af dit valg af elselskab.</p>
     <span>Ved forbrug pr. år.:</span>
     <select bind:value={$consumption}>
         {#each consumptionTypes as item}
@@ -61,13 +61,12 @@ function shouldWarn(product)
     <div class="table-scroll">
         <table>
             <thead>
-                <tr><td>Produkt</td><td>Afregning</td><td>Betaling</td><td class="right">Spotpris tillæg</td><td class="right">Abonnement mv.</td><td class="right">Total (ekskl. spotpris)</td></tr>
+                <tr><td>Produkt</td><td>Afregning</td><td class="right">Spotpris tillæg</td><td class="right">Abonnement & gebyrer</td><td class="right">Årlige omkostninger (eksl. elspotpris)</td></tr>
             </thead>
             {#each productCalculations.sort((a,b) => a.calculatedPrices.total - b.calculatedPrices.total) as item}
                 <tr>
                     <td><a href="/" on:click="{product.set(item)}">{item.name}{#if shouldWarn(item)}<img class="warning" src="/warning.svg" alt="Advarsel" title="Der er bemærkninger til prisen. Klik for mere info." width="16" height="16">{/if}</a></td>
                     <td>{item.payments}</td>
-                    <td></td>
                     <td class="right">{round(item.calculatedPrices.surcharges)} kr</td>
                     <td class="right">{round(item.calculatedPrices.fees)} kr</td>
                     <td class="right"><strong>{round(item.calculatedPrices.total)} kr</strong></td>
@@ -76,3 +75,5 @@ function shouldWarn(product)
         </table>
     </div>
     {/if}
+
+    <p>Omkostningerne vises årligt for det valgte forbrug. Alle priser vises eksl. moms.</p>

@@ -438,12 +438,6 @@
     </div>
     {/if}
 </div>
-<div class="github">
-    <p>
-        {#if $darkMode}<img src="github-dark.png" alt="github" width="32" height="32" />{:else}<img src="github.png" alt="github" width="32" height="32"/>{/if}Hjælp med at forbedre denne side.
-        <a href="https://github.com/rndfm/elspotpris" target="_blank">https://github.com/rndfm/elspotpris</a>
-    </p>
-</div>
 
 <style lang="scss">
 	nav#options {
@@ -602,14 +596,5 @@
 		max-width: 800px;
 		margin: 0 auto;
 		padding: 0 1em;
-	}
-
-	.github {
-		padding: 5em 1em;
-
-		img {
-			vertical-align: middle;
-			padding-right: 10px;
-		}
 	}
 </style>

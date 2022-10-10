@@ -161,6 +161,15 @@
 		flex:1;
 		overflow-y: auto;
 		padding: 0 1em;
+
+		.github {
+		padding: 5em 1em;
+
+		img {
+			vertical-align: middle;
+			padding-right: 10px;
+		}
+	}
 	}
 </style>
 
@@ -182,4 +191,13 @@
 </div>	
 <main>
 	<slot />
+	<div class="github">
+		<p>
+			{#if $darkMode}<img src="/github-dark.png" alt="github" width="32" height="32" />{:else}<img src="/github.png" alt="github" width="32" height="32"/>{/if}Hjælp med at forbedre denne side.
+			<a href="https://github.com/rndfm/elspotpris" target="_blank">https://github.com/rndfm/elspotpris</a>
+		</p>
+		<p>
+			Denne side og beregningerne vedligeholdes af frivillige individer. Siden er ikke sponsoreret.
+		</p>
+	</div>
 </main>
