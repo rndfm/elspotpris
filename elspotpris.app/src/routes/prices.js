@@ -996,22 +996,25 @@ export const products = [
                 amount: null
             },
             {
-                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
-                amount: 0.08,
+                name: "Spotpris tillæg",
+                amount: 0.04,
                 calculated: true
-            }
+            },
+	    {
+                name: "Abonnement pr. kWh",
+		amount: 0.036,
+	    }			
         ],
         fees: [
             {
-                name: "Abonnement",
-                amount: 10,
+                name: "Betaling via betalingsservice",
+                amount: 4.984,
                 paymentsPerYear: 12
             },
-            {
-                name: "Betaling via betalingsservice",
-                amount: 5,
-                paymentsPerYear: 12
-            }
+	    {
+		name: "MobilePay pr. regning",
+		amount: 2.6
+	    }
         ]
     }
 ]
