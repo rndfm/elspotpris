@@ -9,7 +9,7 @@ assignees: rndfm
 ---
 
 Udfyld felterne nedenunder.
-Alle priser uden moms angiver i kroner.    .15 = 0.15 kr = 15 øre.
+Alle priser uden moms angivet i kroner.    .15 = 0.15 kr = 15 øre.
 Hvis der findes yderligere pristillæg eller gebyrer tilføjes det i samme stil.
 Bemærk at udregningen ligger samtlige priser sammen. Vil der gøres opmærksom på en ting som der gratis/ikke betales for kan der laves priser og gebyrer med 0 i "amount".
 
