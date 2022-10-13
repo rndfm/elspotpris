@@ -51,6 +51,12 @@ export const tariffs = [
         peak: .3462
     },
     {
+	id: "trefor_el-net_c",
+	name: "Trefor El-net C",
+	normal: .2068,
+	peak: .5404
+    },
+    {
         id: "trefor_el-net_oest_c",
         name: "Trefor El-Net Øst C",
         normal: .4131,
@@ -86,14 +92,14 @@ export const tariffs = [
     }, 
     {
         id: "veksel",
-        name: "Veksel",
+        name: "Veksel C",
         // kilde: https://www.veksel.dk/priser/nettarif-og-abonnementer/
         normal: .2199,
         peak: .6564
     },
     {
         id: "vores_elnet",
-        name: "Vores Elnet",
+        name: "Vores Elnet C",
         normal: .3676,
         peak: .8995
     }
