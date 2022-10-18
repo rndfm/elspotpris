@@ -102,8 +102,13 @@ export const tariffs = [
         name: "Vores Elnet C",
         normal: .3676,
         peak: .8995
+    },
+    {
+	id: "netselskabet_elvaerk_c",
+	name: "Netselskabet Elværk C",
+	normal: .3947,
+	peak: 1.2997
     }
-
 ]
 
 export const governmentTariffs = [
