@@ -211,7 +211,7 @@
 		return date;
 	}
 </script>
-<p>{height}</p>
+
 {#if options.series[0].data}
     <div use:chart={options} />
 {/if}

@@ -134,7 +134,7 @@
         <p>CO<sub>2</sub> lige nu</p>
     </div>
 </div>
-<svelte:component this={selectedGraph.component}></svelte:component>
+<svelte:component this={selectedGraph.component} height="{visualAreaHeight}"></svelte:component>
 <nav id="options" class:closed="{$menuClosed}">
     <ul>
         <li>
