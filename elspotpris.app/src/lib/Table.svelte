@@ -10,6 +10,10 @@
         return new Date(date.toDateString());
     }
 
+    const isActive = (date) => {
+        return date.getHours() == new Date().getHours() && date.getDay() == new Date().getDay();
+    }
+
     prices.subscribe((value) => {
         if (value)
         {
@@ -43,8 +47,6 @@
 
     function setActive()
     {
-        console.log(priceData);
-
         if (priceData)
         {
             priceData.forEach(d => {
@@ -53,12 +55,6 @@
                 })
             });
         }
-
-        console.log(priceData);
-    }
-
-    const isActive = (date) => {
-        return date.getHours() == new Date().getHours() && date.getDay() == new Date().getDay();
     }
 
     setInterval(() => {
