@@ -9,8 +9,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		prerender: {
-			enabled: false,
-			default: false
+			enabled: true
 		},
 		trailingSlash: 'always'
 	}

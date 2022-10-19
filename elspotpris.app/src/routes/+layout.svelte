@@ -4,17 +4,21 @@
 		mainMenuClosed,
 		darkMode
 	} from "./stores.js";
+	import { browser } from '$app/environment';
 
 	let menuActive = false;
 
 	darkMode.subscribe((value) => {
-		if (value)
+		if (browser)
 		{
-			document.body.classList.add('dark')
-		}
-		else
-		{
-			document.body.classList.remove('dark')
+			if (value)
+			{
+				document.body.classList.add('dark')
+			}
+			else
+			{
+				document.body.classList.remove('dark')
+			}
 		}
 	});
 </script>
@@ -194,7 +198,7 @@
 	<div class="github">
 		<p>
 			{#if $darkMode}<img src="/github-dark.png" alt="github" width="32" height="32" />{:else}<img src="/github.png" alt="github" width="32" height="32"/>{/if}Hjælp med at forbedre denne side.
-			<a href="https://github.com/rndfm/elspotpris" target="_blank">https://github.com/rndfm/elspotpris</a>
+			<a href="https://github.com/rndfm/elspotpris" target="_blank" rel="noreferrer">https://github.com/rndfm/elspotpris</a>
 		</p>
 		<p>
 			Denne side og beregningerne vedligeholdes af frivillige individer. Siden er ikke sponsoreret.

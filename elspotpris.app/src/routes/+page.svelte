@@ -1,12 +1,7 @@
 <script>
-	import ApexCharts from "apexcharts";
-	import { chart } from "svelte-apexcharts";
 	import {
 		priceNow,
-		prices,
 		co2EmissionNow,
-		co2Emissions,
-		co2EmissionsPrognosis,
 		priceRegion,
 		tax,
 		tariff,
@@ -14,12 +9,13 @@
 		darkMode,
 		menuClosed,
 		electricityTax,
-		legendsEnabled,
+		graphTypes,
+		graph
 	} from "./stores.js";
 	import {} from "./data.js";
 	import { tariffs, products, governmentTariffs } from "./prices.js";
 	import { onMount } from 'svelte';
-	import { intros } from "svelte/internal";
+	import { browser } from '$app/environment';
 
 	let selectedProduct;
 	product.subscribe((value) => {
@@ -41,186 +37,15 @@
     	includeElectricityTax = value;
 	});
 
-	const chartId = 'elSpotPrisChart';
-	let options = {
-		series: [
-			{
-				name: "Spotpris",
-				type: "area",
-				data: null,
-			},
-			{
-				name: "CO2",
-				type: "line",
-				data: null,
-			},
-			{
-				name: "CO2 prognose",
-				type: "line",
-				data: null,
-			},
-		],
-		colors: ["#ff3e00", "#4DEBC6", "#4DEBC6"],
-		chart: {
-			id: chartId,
-			foreColor: '#bbb',
-			type: "line",
-			height: 500,
-			toolbar: {
-				show: false
-			},
-			animations: {
-				enabled: false
-			},
-			events: {
-				legendClick: function(_, seriesIndex, config) {
-					let legendsEnabledValues = {};
-
-					for (let i = 0; i < config.config.series.length; i++) {
-						const seriesName = config.config.series[i].name
-						let isHidden = apexChartsIsSeriesHidden(seriesName);
-						// If it is the clicked series we are reading out, the returned value is inverted
-						// because the event is fired before the state is written.
-						isHidden = seriesIndex == i ? !isHidden : isHidden;
-						legendsEnabledValues[seriesName] = !isHidden;
-					}
-
-					legendsEnabled.set(legendsEnabledValues);
-				},
-				mounted: () => {
-					legendsEnabled.subscribe((value) => {
-						for (const seriesName in value) {
-							ApexCharts.exec(chartId, value[seriesName] ? 'showSeries' : 'hideSeries', seriesName);
-						}
-					});
-				},
-			},
-		},
-		stroke: {
-			curve: ["stepline", "smooth", "smooth"],
-			width: [0, 3, 3],
-			dashArray: [0, 0, 5],
-		},
-		fill: {
-			colors: ["#7BC17E", "#000000", "#000000"],
-			type: ["gradient", "solid", "solid"],
-			gradient: {
-				type: "vertical",
-				gradientToColors: ["#ff3e00", "#ff3e00", "#ff3e00"],
-
-				opacityFrom: 0.8,
-				opacityTo: 0.8,
-				stops: [15, 80],
-			},
-		},
-		annotations: {
-			xaxis: [
-				{
-					x: getDateInTimezone("Europe/Copenhagen").getTime(),
-					borderColor: "#333333",
-					strokeDashArray: 5,
-					borderWidth: 3,
-					label: {
-						orientation: "horizontal",
-						style: {
-							color: "#FFF",
-							fontSize: 18,
-							background: "#333333",
-						},
-						text: "Lige nu",
-					},
-				},
-			],
-		},
-		xaxis: {
-			type: "datetime",
-			labels: {
-				datetimeUTC: false,
-			},
-		},
-		grid: {
-			padding: {
-				left: -50,
-				right: -50
-			},
-		},
-		yaxis: [
-			{
-				opposite: true,
-				labels: {
-					offsetY:-10,
-					formatter: function (value) {
-						return Math.round(value * 100) / 100 + " kr";
-					},
-				},
-			},
-			{
-				seriesName: "CO2",
-				labels: {
-					offsetY:-10,
-					formatter: function (value) {
-						return value + " g";
-					},
-				},
-			},
-			{
-				seriesName: "CO2",
-				show: false,
-			},
-		],
-		tooltip: {
-			x: {
-				format: "d. MMMM HH:mm",
-			},
-		},
-		dataLabels: {
-			enabled: false,
-		},
-	};
-
-	// Apex Charts functions start
-	// Duplicated internal functions from Apex Charts to support finding the shwon state of a series
-	// https://github.com/apexcharts/apexcharts.js/blob/ff248b4a38ee21e993e38ef9a3e1318e59a6ea32/src/utils/Utils.js#L305
-	function apexChartsEscapeString(str) {
-		return str.toString().slice().replace(/[` ~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi, 'x');
-  	}
-
-	// https://github.com/apexcharts/apexcharts.js/blob/ff248b4a38ee21e993e38ef9a3e1318e59a6ea32/src/modules/Series.js#L22
-	function apexChartsGetSeriesByName(seriesName) {
-		return document.querySelector(`.apexcharts-inner .apexcharts-series[seriesName='${apexChartsEscapeString(seriesName)}']`);
+	if (browser)
+	{
+		setInterval(() => {
+			gtag('event', 'keepalive');
+		}, 240000);
 	}
-	
-	// https://github.com/apexcharts/apexcharts.js/blob/ff248b4a38ee21e993e38ef9a3e1318e59a6ea32/src/modules/Series.js#L30
-	function apexChartsIsSeriesHidden(seriesName) {
-		const targetElement = apexChartsGetSeriesByName(seriesName);
-		let isHidden = targetElement.classList.contains('apexcharts-series-collapsed');
-
-		return isHidden;
-  	}
-	// Apex Charts functions end
-
-	setInterval(() => {
-		options.annotations.xaxis[0].x = getDateInTimezone("Europe/Copenhagen").getTime();
-	}, 10000);
-
-	setInterval(() => {
-		gtag('event', 'keepalive');
-	}, 240000);
-	
 	let region;
 	priceRegion.subscribe((value) => {
 		region = value;
-	});
-
-	darkMode.subscribe((value) => {
-		if (value)
-		{
-			options.chart.foreColor = '#bbb';
-		}
-		else
-		{
-			options.chart.foreColor = '#333';
-		}
 	});
 
 	function updateRegion() {
@@ -239,47 +64,30 @@
 		emisNow = value;
 	});
 
-	prices.subscribe((value) => {
-		options.series[0].data = value;
-	});
-
-	co2Emissions.subscribe((value) => {
-		options.series[1].data = value;
-	});
-
-	co2EmissionsPrognosis.subscribe((value) => {
-		options.series[2].data = value;
-	});
-
-	function getDateInTimezone(timezone)
-	{
-		let nz_date_string = new Date().toLocaleString("en-US", { timeZone: timezone });
-		// Date object initialized from the above datetime string
-		const date = new Date(nz_date_string);
-		date.timeZone = timezone;
-		return date;
-	}
+	let visualAreaHeight = 500;
 
 	function onResize()
 	{
-		if (document.getElementById('options'))
+		if (browser)
 		{
-			// find height of options.
-			const optionsHeight = document.getElementById('options').clientHeight - 30;
-			const metersHeight = document.getElementById('meters').clientHeight;
-			const offset = 40;
-			var height = window.innerHeight - optionsHeight - metersHeight - offset;
-
-			if (height > 500)
+			if (document.getElementById('options'))
 			{
-				height = 500;
-			}
+				// find height of meters.
+				const metersHeight = document.getElementById('meters').clientHeight;
+				const offset = 40;
+				var height = window.innerHeight - metersHeight - offset - 30;
 
-			if (height < 200)
-			{
-				height = 200;
+				if (height > 500)
+				{
+					height = 500;
+				}
+
+				if (height < 250)
+				{
+					height = 250;
+				}
+				visualAreaHeight = height;
 			}
-			options.chart.height = height;
 		}
 	}
 
@@ -302,6 +110,11 @@
 	onMount(() => {
 		onResize();
 	});
+
+	let selectedGraph = graphTypes[0];
+	graph.subscribe((value) => {
+		selectedGraph = value;
+	});
 </script>
 
 <svelte:head>
@@ -321,9 +134,7 @@
         <p>CO<sub>2</sub> lige nu</p>
     </div>
 </div>
-{#if options.series[0].data}
-    <div use:chart={options} />
-{/if}
+<svelte:component this={selectedGraph.component}></svelte:component>
 <nav id="options" class:closed="{$menuClosed}">
     <ul>
         <li>
@@ -370,6 +181,13 @@
                 {/each}
             </select>
         </li>
+		<li>
+			<select bind:value={$graph}>
+				{#each graphTypes as option}
+					<option value={option}>{option.name}</option>
+				{/each}
+			</select>
+		</li>
         <li>
             <label for="darkMode"><input type="checkbox" id="darkMode" bind:checked={$darkMode} /> Dark mode</label>
         </li>
@@ -380,12 +198,12 @@
     <div class="info col">
         <h1>elspotpris.dk</h1>
         <p class="lead">Få overblik over spotpriserne på el det næste døgn.</p>
-        <p>Har du en elaftale med variabel pris, er din pris pr. kWh baseret på spotprisen ved <a href="https://www.nordpoolgroup.com" target="_blank">Nordpool</a>.<br>
+        <p>Har du en elaftale med variabel pris, er din pris pr. kWh baseret på spotprisen ved <a href="https://www.nordpoolgroup.com" target="_blank" rel="noreferrer">Nordpool</a>.<br>
             Prisen for næste dag bliver frigivet omkring kl. 13.00.</p>
         <p>Vælg om prisen skal vises for DK1 eller DK2, som er henholdvis vest og øst for storebælt. DK1 er Jylland og Fyn, mens DK2 er Sjælland. Prisen i grafen kan vises med elafgift, tariffer/transport og moms.<br /> Alle indstillinger bliver husket til næste gang, du besøger siden.</p>
         <h3>Variabel pris &#8800; spotpris</h3>
         <p>Bemærk at indkøbsprisen/kostprisen i din elaftale med variabel pris som regel er baseret på spotprisen, men tillægges fortjeneste med mere.<br />
-            Vælg et produkt i menuen øverst for at se prisen med alle tillæg.<br />Bemærk at priser på produkter vedligeholdes manuelt. Hvis dit produkt mangler, eller det er udregnet forkert, så opret et punkt på <a href="https://github.com/rndfm/elspotpris/issues/new/choose" target="_blank">github</a>.
+            Vælg et produkt i menuen øverst for at se prisen med alle tillæg.<br />Bemærk at priser på produkter vedligeholdes manuelt. Hvis dit produkt mangler, eller det er udregnet forkert, så opret et punkt på <a href="https://github.com/rndfm/elspotpris/issues/new/choose" target="_blank"  rel="noreferrer">github</a>.
             Der garanteres ikke for korrektheden af udregningen på produkterne, og elselskaberne kan i mange tilfælde ændre prisen uden varsel.
         </p>
         
@@ -434,7 +252,7 @@
             {/each}
         </ul>
         {/if}
-        <p>Priserne i udregningen er opgivet ex. moms.<br/>Er der fejl i udregningen eller satserne rapporteres dette her: <a href="https://github.com/rndfm/elspotpris/issues/new/choose" target="_blank">github</a>.</p>
+        <p>Priserne i udregningen er opgivet ex. moms.<br/>Er der fejl i udregningen eller satserne rapporteres dette her: <a href="https://github.com/rndfm/elspotpris/issues/new/choose" target="_blank" rel="noreferrer">github</a>.</p>
     </div>
     {/if}
 </div>
