@@ -27,6 +27,8 @@ services:
   certbot:
     restart: always
     image: certbot/certbot
+    depends_on:
+      - nginx
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt
