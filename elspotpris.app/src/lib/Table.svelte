@@ -1,6 +1,8 @@
 <script>
     import { prices	} from "../routes/stores.js";
 
+    export let height = 500;
+
     let priceData;
 
     const dayDateStringOptions = { weekday: 'long', day: "numeric" };
@@ -60,22 +62,46 @@
     setInterval(() => {
         setActive();
 	}, 10000);
+
 </script>
 
 <style lang="scss">
 .price-table {
     display: flex;
+    overflow: auto;
+    flex-direction: column;
+
     .day {
-        padding: 0.5em;
-        .hour {
-            color: black;
-            padding: 0.5em;
-            font-size: 1.2em;
-            &.active 
-            {
-                border: 0.15em dashed blue;
-                padding: 0.35em 0.5em;
-                font-weight: bold;
+        .hours {
+            display: grid;
+            grid-template-rows: repeat(12, auto);
+            grid-gap: 1px .25em;
+            grid-auto-flow: column;
+
+            @media only screen and (min-width: 800px) {
+                grid-template-rows: repeat(8, auto);
+            }
+
+            @media only screen and (min-width: 1200px) {
+                grid-template-rows: repeat(6, auto);
+            }
+
+            @media only screen and (min-width: 1600px) {
+                grid-gap: .25em 1px;
+                grid-auto-flow: row;
+                grid-template-columns: repeat(12, auto);
+            }
+
+            .hour {
+                color: black;
+                padding: 0.25em;
+                font-size: 1.2em;
+                &.active 
+                {
+                    border: 0.15em dashed blue;
+                    padding: 0.25em 0.10em;
+                    font-weight: bold;
+                }
             }
         }
     }
@@ -86,10 +112,12 @@
 <div class="price-table">
     {#each priceData as day}
     <div class="day">
-        {day.date.toLocaleDateString("da-DK", dayDateStringOptions)}
-        {#each day.data as price}
-            <div class="hour" class:active="{price.active}" style="background-color: {price.color}">{price.time.toLocaleTimeString("da-DK", hourDateStringOptions)} - {price.price} kr</div>
-        {/each}
+        <p class="lead">{day.date.toLocaleDateString("da-DK", dayDateStringOptions)}</p>
+        <div class="hours">
+            {#each day.data as price}
+                <div class="hour" class:active="{price.active}" style="background-color: {price.color}"><strong>{price.time.toLocaleTimeString("da-DK", hourDateStringOptions)}</strong> - {price.price} kr</div>
+            {/each}
+        </div>
     </div>
     {/each}
 </div>

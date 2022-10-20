@@ -342,10 +342,6 @@
 
 	}
 
-	p.lead {
-		font-size: 1.4em;
-	}
-
 	.flexgrid
 	{
 		display: flex;
