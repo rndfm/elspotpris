@@ -47,8 +47,9 @@ export const tariffs = [
     {
         id: "dinel_c",
         name: "Dinel C",
-        normal: .1112,
-        peak: .3462
+	//https://www.dinel.dk/priser-og-bestemmelser/
+        normal: .1636,	
+        peak: .4537
     },
     {
 	id: "trefor_el-net_c",
