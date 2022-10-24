@@ -239,8 +239,8 @@
             {#if withTax}<li>Moms 25%</li>{/if}
             {#if !withTax}<li>Uden moms</li>{/if}
         </ul>
-        {#if selectedProduct.fees}
-        <p>Ud over prisen pr. kWh er der følgende udgifter ved {selectedProduct.name}</p>
+        {#if selectedProduct.fees && selectedProduct.fees.length > 0}
+        <p>Ud over prisen pr. kWh er der følgende udgifter ved {selectedProduct.name}:</p>
         <ul>
             {#each selectedProduct.fees as item}
             <li>
