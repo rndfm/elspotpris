@@ -3,6 +3,7 @@
 </script>
 
 <script>
+	import ApexCharts from "apexcharts?client";
     import { chart } from "svelte-apexcharts?client";
     import {
 		prices,
