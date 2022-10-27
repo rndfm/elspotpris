@@ -3,6 +3,8 @@
 </script>
 
 <script>
+	import { browser } from '$app/environment';
+	import { onDestroy } from 'svelte'
 	import ApexCharts from "apexcharts?client";
     import { chart } from "svelte-apexcharts?client";
     import {
@@ -18,6 +20,11 @@
     $: {
         options.chart.height = height;
     }
+
+	onDestroy( () => {
+		if (browser)
+			ApexCharts.exec(chartId, 'destroy');
+    })
 
     let options = {
 		series: [
