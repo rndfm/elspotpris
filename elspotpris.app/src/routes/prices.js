@@ -35,8 +35,8 @@ export const tariffs = [
         // from 2022-11-01 increase: https://n1.dk/priser-og-vilkaar/kommende-priser-1-11-2022 
         // from 2023-01-01 increase: https://n1.dk/priser-og-vilkaar/kommende-priser-1-1-2023
         // Updated 2022-09-24 - https://n1.dk/priser-og-vilkaar
-        normal: .2951,
-        peak: .7791
+        normal: .3875,
+        peak: .9734
     },    
     {
         id: "n1_evonet_c",
