@@ -382,7 +382,7 @@ export const products = [
         id: "vindstoed_vestroem",
         name: "Vindstød VEstrøm",
         link: "https://www.vindstoed.dk/",
-        payments: "Acontobetaling kvartalsvis",
+        payments: "Forbrugsafregnet kvartalsvis",
         prices: [
             {
                 name: "Spotpris",
