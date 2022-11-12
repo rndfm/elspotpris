@@ -105,7 +105,7 @@ async function update()
     if (data)
     {
       co2emis = JSON.parse(data).records;
-      co2emis = co2emis.filter(o => new Date(o.Minutes5UTC).getUTCMinutes() % 10 == 0);
+      co2emis = co2emis.filter(o => new Date(o.Minutes5UTC).getUTCMinutes() % 30 == 0);
       io.emit('co2emis', co2emis);
     }
   });
