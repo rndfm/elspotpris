@@ -65,6 +65,11 @@
 
 	let visualAreaHeight = 500;
 
+	let priceFormatter = new Intl.NumberFormat('da-DK', {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 5
+	}).format;
+
 	function onResize() {
 		if (browser) {
 			if (document.getElementById('options')) {
@@ -123,7 +128,7 @@
 
 <div class="flexgrid meters" id="meters">
 	<div class="col">
-		<span>{spotPriceNow} <small>kr/kWh</small></span>
+		<span>{priceFormatter(spotPriceNow)} <small>kr/kWh</small></span>
 		<p>Spotpris lige nu</p>
 	</div>
 	<div class="col">
@@ -248,7 +253,7 @@
 				{#each selectedProduct.prices as item}
 					<li>
 						{item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}{#if item.amount != undefined}&nbsp;-
-							{item.amount} kr{/if}
+							{priceFormatter(item.amount)} kr{/if}
 						{#if item.calculated}<img
 								class="item-warning"
 								src="warning.svg"
@@ -288,13 +293,14 @@
 				{#if includeElectricityTax}
 					{#each governmentTariffs as item}
 						<li>
-							{item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
+							{item.name}{#if item.amount != undefined}&nbsp;- {priceFormatter(item.amount)} kr{/if}
 						</li>
 					{/each}
 				{/if}
 				<li>
-					Netselskab - {selectedTariff.name} - lavlast: {selectedTariff.normal} kr - spidslast: {selectedTariff.peak}
-					kr
+					<span>Netselskab - {selectedTariff.name}</span>
+					<span> - lavlast: {priceFormatter(selectedTariff.normal)} kr</span>
+					<span> - spidslast: {priceFormatter(selectedTariff.peak)} kr</span>
 				</li>
 				{#if withTax}<li>Moms 25%</li>{/if}
 				{#if !withTax}<li>Uden moms</li>{/if}
@@ -304,7 +310,7 @@
 				<ul>
 					{#each selectedProduct.fees as item}
 						<li>
-							{item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
+							{item.name}{#if item.amount != undefined}&nbsp;- {priceFormatter(item.amount)} kr{/if}
 							{#if item.conditions === null}<img
 									class="item-warning"
 									src="warning.svg"

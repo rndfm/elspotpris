@@ -7,6 +7,11 @@
 	let priceData;
 	let timer;
 
+	let priceFormatter = new Intl.NumberFormat('da-DK', {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 5
+	}).format;
+
 	onDestroy(() => {
 		if (timer) clearInterval(timer);
 	});
@@ -43,6 +48,7 @@
 				day.data.push({
 					time: p[0],
 					price: p[1],
+					prettyPrice: priceFormatter(p[1]),
 					color: `#${red}${green}${blue}`
 				});
 			});
@@ -74,7 +80,7 @@
 				<div class="hours">
 					{#each day.data as price}
 						<div class="hour" class:active={price.active} style="background-color: {price.color}">
-							<strong>{price.time.toLocaleTimeString('da-DK', hourDateStringOptions)}</strong> - {price.price}
+							<strong>{price.time.toLocaleTimeString('da-DK', hourDateStringOptions)}</strong> - {price.prettyPrice}
 							kr
 						</div>
 					{/each}
