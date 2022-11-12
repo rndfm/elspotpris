@@ -21,9 +21,14 @@
         options.chart.height = height;
     }
 
+	let timer;
+
 	onDestroy( () => {
 		if (browser)
 			ApexCharts.exec(chartId, 'destroy');
+
+		if (timer)
+			clearInterval(timer);
     })
 
     let options = {
@@ -183,7 +188,7 @@
 		return isHidden;
   	}
 
-    setInterval(() => {
+	timer = setInterval(() => {
 		options.annotations.xaxis[0].x = getDateInTimezone("Europe/Copenhagen").getTime();
 	}, 10000);
 

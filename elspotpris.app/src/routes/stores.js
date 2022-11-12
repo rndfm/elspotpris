@@ -3,6 +3,7 @@ import { tariffs, products, consumptionTypes } from "./prices.js";
 
 import Graph from "../lib/Graph.svelte";
 import Table from "../lib/Table.svelte";
+import Bars from "../lib/Bars.svelte";
 
 import { browser } from '$app/environment';
 
@@ -16,6 +17,11 @@ export const graphTypes = [
         id: "table",
         name: "Tabel",
         component: Table
+    },
+    {
+        id: "bars",
+        name: "Bars",
+        component: Bars
     }
 ]
 

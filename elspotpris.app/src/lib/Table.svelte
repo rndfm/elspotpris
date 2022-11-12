@@ -1,9 +1,16 @@
 <script>
     import { prices	} from "../routes/stores.js";
+	import { onDestroy } from 'svelte'
 
     export let height = 500;
 
     let priceData;
+    let timer;
+
+    onDestroy( () => {
+		if (timer)
+            clearInterval(timer);
+    })
 
     const dayDateStringOptions = { weekday: 'long', day: "numeric" };
     const hourDateStringOptions = { hour: "2-digit" };
@@ -59,7 +66,7 @@
         }
     }
 
-    setInterval(() => {
+    timer = setInterval(() => {
         setActive();
 	}, 10000);
 
