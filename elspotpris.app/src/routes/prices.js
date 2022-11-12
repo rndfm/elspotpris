@@ -105,10 +105,16 @@ export const tariffs = [
         peak: .8995
     },
     {
-	id: "netselskabet_elvaerk_c",
-	name: "Netselskabet Elværk C",
-	normal: .3947,
-	peak: 1.2997
+        id: "netselskabet_elvaerk_c",
+        name: "Netselskabet Elværk C",
+        normal: .3947,
+        peak: 1.2997
+    },
+    {
+        id: "nord_energi_net",
+        name: "Nord Energi Net",
+        normal: .1350,
+        peak: .1350
     }
 ]
 
