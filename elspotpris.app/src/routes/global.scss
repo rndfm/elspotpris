@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -9,14 +10,14 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+		'Helvetica Neue', sans-serif;
 
 	@media only screen and (min-width: 1200px) {
 		display: flex;
 	}
 
-	nav#navigation
-	{
+	nav#navigation {
 		background-color: #cfcfcf;
 		.tab {
 			background-color: #cfcfcf;
@@ -25,22 +26,21 @@ body {
 		div > ul > li {
 			background-color: #c0c0c0;
 
-			&:hover{
+			&:hover {
 				background-color: #b0b0b0;
 			}
 		}
 	}
-    
-    nav#options {
-        > ul {
-            
-            border-bottom: 10px solid #cfcfcf;
-            background-color: #cfcfcf;
-        }
-        .tab {
-            background-color: #cfcfcf;
-        }			
-    }
+
+	nav#options {
+		> ul {
+			border-bottom: 10px solid #cfcfcf;
+			background-color: #cfcfcf;
+		}
+		.tab {
+			background-color: #cfcfcf;
+		}
+	}
 
 	table {
 		border-spacing: 0;
@@ -48,42 +48,46 @@ body {
 		tr {
 			background-color: #cfcfcf;
 		}
-		tr:nth-child(even) {background: #c0c0c0}
-	
+		tr:nth-child(even) {
+			background: #c0c0c0;
+		}
+
 		thead {
 			font-weight: bold;
 		}
 		td {
 			text-align: left;
-			padding: .5em 1em;
+			padding: 0.5em 1em;
 		}
-	
+
 		td.right {
 			text-align: right;
 		}
 	}
 
-    &.dark {
+	&.dark {
 		color: #bbb;
 		background-color: #111;
 
-		input, button, select, textarea {
+		input,
+		button,
+		select,
+		textarea {
 			background-color: #333;
 			color: #bbb;
 			border: 1px solid #666;
 		}
-		
+
 		a {
-			color: rgb(0,150,250);
+			color: rgb(0, 150, 250);
 			text-decoration: none;
 		}
-		
+
 		a:visited {
-			color: rgb(0,130,210);
+			color: rgb(0, 130, 210);
 		}
 
-		nav#navigation
-		{
+		nav#navigation {
 			background-color: #222;
 			.tab {
 				background-color: #222;
@@ -91,8 +95,8 @@ body {
 
 			div > ul > li {
 				background-color: #1e1e1e;
-	
-				&:hover{
+
+				&:hover {
 					background-color: #333;
 				}
 			}
@@ -110,12 +114,14 @@ body {
 				}
 				.tab {
 					background-color: #222;
-				}			
+				}
 			}
 		}
 
-		.apexcharts-tooltip-title, .apexcharts-tooltip, .apexcharts-xaxistooltip {
-			background: #333 !important; 
+		.apexcharts-tooltip-title,
+		.apexcharts-tooltip,
+		.apexcharts-xaxistooltip {
+			background: #333 !important;
 			color: #bbb;
 		}
 
@@ -123,14 +129,15 @@ body {
 			tr {
 				background-color: #222;
 			}
-			tr:nth-child(even) {background: #1B1b1b}
+			tr:nth-child(even) {
+				background: #1b1b1b;
+			}
 		}
 	}
 }
 
-
 a {
-	color: rgb(0,100,200);
+	color: rgb(0, 100, 200);
 	text-decoration: none;
 }
 
@@ -139,15 +146,17 @@ a:hover {
 }
 
 a:visited {
-	color: rgb(0,80,160);
+	color: rgb(0, 80, 160);
 }
-
 
 label {
 	display: block;
 }
 
-input, button, select, textarea {
+input,
+button,
+select,
+textarea {
 	font-family: inherit;
 	font-size: inherit;
 	-webkit-padding: 0.4em 0;
@@ -180,12 +189,12 @@ button:focus {
 	border-color: #666;
 }
 
-
 small {
-	font-size: .6em;
+	font-size: 0.6em;
 }
 
-h1,	h2 {
+h1,
+h2 {
 	color: #ff3e00;
 	font-size: 2em;
 	font-weight: 100;
@@ -198,7 +207,7 @@ h2 {
 }
 
 h3 {
-	margin-bottom: -.5em;
+	margin-bottom: -0.5em;
 }
 
 @media only screen and (min-width: 1200px) {
