@@ -62,8 +62,8 @@
 		if (timer) clearInterval(timer);
 	});
 
-	const isActive = (date) => {
-		return date.getHours() == new Date().getHours() && date.getDay() == new Date().getDay();
+	const isActive = (date, dateNow) => {
+		return date.getHours() == dateNow.getHours() && date.getDay() == dateNow.getDay();
 	};
 
 	function getDateInTimezone(timezone) {
@@ -77,8 +77,9 @@
 	function setActive() {
 		// find the current price and set it as active.
 		if (priceData) {
+			const dateNow = getDateInTimezone('Europe/Copenhagen');
 			priceData.forEach((d) => {
-				d.active = isActive(d.time);
+				d.active = isActive(d.time, dateNow);
 			});
 		}
 
@@ -102,7 +103,7 @@
 					top: 0,
 					behavior: 'smooth'
 				});
-			}, 2000);
+			}, 1000);
 		}
 	}
 
