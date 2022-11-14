@@ -921,6 +921,38 @@ export const products = [
         ]
     },
     {
+        id: "verdo_variabel_timepris",
+        name: "Verdo Variabel Timepris",
+        link: "https://www.verdo.com/dk/elsalg-privat/",
+        payments: "Acontobetaling 2 måneder",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Spotpris tillæg",
+                amount: .06
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 20,
+                paymentsPerYear: 12
+            },
+            {
+                name: "Betaling via betalingsservice",
+                amount: 7.2
+            },
+	        {
+                name: "Betaling via MobilePay",
+                amount: 0,
+                paymentsPerYear: 12
+            }
+        ]
+    },
+    {
         id: "jysk_energi_fdm-stroem",
         name: "Jysk Energi - FDM Strøm",
         link: "https://fdm.dk/vi-tilbyder/groen-el-fdm-stroem",
