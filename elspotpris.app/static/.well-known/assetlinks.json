@@ -1,0 +1,14 @@
+[
+    {
+      "relation": [
+        "delegate_permission/common.handle_all_urls"
+      ],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "dk.elspotpris.twa",
+        "sha256_cert_fingerprints": [
+          "C6:17:7B:48:29:B9:FE:F7:BC:FB:93:19:F0:6F:52:42:A9:EA:53:B1:6C:D0:4B:27:10:72:9E:C6:66:50:EF:76"
+        ]
+      }
+    }
+  ]
