@@ -1011,7 +1011,11 @@ export const products = [
                 name: "Spotpris tillæg",
                 amount: 0.045,
                 calculated: true
-            }	
+            },
+	    {
+                name: "Abonnement pr. kWh (Vores Elnet C)",
+		amount: 0.036986,
+	    }
         ],
         fees: [
             {
