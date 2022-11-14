@@ -1005,12 +1005,11 @@ export const products = [
         prices: [
             {
                 name: "Spotpris",
-                amount: null
+                amount: null,
             },
             {
                 name: "Spotpris tillæg",
                 amount: 0.04,
-                calculated: true
             },
 	    {
                 name: "Abonnement pr. kWh",
