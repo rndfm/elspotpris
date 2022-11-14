@@ -889,6 +889,10 @@ export const products = [
             {
                 name: "Spotpris tillæg",
                 amount: .15
+            },
+            {
+                name: "Tillæg til transport",
+                amount: .11
             }
         ],
         fees: [
