@@ -1029,7 +1029,7 @@ export const products = [
 	    },
 	    {
                 name: "Abonnement",
-                amount: 15,
+                amount: 12,
                 paymentsPerYear: 12
             },
         ]
