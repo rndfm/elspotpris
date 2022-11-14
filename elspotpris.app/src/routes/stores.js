@@ -9,6 +9,11 @@ import { browser } from '$app/environment';
 
 export const graphTypes = [
     {
+        id: "bars",
+        name: "Søjler",
+        component: Bars
+    },
+    {
         id: "graph",
         name: "Graf",
         component: Graph
@@ -17,11 +22,6 @@ export const graphTypes = [
         id: "table",
         name: "Tabel",
         component: Table
-    },
-    {
-        id: "bars",
-        name: "Bars",
-        component: Bars
     }
 ]
 
@@ -79,6 +79,8 @@ export const product = createWriteableObjectFromLocalStorage("product", products
 export const darkMode = createWriteableBoolFromLocalStorage("darkMode", false);
 export const menuClosed = createWriteableBoolFromLocalStorage("menuClosed", false);
 export const mainMenuClosed = createWriteableBoolFromLocalStorage("mainMenuClosed", false);
+
+export const co2Enabled = createWriteableBoolFromLocalStorage("co2Enabled", false);
 
 const storedConsumptionId = browser ? localStorage.getItem("consumption") : null;
 const storedConsumption = storedConsumptionId ? consumptionTypes.find(t => t.id == storedConsumptionId) : consumptionTypes[0];
