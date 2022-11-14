@@ -1026,7 +1026,12 @@ export const products = [
 	    {
 		name: "MobilePay pr. regning",
 		amount: 2.6
-	    }
+	    },
+	    {
+                name: "Abonnement",
+                amount: 12,
+                paymentsPerYear: 12
+            },
         ]
     }
 ]
