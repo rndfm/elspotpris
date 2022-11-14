@@ -1032,5 +1032,28 @@ export const products = [
                 paymentsPerYear: 12
             },
         ]
-    }
+    },
+    {
+        id: "jysk_energi_min-stroem",
+        name: "Jysk Energi - Min Strøm",
+        link: "https://jyskenergi.dk/el/privat/min-stroem/",
+        payments: "Acontobetaling kvartalsvis",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Spotpris tillæg",
+                amount: 0.04
+            },
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 12,
+                paymentsPerYear: 12
+            },
+        ]
+    },
 ]
