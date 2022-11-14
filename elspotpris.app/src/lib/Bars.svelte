@@ -286,7 +286,7 @@ ul.legend {
 }
 </style>
 
-<div bind:this={container} on:touchstart={disableAutoScroll} on:scroll={()=>scrollLeft=container.scrollLeft} class="scrollable" bind:clientWidth={viewPortWidth}>
+<div bind:this={container} on:touchstart={disableAutoScroll} on:scroll={()=>scrollLeft=container.scrollLeft} class="scrollable" bind:clientWidth={viewPortWidth} style="height:{height+20}px">
     {#if priceData}
         <svg width="100%" height="{height}" class="bars">
             {#if nowPosition}
