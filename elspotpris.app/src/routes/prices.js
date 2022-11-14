@@ -144,37 +144,37 @@ export const governmentTariffs = [
 export const consumptionTypes = [
     {
         id: "apartment_small",
-        name: "Lejlighed op til 80 kvm (ca 2000kWh)",
+        name: "Lejlighed op til 80 kvm (ca 2000 kWh)",
         amount: 2000
     },
     {
         id: "apartment_large",
-        name: "Lejlighed over 80 kvm (ca 3000kWh)",
+        name: "Lejlighed over 80 kvm (ca 3000 kWh)",
         amount: 3000
     },
     {
         id: "house_small",
-        name: "Hus op til 130 kvm (ca 4000kWh)",
+        name: "Hus op til 130 kvm (ca 4000 kWh)",
         amount: 4000
     },
     {
         id: "house_large",
-        name: "Hus over 130 kvm (ca 6000kWh)",
+        name: "Hus over 130 kvm (ca 6000 kWh)",
         amount: 6000
     },
     {
         id: "house_large_heatpump",
-        name: "Hus med varmepumpe (ca 10000Wh)",
+        name: "Hus med varmepumpe (ca 10000 kWh)",
         amount: 10000
     },
     {
         id: "house_large_electric_heat",
-        name: "Hus med elvarme (ca 18000Wh)",
+        name: "Hus med elvarme (ca 18000 kWh)",
         amount: 18000
     },
     {
         id: "cottage",
-        name: "Sommerhus (ca. 2000kWh)",
+        name: "Sommerhus (ca. 2000 kWh)",
         amount: 2000
     }
 ]
