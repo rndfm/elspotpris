@@ -115,6 +115,13 @@ export const tariffs = [
         name: "Nord Energi Net",
         normal: .1350,
         peak: .1350
+    }, 
+    {
+        id: "ikast_el_net_as_c",
+        name: "Ikast El Net A/S",
+        // source: https://ikastelnet.dk/priser/gebyrer/
+        normal: .3309,
+        peak: .3309
     }
 ]
 
