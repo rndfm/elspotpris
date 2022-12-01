@@ -45,6 +45,13 @@ export const tariffs = [
         peak: .6933
     },
     {
+        id: "n1_randers_c",
+        name: "N1 Randers C",
+	// Updated 2022-12-01 - https://n1.dk/priser-og-vilkaar
+        normal: .5547,
+        peak: 1.236
+    },
+    {
         id: "dinel_c",
         name: "Dinel C",
         // Updated 2022-10-24 - https://dinel.dk/priser-og-bestemmelser/
