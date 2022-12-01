@@ -231,11 +231,11 @@
         {#if includeElectricityTax}
         {#each governmentTariffs as item}
             <li>
-                {item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
+                {item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr.{/if}
             </li>
         {/each}
         {/if}
-            <li>Netselskab - { selectedTariff.name } - lavlast: {selectedTariff.normal} kr - spidslast: {selectedTariff.peak} kr</li>
+            <li>Netselskab - { selectedTariff.name } - lavlast: {selectedTariff.normal} kr - spidslast: {selectedTariff.peak} kr.</li>
             {#if withTax}<li>Moms 25%</li>{/if}
             {#if !withTax}<li>Uden moms</li>{/if}
         </ul>
