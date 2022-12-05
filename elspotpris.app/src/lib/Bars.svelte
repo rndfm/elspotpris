@@ -145,21 +145,20 @@
 
     function toggleCo2()
     {
-        console.log("toggle");
         co2Enabled.set(!co2EnabledData);
     }
 
     function setActive()
     {
+        if (!priceData)
+            return;
+
         const dateNow = getDateInTimezone("Europe/Copenhagen");
 
         // find the current price and set it as active.
-        if (priceData)
-        {
-            priceData.forEach(d => {
-                d.active = isActive(d.time, dateNow);
-            });
-        }
+        priceData.forEach(d => {
+            d.active = isActive(d.time, dateNow);
+        });
 
         // set position of "right now" indicator line.
         nowPosition = positionFromDate(dateNow);
@@ -291,7 +290,7 @@ ul.legend {
 }
 </style>
 
-<div bind:this={container} on:touchstart={disableAutoScroll} on:scroll={()=>scrollLeft=container.scrollLeft} class="scrollable" bind:clientWidth={viewPortWidth} style="height:{height+20}px">
+<div bind:this={container} on:touchstart={disableAutoScroll} on:scroll={()=>scrollLeft=container.scrollLeft} on:scroll={disableAutoScroll} class="scrollable" bind:clientWidth={viewPortWidth} style="height:{height+20}px">
     {#if priceData}
         <svg width="100%" height="{height}" class="bars">
             {#if nowPosition}
