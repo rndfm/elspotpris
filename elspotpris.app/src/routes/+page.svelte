@@ -66,6 +66,11 @@
 
 	let visualAreaHeight = 500;
 
+	let priceFormatter = new Intl.NumberFormat('da-DK', {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 5
+	}).format;
+
 	function onResize()
 	{
 		if (browser)
@@ -126,7 +131,7 @@
 
 <div class="flexgrid meters" id="meters">
     <div class="col">
-        <span>{spotPriceNow} <small>kr/kWh</small></span>
+        <span>{priceFormatter(spotPriceNow)} <small>kr/kWh</small></span>
         <p>Spotpris lige nu</p>
     </div>
     <div class="col">
@@ -219,7 +224,7 @@
         <ul>
         {#each selectedProduct.prices as item}
             <li>
-                {item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
+                {item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}{#if item.amount != undefined}&nbsp;- {priceFormatter(item.amount)} kr{/if}
                 {#if item.calculated}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Prisen er regnet baglæns og er ikke bekræftet af elselskabet." width="16" height="16">{/if}
                 {#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel" width="16" height="16">{/if}
                 {#if item.conditions}<img class="item-warning" src="info.svg" alt="Info" title="{item.conditions}" width="16" height="16">{/if}
@@ -231,11 +236,11 @@
         {#if includeElectricityTax}
         {#each governmentTariffs as item}
             <li>
-                {item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr.{/if}
+                {item.name}{#if item.amount != undefined}&nbsp;- {priceFormatter(item.amount)} kr.{/if}
             </li>
         {/each}
         {/if}
-            <li>Netselskab - { selectedTariff.name } - lavlast: {selectedTariff.normal} kr - spidslast: {selectedTariff.peak} kr.</li>
+            <li>Netselskab - { selectedTariff.name } - lavlast: {priceFormatter(selectedTariff.normal)} kr - spidslast: {priceFormatter(selectedTariff.peak)} kr.</li>
             {#if withTax}<li>Moms 25%</li>{/if}
             {#if !withTax}<li>Uden moms</li>{/if}
         </ul>
@@ -244,7 +249,7 @@
         <ul>
             {#each selectedProduct.fees as item}
             <li>
-                {item.name}{#if item.amount != undefined}&nbsp;- {item.amount} kr{/if}
+                {item.name}{#if item.amount != undefined}&nbsp;- {priceFormatter(item.amount)} kr{/if}
                 {#if item.conditions === null}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel" width="16" height="16">{/if}
                 {#if item.amount === undefined}<img class="item-warning" src="warning.svg" alt="Advarsel" title="Denne pris er ukendt" width="16" height="16">{/if}
 				{#if item.paymentsPerYear}<small>({item.paymentsPerYear} betalinger om året)</small>{/if}

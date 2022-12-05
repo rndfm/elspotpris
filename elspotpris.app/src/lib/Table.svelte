@@ -7,6 +7,11 @@
     let priceData;
     let timer;
 
+    let priceFormatter = new Intl.NumberFormat('da-DK', {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 5
+	}).format;
+
     onDestroy( () => {
 		if (timer)
             clearInterval(timer);
@@ -122,7 +127,7 @@
         <p class="lead">{day.date.toLocaleDateString("da-DK", dayDateStringOptions)}</p>
         <div class="hours">
             {#each day.data as price}
-                <div class="hour" class:active="{price.active}" style="background-color: {price.color}"><strong>{price.time.toLocaleTimeString("da-DK", hourDateStringOptions)}</strong> - {price.price} kr</div>
+                <div class="hour" class:active="{price.active}" style="background-color: {price.color}"><strong>{price.time.toLocaleTimeString("da-DK", hourDateStringOptions)}</strong> - {priceFormatter(price.price)} kr</div>
             {/each}
         </div>
     </div>

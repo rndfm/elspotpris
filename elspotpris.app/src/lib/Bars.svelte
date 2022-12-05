@@ -41,6 +41,11 @@
     const hourDateStringOptions = { hour: "2-digit" };
     let timer;
 
+    let priceFormatter = new Intl.NumberFormat('da-DK', {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 5
+	}).format;
+
     onMount(async () => {
         prices.subscribe((value) => {
             if (value)
@@ -296,7 +301,7 @@ ul.legend {
 
             {#each priceData as price, i}
                 <rect y="{(height - 20) - price.height * (height - 40)}" x="{i * 2.083333333333333}%" height="{price.height * (height - 40)}" width="2%" class="bar" class:active="{price.active}" fill="{price.color}"></rect>    
-                <text y="{(height - 20) - price.height * (height - 40)}" x="{i * 2.083333333333333}%" class="text price">{price.price}</text>
+                <text y="{(height - 20) - price.height * (height - 40)}" x="{i * 2.083333333333333}%" class="text price">{priceFormatter(price.price)}</text>
                 <text y="{height}" x="{i * 2.083333333333333}%" class="text">{price.time.toLocaleTimeString("da-DK", hourDateStringOptions)}</text>
             {/each}
 
