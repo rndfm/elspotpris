@@ -83,8 +83,44 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-var energidataservice = require("./integrations/energidataservice.js");
-var nordpool = require("./integrations/nordpool.js");
+var energidataservice = require('./integrations/energidataservice.js');
+
+
+const fs = require('fs');
+
+async function updateNetCompanies() {
+  let rawdata = fs.readFileSync('netcompanies.json');
+  let netcompanies = JSON.parse(rawdata);
+
+  netcompanies.forEach(company => {
+    var today = new Date();
+    today.setHours(0);
+    today.setMinutes(0);
+    today.setSeconds(0);
+
+    if (company.lastUpdated === null || company.lastUpdated < today)
+    {
+        energidataservice.getNetCompanyEntities(company.gln, company.chargeTypeCode)
+        .then(data => {
+          company.entities = data;
+          company.lastUpdated = new Date();
+          fs.writeFileSync('netcompanies2.json', JSON.stringify(netcompanies));
+        });
+    }
+  });
+}
+
+updateNetCompanies();
+
+return;
+
+
+
+
+
+
+
+var nordpool = require('./integrations/nordpool.js');
 
 var prices, pricesDate, co2emisprog, co2emis;
 
