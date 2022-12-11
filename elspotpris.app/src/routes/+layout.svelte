@@ -209,6 +209,6 @@
 			elspotpris.dk bliver udviklet og driftet i min fritid. Hvis elspotpris.dk er brugbar for dig, så overvej at støtte driften og den videre udvikling.<br>
 			- <a href="https://www.linkedin.com/in/christian-reinholdt-76712b45/" target="_blank" rel="noreferrer">Christian Reinholdt</a>
 		</p>
-		<a href="{donateLink}" target="_blank" rel="noreferrer"><img src="/donate/donate-mobilepay.png" alt="Støt elspotpris.dk med mobilepay" /></a>
+		<a href="{donateLink}" target="_blank" rel="noreferrer"><img src="/donate/donate-mobilepay.png" style="max-width:100%" alt="Støt elspotpris.dk med mobilepay" /></a>
 	</div>
 </main>
