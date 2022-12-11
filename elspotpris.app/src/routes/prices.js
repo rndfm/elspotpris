@@ -235,29 +235,29 @@ export const products = [
         fees: [
             {
                 name: "Abonnement",
-                amount: 16.25,
+                amount: 13,
                 paymentsPerYear: 12
             },
             {
                 name: "Indbetalingskort pr. regning",
-                amount: 49
+                amount: 39.2
             },
             {
                 name: "Betalingsservice pr. regning",
-                amount: 8,
+                amount: 6.4,
                 paymentsPerYear: 12
             },
             {
                 name: "Gebyr ved kundens skift af leverandør i bindingsperiode",
-                amount: 500
+                amount: 400
             },
             {
                 name: "Ekstra opgørelse / flytteopgørelse",
-                amount: 81.25
+                amount: 65
             },
             {
                 name: "Kopi af faktura",
-                amount: 43.75
+                amount: 35
             },
             {
                 name: "Rykkergebyr",
@@ -285,29 +285,29 @@ export const products = [
         fees: [
             {
                 name: "Abonnement",
-                amount: 16.25,
+                amount: 31.2,
                 paymentsPerYear: 12
             },
             {
                 name: "Indbetalingskort pr. regning",
-                amount: 49
+                amount: 39.2
             },
             {
                 name: "Betalingsservice pr. regning",
-                amount: 8,
+                amount: 6.4,
                 paymentsPerYear: 12
             },
             {
                 name: "Gebyr ved kundens skift af leverandør i bindingsperiode",
-                amount: 500
+                amount: 400
             },
             {
                 name: "Ekstra opgørelse / flytteopgørelse",
-                amount: 81.25
+                amount: 65
             },
             {
                 name: "Kopi af faktura",
-                amount: 43.75
+                amount: 35
             },
             {
                 name: "Rykkergebyr",
