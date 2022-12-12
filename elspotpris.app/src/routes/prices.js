@@ -1110,4 +1110,36 @@ export const products = [
             },
         ]
     },
+	{
+        id: "andel_energi_timeenergi",
+        name: "andel energi - TimeEnergi",
+        link: "https://andelenergi.dk/",
+        payments: "Acontobetaling kvartalsvis",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger",
+                amount: 0.161,
+                calculated: true
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 12.8,
+                paymentsPerYear: 12
+            },
+            {
+                name: "Betaling via betalingsservice",
+                amount: 5
+            },
+		{
+                name: "Betaling via MobilePay",
+                amount: 0
+            }
+        ]
+    },
 ]
