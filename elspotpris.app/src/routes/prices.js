@@ -128,6 +128,13 @@ export const tariffs = [
         peak: .1350
     }, 
     {
+        // source: https://noe.dk/wp-content/uploads/2022/10/Prisblad_gaeldende_fra_d._1._januar_2022.pdf
+        id: "noe_net",
+        name: "Nordvestjysk Elforsyning (NOE Net)",
+        normal: .0805,
+        peak: .0805
+    }, 
+    {
         id: "ikast_el_net_as_c",
         name: "Ikast El Net A/S",
         // source: https://ikastelnet.dk/priser/gebyrer/
