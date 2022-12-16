@@ -52,7 +52,7 @@
 		colors: ["#ff3e00", "#4DEBC6", "#4DEBC6"],
 		chart: {
 			id: chartId,
-			foreColor: '#bbb',
+			foreColor: '#ddd',
 			type: "line",
 			height: height,
 			toolbar: {
@@ -195,7 +195,7 @@
     darkMode.subscribe((value) => {
 		if (value)
 		{
-			options.chart.foreColor = '#bbb';
+			options.chart.foreColor = '#ddd';
 		}
 		else
 		{

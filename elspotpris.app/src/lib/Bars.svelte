@@ -201,6 +201,8 @@
         fill-opacity: 0;
         writing-mode: tb;
         transform: translate(12px, 10px);
+
+        pointer-events: none;
     }
 
     .bar {
@@ -222,11 +224,16 @@
 
     .text {
         fill: #333;
+
+        &.price {
+            fill: #fff;
+        }
     }
 
     .label {
         stroke: #333;
         stroke-opacity: .2;
+        pointer-events: none;
     }
 }
 
@@ -234,16 +241,20 @@
     .bars
     {
         .now {
-            stroke: #bbb;
+            stroke: #ddd;
             stroke-opacity: .2;
         }
 
         .text {
-            fill: #bbb;
+            fill: #ddd;
+
+            &.price {
+                fill: #fff;
+            }
         }
 
         .label {
-            stroke: #bbb;
+            stroke: #ddd;
             stroke-opacity: .2;
         }
     }
@@ -272,7 +283,7 @@ ul.legend {
         .dot {
             height: 12px;
             width: 12px;
-            background-color: #bbb;
+            background-color: #ddd;
             border-radius: 50%;
             display: inline-block;
             vertical-align: baseline;

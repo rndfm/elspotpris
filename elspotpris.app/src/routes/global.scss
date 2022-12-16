@@ -64,12 +64,12 @@ body {
 	}
 
     &.dark {
-		color: #bbb;
+		color: #ddd;
 		background-color: #111;
 
 		input, button, select, textarea {
 			background-color: #333;
-			color: #bbb;
+			color: #ddd;
 			border: 1px solid #666;
 		}
 		
@@ -116,7 +116,7 @@ body {
 
 		.apexcharts-tooltip-title, .apexcharts-tooltip, .apexcharts-xaxistooltip {
 			background: #333 !important; 
-			color: #bbb;
+			color: #ddd;
 		}
 
 		table {
