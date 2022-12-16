@@ -201,6 +201,11 @@ export const consumptionTypes = [
         id: "cottage",
         name: "Sommerhus (ca. 2000 kWh)",
         amount: 2000
+    },
+    {
+        id: "custom",
+        name: "Indtast selv forbrug",
+        amount: null
     }
 ]
 

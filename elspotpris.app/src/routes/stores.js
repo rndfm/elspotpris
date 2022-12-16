@@ -59,6 +59,22 @@ function createWriteableBoolFromLocalStorage(key, defaultValue)
     return writeableBool;
 }
 
+function createWriteableNumberFromLocalStorage(key, defaultValue)
+{
+    var value = Number(defaultValue);
+    const storedValue = browser ? localStorage.getItem(key) : null;
+    if (storedValue !== null)
+        value = Number(storedValue);
+
+    let writeableNumber = writable(value);
+    writeableNumber.subscribe(value => {
+        if (browser)
+            localStorage.setItem(key, value);
+    });
+
+    return writeableNumber;
+}
+
 function createWriteableObjectFromLocalStorage(key, options)
 {
     const storedObjectId = browser ? localStorage.getItem(key) ?? null: null;
@@ -89,6 +105,8 @@ consumption.subscribe(value => {
     if (browser)
         localStorage.setItem("consumption", value.id);
 });
+
+export const customConsumption = createWriteableNumberFromLocalStorage("customConsumption");
 
 const storedGraphId = browser ? localStorage.getItem("graph") : null;
 const storedGraph = storedGraphId ? graphTypes.find(t => t.id == storedGraphId) : graphTypes[0];

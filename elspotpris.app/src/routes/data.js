@@ -1,4 +1,4 @@
-import { userCount, priceNow, prices, co2EmissionNow, co2Emissions, co2EmissionsPrognosis, priceRegion, tax, tariff, product, calculatedProducts, consumption, electricityTax } from "./stores.js";
+import { userCount, priceNow, prices, co2EmissionNow, co2Emissions, co2EmissionsPrognosis, priceRegion, tax, tariff, product, calculatedProducts, consumption, customConsumption, electricityTax } from "./stores.js";
 import { governmentTariffs, products } from './prices';
 import { io } from "socket.io-client";
 import { get } from 'svelte/store';
@@ -7,6 +7,7 @@ let region = "DK2";
 let selectedTariff;
 let selectedProduct;
 let selectedConsumption;
+let selectedCustomConsumption;
 let priceData, co2EmisData, co2EmisProgData;
 let includeTax = false;
 let includeElectricityTax = false;
@@ -79,8 +80,11 @@ const calculatePrices = () => {
                         ])
                 }
                 p.calculatedPrices.average = p.calculatedPrices.prices.reduce((total, next) => total + next[1], 0) / p.calculatedPrices.prices.length;
-                p.calculatedPrices.usage = (p.calculatedPrices.average * selectedConsumption.amount)
-                p.calculatedPrices.surcharges = calculateProductPrice(p, 0, region) * selectedConsumption.amount;
+                
+                const consumptionAmount = selectedConsumption.amount ?? selectedCustomConsumption;
+                
+                p.calculatedPrices.usage = (p.calculatedPrices.average * consumptionAmount)
+                p.calculatedPrices.surcharges = calculateProductPrice(p, 0, region) * consumptionAmount;
 
                 p.calculatedPrices.total = p.calculatedPrices.surcharges;
                 p.calculatedPrices.fees = p.fees.reduce((total, next) => total + ((next.amount || 0) * (next.paymentsPerYear || 0)), 0);
@@ -193,6 +197,11 @@ product.subscribe((value) => {
 
 consumption.subscribe((value) => {
     selectedConsumption = value;
+    calculatePrices();
+});
+
+customConsumption.subscribe((value) => {
+    selectedCustomConsumption = value;
     calculatePrices();
 });
 

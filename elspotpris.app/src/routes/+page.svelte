@@ -187,6 +187,11 @@
             </select>
         </li>
 		<li>
+			<p>
+				<a href="/sammenlign">Sammenlign elselskaber</a>
+			</p>
+		</li>
+		<li>
 			<select bind:value={$graph}>
 				{#each graphTypes as option}
 					<option value={option}>{option.name}</option>

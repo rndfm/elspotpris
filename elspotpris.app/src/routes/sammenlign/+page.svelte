@@ -1,6 +1,6 @@
 <script>
 import { consumptionTypes } from "../prices.js";
-import { product, consumption, calculatedProducts} from "../stores.js";
+import { product, consumption, customConsumption, calculatedProducts} from "../stores.js";
 import {} from "../data.js";
 
 let productCalculations;
@@ -56,7 +56,13 @@ function shouldWarn(product)
             </option>
         {/each}
     </select>
-
+    {#if $consumption.amount === null}
+    <p>
+        <label for="customConsumption">Indtast årligt forbrug (kWh)</label>
+        <input id="customConsumption" type="number" bind:value={$customConsumption}/>
+    </p>
+    
+    {/if}
     {#if productCalculations}
     <div class="table-scroll">
         <table>
