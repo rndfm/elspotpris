@@ -1,9 +1,12 @@
 # elspotpris
 
+Elspotpris.dk er et community vedligeholdt website med visning af variable elpriser.
+Udregningerne, taksterne og priserne hos elselskaberne bliver alle sammen manuelt vedligeholdt. 
+Priser og gebyrer bliver gået efter og stikprøve kontrolleret på elregninger indsendt af forbrugerne.
 
-Elspotpris.dk er et community vedligeholdt website med visning af både variable og faste elpriser.
-Se prisen per kWh time for time. Inkl. afgifter, transport, moms.
-Som noget nyt kan websitet også vise prisen for et specifik produkt hos en el-leverandør.
+## Sammenlign elselskaber på deres reelle pris.
+I mangel på lovgning på hvordan en variabel pris udregnes og fremsættes af elselskaberne har elspotpris.dk en sammenligningsside hvor elselskaber bliver sammenlignet på deres reelle pris.
+Den findes her: https://elspotpris.dk/sammenlign
 
 ## Tilføj produkter fra elselskaber eller tariffer fra netselskaber.
 Ønsker du at tilføje eller rette i priser fra elselskaber eller netselskaber kan dette gøres nemt!
