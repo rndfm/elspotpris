@@ -1,6 +1,6 @@
 ---
 name: Netselskab - Oprettelse eller ændring af tariffer hos netselskab.
-about: Describe this issue template's purpose here.
+about: Denne formular indeholder felter der skal til for at regne et netselskab.
 title: "[TARIFF]"
 labels: ''
 assignees: rndfm
