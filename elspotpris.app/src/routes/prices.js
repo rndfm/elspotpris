@@ -148,7 +148,10 @@ export const governmentTariffs = [
         id: "elafgift",
         name: "Elafgift",
         amount: .723,
-    },
+    }
+]
+
+export const transportTariffs = [
     {
         id: "balance",
         name: "Balancetarif for forbrug",

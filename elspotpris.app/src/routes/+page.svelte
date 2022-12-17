@@ -10,10 +10,11 @@
 		menuClosed,
 		electricityTax,
 		graphTypes,
-		graph
+		graph,
+		transport
 	} from "./stores.js";
 	import {} from "./data.js";
-	import { tariffs, products, governmentTariffs } from "./prices.js";
+	import { tariffs, products, governmentTariffs, transportTariffs } from "./prices.js";
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 
@@ -166,6 +167,13 @@
                     bind:checked={$electricityTax}/> Elafgift</label>
         </li>
 		<li>
+            <label for="transport">
+                <input
+                    type="checkbox"
+                    id="transport"
+                    bind:checked={$transport}/> Transport</label>
+        </li>
+		<li>
             <label for="tax"><input type="checkbox" id="tax" bind:checked={$tax} /> Moms</label>
         </li>
         <li class="full">
@@ -177,6 +185,7 @@
                 {/each}
             </select>
         </li>
+		<li><p><a href="https://greenpowerdenmark.dk/vejledning-teknik/nettilslutning/find-netselskab" target="_blank" rel="noreferrer">Find netselskab</a></p></li>
         <li class="full">
             <select bind:value={$product}>
                 {#each products.sort((a, b) => a.name.localeCompare(b.name)) as product}
@@ -222,7 +231,7 @@
     <div class="calculation col">
         <h2>
             {#if shouldWarn(selectedProduct)}<img src="warning.svg" width="32" height="32" class="warning" alt="Advarsel" title="Dele af udregningen er ugarranteret eller uden betingelser."/>{/if}
-            Sådan er prisen udregnet
+            Sådan er prisen pr. kWh udregnet
         </h2>
         <p class="lead">{selectedProduct.name}</p>
         {#if selectedProduct.link}<a href={selectedProduct.link}>{selectedProduct.link}</a>{/if}
@@ -237,19 +246,34 @@
             </li>
         {/each}
         </ul>
-        <ul>
         {#if includeElectricityTax}
+		<p>Elafgift som betales til staten:</p>
+		<ul>
         {#each governmentTariffs as item}
             <li>
                 {item.name}{#if item.amount != undefined}&nbsp;- {priceFormatter(item.amount)} kr.{/if}
             </li>
         {/each}
+		</ul>
         {/if}
+		
+		{#if $transport}
+		<p>Transportudgifter som betales til det danske energinet:</p>
+		<ul>
+        {#each transportTariffs as item}
+            <li>
+                {item.name}{#if item.amount != undefined}&nbsp;- {priceFormatter(item.amount)} kr.{/if}
+            </li>
+        {/each}
+		</ul>
+        {/if}
+		{#if selectedTariff.id !== "none"}
+		<p>Transportudgifter som betales til dit lokale netselskab.</p>
+		<ul>
             <li>Netselskab - { selectedTariff.name } - lavlast: {priceFormatter(selectedTariff.normal)} kr - spidslast: {priceFormatter(selectedTariff.peak)} kr.</li>
-            {#if withTax}<li>Moms 25%</li>{/if}
-            {#if !withTax}<li>Uden moms</li>{/if}
         </ul>
-        {#if selectedProduct.fees && selectedProduct.fees.length > 0}
+		{/if}
+		{#if selectedProduct.fees && selectedProduct.fees.length > 0}
         <p>Ud over prisen pr. kWh er der følgende udgifter ved {selectedProduct.name}:</p>
         <ul>
             {#each selectedProduct.fees as item}
@@ -262,6 +286,7 @@
             {/each}
         </ul>
         {/if}
+        
         <p>Priserne i udregningen er opgivet ex. moms.<br/>Er der fejl i udregningen eller satserne rapporteres dette her: <a href="https://github.com/rndfm/elspotpris/issues/new/choose" target="_blank" rel="noreferrer">github</a>.</p>
     </div>
     {/if}
