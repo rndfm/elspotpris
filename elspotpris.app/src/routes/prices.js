@@ -1154,4 +1154,66 @@ export const products = [
             }
         ]
     },
+    {
+        id: "forsyning_helsingoer_kronborg_el",
+        name: "Forsyning Helsingør - Kronborg El",
+        link: "https://www.fh.dk/el/kronborg-el",
+        payments: "Acontobetaling kvartalsvis",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Indkøbsomkostninger Øst (variabel)*",
+                amount: .1056,
+                conditions: null
+            },
+            {
+                name: "Handelstillæg",
+                amount: .04
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 9.6,
+                paymentsPerYear: 12
+            },
+            {
+                name: "Betaling via betalingsservice",
+                amount: 0,
+                conditions: "Ikke bekræftet"
+            }
+        ]
+    },
+    {
+        id: "forsyning_helsingoer_kronborg_el_plus",
+        name: "Forsyning Helsingør - Kronborg El+",
+        link: "https://www.fh.dk/el/kronborg-el",
+        payments: "Acontobetaling kvartalsvis",
+        prices: [
+            {
+                name: "Spotpris",
+                amount: null
+            },
+            {
+                name: "Indkøbsomkostninger Øst (variabel)*",
+                amount: .1056,
+                conditions: null
+            }
+        ],
+        fees: [
+            {
+                name: "Abonnement",
+                amount: 24,
+                paymentsPerYear: 12
+            },
+            {
+                name: "Betaling via betalingsservice",
+                amount: 0,
+                conditions: "Ikke bekræftet"
+            }
+        ]
+    }
 ]
