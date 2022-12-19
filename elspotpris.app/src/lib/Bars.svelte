@@ -33,9 +33,6 @@
                 position: priceLabel.position
             });
         });
-
-
-        console.log(co2Labels);
     }
 
     const hourDateStringOptions = { hour: "2-digit" };
@@ -50,11 +47,11 @@
         prices.subscribe((value) => {
             if (value)
             {
-                const maxPrice = Math.max(...value.map(p => p[1]));
-                const minPrice = Math.min(...value.map(p => p[1]));
+                const maxPrice = (Math.max(...value.map(p => p[1])) * .8) + (8 * .2);
+                const minPrice = (Math.min(...value.map(p => p[1])) * .8) + (1.5 * .2);
 
                 labels = [];
-                for (let i = 1; i < maxPrice; i++)
+                for (let i = 1; i <= maxPrice; i++)
                 {
                     labels.push({
                         text: i + " kr",
@@ -67,7 +64,12 @@
                 priceData = [];
                 value.forEach(p => {
                     const price = p[1];
-                    const severity = (price - minPrice) / (maxPrice - minPrice);
+                    let severity = (price - minPrice) / (maxPrice - minPrice);
+                    if (severity < 0)
+                        severity = 0;
+                    if (severity > 1)
+                        severity = 1;
+
                     const red = ((severity * 235) | 0).toString(16).padStart(2,'0');
                     const green = (((1 - severity) * 130) + 45 | 0).toString(16).padStart(2,'0');
                     const blue = (((1 - Math.abs(severity - 0.5)) * 70) | 0).toString(16).padStart(2,'0');
@@ -88,7 +90,7 @@
             if (value)
             {
                 co2EmissionsData = value.map(v => { return { position: positionFromDate(v[0]), emission: v[1]}});
-                const max = Math.max(co2EmissionsData.map(e => e.emission));
+                const max = Math.max(...co2EmissionsData.map(e => e.emission));
                 if (max > co2Max)
                 {
                     co2Max = max;
@@ -101,7 +103,7 @@
             if (value)
             {
                 co2EmissionsPrognosisData = value.map(v => { return { position: positionFromDate(v[0]), emission: v[1]}});
-                const max = Math.max(co2EmissionsPrognosisData.map(e => e.emission));
+                const max = Math.max(...co2EmissionsPrognosisData.map(e => e.emission));
                 if (max > co2Max)
                 {
                     co2Max = max;
