@@ -39,7 +39,7 @@ export const tariffs = [
         // peak: .9734
         normal: 0, // Only for december 2022
         peak: 0 // Only for december 2022
-    },    
+    },
     {
         id: "n1_evonet_c",
         name: "N1 (tidl. Evonet) C",
@@ -51,7 +51,7 @@ export const tariffs = [
     {
         id: "n1_randers_c",
         name: "N1 Randers C",
-	// Updated 2022-12-01 - https://n1.dk/priser-og-vilkaar
+        // Updated 2022-12-01 - https://n1.dk/priser-og-vilkaar
         normal: .5547,
         peak: 1.236
     },
@@ -63,10 +63,10 @@ export const tariffs = [
         peak: .4537
     },
     {
-	id: "trefor_el-net_c",
-	name: "Trefor El-net C",
-	normal: .2068,
-	peak: .5404
+        id: "trefor_el-net_c",
+        name: "Trefor El-net C",
+        normal: .2068,
+        peak: .5404
     },
     {
         id: "trefor_el-net_oest_c",
@@ -101,7 +101,7 @@ export const tariffs = [
         // Updated 2022-09-24 - http://www.hev.dk/faste-afgifter/
         normal: .15,
         peak: .15
-    }, 
+    },
     {
         id: "veksel",
         name: "Veksel C",
@@ -126,14 +126,14 @@ export const tariffs = [
         name: "Nord Energi Net",
         normal: .1350,
         peak: .1350
-    }, 
+    },
     {
         // source: https://noe.dk/wp-content/uploads/2022/10/Prisblad_gaeldende_fra_d._1._januar_2022.pdf
         id: "noe_net",
         name: "Nordvestjysk Elforsyning (NOE Net)",
         normal: .0805,
         peak: .0805
-    }, 
+    },
     {
         id: "ikast_el_net_as_c",
         name: "Ikast El Net A/S",
@@ -166,7 +166,7 @@ export const transportTariffs = [
         id: "transmissionsnettarif",
         name: "Transmissions nettarif",
         amount: .049,
-    },
+    }
 ]
 
 export const consumptionTypes = [
@@ -904,9 +904,9 @@ export const products = [
             {
                 name: "Betaling via betalingsservice",
                 amount: 6.4,
-		        paymentsPerYear: 12
+                paymentsPerYear: 12
             },
- 	    {
+            {
                 name: "Rykkergebyr",
                 amount: 80
             }
@@ -938,19 +938,19 @@ export const products = [
                 paymentsPerYear: 12
             },
             {
-                name: "Betaling via betalingskort", 
+                name: "Betaling via betalingskort",
                 amount: 32
             },
             {
                 name: "Betaling via betalingsservice",
                 amount: 7.96,
-		        paymentsPerYear: 12
+                paymentsPerYear: 12
             },
-	    {
+            {
                 name: "Betaling via Bankoverførsel",
                 amount: 80
             },
- 	    {
+            {
                 name: "Rykkergebyr",
                 amount: 80
             }
@@ -981,7 +981,7 @@ export const products = [
                 name: "Betaling via betalingsservice",
                 amount: 7.2
             },
-	        {
+            {
                 name: "Betaling via MobilePay",
                 amount: 0,
                 paymentsPerYear: 12
@@ -1083,10 +1083,10 @@ export const products = [
                 name: "Spotpris tillæg",
                 amount: 0.04,
             },
-	    {
+            {
                 name: "Abonnement pr. kWh",
-		amount: 0.036,
-	    }			
+                amount: 0.036,
+            }
         ],
         fees: [
             {
@@ -1094,11 +1094,11 @@ export const products = [
                 amount: 4.984,
                 paymentsPerYear: 12
             },
-	    {
-		name: "MobilePay pr. regning",
-		amount: 2.6
-	    },
-	    {
+            {
+                name: "MobilePay pr. regning",
+                amount: 2.6
+            },
+            {
                 name: "Abonnement",
                 amount: 12,
                 paymentsPerYear: 12
@@ -1154,7 +1154,7 @@ export const products = [
                 name: "Betaling via betalingsservice",
                 amount: 5
             },
-		{
+            {
                 name: "Betaling via MobilePay",
                 amount: 0
             }
