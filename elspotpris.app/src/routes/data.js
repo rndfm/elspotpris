@@ -1,5 +1,5 @@
-import { userCount, priceNow, prices, co2EmissionNow, co2Emissions, co2EmissionsPrognosis, priceRegion, tax, tariff, product, calculatedProducts, consumption, customConsumption, electricityTax, transport } from "./stores.js";
-import { governmentTariffs, transportTariffs, products } from './prices';
+import { userCount, priceNow, prices, co2EmissionNow, co2Emissions, co2EmissionsPrognosis, priceRegion, tax, tariff, product, calculatedProducts, consumption, customConsumption, electricityTax, transmission } from "./stores.js";
+import { governmentTariffs, transmissionTariffs, products } from './prices';
 import { io } from "socket.io-client";
 import { get } from 'svelte/store';
 
@@ -11,7 +11,7 @@ let selectedCustomConsumption;
 let priceData, co2EmisData, co2EmisProgData;
 let includeTax = false;
 let includeElectricityTax = false;
-let includeTransport = false;
+let includeTransmission = false;
 const taxRate = 1.25;
 
 export const calculateTariff = (datetime) => {
@@ -26,9 +26,9 @@ export const calculateTariff = (datetime) => {
         }, 0);
     }
 
-    if (includeTransport)
+    if (includeTransmission)
     {
-        amount += transportTariffs.reduce((previous, current) => {
+        amount += transmissionTariffs.reduce((previous, current) => {
             return previous + current.amount;
         }, 0);
     }
@@ -218,7 +218,7 @@ electricityTax.subscribe((value) => {
     calculatePrices();
 });
 
-transport.subscribe((value) => {
-    includeTransport = value;
+transmission.subscribe((value) => {
+    includeTransmission = value;
     calculatePrices();
 });

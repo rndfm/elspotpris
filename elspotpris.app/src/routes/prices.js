@@ -151,7 +151,7 @@ export const governmentTariffs = [
     }
 ]
 
-export const transportTariffs = [
+export const transmissionTariffs = [
     {
         id: "balance",
         name: "Balancetarif for forbrug",

@@ -95,7 +95,7 @@ export const product = createWriteableObjectFromLocalStorage("product", products
 export const darkMode = createWriteableBoolFromLocalStorage("darkMode", false);
 export const menuClosed = createWriteableBoolFromLocalStorage("menuClosed", false);
 export const mainMenuClosed = createWriteableBoolFromLocalStorage("mainMenuClosed", false);
-export const transport = createWriteableBoolFromLocalStorage("transport", true);
+export const transmission = createWriteableBoolFromLocalStorage("transmission", true);
 
 export const co2Enabled = createWriteableBoolFromLocalStorage("co2Enabled", false);
 

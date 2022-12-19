@@ -11,10 +11,10 @@
 		electricityTax,
 		graphTypes,
 		graph,
-		transport
+		transmission
 	} from "./stores.js";
 	import {} from "./data.js";
-	import { tariffs, products, governmentTariffs, transportTariffs } from "./prices.js";
+	import { tariffs, products, governmentTariffs, transmissionTariffs } from "./prices.js";
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 
@@ -167,11 +167,11 @@
                     bind:checked={$electricityTax}/> Elafgift</label>
         </li>
 		<li>
-            <label for="transport">
+            <label for="transmission">
                 <input
                     type="checkbox"
-                    id="transport"
-                    bind:checked={$transport}/> Transport</label>
+                    id="transmission"
+                    bind:checked={$transmission}/> Transmission</label>
         </li>
 		<li>
             <label for="tax"><input type="checkbox" id="tax" bind:checked={$tax} /> Moms</label>
@@ -257,10 +257,10 @@
 		</ul>
         {/if}
 		
-		{#if $transport}
-		<p>Transportudgifter som betales til det danske energinet:</p>
+		{#if $transmission}
+		<p>Transmissionsudgifter som betales til det danske energinet:</p>
 		<ul>
-        {#each transportTariffs as item}
+        {#each transmissionTariffs as item}
             <li>
                 {item.name}{#if item.amount != undefined}&nbsp;- {priceFormatter(item.amount)} kr.{/if}
             </li>
