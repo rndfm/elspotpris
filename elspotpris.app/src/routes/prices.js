@@ -741,7 +741,6 @@ export const products = [
                 name: "Betaling via betalingsservice",
                 amount: 5
             },
-            ,
             {
                 name: "Der er stoppet for salg af produktet hos Andel Energi"
             }
@@ -1129,7 +1128,7 @@ export const products = [
             },
         ]
     },
-	{
+    {
         id: "andel_energi_timeenergi",
         name: "andel energi - TimeEnergi",
         link: "https://andelenergi.dk/",
