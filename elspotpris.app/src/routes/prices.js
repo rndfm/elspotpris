@@ -140,6 +140,15 @@ export const tariffs = [
         // source: https://ikastelnet.dk/priser/gebyrer/
         normal: .3309,
         peak: .3309
+    },
+    {
+        id: "flow_elnet",
+        name: "Flow Elnet",
+        // Updated 2022-12-20 - https://flow-elnet.dk/priser-regler/aktuelle-priser
+        // From 2023-01-01 normal: .2224, peak: .5835
+        // From 2023-04-01 normal: .3977, peak: .9521
+        normal: .2241,
+        peak: .5871
     }
 ]
 
