@@ -1,44 +1,35 @@
-# elspotpris
+# Elspotpris
+Elspotpris.dk er et fællesskabsdrevet website, der viser variable elpriser. Oplysningerne om udregninger, tarifer og priser hos elselskaberne vedligeholdes manuelt. Priser og gebyrer verificeres og stikprøvekontrolleres på elregninger, der indsendes af forbrugerne.
 
-Elspotpris.dk er et community vedligeholdt website med visning af variable elpriser.
-Udregningerne, taksterne og priserne hos elselskaberne bliver alle sammen manuelt vedligeholdt. 
-Priser og gebyrer bliver gået efter og stikprøve kontrolleret på elregninger indsendt af forbrugerne.
+## Sammenlign elselskaber på deres faktiske pris
+På grund af manglende lovgivning om, hvordan en variabel pris udregnes og præsenteres af elselskaberne, har Elspotpris.dk en sammenligningsside, hvor elselskaber sammenlignes på deres faktiske pris. Den findes her: https://elspotpris.dk/sammenlign
 
-## Sammenlign elselskaber på deres reelle pris.
-I mangel på lovgning på hvordan en variabel pris udregnes og fremsættes af elselskaberne har elspotpris.dk en sammenligningsside hvor elselskaber bliver sammenlignet på deres reelle pris.
-Den findes her: https://elspotpris.dk/sammenlign
+## Tilføj produkter fra elselskaber eller tarif fra netselskaber
+Hvis du ønsker at tilføje eller rette priser fra elselskaber eller netselskaber, kan dette gøres nemt! Filen [elspotpris.app/src/prices.js](https://github.com/rndfm/elspotpris/blob/master/elspotpris.app/src/prices.js) indeholder alle definitionerne for priserne på både tarif og elprodukter. Rediger filen og send en pull request. Det er nemmere end det lyder, og du kan ikke ødelægge noget. Rekvisitionen vil blive verificeret, før den går live.
 
-## Tilføj produkter fra elselskaber eller tariffer fra netselskaber.
-Ønsker du at tilføje eller rette i priser fra elselskaber eller netselskaber kan dette gøres nemt!
-
-I filen [elspotpris.app/src/routes/prices.js](https://github.com/rndfm/elspotpris/blob/master/elspotpris.app/src/routes/prices.js) findes alle definitionerne for priserne på både tariffer og el produkter.  
-Rediger filen og lav et pull request.  
-Det er nemmere end det lyder og man kan ikke ødelægge noget. Rettelsen bliver tjekket inden den går live.
-
-[Link til prisfilen](https://github.com/rndfm/elspotpris/blob/master/elspotpris.app/src/routes/prices.js)
+[Link til prisfilen](https://github.com/rndfm/elspotpris/blob/master/elspotpris.app/src/prices.js)
 
 ## Lokalt udviklingsmiljø
 
-Brug [NPM](https://www.npmjs.com/) til at starte projektet.
-For at køre hele projektet skal både app og api startes.
-Klienten(app) består af en sveltekit app.
-Api er NodeJS.
+Brug [NPM](https://www.npmjs.com/) til at starte projektet. For at køre hele projektet, skal både app'en og API'et startes. Klienten (app'en) består af en SvelteKit-app, mens API'et er baseret på NodeJS.
 
-Kør app'en i /elspotpris.app mappen.
-```bash
-cd .\elspotpris.app\
-npm install
-npm run dev
-```
+For at starte serveren skal du gå ind i mappen elspotpris.api og køre følgende kommandoer:
 
-Start server
 ```bash
 cd .\elspotpris.api\
 npm install
 npm run start
 ```
 
-Sitet kan nu ses på http://localhost:4000
+For at køre app'en skal du først gå ind i mappen elspotpris.app og køre følgende kommandoer:
+
+```bash
+cd .\elspotpris.app\
+npm install
+npm run dev
+```
+
+App'en kan nu ses på http://localhost:4000
 
 ## Bidrag til udviklingen og vedligeholdelsen af elspotpris.dk
 Pull requests er meget velkomne. For større ændringer, åben gerne et issue først for at afklare hvad du ønsker at ændre eller udvikle.
