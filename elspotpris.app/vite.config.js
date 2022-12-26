@@ -5,10 +5,7 @@ const config = {
 	server: {
 		port: 4000
 	},
-	plugins: [
-		sveltekit(),
-		isoImport()
-	]
+	plugins: [sveltekit(), isoImport()]
 };
 
 export default config;
