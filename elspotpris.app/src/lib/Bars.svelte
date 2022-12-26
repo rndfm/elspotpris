@@ -1,5 +1,5 @@
 <script>
-	import { prices, co2Emissions, co2EmissionsPrognosis, co2Enabled } from '../routes/stores.js';
+	import { prices, co2Emissions, co2EmissionsPrognosis, co2Enabled } from '../stores.js';
 	import { onMount, onDestroy } from 'svelte';
 
 	export let height = 500;

@@ -12,9 +12,9 @@
 		graphTypes,
 		graph,
 		transmission
-	} from './stores.js';
-	import {} from './data.js';
-	import { tariffs, products, governmentTariffs, transmissionTariffs } from './prices.js';
+	} from '../stores.js';
+	import {} from '../data.js';
+	import { tariffs, products, governmentTariffs, transmissionTariffs } from '../prices.js';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 

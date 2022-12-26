@@ -1,6 +1,6 @@
 <script>
-	import { prices } from '../stores.js';
-	import {} from '../data.js';
+	import { prices } from '../../stores.js';
+	import {} from '../../data.js';
 
 	let thePrices;
 	let avarageRunPrice = 1337;

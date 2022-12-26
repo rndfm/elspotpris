@@ -1,6 +1,6 @@
 <script>
 	import './global.scss';
-	import { mainMenuClosed, darkMode } from './stores.js';
+	import { mainMenuClosed, darkMode } from '../stores.js';
 	import { browser } from '$app/environment';
 
 	let menuActive = false;

@@ -1,7 +1,7 @@
 <script>
-	import { consumptionTypes } from '../prices.js';
-	import { product, consumption, customConsumption, calculatedProducts } from '../stores.js';
-	import {} from '../data.js';
+	import { consumptionTypes } from '../../prices.js';
+	import { product, consumption, customConsumption, calculatedProducts } from '../../stores.js';
+	import {} from '../../data.js';
 
 	let productCalculations;
 	calculatedProducts.subscribe((value) => {

@@ -1,5 +1,5 @@
 <script>
-	import { prices } from '../routes/stores.js';
+	import { prices } from '../stores.js';
 	import { onDestroy } from 'svelte';
 
 	export let height = 500;

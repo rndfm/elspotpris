@@ -1,8 +1,8 @@
 import { writable } from 'svelte/store';
 import { tariffs, products, consumptionTypes } from './prices.js';
 
-import Table from '../lib/Table.svelte';
-import Bars from '../lib/Bars.svelte';
+import Table from './lib/Table.svelte';
+import Bars from './lib/Bars.svelte';
 
 import { browser } from '$app/environment';
 
