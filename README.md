@@ -5,7 +5,7 @@ Elspotpris.dk er et fællesskabsdrevet website, der viser variable elpriser. Opl
 På grund af manglende lovgivning om, hvordan en variabel pris udregnes og præsenteres af elselskaberne, har Elspotpris.dk en sammenligningsside, hvor elselskaber sammenlignes på deres faktiske pris. Den findes her: https://elspotpris.dk/sammenlign
 
 ## Tilføj produkter fra elselskaber eller tarif fra netselskaber
-Hvis du ønsker at tilføje eller rette priser fra elselskaber eller netselskaber, kan dette gøres nemt! Filen [elspotpris.app/src/prices.js](https://github.com/rndfm/elspotpris/blob/master/elspotpris.app/src/prices.js) indeholder alle definitionerne for priserne på både tarif og elprodukter. Rediger filen og send en pull request. Det er nemmere end det lyder, og du kan ikke ødelægge noget. Rekvisitionen vil blive verificeret, før den går live.
+Hvis du ønsker at tilføje eller rette priser fra elselskaber eller netselskaber, kan dette gøres nemt. Filen [elspotpris.app/src/prices.js](https://github.com/rndfm/elspotpris/blob/master/elspotpris.app/src/prices.js) indeholder alle definitionerne for priserne på både tarif og elprodukter. Rediger filen og send en pull request. Det er nemmere end det lyder, og du kan ikke ødelægge noget. Ændringen vil blive verificeret, før den går live.
 
 [Link til prisfilen](https://github.com/rndfm/elspotpris/blob/master/elspotpris.app/src/prices.js)
 
