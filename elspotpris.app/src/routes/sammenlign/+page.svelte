@@ -17,8 +17,8 @@
 			return false;
 		}
 		return (
-			product.prices.some((p) => p.conditions === null || p.calculated || p.amount === undefined) ||
-			product.fees.some((f) => f.amount === undefined || f.conditions === null)
+			product.prices.some((p) => p.conditions === null || p.conditions || p.calculated || p.amount === undefined) ||
+			product.fees.some((f) => f.amount === undefined || f.conditions === null || f.conditions)
 		);
 	}
 </script>
