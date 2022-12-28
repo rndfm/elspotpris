@@ -57,8 +57,12 @@ async function getPriceEntries(gln, chargeTypeCodes) {
     var json = JSON.parse(data);
 
     const now = new Date();
+    const validFrom = new Date();
+    validFrom.setDate(validFrom.getDate() + 2);
+    
     const filtered = json.records.filter(
       (t) =>
+        (t.ValidFrom == null || new Date(t.ValidFrom) <= validFrom) &&
         (t.ValidTo == null || new Date(t.ValidTo) >= now)
     );
 
