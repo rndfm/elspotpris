@@ -121,8 +121,8 @@
 			return false;
 		}
 		return (
-			product.prices.some((p) => p.conditions === null || p.calculated || p.amount === undefined) ||
-			product.fees.some((f) => f.amount === undefined || f.conditions === null)
+			product.prices.some((p) => p.conditions === null || p.conditions || p.calculated || p.amount === undefined) ||
+			product.fees.some((f) => f.amount === undefined || f.conditions === null || f.conditions)
 		);
 	}
 
@@ -325,8 +325,8 @@
 								/>{/if}
 							{#if item.conditions}<img
 									class="item-warning"
-									src="info.svg"
-									alt="Info"
+									src="warning.svg"
+									alt="Advarsel"
 									title={item.conditions}
 									width="16"
 									height="16"
@@ -405,7 +405,8 @@
 					{#each selectedProduct.fees as item}
 						<tr>
 							<td
-								>{item.name}{#if item.conditions === null}<img
+								>{item.name}
+								{#if item.conditions === null}<img
 										class="item-warning"
 										src="warning.svg"
 										alt="Advarsel"
@@ -413,6 +414,14 @@
 										width="16"
 										height="16"
 									/>{/if}
+								{#if item.conditions}<img
+									class="item-warning"
+									src="warning.svg"
+									alt="Advarsel"
+									title={item.conditions}
+									width="16"
+									height="16"
+								/>{/if}
 								{#if item.amount === undefined}<img
 										class="item-warning"
 										src="warning.svg"

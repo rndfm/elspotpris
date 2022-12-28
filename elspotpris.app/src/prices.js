@@ -1025,14 +1025,14 @@ export const products = [
 			},
 			{
 				name: 'Indkøbsomkostninger Vest (variabel)*',
-				amount: 0.1319,
-				conditions: null,
+				amount: 0.01319,
+				conditions: "Tillæg ændre sig måned for måned og kendes først 3 måneder efter forbrug.",
 				region: 'DK1'
 			},
 			{
 				name: 'Indkøbsomkostninger Øst (variabel)*',
 				amount: 0.1056,
-				conditions: null,
+				conditions: "Tillæg ændre sig måned for måned og kendes først 3 måneder efter forbrug.",
 				region: 'DK2'
 			},
 			{
@@ -1065,14 +1065,14 @@ export const products = [
 			},
 			{
 				name: 'Indkøbsomkostninger Vest (variabel)*',
-				amount: 0.1319,
-				conditions: null,
+				amount: 0.01319,
+				conditions: "Tillæg ændre sig måned for måned og kendes først 3 måneder efter forbrug.",
 				region: 'DK1'
 			},
 			{
 				name: 'Indkøbsomkostninger Øst (variabel)*',
 				amount: 0.1056,
-				conditions: null,
+				conditions: "Tillæg ændre sig måned for måned og kendes først 3 måneder efter forbrug.",
 				region: 'DK2'
 			},
 		],
