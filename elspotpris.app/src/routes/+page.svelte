@@ -11,10 +11,12 @@
 		electricityTax,
 		graphTypes,
 		graph,
-		transmission
+		transmission,
+		transport,
+		transportNow
 	} from '../stores.js';
 	import {} from '../data.js';
-	import { tariffs, products, governmentTariffs, transmissionTariffs } from '../prices.js';
+	import { products, governmentTariffs, transmissionTariffs } from '../prices.js';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 
@@ -24,8 +26,21 @@
 	});
 
 	let selectedTariff;
+	let selectedTariffId;
+	let transportTariffs;
+
 	tariff.subscribe((value) => {
-		selectedTariff = value;
+		selectedTariffId = value;
+		if (value && transportTariffs) {
+			selectedTariff = transportTariffs.find((t) => t.id === value);
+		}
+	});
+
+	transport.subscribe((value) => {
+		transportTariffs = value;
+		if (value && selectedTariffId) {
+			selectedTariff = transportTariffs.find((t) => t.id === selectedTariffId);
+		}
 	});
 
 	let withTax;
@@ -58,6 +73,11 @@
 		spotPriceNow = value;
 	});
 
+	let tariffNow;
+	transportNow.subscribe((value) => {
+		tariffNow = value;
+	});
+
 	let emisNow;
 
 	co2EmissionNow.subscribe((value) => {
@@ -68,6 +88,11 @@
 
 	let priceFormatter = new Intl.NumberFormat('da-DK', {
 		minimumFractionDigits: 2,
+		maximumFractionDigits: 5
+	}).format;
+
+	let pricePricisionFormatter = new Intl.NumberFormat('da-DK', {
+		minimumFractionDigits: 5,
 		maximumFractionDigits: 5
 	}).format;
 
@@ -83,8 +108,8 @@
 					height = 500;
 				}
 
-				if (height < 250) {
-					height = 250;
+				if (height < 200) {
+					height = 200;
 				}
 				visualAreaHeight = height;
 			}
@@ -174,13 +199,15 @@
 			<label for="tax"><input type="checkbox" id="tax" bind:checked={$tax} /> Moms</label>
 		</li>
 		<li class="full">
-			<select bind:value={$tariff}>
-				{#each tariffs as item}
-					<option value={item}>
-						{item.name}
-					</option>
-				{/each}
-			</select>
+			{#if transportTariffs}
+				<select bind:value={$tariff}>
+					{#each transportTariffs as item}
+						<option value={item.id}>
+							{item.name}
+						</option>
+					{/each}
+				</select>
+			{/if}
 		</li>
 		<li>
 			<p>
@@ -267,89 +294,40 @@
 					/>{/if}
 				Sådan er prisen pr. kWh udregnet
 			</h2>
-			<p class="lead">{selectedProduct.name}</p>
-			{#if selectedProduct.link}<a href={selectedProduct.link}>{selectedProduct.link}</a>{/if}
-			<ul>
+			<table class="scrollable">
+				<tr>
+					<th colspan="2">
+						{selectedProduct.name}<br />
+						{#if selectedProduct.link}<a href={selectedProduct.link}
+								><small>{selectedProduct.link}</small></a
+							>{/if}
+					</th>
+				</tr>
 				{#each selectedProduct.prices as item}
-					<li>
-						{item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}{#if item.amount != undefined}&nbsp;-
-							{priceFormatter(item.amount)} kr{/if}
-						{#if item.calculated}<img
-								class="item-warning"
-								src="warning.svg"
-								alt="Advarsel"
-								title="Prisen er regnet baglæns og er ikke bekræftet af elselskabet."
-								width="16"
-								height="16"
-							/>{/if}
-						{#if item.conditions === null}<img
-								class="item-warning"
-								src="warning.svg"
-								alt="Advarsel"
-								title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel"
-								width="16"
-								height="16"
-							/>{/if}
-						{#if item.conditions}<img
-								class="item-warning"
-								src="info.svg"
-								alt="Info"
-								title={item.conditions}
-								width="16"
-								height="16"
-							/>{/if}
-						{#if item.amount === undefined}<img
-								class="item-warning"
-								src="warning.svg"
-								alt="Advarsel"
-								title="Denne pris er ukendt"
-								width="16"
-								height="16"
-							/>{/if}
-					</li>
-				{/each}
-			</ul>
-			{#if includeElectricityTax}
-				<p>Elafgift som betales til staten:</p>
-				<ul>
-					{#each governmentTariffs as item}
-						<li>
-							{item.name}{#if item.amount != undefined}&nbsp;- {priceFormatter(item.amount)} kr.{/if}
-						</li>
-					{/each}
-				</ul>
-			{/if}
-
-			{#if $transmission}
-				<p>Transmissionsudgifter som betales til det danske energinet:</p>
-				<ul>
-					{#each transmissionTariffs as item}
-						<li>
-							{item.name}{#if item.amount != undefined}&nbsp;- {priceFormatter(item.amount)} kr.{/if}
-						</li>
-					{/each}
-				</ul>
-			{/if}
-			{#if selectedTariff.id !== 'none'}
-				<p>Transportudgifter som betales til dit lokale netselskab.</p>
-				<ul>
-					<li>
-						Netselskab - {selectedTariff.name} - lavlast: {priceFormatter(selectedTariff.normal)} kr
-						- spidslast: {priceFormatter(selectedTariff.peak)} kr.
-					</li>
-				</ul>
-			{/if}
-			{#if selectedProduct.fees && selectedProduct.fees.length > 0}
-				<p>Ud over prisen pr. kWh er der følgende udgifter ved {selectedProduct.name}:</p>
-				<ul>
-					{#each selectedProduct.fees as item}
-						<li>
-							{item.name}{#if item.amount != undefined}&nbsp;- {priceFormatter(item.amount)} kr{/if}
+					<tr>
+						<td
+							>{item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}
+							{#if item.calculated}<img
+									class="item-warning"
+									src="warning.svg"
+									alt="Advarsel"
+									title="Prisen er regnet baglæns og er ikke bekræftet af elselskabet."
+									width="16"
+									height="16"
+								/>{/if}
 							{#if item.conditions === null}<img
 									class="item-warning"
 									src="warning.svg"
 									alt="Advarsel"
 									title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel"
+									width="16"
+									height="16"
+								/>{/if}
+							{#if item.conditions}<img
+									class="item-warning"
+									src="info.svg"
+									alt="Info"
+									title={item.conditions}
 									width="16"
 									height="16"
 								/>{/if}
@@ -361,11 +339,97 @@
 									width="16"
 									height="16"
 								/>{/if}
-							{#if item.paymentsPerYear}<small>({item.paymentsPerYear} betalinger om året)</small
-								>{/if}
-						</li>
+						</td>
+						<td class="amount"
+							>{#if item.amount != undefined}{pricePricisionFormatter(item.amount)} kr{/if}</td
+						>
+					</tr>
+				{/each}
+				{#if includeElectricityTax}
+					<tr>
+						<th colspan="2">Elafgift som betales til staten</th>
+					</tr>
+					{#each governmentTariffs as item}
+						<tr>
+							<td>{item.name}</td>
+							<td class="amount"
+								>{#if item.amount != undefined}{pricePricisionFormatter(item.amount)} kr.{/if}</td
+							>
+						</tr>
 					{/each}
-				</ul>
+				{/if}
+
+				{#if $transmission}
+					<tr>
+						<th colspan="2">Transmissionsudgifter som betales til det danske energinet</th>
+					</tr>
+					{#each transmissionTariffs as item}
+						<tr>
+							<td>{item.name}</td>
+							<td class="amount"
+								>{#if item.amount != undefined}{pricePricisionFormatter(item.amount)} kr.{/if}</td
+							>
+						</tr>
+					{/each}
+				{/if}
+				{#if selectedTariff}
+					<tr>
+						<th colspan="2"
+							>Transportudgifter som betales til dit lokale netselskab - {selectedTariff.name}</th
+						>
+					</tr>
+					{#if tariffNow}
+						{#each tariffNow as item}
+							<tr>
+								<td
+									>kl. {String(item.start).padStart(2, '0')} - {String(item.end + 1).padStart(
+										2,
+										'0'
+									)}</td
+								>
+								<td class="amount"
+									>{#if item.price != undefined}{pricePricisionFormatter(item.price)} kr.{/if}</td
+								>
+							</tr>
+						{/each}
+					{/if}
+				{/if}
+			</table>
+			{#if selectedProduct.fees && selectedProduct.fees.length > 0}
+				<table>
+					<tr>
+						<th colspan="2"
+							>Ud over prisen pr. kWh er der følgende udgifter ved {selectedProduct.name}</th
+						>
+					</tr>
+					{#each selectedProduct.fees as item}
+						<tr>
+							<td
+								>{item.name}{#if item.conditions === null}<img
+										class="item-warning"
+										src="warning.svg"
+										alt="Advarsel"
+										title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel"
+										width="16"
+										height="16"
+									/>{/if}
+								{#if item.amount === undefined}<img
+										class="item-warning"
+										src="warning.svg"
+										alt="Advarsel"
+										title="Denne pris er ukendt"
+										width="16"
+										height="16"
+									/>{/if}
+								{#if item.paymentsPerYear}<small>({item.paymentsPerYear} betalinger om året)</small
+									>{/if}</td
+							>
+							<td class="amount"
+								>{#if item.amount != undefined}{pricePricisionFormatter(item.amount)} kr{/if}</td
+							>
+						</tr>
+					{/each}
+				</table>
 			{/if}
 
 			<p>
@@ -382,6 +446,17 @@
 </div>
 
 <style lang="scss">
+	table {
+		margin-top: 1em;
+		td.amount {
+			text-align: right;
+			white-space: nowrap;
+		}
+		th {
+			padding: 2em 1em 1em 1em;
+			text-align: left;
+		}
+	}
 	nav#options {
 		> ul {
 			display: block;

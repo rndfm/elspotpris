@@ -13,7 +13,9 @@ import {
 	consumption,
 	customConsumption,
 	electricityTax,
-	transmission
+	transmission,
+	transport,
+	transportNow
 } from './stores.js';
 import { governmentTariffs, transmissionTariffs, products } from './prices';
 import { io } from 'socket.io-client';
@@ -21,17 +23,45 @@ import { get } from 'svelte/store';
 
 let region = 'DK2';
 let selectedTariff;
+let selectedTariffId;
 let selectedProduct;
 let selectedConsumption;
 let selectedCustomConsumption;
-let priceData, co2EmisData, co2EmisProgData;
+let priceData, transportData, co2EmisData, co2EmisProgData;
 let includeTax = false;
 let includeElectricityTax = false;
 let includeTransmission = false;
 const taxRate = 1.25;
 
-export const calculateTariff = (datetime) => {
-	if (datetime == null) datetime = new Date();
+const getActiveTariffs = (datetime) => {
+	if (!selectedTariff) {
+		return null;
+	}
+
+	const activeEntries = selectedTariff.entries.filter(
+		(e) =>
+			(e.validFrom === null || new Date(e.validFrom) < datetime) &&
+			(e.validTo === null || new Date(e.validTo) > datetime)
+	);
+
+	let hour = datetime.getHours();
+	const activeTariffs = [];
+	activeEntries.forEach((entry) => {
+		entry.prices
+			.filter((t) => t.start <= hour && t.end >= hour)
+			.forEach((p) => {
+				activeTariffs.push(p);
+			});
+	});
+
+	return activeTariffs;
+};
+
+const calculateTariffs = (datetime) => {
+	if (datetime == null) {
+		datetime = new Date();
+	}
+
 	let amount = 0;
 
 	if (includeElectricityTax) {
@@ -45,13 +75,13 @@ export const calculateTariff = (datetime) => {
 			return previous + current.amount;
 		}, 0);
 	}
-
-	let month = datetime.getMonth() + 1;
-	let hour = datetime.getHours();
-	// Peak load october to march between 17 to 20.
-	let peakLoad = (month >= 10 || month <= 3) && hour >= 17 && hour < 20;
-
-	return amount + (peakLoad ? selectedTariff.peak : selectedTariff.normal);
+	const activeTariffs = getActiveTariffs(datetime);
+	if (activeTariffs) {
+		amount += getActiveTariffs(datetime).reduce((previous, current) => {
+			return previous + current.price;
+		}, 0);
+	}
+	return amount;
 };
 
 const calculateProductPrice = (product, spotPrice, region) => {
@@ -68,8 +98,7 @@ const calculateProductPrice = (product, spotPrice, region) => {
 
 const calculateTotalPrice = (product, spotPrice, datetime) => {
 	const pricePerKwh =
-		(calculateProductPrice(product, spotPrice, region) +
-			(selectedTariff ? calculateTariff(datetime) : 0)) *
+		(calculateProductPrice(product, spotPrice, region) + calculateTariffs(datetime)) *
 		(includeTax ? taxRate : 1);
 
 	return Math.round((pricePerKwh + Number.EPSILON) * 100) / 100;
@@ -130,7 +159,7 @@ const calculatePrices = () => {
 			now.setSeconds(0);
 			now.setMilliseconds(0);
 
-			var priceEntry = priceData.filter((x) => new Date(x.hour) >= now)[0];
+			const priceEntry = priceData.filter((x) => new Date(x.hour) >= now)[0];
 			priceNow.set(
 				calculateTotalPrice(
 					selectedProduct,
@@ -138,6 +167,9 @@ const calculatePrices = () => {
 					new Date(priceEntry.hour)
 				)
 			);
+
+			const transportEntry = getActiveTariffs(now);
+			transportNow.set(transportEntry);
 		}
 	}
 };
@@ -194,6 +226,15 @@ socket.on('prices', function (data) {
 	calculatePrices();
 });
 
+socket.on('transport', function (data) {
+	transportData = data;
+	if (selectedTariffId) {
+		selectedTariff = transportData.find((t) => t.id === selectedTariffId);
+	}
+	transport.set(transportData);
+	calculatePrices();
+});
+
 socket.on('co2emis', function (data) {
 	co2EmisData = data;
 	updateCo2Emis();
@@ -220,8 +261,11 @@ tax.subscribe((value) => {
 });
 
 tariff.subscribe((value) => {
-	selectedTariff = value;
-	calculatePrices();
+	selectedTariffId = value;
+	if (value && transportData) {
+		selectedTariff = transportData.find((t) => t.id === value);
+		calculatePrices();
+	}
 });
 
 product.subscribe((value) => {

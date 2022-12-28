@@ -1,157 +1,3 @@
-export const tariffs = [
-	{
-		id: 'none',
-		name: 'Uden netselskab',
-		normal: 0,
-		peak: 0
-	},
-	{
-		id: 'radius_c',
-		name: 'Radius C',
-		normal: 0.3003,
-		peak: 0.7651
-	},
-	{
-		id: 'rah_c',
-		name: 'RAH C',
-		normal: 0.2475,
-		peak: 0.6164
-	},
-	{
-		id: 'konstant_c',
-		name: 'Konstant C',
-		normal: 0.1432,
-		peak: 0.3983
-	},
-	{
-		id: 'cerius_c',
-		name: 'Cerius C',
-		normal: 0.3028,
-		peak: 0.7885
-	},
-	{
-		id: 'n1_c',
-		name: 'N1 C',
-		// from 2022-11-01 increase: https://n1.dk/priser-og-vilkaar/kommende-priser-1-11-2022
-		// from 2023-01-01 increase: https://n1.dk/priser-og-vilkaar/kommende-priser-1-1-2023
-		// Updated 2022-09-24 - https://n1.dk/priser-og-vilkaar
-		// normal: .3875,
-		// peak: .9734
-		normal: 0, // Only for december 2022
-		peak: 0 // Only for december 2022
-	},
-	{
-		id: 'n1_evonet_c',
-		name: 'N1 (tidl. Evonet) C',
-		//normal: .2114,
-		//peak: .6933
-		normal: 0, // Only for december 2022
-		peak: 0 // Only for december 2022
-	},
-	{
-		id: 'n1_randers_c',
-		name: 'N1 Randers C',
-		// Updated 2022-12-01 - https://n1.dk/priser-og-vilkaar
-		normal: 0.5547,
-		peak: 1.236
-	},
-	{
-		id: 'dinel_c',
-		name: 'Dinel C',
-		// Updated 2022-10-24 - https://dinel.dk/priser-og-bestemmelser/
-		normal: 0.1636,
-		peak: 0.4537
-	},
-	{
-		id: 'trefor_el-net_c',
-		name: 'Trefor El-net C',
-		normal: 0.2068,
-		peak: 0.5404
-	},
-	{
-		id: 'trefor_el-net_oest_c',
-		name: 'Trefor El-Net Øst C',
-		normal: 0.4131,
-		peak: 1.1598
-	},
-	{
-		id: 'elektrus_c',
-		name: 'Elektrus C',
-		normal: 0.2858,
-		peak: 0.6461
-	},
-	{
-		id: 'elnet_midt_c',
-		name: 'Elnet midt C',
-		// Updated 2023-10-05 - https://www.elnetmidt.dk/priser
-		normal: 0.2191,
-		peak: 0.6562
-	},
-	{
-		id: 'elvrk_c',
-		name: 'Elværk C',
-		// From 2023-01-01 decrease:  normal: .2330;, peak: .7206
-		// Updated 2022-09-24 - https://www.elvrk.dk/forside/priser/
-		normal: 0.3947,
-		peak: 1.2997
-	},
-	{
-		id: 'hurup_elvrk_net_c',
-		name: 'Hurup Elværk Net C',
-		// Updated 2022-09-24 - http://www.hev.dk/faste-afgifter/
-		normal: 0.15,
-		peak: 0.15
-	},
-	{
-		id: 'veksel',
-		name: 'Veksel C',
-		// kilde: https://www.veksel.dk/priser/nettarif-og-abonnementer/
-		normal: 0.2199,
-		peak: 0.6564
-	},
-	{
-		id: 'vores_elnet',
-		name: 'Vores Elnet C',
-		normal: 0.3676,
-		peak: 0.8995
-	},
-	{
-		id: 'netselskabet_elvaerk_c',
-		name: 'Netselskabet Elværk C',
-		normal: 0.3947,
-		peak: 1.2997
-	},
-	{
-		id: 'nord_energi_net',
-		name: 'Nord Energi Net',
-		normal: 0.135,
-		peak: 0.135
-	},
-	{
-		// source: https://noe.dk/wp-content/uploads/2022/10/Prisblad_gaeldende_fra_d._1._januar_2022.pdf
-		id: 'noe_net',
-		name: 'Nordvestjysk Elforsyning (NOE Net)',
-		normal: 0.0805,
-		peak: 0.0805
-	},
-	{
-		id: 'ikast_el_net_as_c',
-		name: 'Ikast El Net A/S',
-		// source: https://ikastelnet.dk/priser/gebyrer/
-		normal: 0.3309,
-		peak: 0.3309
-	},
-	{
-		id: 'flow_elnet',
-		name: 'Flow Elnet',
-		// Updated 2022-12-20 - https://flow-elnet.dk/priser-regler/aktuelle-priser
-		// From 2023-01-01 normal: .2224, peak: .5835
-		// From 2023-04-01 normal: .3977, peak: .9521
-		normal: 0.2241,
-		peak: 0.5871
-	}
-];
-
 export const governmentTariffs = [
 	{
 		id: 'elafgift',
@@ -1178,9 +1024,16 @@ export const products = [
 				amount: null
 			},
 			{
+				name: 'Indkøbsomkostninger Vest (variabel)*',
+				amount: 0.1319,
+				conditions: null,
+				region: 'DK1'
+			},
+			{
 				name: 'Indkøbsomkostninger Øst (variabel)*',
 				amount: 0.1056,
-				conditions: null
+				conditions: null,
+				region: 'DK2'
 			},
 			{
 				name: 'Handelstillæg',
@@ -1211,10 +1064,17 @@ export const products = [
 				amount: null
 			},
 			{
+				name: 'Indkøbsomkostninger Vest (variabel)*',
+				amount: 0.1319,
+				conditions: null,
+				region: 'DK1'
+			},
+			{
 				name: 'Indkøbsomkostninger Øst (variabel)*',
 				amount: 0.1056,
-				conditions: null
-			}
+				conditions: null,
+				region: 'DK2'
+			},
 		],
 		fees: [
 			{

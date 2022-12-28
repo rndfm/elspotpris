@@ -13,46 +13,6 @@ var app = express();
 app.use(cors());
 
 const http = require("http").Server(app);
-var io = require("socket.io")(http, {
-  cors: {
-    origin: [
-      "https://elspotpris.dk",
-      "http://elspotpris.dk",
-      "http://localhost",
-      "http://127.0.0.1:4000",
-      "http://localhost:4000",
-      "http://127.0.0.1:4173"
-    ],
-    methods: ["GET", "POST"],
-  },
-});
-
-io.on("connection", function (socket) {
-  io.emit("users", io.engine.clientsCount);
-  console.log("A user connected");
-  console.log(io.engine.clientsCount);
-  io.emit("prices", prices);
-  io.emit("co2emis", co2emis);
-  io.emit("co2emisprog", co2emisprog);
-
-  socket.on("region", function () {
-    // https://stackoverflow.com/questions/11182980/not-getting-remote-address-while-using-proxy-in-socket-io/11187053#11187053
-    const remoteIp =
-      socket.handshake.headers["x-forwarded-for"] ||
-      socket.request.connection.remoteAddress;
-    ipApi
-      .getRegion(remoteIp)
-      .then((region) => socket.emit("region", region))
-      .catch((err) => console.error(err));
-  });
-
-  socket.on("disconnect", function () {
-    io.emit("users", io.engine.clientsCount);
-    console.log("A user disconnected");
-    console.log(io.engine.clientsCount);
-  });
-});
-
 app.set("port", process.env.PORT || 3000);
 
 http.listen(3000, () => {
@@ -83,48 +43,49 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-var energidataservice = require('./integrations/energidataservice.js');
+const energidataservice = require("./integrations/energidataservice.js");
+const nordpool = require("./integrations/nordpool.js");
 
+const fs = require("fs");
 
-const fs = require('fs');
+async function updateTransport() {
+  let rawdata = fs.readFileSync("transport.json");
+  transport = JSON.parse(rawdata);
 
-async function updateNetCompanies() {
-  let rawdata = fs.readFileSync('netcompanies.json');
-  let netcompanies = JSON.parse(rawdata);
+  var changes = false;
+  transport.forEach((company) => {
+    if (!company.gln || !company.type) {
+      return;
+    }
 
-  netcompanies.forEach(company => {
     var today = new Date();
     today.setHours(0);
     today.setMinutes(0);
     today.setSeconds(0);
 
-    if (company.lastUpdated === null || company.lastUpdated < today)
-    {
-        energidataservice.getNetCompanyEntities(company.gln, company.chargeTypeCode)
-        .then(data => {
-          company.entities = data;
+    if (!company.lastUpdated || company.lastUpdated < today) {
+      energidataservice
+        .getPriceEntries(company.gln, company.type)
+        .then((data) => {
+          company.entries = data;
           company.lastUpdated = new Date();
-          fs.writeFileSync('netcompanies2.json', JSON.stringify(netcompanies));
+          fs.writeFileSync("transport.json", JSON.stringify(transport));
+          changes = true;
         });
     }
   });
+
+  if (changes)
+  {
+    io.emit("transport", transport);
+  }
 }
 
-updateNetCompanies();
-
-return;
-
-
-
-
-
-
-
-var nordpool = require('./integrations/nordpool.js');
-
-var prices, pricesDate, co2emisprog, co2emis;
+var prices, transport, pricesDate, co2emisprog, co2emis;
 
 async function update() {
+  updateTransport();
+
   // update prices.
   var today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -170,4 +131,44 @@ async function update() {
 
 update();
 setInterval(update, 300000);
+
+var io = require("socket.io")(http, {
+  cors: {
+    origin: [
+      "https://elspotpris.dk",
+      "http://elspotpris.dk",
+      "http://localhost",
+      "http://127.0.0.1:4000",
+      "http://localhost:4000",
+      "http://127.0.0.1:4173",
+    ],
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", function (socket) {
+  console.log("A user connected");
+  console.log(io.engine.clientsCount);
+  io.emit("prices", prices);
+  io.emit("transport", transport);
+  io.emit("co2emis", co2emis);
+  io.emit("co2emisprog", co2emisprog);
+
+  socket.on("region", function () {
+    // https://stackoverflow.com/questions/11182980/not-getting-remote-address-while-using-proxy-in-socket-io/11187053#11187053
+    const remoteIp =
+      socket.handshake.headers["x-forwarded-for"] ||
+      socket.request.connection.remoteAddress;
+    ipApi
+      .getRegion(remoteIp)
+      .then((region) => socket.emit("region", region))
+      .catch((err) => console.error(err));
+  });
+
+  socket.on("disconnect", function () {
+    console.log("A user disconnected");
+    console.log(io.engine.clientsCount);
+  });
+});
+
 module.exports = app;

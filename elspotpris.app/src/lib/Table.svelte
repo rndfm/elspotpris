@@ -12,10 +12,6 @@
 		maximumFractionDigits: 5
 	}).format;
 
-	onDestroy(() => {
-		if (timer) clearInterval(timer);
-	});
-
 	const dayDateStringOptions = { weekday: 'long', day: 'numeric' };
 	const hourDateStringOptions = { hour: '2-digit' };
 
@@ -27,11 +23,11 @@
 		return date.getHours() == new Date().getHours() && date.getDay() == new Date().getDay();
 	};
 
-	prices.subscribe((value) => {
+	let pricesUnsubscribe = prices.subscribe((value) => {
 		if (value) {
 			const staticRate = 0.2;
-			const maxPrice = (Math.max(...value.map((p) => p[1])) * (1 - staticRate)) + (8 * staticRate);
-			const minPrice = (Math.min(...value.map((p) => p[1])) * (1 - staticRate)) + (1.5 * staticRate);
+			const maxPrice = Math.max(...value.map((p) => p[1])) * (1 - staticRate) + 8 * staticRate;
+			const minPrice = Math.min(...value.map((p) => p[1])) * (1 - staticRate) + 1.5 * staticRate;
 
 			priceData = [];
 			let day = null;
@@ -74,6 +70,13 @@
 	timer = setInterval(() => {
 		setActive();
 	}, 10000);
+
+	onDestroy(() => {
+		if (timer) clearInterval(timer);
+		if (pricesUnsubscribe) {
+			pricesUnsubscribe();
+		}
+	});
 </script>
 
 {#if priceData}
