@@ -48,7 +48,7 @@ const nordpool = require("./integrations/nordpool.js");
 
 const fs = require("fs");
 
-async function updateTransport() {
+async function updateTransport(refresh) {
   let rawdata = fs.readFileSync("transport.json");
   transport = JSON.parse(rawdata);
 
@@ -63,7 +63,7 @@ async function updateTransport() {
     today.setMinutes(0);
     today.setSeconds(0);
 
-    if (!company.lastUpdated || company.lastUpdated < today) {
+    if (!company.lastUpdated || company.lastUpdated < today || refresh) {
       energidataservice
         .getPriceEntries(company.gln, company.type)
         .then((data) => {
@@ -83,8 +83,8 @@ async function updateTransport() {
 
 var prices, transport, pricesDate, co2emisprog, co2emis;
 
-async function update() {
-  updateTransport();
+async function update(refresh) {
+  updateTransport(refresh);
 
   // update prices.
   var today = new Date();
@@ -129,7 +129,7 @@ async function update() {
   });
 }
 
-update();
+update(true);
 setInterval(update, 300000);
 
 var io = require("socket.io")(http, {
