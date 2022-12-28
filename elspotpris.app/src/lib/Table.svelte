@@ -36,7 +36,11 @@
 			priceData = [];
 			let day = null;
 			value.forEach((p) => {
-				const severity = (p[1] - minPrice) / (maxPrice - minPrice);
+				const price = p[1];
+				let severity = (price - minPrice) / (maxPrice - minPrice);
+				if (severity < 0) severity = 0;
+				if (severity > 1) severity = 1;
+				
 				const red = ((severity * 200) | 0).toString(16).padStart(2, '0');
 				const green = (((1 - severity) * 150 + 50) | 0).toString(16).padStart(2, '0');
 				const blue = (((1 - Math.abs(severity - 0.5)) * 50 + 50) | 0).toString(16).padStart(2, '0');
