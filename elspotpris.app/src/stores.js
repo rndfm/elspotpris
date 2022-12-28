@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { tariffs, products, consumptionTypes } from './prices.js';
+import { products, consumptionTypes } from './prices.js';
 
 import Table from './lib/Table.svelte';
 import Bars from './lib/Bars.svelte';
@@ -29,8 +29,10 @@ priceRegion.subscribe((value) => {
 
 export const calculatedProducts = writable();
 
-export const priceNow = writable(0);
 export const prices = writable();
+export const priceNow = writable(0);
+export const transport = writable();
+export const transportNow = writable();
 
 export const co2EmissionNow = writable(0);
 export const co2Emissions = writable();
@@ -75,9 +77,20 @@ function createWriteableObjectFromLocalStorage(key, options) {
 	return writeableObject;
 }
 
+function createWriteableStringFromLocalStorage(key, defaultValue) {
+	const storedString = browser ? localStorage.getItem(key) ?? defaultValue : null;
+
+	let writeableString = writable(storedString);
+	writeableString.subscribe((value) => {
+		if (browser) localStorage.setItem(key, value);
+	});
+
+	return writeableString;
+}
+
 export const tax = createWriteableBoolFromLocalStorage('tax', true);
 export const electricityTax = createWriteableBoolFromLocalStorage('electricityTax', true);
-export const tariff = createWriteableObjectFromLocalStorage('tariff', tariffs);
+export const tariff = createWriteableStringFromLocalStorage('tariff', 'none');
 export const product = createWriteableObjectFromLocalStorage('product', products);
 export const darkMode = createWriteableBoolFromLocalStorage('darkMode', false);
 export const menuClosed = createWriteableBoolFromLocalStorage('menuClosed', false);
@@ -105,12 +118,4 @@ const storedGraph = storedGraphId ? graphTypes.find((t) => t.id == storedGraphId
 export const graph = writable(storedGraph ? storedGraph : graphTypes[0]);
 graph.subscribe((value) => {
 	if (browser) localStorage.setItem('graph', value.id);
-});
-
-const storedLegendsEnabled = browser ? localStorage.getItem('legendsEnabled') : null;
-export const legendsEnabled = writable(
-	storedLegendsEnabled ? JSON.parse(storedLegendsEnabled) : {}
-); // Default no filter
-legendsEnabled.subscribe((value) => {
-	if (browser) localStorage.setItem('legendsEnabled', JSON.stringify(value));
 });

@@ -42,12 +42,15 @@
 		maximumFractionDigits: 5
 	}).format;
 
+	let pricesUnsubscribe;
+	let co2EmissionsUnsubscribe;
+	let co2EmissionsPrognosisUnsubscribe;
 	onMount(async () => {
-		prices.subscribe((value) => {
+		pricesUnsubscribe = prices.subscribe((value) => {
 			if (value) {
 				const staticRate = 0.2;
-				const maxPrice = (Math.max(...value.map((p) => p[1])) * (1 - staticRate)) + (8 * staticRate);
-				const minPrice = (Math.min(...value.map((p) => p[1])) * (1 - staticRate)) + (1.5 * staticRate);
+				const maxPrice = Math.max(...value.map((p) => p[1])) * (1 - staticRate) + 8 * staticRate;
+				const minPrice = Math.min(...value.map((p) => p[1])) * (1 - staticRate) + 1.5 * staticRate;
 
 				labels = [];
 				for (let i = 1; i <= maxPrice; i++) {
@@ -82,7 +85,7 @@
 			}
 		});
 
-		co2Emissions.subscribe((value) => {
+		co2EmissionsUnsubscribe = co2Emissions.subscribe((value) => {
 			if (value) {
 				co2EmissionsData = value.map((v) => {
 					return { position: positionFromDate(v[0]), emission: v[1] };
@@ -95,7 +98,7 @@
 			}
 		});
 
-		co2EmissionsPrognosis.subscribe((value) => {
+		co2EmissionsPrognosisUnsubscribe = co2EmissionsPrognosis.subscribe((value) => {
 			if (value) {
 				co2EmissionsPrognosisData = value.map((v) => {
 					return { position: positionFromDate(v[0]), emission: v[1] };
@@ -115,6 +118,16 @@
 
 	onDestroy(() => {
 		if (timer) clearInterval(timer);
+		if (autoScrollDisabledTimer) clearInterval(autoScrollDisabledTimer);
+		if (pricesUnsubscribe) {
+			pricesUnsubscribe();
+		}
+		if (co2EmissionsUnsubscribe) {
+			co2EmissionsUnsubscribe();
+		}
+		if (co2EmissionsPrognosisUnsubscribe) {
+			co2EmissionsPrognosisUnsubscribe();
+		}
 	});
 
 	const isActive = (date, dateNow) => {

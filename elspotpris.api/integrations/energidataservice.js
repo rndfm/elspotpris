@@ -38,6 +38,176 @@ async function getCo2EmisPrognosis() {
   });
 }
 
+async function getPriceEntries(gln, chargeTypeCodes) {
+  var startDate = new Date();
+  startDate.setDate(1);
+  startDate.setMonth(0);
+  startDate.setHours(1, 0, 0, 0);
+
+
+  const chargeTypeCodesFilter = `["${Array.isArray(chargeTypeCodes) ? chargeTypeCodes.join('","') : chargeTypeCodes}"]`;
+
+  const query = `limit=100000000&filter=%7B"GLN_Number":["${gln}"],"ChargeType":["D03"],"ChargeTypeCode":${chargeTypeCodesFilter}%7D&sort=ValidFrom%20DESC&timezone=dk`;
+  
+  const data = await request("DatahubPricelist", query).catch((e) => {
+    console.log(e);
+  });
+
+  if (data) {
+    var json = JSON.parse(data);
+
+    const now = new Date();
+    const filtered = json.records.filter(
+      (t) =>
+        (t.ValidTo == null || new Date(t.ValidTo) >= now)
+    );
+
+    return filtered.map((item) => ({
+      company: item.ChargeOwner,
+      type: item.ChargeTypeCode,
+      note: item.Note,
+      description: item.Description,
+      validFrom: item.ValidFrom,
+      validTo: item.ValidTo,
+      prices: getPricePeriodsFromTable(item),
+    }));
+  }
+}
+
+async function getTransportCompanies() {
+  var startDate = new Date();
+  startDate.setDate(1);
+  startDate.setMonth(0);
+  startDate.setHours(1, 0, 0, 0);
+
+  const query = `&start=${toCustomISOString(
+    startDate
+  )}&limit=10000000&filter=%7B%22ChargeType%22:%22D03%22%7D&sort=ValidFrom%20DESC&timezone=dk`;
+
+  const data = await request("DatahubPricelist", query).catch((e) => {
+    console.log(e);
+  });
+
+  if (data) {
+    var json = JSON.parse(data);
+
+    const now = new Date();
+
+    const badWords = [
+      " a ",
+      " b ",
+      "a lav",
+      "a-lav",
+      "a høj",
+      "a-høj",
+      "b lav",
+      "b-lav",
+      "b høj",
+      "b-høj",
+      "b1",
+      "b2",
+      "a1",
+      "a2",
+      "rådig"
+    ];
+
+    const filtered = json.records.filter(
+      (t) =>
+        new Date(t.ValidFrom) <= now &&
+        (t.ValidTo == null || new Date(t.ValidTo) >= now) &&
+        !badWords.some((word) => t.Note.toLowerCase().includes(word))
+    );
+
+    const companies = filtered.map((item) => ({
+      gln: item.GLN_Number,
+      company: item.ChargeOwner,
+      type: item.ChargeTypeCode,
+      note: item.Note,
+      description: item.Description,
+      validFrom: item.ValidFrom,
+      validTo: item.ValidTo,
+      prices: getPricePeriodsFromTable(item),
+    }));
+
+    const filteredCompanies = companies.filter((c) =>
+      c.prices.some((p) => p.price > 0)
+    );
+
+    console.log(filteredCompanies.length);
+
+    const fs = require("fs");
+    let jsondata = JSON.stringify(filteredCompanies);
+    fs.writeFileSync("companies.json", jsondata);
+  }
+}
+
+function getPricePeriodsFromTable(item) {
+  const prices = Object.getOwnPropertyNames(item)
+    .filter((propertyName) => propertyName.startsWith("Price"))
+    .map((propertyName) => item[propertyName]);
+
+  const pricePeriods = [];
+  var lastPrice = null;
+  var currentPeriod = null;
+  var timeOfDay = 0;
+  prices.forEach((price) => {
+    if (price == null) price = prices[0]; // according to energidataservice: if a price is null the price from first hour apply.
+
+    if (price != lastPrice && currentPeriod != null) {
+      // if price changes a new price period starts!
+      pricePeriods.push(currentPeriod);
+      currentPeriod = null;
+    }
+
+    if (currentPeriod == null)
+      currentPeriod = { start: timeOfDay, price: price };
+
+    currentPeriod.end = timeOfDay;
+    lastPrice = price;
+    timeOfDay++;
+  });
+
+  pricePeriods.push(currentPeriod);
+
+  return pricePeriods;
+}
+
+async function getTransportTariffs() {
+  const monitoredChargeTypeCodes = ["HEV-NT-01", "DT_C_01"];
+  var startDate = new Date();
+  startDate.setDate(1);
+  startDate.setMonth(0);
+  startDate.setHours(1, 0, 0, 0);
+
+  var endDate = new Date();
+
+  console.log(startDate);
+  const query = `limit=100000&start=${toCustomISOString(
+    startDate
+  )}&end=${toCustomISOString(
+    endDate
+  )}&filter=%7B%22Note%22:%22Nettarif%20C%20time%22%7D&sort=ValidFrom%20ASC&timezone=utc`;
+
+  const data = await request("DatahubPricelist", query).catch((e) => {
+    console.log(e);
+  });
+
+  if (data) {
+    var json = JSON.parse(data);
+
+    const now = new Date();
+    const filtered = json.records.filter(
+      (t) => new Date(t.ValidFrom) <= now && new Date(t.ValidTo) >= now
+    );
+
+    filtered.forEach((e) => {
+      console.log(
+        `${e.ChargeOwner} \t\t - Fra ${e.ValidFrom} - ${e.ValidTo} : ${e.Price1}`
+      );
+    });
+  }
+}
+
 async function request(dataset, query) {
   const requestUrl = `${apiUrl}/${dataset}?${query}`;
   const options = {
@@ -95,4 +265,7 @@ module.exports = {
   getPrices,
   getCo2Emis,
   getCo2EmisPrognosis,
+  getTransportTariffs,
+  getTransportCompanies,
+  getPriceEntries,
 };
