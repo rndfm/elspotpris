@@ -24,10 +24,10 @@ body {
 		}
 
 		div > ul > li {
-			background-color: #c0c0c0;
+			background-color: #e0e0e0;
 
 			&:hover {
-				background-color: #b0b0b0;
+				background-color: #d0d0d0;
 			}
 		}
 	}
@@ -49,7 +49,7 @@ body {
 			background-color: #efefef;
 		}
 		tr:nth-child(even) {
-			background: #c0c0c0;
+			background: #e0e0e0;
 		}
 
 		thead {
@@ -130,7 +130,7 @@ body {
 				background-color: #222;
 			}
 			tr:nth-child(even) {
-				background: #1b1b1b;
+				background: #1f1f1f;
 			}
 		}
 	}
