@@ -411,7 +411,7 @@ export const products = [
 			},
 			{
 				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
-				amount: 0.015
+				amount: 0.03
 			}
 		],
 		fees: [
