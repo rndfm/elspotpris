@@ -254,7 +254,7 @@
 		<h1>elspotpris.dk</h1>
 		<p class="lead">Få overblik over spotpriserne på el det næste døgn.</p>
 		<p>
-			Har du en elaftale med variabel pris, er din pris pr. kWh baseret på spotprisen ved <a
+			Har du en elaftale med variabel pris, er din pris pr. kWh formentlig baseret på spotprisen ved <a
 				href="https://www.nordpoolgroup.com"
 				target="_blank"
 				rel="noreferrer">Nordpool</a
@@ -266,23 +266,36 @@
 			er Jylland og Fyn, mens DK2 er Sjælland. Prisen i grafen kan vises med elafgift,
 			tariffer/transport og moms.<br /> Alle indstillinger bliver husket til næste gang, du besøger siden.
 		</p>
-		<h2>Variabel pris &#8800; spotpris</h2>
+		<h2>Sammenlign elselskaberne</h2>
 		<p>
-			Bemærk at indkøbsprisen/kostprisen i din elaftale med variabel pris som regel er baseret på
-			spotprisen, men tillægges fortjeneste med mere.<br />
-			Vælg et produkt i menuen øverst for at se prisen med alle tillæg.<br />Bemærk at priser på
-			produkter vedligeholdes manuelt. Hvis dit produkt mangler, eller det er udregnet forkert, så
-			opret et punkt på
-			<a
-				href="https://github.com/rndfm/elspotpris/issues/new/choose"
-				target="_blank"
-				rel="noreferrer">github</a
-			>. Der garanteres ikke for korrektheden af udregningen på produkterne, og elselskaberne kan i
-			mange tilfælde ændre prisen uden varsel.
+			Sammenlign produkterne hos elselskaberne på deres reelle pris. <a href="/sammenlign">Klik her</a><br />
+			Læs i nyhederne nedenfor, hvorfor du ikke skal bruge elpris.dk til at sammenligne elselskaber med variabel pris.
 		</p>
+		<h2>Elspotpris.dk i nyhederne</h2>
+		<p>Et udpluk af relevante nyheder omkring elspotpris.dk, generelt om variable priser og prissammenligning af elselskaber.</p>
+		<hr />
+		<h3>Jyllandsposten</h3>
+		<p>Statens prisportal over elselskaber er ikke til at stole på, viser test. <a href="https://jyllands-posten.dk/indland/ECE14758058/statens-prisportal-over-elselskaber-er-ikke-til-at-stole-paa-viser-test/" target="_blank"  rel="noreferrer">Læs nyheden</a></p>
+		<hr />
+		<h3>Videncentret Bolius</h3>
+		<p>Hvordan finder jeg det billigste elselskab med flex-afregning? <a href="https://www.bolius.dk/hvordan-finder-jeg-det-billigste-elselskab-med-flex-afregning-98432" target="_blank" rel="noreferrer">Læs nyheden</a></p>
+		<hr />
+		<h3>Ekstrabladet</h3>
+		<p>Test: Prisportal over elpriser kan give misvisende billede. <a href="https://ekstrabladet.dk/nyheder/samfund/test-prisportal-over-elpriser-kan-give-misvisende-billede/9567355" target="_blank" rel="noreferrer">Læs nyheden</a></p>
+		<hr />
+		<h3>Videncentret Bolius</h3>
+		<p>Elpris.dk vildleder: Finder ikke de billigste elselskaber. <a href="https://www.bolius.dk/elprisdk-vildleder-finder-ikke-de-billigste-elselskaber-98431" target="_blank" rel="noreferrer">Læs nyheden</a></p>
+		<hr />
+		
 	</div>
 	{#if selectedProduct}
 		<div class="calculation col">
+			<h2>Variabel pris &#8800; spotpris</h2>
+			<p>
+				Bemærk at indkøbsprisen/kostprisen i din elaftale med variabel pris som regel er baseret på
+				spotprisen, men tillægges fortjeneste mm. af dit elselskab.<br />
+				Vælg transportselskab og elselskab produkt i menuen øverst for at se totalprisen.
+			</p>
 			<h2>
 				{#if shouldWarn(selectedProduct)}<img
 						src="warning.svg"
@@ -294,6 +307,7 @@
 					/>{/if}
 				Sådan er prisen pr. kWh udregnet
 			</h2>
+			<p>Her ses den udregning som er lavet på baggrund af de indstillinger du har valgt.</p>
 			<table class="scrollable">
 				<tr>
 					<th colspan="2">
