@@ -254,17 +254,14 @@
 		<h1>elspotpris.dk</h1>
 		<p class="lead">Få overblik over spotpriserne på el det næste døgn.</p>
 		<p>
-			Har du en elaftale med variabel pris, er din pris pr. kWh formentlig baseret på spotprisen ved <a
+			På denne side vises elpriserne for elaftaler med variabel pris baseret på spotprisen ved <a
 				href="https://www.nordpoolgroup.com"
 				target="_blank"
 				rel="noreferrer">Nordpool</a
 			>.<br />
-			Prisen for næste dag bliver frigivet omkring kl. 13.00.
-		</p>
-		<p>
-			Vælg om prisen skal vises for DK1 eller DK2, som er henholdvis vest og øst for storebælt. DK1
-			er Jylland og Fyn, mens DK2 er Sjælland. Prisen i grafen kan vises med elafgift,
-			tariffer/transport og moms.<br /> Alle indstillinger bliver husket til næste gang, du besøger siden.
+			Prisen for næste dag bliver frigivet omkring kl. 13.00.<br />
+			Se prisen med elafgift, tariffer/transport, moms alle tillæg inkluderet ved at vælge dit netselskab og elprodukt i menuen ovenfor.
+			Alle dine indstillinger vil blive gemt til næste gang, du besøger siden.
 		</p>
 		<h2>Sammenlign elselskaberne</h2>
 		<p>
@@ -272,7 +269,7 @@
 			Læs i nyhederne nedenfor, hvorfor du ikke skal bruge elpris.dk til at sammenligne elselskaber med variabel pris.
 		</p>
 		<h2>Elspotpris.dk i nyhederne</h2>
-		<p>Et udpluk af relevante nyheder omkring elspotpris.dk, generelt om variable priser og prissammenligning af elselskaber.</p>
+		<p>Et udpluk af relevante nyheder omkring elspotpris.dk, generelt om variable priser, og prissammenligning af elselskaber.</p>
 		<hr />
 		<h3>Jyllandsposten</h3>
 		<p>Statens prisportal over elselskaber er ikke til at stole på, viser test. <a href="https://jyllands-posten.dk/indland/ECE14758058/statens-prisportal-over-elselskaber-er-ikke-til-at-stole-paa-viser-test/" target="_blank"  rel="noreferrer">Læs nyheden</a></p>
