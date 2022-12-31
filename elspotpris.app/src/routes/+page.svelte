@@ -13,7 +13,9 @@
 		graph,
 		transmission,
 		transport,
-		transportNow
+		transportNow,
+		governmentTariffsNow,
+		transmissionTariffsNow
 	} from '../stores.js';
 	import {} from '../data.js';
 	import { products, governmentTariffs, transmissionTariffs } from '../prices.js';
@@ -304,7 +306,7 @@
 					/>{/if}
 				Sådan er prisen pr. kWh udregnet
 			</h2>
-			<p>Her ses den udregning som er lavet på baggrund af de indstillinger du har valgt.</p>
+			<p>Her ses udregningen for nuværende time, lavet på baggrund af de indstillinger du har valgt.</p>
 			<table class="scrollable">
 				<tr>
 					<th colspan="2">
@@ -356,11 +358,12 @@
 						>
 					</tr>
 				{/each}
-				{#if includeElectricityTax}
+				{#if includeElectricityTax && $governmentTariffsNow}
 					<tr>
 						<th colspan="2">Elafgift som betales til staten</th>
 					</tr>
-					{#each governmentTariffs as item}
+
+					{#each $governmentTariffsNow as item}
 						<tr>
 							<td>{item.name}</td>
 							<td class="amount"
@@ -370,11 +373,11 @@
 					{/each}
 				{/if}
 
-				{#if $transmission}
+				{#if $transmission && $transmissionTariffsNow}
 					<tr>
 						<th colspan="2">Transmissionsudgifter som betales til det danske energinet</th>
 					</tr>
-					{#each transmissionTariffs as item}
+					{#each $transmissionTariffsNow as item}
 						<tr>
 							<td>{item.name}</td>
 							<td class="amount"

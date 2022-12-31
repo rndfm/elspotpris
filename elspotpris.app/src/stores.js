@@ -33,6 +33,8 @@ export const prices = writable();
 export const priceNow = writable(0);
 export const transport = writable();
 export const transportNow = writable();
+export const governmentTariffsNow = writable();
+export const transmissionTariffsNow = writable();
 
 export const co2EmissionNow = writable(0);
 export const co2Emissions = writable();

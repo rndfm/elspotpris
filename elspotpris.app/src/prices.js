@@ -1,26 +1,55 @@
 export const governmentTariffs = [
 	{
-		id: 'elafgift',
-		name: 'Elafgift',
-		amount: 0.723
+		id: 'elafgift2022',
+		name: 'Elafgift 2022',
+		amount: 0.723,
+		validFrom: null,
+		validTo: "2023-01-01T00:00:00",
+	},
+	{
+		id: 'elafgift2023',
+		name: 'Elafgift 2023',
+		amount: 0.008,
+		validFrom: "2023-01-01T00:00:00",
+		validTo: "2023-06-01T00:00:00",
 	}
 ];
 
 export const transmissionTariffs = [
 	{
 		id: 'balance',
-		name: 'Balancetarif for forbrug',
-		amount: 0.00229
+		name: 'Balancetarif for forbrug 2022',
+		amount: 0.00229,
+		validFrom: null,
+		validTo: "2023-01-01T00:00:00"
 	},
 	{
 		id: 'systemtarif',
-		name: 'Systemtarif',
-		amount: 0.061
+		name: 'Systemtarif 2022',
+		amount: 0.061,
+		validFrom: null,
+		validTo: "2023-01-01T00:00:00"
 	},
 	{
 		id: 'transmissionsnettarif',
-		name: 'Transmissions nettarif',
-		amount: 0.049
+		name: 'Transmissions nettarif 2022',
+		amount: 0.049,
+		validFrom: null,
+		validTo: "2023-01-01T00:00:00"
+	},
+	{
+		id: 'systemtarif2023',
+		name: 'Systemtarif 2023',
+		amount: 0.054,
+		validFrom: "2023-01-01T00:00:00",
+		validTo: null
+	},
+	{
+		id: 'transmissionsnettarif2023',
+		name: 'Transmissions nettarif 2023',
+		amount: 0.058,
+		validFrom: "2023-01-01T00:00:00",
+		validTo: null
 	}
 ];
 

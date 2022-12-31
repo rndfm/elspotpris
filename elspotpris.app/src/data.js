@@ -15,7 +15,9 @@ import {
 	electricityTax,
 	transmission,
 	transport,
-	transportNow
+	transportNow,
+	governmentTariffsNow,
+	transmissionTariffsNow
 } from './stores.js';
 import { governmentTariffs, transmissionTariffs, products } from './prices';
 import { io } from 'socket.io-client';
@@ -38,15 +40,10 @@ const getActiveTariffs = (datetime) => {
 		return null;
 	}
 
-	var startOfDay = datetime;
-    startOfDay.setHours(0);
-    startOfDay.setMinutes(0);
-    startOfDay.setSeconds(0);
-
 	const activeEntries = selectedTariff.entries.filter(
 		(e) =>
-			(e.validFrom === null || new Date(e.validFrom) <= startOfDay) &&
-			(e.validTo === null || new Date(e.validTo) >= startOfDay)
+			(e.validFrom === null || new Date(e.validFrom) <= datetime) &&
+			(e.validTo === null || new Date(e.validTo) > datetime)
 	);
 
 	let hour = datetime.getHours();
@@ -62,6 +59,16 @@ const getActiveTariffs = (datetime) => {
 	return activeTariffs;
 };
 
+const getActiveGovernmentTariffs = (datetime) => {
+	return governmentTariffs
+		.filter(t => (t.validFrom === null || new Date(t.validFrom) <= datetime) && (t.validTo === null || new Date(t.validTo) > datetime))
+};
+
+const getActiveTransmissionTariffs = (datetime) => {
+	return transmissionTariffs
+		.filter(t => (t.validFrom === null || new Date(t.validFrom) <= datetime) && (t.validTo === null || new Date(t.validTo) > datetime))
+};
+
 const calculateTariffs = (datetime) => {
 	if (datetime == null) {
 		datetime = new Date();
@@ -70,19 +77,22 @@ const calculateTariffs = (datetime) => {
 	let amount = 0;
 
 	if (includeElectricityTax) {
-		amount += governmentTariffs.reduce((previous, current) => {
+		amount += getActiveGovernmentTariffs(datetime)
+		.reduce((previous, current) => {
 			return previous + current.amount;
 		}, 0);
 	}
 
 	if (includeTransmission) {
-		amount += transmissionTariffs.reduce((previous, current) => {
+		amount += getActiveTransmissionTariffs(datetime)
+		.reduce((previous, current) => {
 			return previous + current.amount;
 		}, 0);
 	}
 	const activeTariffs = getActiveTariffs(datetime);
 	if (activeTariffs) {
-		amount += getActiveTariffs(datetime).reduce((previous, current) => {
+		amount += getActiveTariffs(datetime)
+		.reduce((previous, current) => {
 			return previous + current.price;
 		}, 0);
 	}
@@ -175,6 +185,12 @@ const calculatePrices = () => {
 
 			const transportEntry = getActiveTariffs(now);
 			transportNow.set(transportEntry);
+
+			const activeGovernmentTariffs = getActiveGovernmentTariffs(now);
+			governmentTariffsNow.set(activeGovernmentTariffs);
+
+			const activeTransmissionTariffs = getActiveTransmissionTariffs(now);
+			transmissionTariffsNow.set(activeTransmissionTariffs);
 		}
 	}
 };
