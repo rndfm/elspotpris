@@ -19,8 +19,6 @@ export const graphTypes = [
 	}
 ];
 
-export const userCount = writable(0);
-
 let storedPriceRegion = browser ? localStorage.getItem('priceRegion') ?? null : null;
 export const priceRegion = writable(storedPriceRegion);
 priceRegion.subscribe((value) => {

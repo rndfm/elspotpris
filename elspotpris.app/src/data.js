@@ -1,5 +1,4 @@
 import {
-	userCount,
 	priceNow,
 	prices,
 	co2EmissionNow,
@@ -137,22 +136,22 @@ const calculatePrices = () => {
 				.filter((p) => !p.excludeInComparison)
 				.map((p) => {
 					p.calculatedPrices = {
-						prices: priceData.map((o) => [
-							new Date(o.hour),
-							calculateTotalPrice(
-								p,
-								o.prices.filter((p) => p.area == region)[0].price / 1000,
-								new Date(o.hour)
-							)
-						])
+						// prices: priceData.map((o) => [
+						// 	new Date(o.hour),
+						// 	calculateTotalPrice(
+						// 		p,
+						// 		o.prices.filter((p) => p.area == region)[0].price / 1000,
+						// 		new Date(o.hour)
+						// 	)
+						// ])
 					};
-					p.calculatedPrices.average =
-						p.calculatedPrices.prices.reduce((total, next) => total + next[1], 0) /
-						p.calculatedPrices.prices.length;
+					// p.calculatedPrices.average =
+					// 	p.calculatedPrices.prices.reduce((total, next) => total + next[1], 0) /
+					// 	p.calculatedPrices.prices.length;
 
 					const consumptionAmount = selectedConsumption.amount ?? selectedCustomConsumption;
 
-					p.calculatedPrices.usage = p.calculatedPrices.average * consumptionAmount;
+					// p.calculatedPrices.usage = p.calculatedPrices.average * consumptionAmount;
 					p.calculatedPrices.surcharges = calculateProductPrice(p, 0, region) * consumptionAmount;
 
 					p.calculatedPrices.total = p.calculatedPrices.surcharges;
@@ -233,10 +232,6 @@ const updateCo2Emis = () => {
 const environment = process.env.NODE_ENV;
 if (environment == 'development') var socket = io(':3000');
 else var socket = io();
-
-socket.on('users', function (data) {
-	userCount.set(data);
-});
 
 socket.on('region', function (data) {
 	priceRegion.set(data);
