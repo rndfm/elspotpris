@@ -38,10 +38,15 @@ const getActiveTariffs = (datetime) => {
 		return null;
 	}
 
+	var startOfDay = datetime;
+    startOfDay.setHours(0);
+    startOfDay.setMinutes(0);
+    startOfDay.setSeconds(0);
+
 	const activeEntries = selectedTariff.entries.filter(
 		(e) =>
-			(e.validFrom === null || new Date(e.validFrom) < datetime) &&
-			(e.validTo === null || new Date(e.validTo) > datetime)
+			(e.validFrom === null || new Date(e.validFrom) <= startOfDay) &&
+			(e.validTo === null || new Date(e.validTo) >= startOfDay)
 	);
 
 	let hour = datetime.getHours();
