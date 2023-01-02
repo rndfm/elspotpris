@@ -538,8 +538,18 @@ export const products = [
 				amount: 0
 			},
 			{
-				name: 'Omkostning/gebyr pr. regning.'
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			},
+			{
+				name: 'Indbetalingskort',
+				amount: 0
+			},
+			{
+				name: 'Rykkergebyr',
+				amount: 100
 			}
+			
 		]
 	},
 	{
@@ -563,8 +573,18 @@ export const products = [
 				amount: 0
 			},
 			{
-				name: 'Omkostning/gebyr pr. regning.'
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			},
+			{
+				name: 'Indbetalingskort',
+				amount: 0
+			},
+			{
+				name: 'Rykkergebyr',
+				amount: 100
 			}
+			
 		]
 	},
 	{
