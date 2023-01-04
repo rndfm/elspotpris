@@ -63,7 +63,7 @@ async function updateTransport(refresh) {
     today.setMinutes(0);
     today.setSeconds(0);
 
-    if (!company.lastUpdated || company.lastUpdated < today || refresh) {
+    if (!company.lastUpdated || new Date(company.lastUpdated) < today || refresh) {
       energidataservice
         .getPriceEntries(company.gln, company.type)
         .then((data) => {
