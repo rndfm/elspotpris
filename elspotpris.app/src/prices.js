@@ -1137,5 +1137,51 @@ export const products = [
 				conditions: 'Ikke bekræftet'
 			}
 		]
+	},
+	{
+		id: 'go_energi_gospot_energi',
+		name: 'go\'energi go\'spot energi',
+		link: 'https://go-energi.dk/elprodukter/til-private/stroem-til-budgetpris/gospot-energi',
+		payments: 'Acontobetaling kvartalsvis',
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				amount: 0.05
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 15.00,
+				paymentsPerYear: 12
+			}
+		]
+	},
+	{
+		id: 'go_energi_gospot_maaned',
+		name: 'go\'energi go\'spot måned',
+		link: 'https://go-energi.dk/elprodukter/til-private/stroem-til-budgetpris/gospot-maaned',
+		payments: 'Acontobetaling månedligt',
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				amount: 0.05
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 30.00,
+				paymentsPerYear: 12
+			}
+		]
 	}
 ];
