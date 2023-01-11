@@ -1149,15 +1149,29 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.04
 			}
 		],
 		fees: [
 			{
 				name: 'Abonnement',
-				amount: 12.00,
+				amount: 12,
 				paymentsPerYear: 12
+			},
+			{
+				name: 'Rykkergebyr',
+				amount: 100,
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0,
+				paymentsPerYear: 4
+			},
+			{
+				name: 'Betaling med indbetalingskort',
+				amount: 0,
+				paymentsPerYear: 4
 			}
 		]
 	},
@@ -1172,15 +1186,29 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.04
 			}
 		],
 		fees: [
 			{
 				name: 'Abonnement',
-				amount: 24.00,
+				amount: 24,
 				paymentsPerYear: 12
+			},
+			{
+				name: 'Rykkergebyr',
+				amount: 100,
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0,
+				paymentsPerYear: 4
+			},
+			{
+				name: 'Betaling med indbetalingskort',
+				amount: 0,
+				paymentsPerYear: 4
 			}
 		]
 	}
