@@ -1203,12 +1203,12 @@ export const products = [
 			{
 				name: 'Betaling via betalingsservice',
 				amount: 0,
-				paymentsPerYear: 4
+				paymentsPerYear: 12
 			},
 			{
 				name: 'Betaling med indbetalingskort',
 				amount: 0,
-				paymentsPerYear: 4
+				paymentsPerYear: 12
 			}
 		]
 	}
