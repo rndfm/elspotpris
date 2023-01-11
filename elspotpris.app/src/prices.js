@@ -1150,13 +1150,13 @@ export const products = [
 			},
 			{
 				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
-				amount: 0.05
+				amount: 0.04
 			}
 		],
 		fees: [
 			{
 				name: 'Abonnement',
-				amount: 15.00,
+				amount: 12.00,
 				paymentsPerYear: 12
 			}
 		]
@@ -1173,13 +1173,13 @@ export const products = [
 			},
 			{
 				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
-				amount: 0.05
+				amount: 0.04
 			}
 		],
 		fees: [
 			{
 				name: 'Abonnement',
-				amount: 30.00,
+				amount: 24.00,
 				paymentsPerYear: 12
 			}
 		]
