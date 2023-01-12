@@ -288,7 +288,7 @@ export const products = [
 		fees: [
 			{
 				name: 'Abonnement',
-				amount: 0
+				amount: 125,75
 			},
 			{
 				name: 'Omkostning/gebyr pr. regning. ved betaling via netbank.',
