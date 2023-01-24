@@ -120,7 +120,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.0384,
 				calculated: true,
 				conditions: null
@@ -175,7 +175,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.0384,
 				calculated: true,
 				conditions: null
@@ -225,7 +225,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.1,
 				conditions: null
 			}
@@ -253,7 +253,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.15,
 				conditions: null
 			}
@@ -281,7 +281,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.005
 			}
 		],
@@ -312,7 +312,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.012
 			}
 		],
@@ -343,7 +343,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.005
 			}
 		],
@@ -375,7 +375,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.19
 			}
 		],
@@ -407,7 +407,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.0,
 				conditions: 'Prisen udløber ved aftalens afslutning.'
 			}
@@ -439,7 +439,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.03
 			}
 		],
@@ -475,7 +475,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.008
 			}
 		],
@@ -502,7 +502,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.05
 			}
 		],
@@ -528,7 +528,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.1057
 			}
 		],
@@ -563,7 +563,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.2057
 			}
 		],
@@ -598,7 +598,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.03544,
 				calculated: true
 			}
@@ -630,7 +630,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.045,
 				calculated: true
 			}
@@ -661,7 +661,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Spotpris tillæg',
+				name: 'Tillæg til spotpris',
 				amount: 0.048,
 				calculated: true
 			}
@@ -673,7 +673,7 @@ export const products = [
 				paymentsPerYear: 12
 			},
 			{
-				name: 'Betaling - pr. udstedt faktura - kun frem til kunden tilmelder sig NETS-betaling af faktura, herefter bortfalder hele gebyret.',
+				name: 'Betaling - pr. udstedt faktura.',
 				amount: 23.2
 			},
 			{
@@ -696,7 +696,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Spotpris tillæg',
+				name: 'Tillæg til spotpris',
 				amount: 0.136
 			}
 		],
@@ -707,7 +707,7 @@ export const products = [
 				paymentsPerYear: 12
 			},
 			{
-				name: 'Betaling - pr. udstedt faktura - kun frem til kunden tilmelder sig NETS-betaling af faktura, herefter bortfalder hele gebyret.',
+				name: 'Betaling - pr. udstedt faktura.',
 				amount: 39.2
 			},
 			{
@@ -728,7 +728,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.008
 			}
 		],
@@ -755,7 +755,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0
 			}
 		],
@@ -789,7 +789,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Spotpris tillæg',
+				name: 'Tillæg til spotpris',
 				amount: 0.024
 			}
 		],
@@ -825,7 +825,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Spotpris tillæg',
+				name: 'Tillæg til spotpris',
 				amount: 0.15
 			},
 			{
@@ -869,7 +869,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Spotpris tillæg',
+				name: 'Tillæg til spotpris',
 				amount: 0.06
 			}
 		],
@@ -901,11 +901,11 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.0025
 			},
 			{
-				name: 'grønt tiltag',
+				name: 'Grønt tiltag',
 				amount: 0.025
 			}
 		],
@@ -953,7 +953,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.08,
 				calculated: true
 			}
@@ -982,7 +982,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Spotpris tillæg',
+				name: 'Tillæg til spotpris',
 				amount: 0.04
 			},
 			{
@@ -1018,7 +1018,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Spotpris tillæg',
+				name: 'Tillæg til spotpris',
 				amount: 0.04
 			}
 		],
@@ -1041,7 +1041,7 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Fortjeneste, balanceomkostninger, profilomkostninger og handelsomkostninger',
+				name: 'Tillæg til spotpris',
 				amount: 0.161,
 				calculated: true
 			}
@@ -1073,13 +1073,13 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Indkøbsomkostninger Vest (variabel)*',
+				name: 'Tillæg til spotpris - Vest (variabel)*',
 				amount: 0.01319,
 				conditions: "Tillæg ændre sig måned for måned og kendes først 3 måneder efter forbrug.",
 				region: 'DK1'
 			},
 			{
-				name: 'Indkøbsomkostninger Øst (variabel)*',
+				name: 'Tillæg til spotpris - Øst (variabel)*',
 				amount: 0.1056,
 				conditions: "Tillæg ændre sig måned for måned og kendes først 3 måneder efter forbrug.",
 				region: 'DK2'
@@ -1113,13 +1113,13 @@ export const products = [
 				amount: null
 			},
 			{
-				name: 'Indkøbsomkostninger Vest (variabel)*',
+				name: 'Tillæg til spotpris - Vest (variabel)*',
 				amount: 0.01319,
 				conditions: "Tillæg ændre sig måned for måned og kendes først 3 måneder efter forbrug.",
 				region: 'DK1'
 			},
 			{
-				name: 'Indkøbsomkostninger Øst (variabel)*',
+				name: 'Tillæg til spotpris - Øst (variabel)*',
 				amount: 0.1056,
 				conditions: "Tillæg ændre sig måned for måned og kendes først 3 måneder efter forbrug.",
 				region: 'DK2'

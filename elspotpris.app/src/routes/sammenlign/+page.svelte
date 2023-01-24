@@ -2,6 +2,7 @@
 	import { consumptionTypes } from '../../prices.js';
 	import { product, consumption, customConsumption, calculatedProducts } from '../../stores.js';
 	import {} from '../../data.js';
+	import ProductDetails from '../../lib/ProductDetails.svelte';
 
 	let productCalculations;
 	calculatedProducts.subscribe((value) => {
@@ -61,29 +62,32 @@
 		<table>
 			<thead>
 				<tr
-					><td>Produkt</td><td>Afregning</td><td class="right">Spotpris tillæg</td><td class="right"
+					><td>Produkt</td><td class="right hide-small">kWh tillæg</td><td class="right hide-small"
 						>Abonnement & gebyrer</td
-					><td class="right">Årlige omkostninger (eksl. elspotpris)</td></tr
+					><td class="right">Årlige omkostninger<small>(eksl. elspotpris)</small></td></tr
 				>
 			</thead>
 			{#each productCalculations.sort((a, b) => a.calculatedPrices.total - b.calculatedPrices.total) as item}
 				<tr>
 					<td
-						><a href="/" on:click={product.set(item)}
-							>{item.name}{#if shouldWarn(item)}<img
+						><button class="product" on:click={() => (item.open = !item.open)}
+							><span class="chevron" class:open={item.open} />{item.name}{#if shouldWarn(item)}<img
 									class="warning"
 									src="/warning.svg"
 									alt="Advarsel"
 									title="Der er bemærkninger til prisen. Klik for mere info."
 									width="16"
 									height="16"
-								/>{/if}</a
-						></td
+								/>{/if}</button
+						>
+						<div class="collapsable details" class:open={item.open}>
+							<ProductDetails product={item}></ProductDetails>
+						</div>
+						</td
 					>
-					<td>{item.payments}</td>
-					<td class="right">{round(item.calculatedPrices.surcharges)} kr</td>
-					<td class="right">{round(item.calculatedPrices.fees)} kr</td>
-					<td class="right"><strong>{round(item.calculatedPrices.total)} kr</strong></td>
+					<td class="amount hide-small">{round(item.calculatedPrices.surcharges)} kr</td>
+					<td class="amount hide-small">{round(item.calculatedPrices.fees)} kr</td>
+					<td class="amount"><strong>{round(item.calculatedPrices.total)} kr</strong></td>
 				</tr>
 			{/each}
 		</table>
@@ -93,14 +97,79 @@
 <p>Omkostningerne vises årligt for det valgte forbrug. Alle priser vises eksl. moms.</p>
 
 <style lang="scss">
+	.details {
+		max-width: 400px;
+		font-size: 0.8;
+	}
+
+	button.product {
+		all: unset;
+		cursor: pointer;
+		padding: .5em;
+	}
+
+	@media only screen and (max-width: 768px) {
+		.hide-small {
+			display: none;
+		}
+
+		table {
+			font-size: 0.8em;
+		}
+
+		.table-scroll {
+			margin: 0 -1em;
+		}
+
+		.details {
+			font-size: 1em;
+		}
+	}
+
+	.collapsable
+	{
+		display: none;
+		&.open {
+			display: block;
+		}
+	}
+
 	.table-scroll {
 		overflow-x: auto;
+	}
+
+	.chevron::before {
+		border-style: solid;
+		border-width: 0.25em 0.25em 0 0;
+		content: '';
+		display: inline-block;
+		position: relative;
+		
+		vertical-align: top;
+		width: 0.45em;
+		height: 0.45em;
+		
+
+		left: -0.5em;
+		top: 0.25em;
+		transform: rotate(45deg);
+	}
+
+	.chevron.open::before{
+		top: 0.25em;
+		left: -0.4em;
+		transform: rotate(135deg);
 	}
 
 	table {
 		td {
 			img.warning {
 				padding-left: 0.5em;
+			}
+			&.amount {
+				text-align: right;
+				white-space: nowrap;
+				vertical-align: top;
 			}
 		}
 	}

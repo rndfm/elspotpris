@@ -23,7 +23,7 @@
 	<button
 		on:click={() => ($mainMenuClosed = !$mainMenuClosed)}
 		class="tab"
-		aria-label="Åben og luk menu"><span class="chevron up" /></button
+		aria-label="Åben og luk menu"><span class="chevron" /></button
 	>
 	<div>
 		<span class="logo">elspotpris.dk</span>
