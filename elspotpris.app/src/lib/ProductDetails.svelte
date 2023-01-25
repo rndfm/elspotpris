@@ -11,7 +11,7 @@
 <table class="scrollable">
     <tr>
         <th colspan="2">
-            {#if product.link}<a href={product.link}
+            {#if product.link}<a href={product.link} target="_blank" rel="noreferrer"
                     >{product.link}</a
                 >{/if}
         </th>
