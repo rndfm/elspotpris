@@ -745,40 +745,6 @@ export const products = [
 		]
 	},
 	{
-		id: 'watts',
-		name: 'Watts',
-		link: 'https://watts.dk/',
-		payments: 'Acontobetaling månedligt',
-		prices: [
-			{
-				name: 'Spotpris',
-				amount: null
-			},
-			{
-				name: 'Tillæg til spotpris',
-				amount: 0
-			}
-		],
-		fees: [
-			{
-				name: 'Abonnement',
-				amount: 23.2,
-				paymentsPerYear: 12
-			},
-			{
-				name: 'Betaling via betalingskort',
-				amount: 0
-			},
-			{
-				name: 'Betaling via betalingsservice',
-				amount: 5
-			},
-			{
-				name: 'Watts tager ikke nye kunder'
-			}
-		]
-	},
-	{
 		id: 'kernfull',
 		name: 'Kärnfull',
 		link: 'https://dk.karnfull.com/',
