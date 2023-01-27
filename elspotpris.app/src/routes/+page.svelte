@@ -103,12 +103,12 @@
 	</p>
 	<p>
 		Der sammenlignes på <strong>spotpristillæg, abonnementspris og betalingsgebyrer</strong>.<br>
-		Læs mere længere nede på siden om hvorfor det er vigtigt at sammenligne på de reelle udgifter frem for en fiktiv oplyst pris fra elselskabet.
+		Hvorfor det er vigtigt at sammenligne de reelle udgifter i stedet for en oplyst pris fra elselskabet, kan du læse om nederst på siden
 	</p>
 	<div class="box">
 		<div class="flexgrid responsive">
 			<div class="col">
-				<h3>Vælg dit estimerede forbrug</h3>
+				<h4>Vælg dit estimerede forbrug</h4>
 				<span>Ved forbrug pr. år.:</span>
 				<select bind:value={$consumption}>
 					{#each consumptionTypes as item}
@@ -125,7 +125,7 @@
 				{/if}
 			</div>
 			<div class="col">
-				<h3>Filtre</h3>
+				<h4>Filtre</h4>
 				<p>
 					<label for="monthlyPayment"><input id="monthlyPayment" type="checkbox" bind:checked={paymentTypeConsumptionOnly} /> Vis kun forbrugsafregnede</label>
 				</p>
