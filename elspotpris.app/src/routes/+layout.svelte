@@ -15,6 +15,12 @@
 		}
 	});
 
+	if (browser) {
+		setInterval(() => {
+			gtag('event', 'keepalive');
+		}, 240000);
+	}
+
 	const donateLink =
 		'https://products.mobilepay.dk/box/pay-in?id=2263bc16-d568-485c-98bd-b43768a5aa1a&phone=1996KN';
 </script>
@@ -28,8 +34,10 @@
 	<div>
 		<span class="logo">elspotpris.dk</span>
 		<ul>
-			<li><a href="/" on:click={() => (menuActive = false)}>Live</a></li>
-			<li><a href="/sammenlign" on:click={() => (menuActive = false)}>Sammenlign</a></li>
+			<li><a href="/" on:click={() => (menuActive = false)}>Forside</a></li>
+			<li><a href="/live" on:click={() => (menuActive = false)}>Live</a></li>
+			<li><a href="/nyheder" on:click={() => (menuActive = false)}>Nyheder</a></li>
+			<!-- <li><a href="/guide" on:click={() => (menuActive = false)}>Guide</a></li> -->
 			<!-- <li><a href="/automatisering">Automatisering</a></li>
 			<li><a href="/om-elspotpris">Om elspotpris.dk</a></li> -->
 		</ul>
@@ -47,6 +55,7 @@
 </div>
 <main>
 	<slot />
+	
 	<div class="github">
 		<p>
 			{#if $darkMode}<img src="/github-dark.png" alt="github" width="32" height="32" />{:else}<img

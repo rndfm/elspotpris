@@ -1,0 +1,606 @@
+<script>
+	import {
+		priceNow,
+		co2EmissionNow,
+		priceRegion,
+		tax,
+		tariff,
+		product,
+		darkMode,
+		menuClosed,
+		electricityTax,
+		graphTypes,
+		graph,
+		transmission,
+		transport,
+		transportNow,
+		governmentTariffsNow,
+		transmissionTariffsNow
+	} from '../../stores.js';
+	import { taxRate } from '../../data.js';
+	import { products } from '../../prices.js';
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
+
+	let selectedProduct;
+	product.subscribe((value) => {
+		selectedProduct = value;
+	});
+
+	let selectedTariff;
+	let selectedTariffId;
+	let transportTariffs;
+	let sortedProducts = [...products];
+	sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+
+
+	tariff.subscribe((value) => {
+		selectedTariffId = value;
+		if (value && transportTariffs) {
+			selectedTariff = transportTariffs.find((t) => t.id === value);
+		}
+	});
+
+	transport.subscribe((value) => {
+		transportTariffs = value;
+		if (value && selectedTariffId) {
+			selectedTariff = transportTariffs.find((t) => t.id === selectedTariffId);
+		}
+	});
+
+	let withTax;
+	tax.subscribe((value) => {
+		withTax = value;
+	});
+
+	let includeElectricityTax = false;
+	electricityTax.subscribe((value) => {
+		includeElectricityTax = value;
+	});
+
+	let region;
+	priceRegion.subscribe((value) => {
+		region = value;
+	});
+
+	function updateRegion() {
+		priceRegion.set(region);
+	}
+
+	let spotPriceNow;
+
+	priceNow.subscribe((value) => {
+		spotPriceNow = value;
+	});
+
+	let tariffNow;
+	transportNow.subscribe((value) => {
+		tariffNow = value;
+	});
+
+	let emisNow;
+
+	co2EmissionNow.subscribe((value) => {
+		emisNow = value;
+	});
+
+	let visualAreaHeight = 500;
+
+	let priceFormatter = new Intl.NumberFormat('da-DK', {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 5
+	}).format;
+
+	let pricePricisionFormatter = new Intl.NumberFormat('da-DK', {
+		minimumFractionDigits: 5,
+		maximumFractionDigits: 5
+	}).format;
+
+	function taxAndFormat(price) {
+		price = price * (withTax ? taxRate : 1);
+		return pricePricisionFormatter(price);
+	}
+
+	function onResize() {
+		if (browser) {
+			if (document.getElementById('options')) {
+				// find height of meters.
+				const metersHeight = document.getElementById('meters').clientHeight;
+				const offset = 40;
+				var height = window.innerHeight - metersHeight - offset - 30;
+
+				if (height > 500) {
+					height = 500;
+				}
+
+				if (height < 200) {
+					height = 200;
+				}
+				visualAreaHeight = height;
+			}
+		}
+	}
+
+	function shouldWarn(product) {
+		if (!product) {
+			return false;
+		}
+		return (
+			product.prices?.some((p) => p.conditions === null || p.conditions || p.calculated || p.amount === undefined) ||
+			product.fees?.some((f) => f.amount === undefined || f.conditions === null || f.conditions)
+		);
+	}
+
+	menuClosed.subscribe(() => {
+		setTimeout(() => {
+			onResize();
+		}, 500);
+	});
+
+	onMount(() => {
+		onResize();
+	});
+
+	let selectedGraph = graphTypes[0];
+	graph.subscribe((value) => {
+		selectedGraph = value;
+	});
+</script>
+
+<svelte:head>
+	<title>elspotpris.dk - Se din elpris pr. kWh time for time - i dag og det næste døgn frem.</title>
+	<meta
+		name="description"
+		content="Se elprisen inkl. transport tariffer, elafgift og moms i overskuelig graf så du kan planlægge dit strømforbrug. Se også nuværende og prognose for Co2 udledning."
+	/>
+</svelte:head>
+
+<svelte:window on:resize={onResize} />
+
+<div class="flexgrid meters" id="meters">
+	<div class="col">
+		<span>{priceFormatter(spotPriceNow)} <small>kr/kWh</small></span>
+		<p>Spotpris lige nu</p>
+	</div>
+	<div class="col">
+		<span>{emisNow} <small>g/kWh</small></span>
+		<p>CO<sub>2</sub> lige nu</p>
+	</div>
+</div>
+<svelte:component this={selectedGraph.component} height={visualAreaHeight} />
+<nav id="options" class:closed={$menuClosed}>
+	<ul>
+		<li>
+			<label for="priceAreaDK1">
+				<input
+					id="priceAreaDK1"
+					type="radio"
+					bind:group={region}
+					value="DK1"
+					on:change={updateRegion}
+				/> DK1(vest)</label
+			>
+			<label for="priceAreaDK2">
+				<input
+					id="priceAreaDK2"
+					type="radio"
+					bind:group={region}
+					value="DK2"
+					on:change={updateRegion}
+				/> DK2(øst)</label
+			>
+		</li>
+		<li>
+			<label for="electricityTax">
+				<input type="checkbox" id="electricityTax" bind:checked={$electricityTax} /> Elafgift</label
+			>
+		</li>
+		<li>
+			<label for="transmission">
+				<input type="checkbox" id="transmission" bind:checked={$transmission} /> Transmission</label
+			>
+		</li>
+		<li>
+			<label for="tax"><input type="checkbox" id="tax" bind:checked={$tax} /> Moms</label>
+		</li>
+		<li class="full">
+			{#if transportTariffs}
+				<select bind:value={$tariff}>
+					{#each transportTariffs as item}
+						<option value={item.id}>
+							{item.name}
+						</option>
+					{/each}
+				</select>
+			{/if}
+		</li>
+		<li>
+			<p>
+				<a
+					href="https://greenpowerdenmark.dk/vejledning-teknik/nettilslutning/find-netselskab"
+					target="_blank"
+					rel="noreferrer">Find netselskab</a
+				>
+			</p>
+		</li>
+		<li class="full">
+			<select bind:value={$product}>
+				{#each sortedProducts.filter(p => !p.disabled) as product (product.id)}
+					<option value={product}>
+						{product.name}
+					</option>
+				{/each}
+			</select>
+		</li>
+		<li>
+			<p>
+				<a href="/">Sammenlign elselskaber</a>
+			</p>
+		</li>
+		<li>
+			<select bind:value={$graph}>
+				{#each graphTypes as option}
+					<option value={option}>{option.name}</option>
+				{/each}
+			</select>
+		</li>
+		<li>
+			<label for="darkMode"
+				><input type="checkbox" id="darkMode" bind:checked={$darkMode} /> Mørk</label
+			>
+		</li>
+	</ul>
+	<button class="tab" on:click={() => ($menuClosed = !$menuClosed)} aria-label="Åben og luk menu"
+		><span class="chevron up" /></button
+	>
+</nav>
+<div class="flexgrid responsive">
+	<div class="info col">
+		<h1>elspotpris.dk</h1>
+		<p class="lead">Få overblik over spotpriserne på el det næste døgn.</p>
+		<p>
+			På denne side vises elpriserne for elaftaler med variabel pris baseret på spotprisen ved <a
+				href="https://www.nordpoolgroup.com"
+				target="_blank"
+				rel="noreferrer">Nordpool</a
+			>.<br />
+			Prisen for næste dag bliver frigivet omkring kl. 13.00.<br />
+			Se prisen med elafgift, tariffer/transport, moms alle tillæg inkluderet ved at vælge dit netselskab og elprodukt i menuen ovenfor.
+			Alle dine indstillinger vil blive gemt til næste gang, du besøger siden.
+		</p>
+		<h2>Variabel pris &#8800; spotpris</h2>
+		<p>
+			Bemærk at indkøbsprisen/kostprisen i din elaftale med variabel pris som regel er baseret på
+			spotprisen, men tillægges fortjeneste mm. af dit elselskab.<br />
+			Vælg transportselskab og elselskab produkt i menuen øverst for at se totalprisen.
+		</p>
+	</div>
+	{#if selectedProduct}
+		<div class="calculation col">
+			<h2>
+				{#if shouldWarn(selectedProduct)}<img
+						src="warning.svg"
+						width="32"
+						height="32"
+						class="warning"
+						alt="Advarsel"
+						title="Dele af udregningen er ugarranteret eller uden betingelser."
+					/>{/if}
+				Sådan er prisen pr. kWh udregnet
+			</h2>
+			<p>Her ses udregningen for nuværende time, lavet på baggrund af de indstillinger du har valgt.</p>
+			<table class="scrollable">
+				<tr>
+					<th colspan="2">
+						{selectedProduct.name}<br />
+						{#if selectedProduct.link}<a href={selectedProduct.link}
+								><small>{selectedProduct.link}</small></a
+							>{/if}
+					</th>
+				</tr>
+				{#each selectedProduct.prices as item}
+					<tr>
+						<td
+							>{item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}
+							{#if item.calculated}<img
+									class="item-warning"
+									src="warning.svg"
+									alt="Advarsel"
+									title="Prisen er regnet baglæns og er ikke bekræftet af elselskabet."
+									width="16"
+									height="16"
+								/>{/if}
+							{#if item.conditions === null}<img
+									class="item-warning"
+									src="warning.svg"
+									alt="Advarsel"
+									title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel"
+									width="16"
+									height="16"
+								/>{/if}
+							{#if item.conditions}<img
+									class="item-warning"
+									src="warning.svg"
+									alt="Advarsel"
+									title={item.conditions}
+									width="16"
+									height="16"
+								/>{/if}
+							{#if item.amount === undefined}<img
+									class="item-warning"
+									src="warning.svg"
+									alt="Advarsel"
+									title="Denne pris er ukendt"
+									width="16"
+									height="16"
+								/>{/if}
+						</td>
+						<td class="amount"
+							>{#if item.amount != undefined}{taxAndFormat(item.amount)} kr{/if}</td
+						>
+					</tr>
+				{/each}
+				{#if includeElectricityTax && $governmentTariffsNow}
+					<tr>
+						<th colspan="2">Elafgift som betales til staten</th>
+					</tr>
+
+					{#each $governmentTariffsNow as item}
+						<tr>
+							<td>{item.name}</td>
+							<td class="amount"
+								>{#if item.amount != undefined}{taxAndFormat(item.amount)} kr.{/if}</td
+							>
+						</tr>
+					{/each}
+				{/if}
+
+				{#if $transmission && $transmissionTariffsNow}
+					<tr>
+						<th colspan="2">Transmissionsudgifter som betales til det danske energinet</th>
+					</tr>
+					{#each $transmissionTariffsNow as item}
+						<tr>
+							<td>{item.name}</td>
+							<td class="amount"
+								>{#if item.amount != undefined}{taxAndFormat(item.amount)} kr.{/if}</td
+							>
+						</tr>
+					{/each}
+				{/if}
+				{#if selectedTariff}
+					<tr>
+						<th colspan="2"
+							>Transportudgifter som betales til dit lokale netselskab - {selectedTariff.name}</th
+						>
+					</tr>
+					{#if tariffNow}
+						{#each tariffNow as item}
+							<tr>
+								<td
+									>kl. {String(item.start).padStart(2, '0')} - {String(item.end + 1).padStart(
+										2,
+										'0'
+									)}</td
+								>
+								<td class="amount"
+									>{#if item.price != undefined}{taxAndFormat(item.price)} kr.{/if}</td
+								>
+							</tr>
+						{/each}
+					{/if}
+				{/if}
+			</table>
+			{#if selectedProduct.fees && selectedProduct.fees.length > 0}
+				<table>
+					<tr>
+						<th colspan="2"
+							>Ud over prisen pr. kWh er der følgende udgifter ved {selectedProduct.name}</th
+						>
+					</tr>
+					{#each selectedProduct.fees as item}
+						<tr>
+							<td
+								>{item.name}
+								{#if item.conditions === null}<img
+										class="item-warning"
+										src="warning.svg"
+										alt="Advarsel"
+										title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel"
+										width="16"
+										height="16"
+									/>{/if}
+								{#if item.conditions}<img
+									class="item-warning"
+									src="warning.svg"
+									alt="Advarsel"
+									title={item.conditions}
+									width="16"
+									height="16"
+								/>{/if}
+								{#if item.amount === undefined}<img
+										class="item-warning"
+										src="warning.svg"
+										alt="Advarsel"
+										title="Denne pris er ukendt"
+										width="16"
+										height="16"
+									/>{/if}
+								{#if item.paymentsPerYear}<small>({item.paymentsPerYear} betalinger om året)</small
+									>{/if}</td
+							>
+							<td class="amount"
+								>{#if item.amount != undefined}{taxAndFormat(item.amount)} kr{/if}</td
+							>
+						</tr>
+					{/each}
+				</table>
+			{/if}
+
+			<p>
+				Priserne i udregningen vises {#if withTax}inkl{:else}eksl{/if}. moms.<br />Er der fejl i udregningen eller satserne
+				rapporteres dette her:
+				<a
+					href="https://github.com/rndfm/elspotpris/issues/new/choose"
+					target="_blank"
+					rel="noreferrer">github</a
+				>.
+			</p>
+		</div>
+	{/if}
+</div>
+
+<style lang="scss">
+	table {
+		margin-top: 1em;
+		td.amount {
+			text-align: right;
+			white-space: nowrap;
+		}
+		th {
+			padding: 2em 1em 1em 1em;
+			text-align: left;
+		}
+	}
+	nav#options {
+		> ul {
+			display: block;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			transition: max-height 0.15s ease-out;
+			border-radius: 10px;
+
+			@media only screen and (min-width: 768px) {
+				justify-content: center;
+			}
+
+			flex-wrap: wrap;
+
+			> li {
+				padding: 10px 10px 0 10px;
+				display: flex;
+				&.full {
+					width: 100%;
+				}
+				align-items: center;
+
+				@media only screen and (min-width: 1200px) {
+					&.full {
+						width: unset;
+					}
+				}
+
+				> label {
+					margin-right: 10px;
+				}
+
+				> select {
+					margin: 0;
+					width: 100%;
+				}
+			}
+		}
+
+		.tab {
+			display: block;
+			position: relative;
+			border: none;
+			border-bottom-left-radius: 33%;
+			border-bottom-right-radius: 33%;
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+			margin: 0 auto;
+			width: 50px;
+			height: 30px;
+			cursor: pointer;
+
+			.chevron::before {
+				border-style: solid;
+				border-width: 0.25em 0.25em 0 0;
+				content: '';
+				display: inline-block;
+				height: 0.45em;
+				position: relative;
+				top: 0.15em;
+				transform: rotate(-45deg);
+				vertical-align: top;
+				width: 0.45em;
+			}
+		}
+
+		&.closed {
+			ul {
+				max-height: 0px;
+				overflow: hidden;
+			}
+			.tab {
+				top: -10px;
+				.chevron:before {
+					top: 0;
+					transform: rotate(135deg);
+				}
+			}
+		}
+	}
+
+	.flexgrid {
+		display: flex;
+	}
+
+	.flexgrid.responsive {
+		display: block;
+
+		.col {
+			flex: 1;
+		}
+	}
+
+	@media only screen and (min-width: 1200px) {
+		.flexgrid.responsive {
+			display: flex;
+		}
+	}
+
+	.meters {
+		overflow-x: auto;
+		> * {
+			margin: 1em 1em 0 0;
+		}
+
+		span {
+			font-size: 2em;
+			color: #ff3e00;
+		}
+
+		p {
+			padding: 0;
+			margin: 0;
+		}
+
+		@media only screen and (min-width: 1200px) {
+			justify-content: space-around;
+			span {
+				font-size: 2.5em;
+			}
+		}
+	}
+
+	.calculation {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 1em;
+
+		.warning {
+			width: 32px;
+			padding-right: 10px;
+		}
+	}
+
+	.info {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 1em;
+	}
+</style>

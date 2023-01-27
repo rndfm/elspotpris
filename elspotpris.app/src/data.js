@@ -32,7 +32,7 @@ let priceData, transportData, co2EmisData, co2EmisProgData;
 let includeTax = false;
 let includeElectricityTax = false;
 let includeTransmission = false;
-const taxRate = 1.25;
+export const taxRate = 1.25;
 
 const getActiveTariffs = (datetime) => {
 	if (!selectedTariff) {
@@ -99,7 +99,7 @@ const calculateTariffs = (datetime) => {
 };
 
 const calculateProductPrice = (product, spotPrice, region) => {
-	return product.prices.reduce((previous, current) => {
+	return product.prices?.reduce((previous, current) => {
 		if (current.region != null && current.region !== region) return previous;
 
 		if (current.amount === null) return previous + spotPrice;
@@ -135,31 +135,19 @@ const calculatePrices = () => {
 			products
 				.filter((p) => !p.excludeInComparison)
 				.map((p) => {
-					p.calculatedPrices = {
-						// prices: priceData.map((o) => [
-						// 	new Date(o.hour),
-						// 	calculateTotalPrice(
-						// 		p,
-						// 		o.prices.filter((p) => p.area == region)[0].price / 1000,
-						// 		new Date(o.hour)
-						// 	)
-						// ])
-					};
-					// p.calculatedPrices.average =
-					// 	p.calculatedPrices.prices.reduce((total, next) => total + next[1], 0) /
-					// 	p.calculatedPrices.prices.length;
+					p.calculatedPrices = {};
 
 					const consumptionAmount = selectedConsumption.amount ?? selectedCustomConsumption;
 
-					// p.calculatedPrices.usage = p.calculatedPrices.average * consumptionAmount;
-					p.calculatedPrices.surcharges = calculateProductPrice(p, 0, region) * consumptionAmount;
+					p.calculatedPrices.surcharges = (calculateProductPrice(p, 0, region) * consumptionAmount) * (includeTax ? taxRate : 1);
 
 					p.calculatedPrices.total = p.calculatedPrices.surcharges;
-					p.calculatedPrices.fees = p.fees.reduce(
+					p.calculatedPrices.fees = p.fees?.reduce(
 						(total, next) => total + (next.amount || 0) * (next.paymentsPerYear || 0),
 						0
 					);
 					if (!isNaN(p.calculatedPrices.fees)) {
+						p.calculatedPrices.fees = p.calculatedPrices.fees * (includeTax ? taxRate : 1);
 						p.calculatedPrices.total += p.calculatedPrices.fees;
 					}
 					return p;

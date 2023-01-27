@@ -193,21 +193,17 @@ small {
 	font-size: 0.8em;
 }
 
-h1,
-h2 {
+h1 {
 	color: #ff3e00;
 	font-size: 2em;
 	font-weight: 100;
-	margin: 0;
+	margin: 0.25em 1.5em 0 0;
 	padding: 0;
 }
 
 h2 {
 	font-size: 1.5em;
-}
-
-h3 {
-	margin-bottom: -0.5em;
+	font-weight: 100;
 }
 
 @media only screen and (min-width: 1200px) {

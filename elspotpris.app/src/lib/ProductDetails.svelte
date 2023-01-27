@@ -5,7 +5,6 @@
 		minimumFractionDigits: 5,
 		maximumFractionDigits: 5
 	}).format;
-
 </script>
 
 <table class="scrollable">
@@ -16,6 +15,7 @@
                 >{/if}
         </th>
     </tr>
+    {#if product.prices && product.prices.length > 0}
     {#each product.prices.filter(p => p.amount !== null) as item}
         <tr>
             <td
@@ -58,6 +58,7 @@
             >
         </tr>
     {/each}
+    {/if}
     {#if product.fees && product.fees.length > 0}
         {#each product.fees as item}
             <tr>

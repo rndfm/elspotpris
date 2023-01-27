@@ -1,6 +1,6 @@
 <script>
 	import { consumptionTypes } from '../../prices.js';
-	import { product, consumption, customConsumption, calculatedProducts } from '../../stores.js';
+	import { consumption, customConsumption, calculatedProducts } from '../../stores.js';
 	import {} from '../../data.js';
 	import ProductDetails from '../../lib/ProductDetails.svelte';
 

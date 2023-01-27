@@ -206,8 +206,8 @@
 	{#if priceData}
 		<svg width="100%" {height} class="bars">
 			{#if nowPosition}
-				<line x1="{nowPosition}%" y1="0" x2="{nowPosition}%" y2={height} class="now" />
-				<text x="{nowPosition}%" y="12" transform="translate(5,0)" class="text">lige nu</text>
+				<line x1="{nowPosition}%" y1="10" x2="{nowPosition}%" y2={height} class="now" />
+				<!-- <text x="{nowPosition}%" y="12" transform="translate(5,0)" class="text">lige nu</text> -->
 			{/if}
 
 			{#each priceData as price, i}
@@ -324,8 +324,8 @@
 		}
 
 		.now {
-			stroke: #333;
-			stroke-opacity: 0.2;
+			stroke: #ff3e00;
+			stroke-opacity: 0.8;
 		}
 
 		.text {
@@ -346,8 +346,8 @@
 	.dark {
 		.bars {
 			.now {
-				stroke: #ddd;
-				stroke-opacity: 0.2;
+				stroke: #ff3e00;
+				stroke-opacity: 0.8;
 			}
 
 			.text {

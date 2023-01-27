@@ -110,10 +110,23 @@ export const products = [
 		excludeInComparison: true
 	},
 	{
+		id: 'no-spotpris',
+		name: 'Uden spotpris',
+		prices: [
+			{
+				name: 'Uden spotpris',
+				amount: 0
+			}
+		],
+		fees: [],
+		excludeInComparison: true
+	},
+	{
 		id: 'nrgi_bevarmigel',
 		name: 'NRGi - Bevar-Mig-El',
 		link: 'https://nrgi.dk/privat/stroem/produkter/bestil-stroem/bevar-mig-el',
 		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -169,6 +182,7 @@ export const products = [
 		name: 'NRGi - Indkøbspris',
 		link: 'https://nrgi.dk/privat/stroem/produkter/bestil-stroem/indkoebspris-bestil/elpris/',
 		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -219,6 +233,7 @@ export const products = [
 		name: 'nettopower',
 		link: 'https://www.nettopower.dk/',
 		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -247,6 +262,7 @@ export const products = [
 		name: 'Velkommen',
 		link: 'https://velkommen.dk/',
 		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -275,6 +291,7 @@ export const products = [
 		name: 'Vindstød DanskVind',
 		link: 'https://www.vindstoed.dk/',
 		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -306,6 +323,7 @@ export const products = [
 		name: 'Vindstød VEstrøm',
 		link: 'https://www.vindstoed.dk/',
 		payments: 'Forbrugsafregnet kvartalsvis',
+		paymentType: "consumption",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -337,6 +355,7 @@ export const products = [
 		name: 'Vindstød LokalVind',
 		link: 'https://www.vindstoed.dk/',
 		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -369,6 +388,7 @@ export const products = [
 		name: 'Vindstød SpotVind',
 		link: 'https://www.vindstoed.dk/',
 		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -401,6 +421,7 @@ export const products = [
 		name: 'Elforbundet.dk 2022 – Vindstød',
 		link: 'https://www.elforbundet.dk/',
 		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -433,6 +454,7 @@ export const products = [
 		name: 'EWII Grøn Indkøbspris',
 		link: 'https://www.ewii.dk/privat/el/groen-el/groen-indkoebspris/',
 		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -469,6 +491,7 @@ export const products = [
 		name: 'Gasel',
 		link: 'https://www.gasel.dk/',
 		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -496,6 +519,7 @@ export const products = [
 		name: 'AURA FlexEl',
 		link: 'https://www.aura.dk/',
 		payments: 'Acontobetaling månedligt',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -522,6 +546,7 @@ export const products = [
 		name: 'OK El Flex',
 		link: 'https://www.ok.dk/',
 		payments: 'Acontobetaling månedligt',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -557,6 +582,7 @@ export const products = [
 		name: 'Grøn OK El Flex',
 		link: 'https://www.ok.dk/',
 		payments: 'Acontobetaling månedligt',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -592,6 +618,7 @@ export const products = [
 		name: 'Norlys FlexEl',
 		link: 'https://norlys.dk/',
 		payments: 'Acontobetaling månedligt',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -624,6 +651,7 @@ export const products = [
 		name: 'andel energi - Variabel pris',
 		link: 'https://andelenergi.dk/',
 		payments: 'Acontobetaling månedligt',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -655,6 +683,7 @@ export const products = [
 		name: 'GNP Energy - Fordel Plus el',
 		link: 'https://dk.gnp.energy/produkter/fordel-plus/',
 		payments: 'Acontobetaling månedligt',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -690,6 +719,7 @@ export const products = [
 		name: 'SEF Energi A/S - FleksVIND',
 		link: 'https://www.sef.dk/privat/el/fleksvind/',
 		payments: 'Acontobetaling månedligt',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -722,6 +752,7 @@ export const products = [
 		name: 'Clever Power',
 		link: 'https://clever.dk/produkter/clever-power/',
 		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -749,6 +780,7 @@ export const products = [
 		name: 'Kärnfull',
 		link: 'https://dk.karnfull.com/',
 		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -785,6 +817,7 @@ export const products = [
 		name: 'Modstrøm Grundprodukt',
 		link: 'https://www.modstroem.dk/privat/bliv-kunde/',
 		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -829,6 +862,7 @@ export const products = [
 		name: 'Verdo Variabel Timepris',
 		link: 'https://www.verdo.com/dk/elsalg-privat/',
 		payments: 'Acontobetaling 2 måneder',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -861,6 +895,7 @@ export const products = [
 		name: 'Jysk Energi - FDM Strøm',
 		link: 'https://fdm.dk/vi-tilbyder/groen-el-fdm-stroem',
 		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -913,6 +948,7 @@ export const products = [
 		name: 'Ø-Strøm - SpotEL',
 		link: 'https://www.xn---strm-uuae.dk/elprodukter-fra-oe/stroem/spotel/',
 		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -942,6 +978,7 @@ export const products = [
 		name: 'Energi Fyn - SpotEl',
 		link: 'https://www.energifyn.dk/privat/el/spotel/',
 		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -978,6 +1015,7 @@ export const products = [
 		name: 'Jysk Energi - Min Strøm',
 		link: 'https://jyskenergi.dk/el/privat/min-stroem/',
 		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -1001,6 +1039,7 @@ export const products = [
 		name: 'andel energi - TimeEnergi',
 		link: 'https://andelenergi.dk/',
 		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -1033,6 +1072,7 @@ export const products = [
 		name: 'Forsyning Helsingør - Kronborg El',
 		link: 'https://www.fh.dk/el/kronborg-el',
 		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -1073,6 +1113,7 @@ export const products = [
 		name: 'Forsyning Helsingør - Kronborg El+',
 		link: 'https://www.fh.dk/el/kronborg-el',
 		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -1103,5 +1144,159 @@ export const products = [
 				conditions: 'Ikke bekræftet'
 			}
 		]
+	},
+	{
+		id: 'nordisk_energy',
+		name: 'Nordisk Energy',
+		link: 'https://nordiskenergy.dk/',
+		payments: 'Forbrugsafregnet månedsvis',
+		paymentType: "consumption",
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'nef',
+		name: 'nef',
+		link: 'https://nef.dk/elprodukter/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'gronelforsyning',
+		name: 'Grøn El-Forsyning',
+		link: 'https://gronelforsyning.dk/el/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'go-energi',
+		name: 'go\'energi',
+		link: 'https://go-energi.dk/elprodukter/til-private',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'stromlinet',
+		name: 'Strømlinet',
+		link: 'https://stromlinet.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'energi_viborg',
+		name: 'Energi Viborg',
+		link: 'https://www.energiviborg.dk/stroem/bestil-stroem',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'bornholms_energi_og_forsyning',
+		name: 'Bornholms Energi & Forsyning',
+		link: 'https://www.beof.dk/privat/strom/ny-kunde-kob-din-el-af-os/ny-kunde-kob-din-el-her',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'looad',
+		name: 'LOOAD',
+		link: 'https://looad.dk/el-til-hjemmet/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'forsyningen',
+		name: 'Forsyningen',
+		link: 'https://www.forsyningen.dk/Privat/El',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'lokal_energi',
+		name: 'Lokal-Energi',
+		link: 'https://www.lokal-energi.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'forskel',
+		name: 'forskel',
+		link: 'https://forskel.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'natur-energi',
+		name: 'natur-energi',
+		link: 'https://www.natur-energi.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'sk-energi',
+		name: 'sk energi',
+		link: 'https://skenergi.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'gostrom',
+		name: 'GoStrøm',
+		link: 'http://www.gostrom.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'elektron',
+		name: 'elektron',
+		link: 'https://elektron.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'b_energy',
+		name: 'b energy',
+		link: 'https://b.energy/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'energiselskabet_elg',
+		name: 'Energiselskabet ELG',
+		link: 'https://elgpower.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
 	}
 ];

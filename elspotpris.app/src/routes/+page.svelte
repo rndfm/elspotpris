@@ -2,75 +2,33 @@
 	import {
 		priceNow,
 		co2EmissionNow,
-		priceRegion,
-		tax,
-		tariff,
-		product,
-		darkMode,
-		menuClosed,
-		electricityTax,
-		graphTypes,
-		graph,
-		transmission,
-		transport,
 		transportNow,
-		governmentTariffsNow,
-		transmissionTariffsNow
+		consumption, 
+		customConsumption, 
+		calculatedProducts,
+		tax
 	} from '../stores.js';
+	
+	import { consumptionTypes } from '../prices.js';
 	import {} from '../data.js';
-	import { products, governmentTariffs, transmissionTariffs } from '../prices.js';
-	import { onMount } from 'svelte';
-	import { browser } from '$app/environment';
+	import ProductDetails from '../lib/ProductDetails.svelte';
+	import Bars from '../lib/Bars.svelte';
 
-	let selectedProduct;
-	product.subscribe((value) => {
-		selectedProduct = value;
+	let productCalculations;
+	calculatedProducts.subscribe((value) => {
+		if (!value)
+			return;
+
+		productCalculations = value;
+		productCalculations.sort((a, b) => {
+			if (a.calculatedPrices.total === b.calculatedPrices.total) return 0;
+			if (a.calculatedPrices.total === NaN) return 1;
+			if (b.calculatedPrices.total === NaN) return -1;
+			return a.calculatedPrices.total < b.calculatedPrices.total ? -1 : 1;
+		});
 	});
-
-	let selectedTariff;
-	let selectedTariffId;
-	let transportTariffs;
-
-	tariff.subscribe((value) => {
-		selectedTariffId = value;
-		if (value && transportTariffs) {
-			selectedTariff = transportTariffs.find((t) => t.id === value);
-		}
-	});
-
-	transport.subscribe((value) => {
-		transportTariffs = value;
-		if (value && selectedTariffId) {
-			selectedTariff = transportTariffs.find((t) => t.id === selectedTariffId);
-		}
-	});
-
-	let withTax;
-	tax.subscribe((value) => {
-		withTax = value;
-	});
-
-	let includeElectricityTax = false;
-	electricityTax.subscribe((value) => {
-		includeElectricityTax = value;
-	});
-
-	if (browser) {
-		setInterval(() => {
-			gtag('event', 'keepalive');
-		}, 240000);
-	}
-	let region;
-	priceRegion.subscribe((value) => {
-		region = value;
-	});
-
-	function updateRegion() {
-		priceRegion.set(region);
-	}
 
 	let spotPriceNow;
-
 	priceNow.subscribe((value) => {
 		spotPriceNow = value;
 	});
@@ -80,396 +38,173 @@
 		tariffNow = value;
 	});
 
+	let withTax;
+	tax.subscribe((value) => {
+		withTax = value;
+	});
+
 	let emisNow;
 
 	co2EmissionNow.subscribe((value) => {
 		emisNow = value;
 	});
 
-	let visualAreaHeight = 500;
+	function round(amount) {
+		return (Math.round((amount + Number.EPSILON) * 100) / 100).toFixed(2);
+	}
+
+	let paymentTypeConsumptionOnly = false;
 
 	let priceFormatter = new Intl.NumberFormat('da-DK', {
 		minimumFractionDigits: 2,
 		maximumFractionDigits: 5
 	}).format;
 
-	let pricePricisionFormatter = new Intl.NumberFormat('da-DK', {
-		minimumFractionDigits: 5,
-		maximumFractionDigits: 5
-	}).format;
-
-	function onResize() {
-		if (browser) {
-			if (document.getElementById('options')) {
-				// find height of meters.
-				const metersHeight = document.getElementById('meters').clientHeight;
-				const offset = 40;
-				var height = window.innerHeight - metersHeight - offset - 30;
-
-				if (height > 500) {
-					height = 500;
-				}
-
-				if (height < 200) {
-					height = 200;
-				}
-				visualAreaHeight = height;
-			}
-		}
-	}
-
 	function shouldWarn(product) {
-		if (!product) {
+		if (!product)
 			return false;
-		}
+		
+		if (product.prices === null)
+			return true;
+
 		return (
-			product.prices.some((p) => p.conditions === null || p.conditions || p.calculated || p.amount === undefined) ||
-			product.fees.some((f) => f.amount === undefined || f.conditions === null || f.conditions)
+			product.prices.some(
+				(p) => p.conditions === null || p.conditions || p.calculated || p.amount === undefined
+			) || product.fees.some((f) => f.amount === undefined || f.conditions === null || f.conditions)
 		);
 	}
-
-	menuClosed.subscribe(() => {
-		setTimeout(() => {
-			onResize();
-		}, 500);
-	});
-
-	onMount(() => {
-		onResize();
-	});
-
-	let selectedGraph = graphTypes[0];
-	graph.subscribe((value) => {
-		selectedGraph = value;
-	});
 </script>
 
 <svelte:head>
-	<title>elspotpris.dk - Se din elpris pr. kWh time for time - i dag og det næste døgn frem.</title>
+	<title>elspotpris.dk - Find det elselskab der reelt er billigst for dig.</title>
 	<meta
 		name="description"
-		content="Se elprisen inkl. transport tariffer, elafgift og moms i overskuelig graf så du kan planlægge dit strømforbrug. Se også nuværende og prognose for Co2 udledning."
+		content="Sammenlign på de reelle udgifter hos elselskaberne. Se alle spotpristillæg, abonnement, betalingsgebyrer mv."
 	/>
 </svelte:head>
-
-<svelte:window on:resize={onResize} />
-
-<div class="flexgrid meters" id="meters">
-	<div class="col">
-		<span>{priceFormatter(spotPriceNow)} <small>kr/kWh</small></span>
-		<p>Spotpris lige nu</p>
+<div class="content">
+	<h1>elspotpris.dk</h1>
+	<div class="box">
+		<div class="flexgrid meters" id="meters">
+			<div class="col">
+				<span><small>Elprisen lige nu</small> {priceFormatter(spotPriceNow)} <small>kr</small></span>
+			</div>
+			<div class="col">
+				<span><small>CO<sub>2</sub></small> {emisNow} <small>g/kWh</small></span>
+			</div>
+		</div>
+		<Bars height={150} />
+		<a href="/live">Vælg indstillinger og se beregningen</a>
 	</div>
-	<div class="col">
-		<span>{emisNow} <small>g/kWh</small></span>
-		<p>CO<sub>2</sub> lige nu</p>
-	</div>
-</div>
-<svelte:component this={selectedGraph.component} height={visualAreaHeight} />
-<nav id="options" class:closed={$menuClosed}>
-	<ul>
-		<li>
-			<label for="priceAreaDK1">
-				<input
-					id="priceAreaDK1"
-					type="radio"
-					bind:group={region}
-					value="DK1"
-					on:change={updateRegion}
-				/> DK1(vest)</label
-			>
-			<label for="priceAreaDK2">
-				<input
-					id="priceAreaDK2"
-					type="radio"
-					bind:group={region}
-					value="DK2"
-					on:change={updateRegion}
-				/> DK2(øst)</label
-			>
-		</li>
-		<li>
-			<label for="electricityTax">
-				<input type="checkbox" id="electricityTax" bind:checked={$electricityTax} /> Elafgift</label
-			>
-		</li>
-		<li>
-			<label for="transmission">
-				<input type="checkbox" id="transmission" bind:checked={$transmission} /> Transmission</label
-			>
-		</li>
-		<li>
-			<label for="tax"><input type="checkbox" id="tax" bind:checked={$tax} /> Moms</label>
-		</li>
-		<li class="full">
-			{#if transportTariffs}
-				<select bind:value={$tariff}>
-					{#each transportTariffs as item}
-						<option value={item.id}>
+
+	<h2>Find det billigste elselskab for dig.</h2>
+	<p>
+		Herunder kan du se en sammenligning af de reelle udgifter hos de største elselskaber i Danmark.<br>
+	</p>
+	<p>
+		Der sammenlignes kun på <strong>spotpristillæg, abonnementspris og betalingsgebyrer</strong>.
+	</p>
+	<div class="box">
+		<div class="flexgrid responsive">
+			<div class="col">
+				<h3>Vælg dit estimerede forbrug</h3>
+				<span>Ved forbrug pr. år.:</span>
+				<select bind:value={$consumption}>
+					{#each consumptionTypes as item}
+						<option value={item}>
 							{item.name}
 						</option>
 					{/each}
 				</select>
-			{/if}
-		</li>
-		<li>
-			<p>
-				<a
-					href="https://greenpowerdenmark.dk/vejledning-teknik/nettilslutning/find-netselskab"
-					target="_blank"
-					rel="noreferrer">Find netselskab</a
-				>
-			</p>
-		</li>
-		<li class="full">
-			<select bind:value={$product}>
-				{#each products.sort((a, b) => a.name.localeCompare(b.name)) as product}
-					<option value={product}>
-						{product.name}
-					</option>
-				{/each}
-			</select>
-		</li>
-		<li>
-			<p>
-				<a href="/sammenlign">Sammenlign elselskaber</a>
-			</p>
-		</li>
-		<li>
-			<select bind:value={$graph}>
-				{#each graphTypes as option}
-					<option value={option}>{option.name}</option>
-				{/each}
-			</select>
-		</li>
-		<li>
-			<label for="darkMode"
-				><input type="checkbox" id="darkMode" bind:checked={$darkMode} /> Mørk</label
-			>
-		</li>
-	</ul>
-	<button class="tab" on:click={() => ($menuClosed = !$menuClosed)} aria-label="Åben og luk menu"
-		><span class="chevron up" /></button
-	>
-</nav>
-<div class="flexgrid responsive">
-	<div class="info col">
-		<h1>elspotpris.dk</h1>
-		<p class="lead">Få overblik over spotpriserne på el det næste døgn.</p>
-		<p>
-			På denne side vises elpriserne for elaftaler med variabel pris baseret på spotprisen ved <a
-				href="https://www.nordpoolgroup.com"
-				target="_blank"
-				rel="noreferrer">Nordpool</a
-			>.<br />
-			Prisen for næste dag bliver frigivet omkring kl. 13.00.<br />
-			Se prisen med elafgift, tariffer/transport, moms alle tillæg inkluderet ved at vælge dit netselskab og elprodukt i menuen ovenfor.
-			Alle dine indstillinger vil blive gemt til næste gang, du besøger siden.
-		</p>
-		<h2>Sammenlign elselskaberne</h2>
-		<p>
-			Sammenlign produkterne hos elselskaberne på deres reelle pris. <a href="/sammenlign">Klik her</a><br />
-			Læs i nyhederne nedenfor, hvorfor du ikke skal bruge elpris.dk til at sammenligne elselskaber med variabel pris.
-		</p>
-		<h2>Elspotpris.dk i nyhederne</h2>
-		<p>Et udpluk af relevante nyheder omkring elspotpris.dk, generelt om variable priser, og prissammenligning af elselskaber.</p>
-		<hr />
-		<h3>Jyllandsposten</h3>
-		<p>Statens prisportal over elselskaber er ikke til at stole på, viser test. <a href="https://jyllands-posten.dk/indland/ECE14758058/statens-prisportal-over-elselskaber-er-ikke-til-at-stole-paa-viser-test/" target="_blank"  rel="noreferrer">Læs nyheden</a></p>
-		<hr />
-		<h3>Videncentret Bolius</h3>
-		<p>Hvordan finder jeg det billigste elselskab med flex-afregning? <a href="https://www.bolius.dk/hvordan-finder-jeg-det-billigste-elselskab-med-flex-afregning-98432" target="_blank" rel="noreferrer">Læs nyheden</a></p>
-		<hr />
-		<h3>Ekstrabladet</h3>
-		<p>Test: Prisportal over elpriser kan give misvisende billede. <a href="https://ekstrabladet.dk/nyheder/samfund/test-prisportal-over-elpriser-kan-give-misvisende-billede/9567355" target="_blank" rel="noreferrer">Læs nyheden</a></p>
-		<hr />
-		<h3>Videncentret Bolius</h3>
-		<p>Elpris.dk vildleder: Finder ikke de billigste elselskaber. <a href="https://www.bolius.dk/elprisdk-vildleder-finder-ikke-de-billigste-elselskaber-98431" target="_blank" rel="noreferrer">Læs nyheden</a></p>
-		<hr />
-		
+				{#if $consumption.amount === null}
+					<p>
+						<label for="customConsumption">Indtast årligt forbrug (kWh)</label>
+						<input id="customConsumption" type="number" bind:value={$customConsumption} />
+					</p>
+				{/if}
+			</div>
+			<div class="col">
+				<h3>Filtre</h3>
+				<p>
+					<label for="monthlyPayment"><input id="monthlyPayment" type="checkbox" bind:checked={paymentTypeConsumptionOnly} /> Vis kun forbrugsafregnede</label>
+				</p>
+			</div>
+		</div>
 	</div>
-	{#if selectedProduct}
-		<div class="calculation col">
-			<h2>Variabel pris &#8800; spotpris</h2>
-			<p>
-				Bemærk at indkøbsprisen/kostprisen i din elaftale med variabel pris som regel er baseret på
-				spotprisen, men tillægges fortjeneste mm. af dit elselskab.<br />
-				Vælg transportselskab og elselskab produkt i menuen øverst for at se totalprisen.
-			</p>
-			<h2>
-				{#if shouldWarn(selectedProduct)}<img
-						src="warning.svg"
-						width="32"
-						height="32"
-						class="warning"
-						alt="Advarsel"
-						title="Dele af udregningen er ugarranteret eller uden betingelser."
-					/>{/if}
-				Sådan er prisen pr. kWh udregnet
-			</h2>
-			<p>Her ses udregningen for nuværende time, lavet på baggrund af de indstillinger du har valgt.</p>
-			<table class="scrollable">
-				<tr>
-					<th colspan="2">
-						{selectedProduct.name}<br />
-						{#if selectedProduct.link}<a href={selectedProduct.link}
-								><small>{selectedProduct.link}</small></a
-							>{/if}
-					</th>
-				</tr>
-				{#each selectedProduct.prices as item}
-					<tr>
-						<td
-							>{item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}
-							{#if item.calculated}<img
-									class="item-warning"
-									src="warning.svg"
-									alt="Advarsel"
-									title="Prisen er regnet baglæns og er ikke bekræftet af elselskabet."
-									width="16"
-									height="16"
-								/>{/if}
-							{#if item.conditions === null}<img
-									class="item-warning"
-									src="warning.svg"
-									alt="Advarsel"
-									title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel"
-									width="16"
-									height="16"
-								/>{/if}
-							{#if item.conditions}<img
-									class="item-warning"
-									src="warning.svg"
-									alt="Advarsel"
-									title={item.conditions}
-									width="16"
-									height="16"
-								/>{/if}
-							{#if item.amount === undefined}<img
-									class="item-warning"
-									src="warning.svg"
-									alt="Advarsel"
-									title="Denne pris er ukendt"
-									width="16"
-									height="16"
-								/>{/if}
+	{#if productCalculations}
+		<div class="table-scroll">
+			<table>
+				<thead>
+					<tr><td>Produkt</td><td class="right hide-small">kWh tillæg</td><td class="right hide-small">Abonnement & gebyrer</td><td class="right">Årlige omkostninger<br><small>(eksl. elpris)</small></td></tr>
+				</thead>
+				{#each productCalculations.filter(p => !paymentTypeConsumptionOnly || p.paymentType == "consumption") as item}
+					<tr class:disabled={item.disabled}>
+						<td><button class="product" on:click={() => (item.open = !item.open)}
+								><span class="chevron" class:open={item.open} />{item.name} {#if shouldWarn(item)}<img
+										class="warning"
+										src="/warning.svg"
+										alt="Advarsel"
+										title="Der er bemærkninger til prisen. Klik for mere info."
+										width="16"
+										height="16"
+									/>{/if}</button>
+							<div class="collapsable details" class:open={item.open}>
+								<ProductDetails product={item}></ProductDetails>
+							</div>
 						</td>
-						<td class="amount"
-							>{#if item.amount != undefined}{pricePricisionFormatter(item.amount)} kr{/if}</td
-						>
+						{#if item.prices === null}
+						<td class="amount"></td>
+						<td colspan="2" class="amount hide-small"><small>Kan ikke beregnes da {item.name} ikke oplyser deres reelle priser.</small></td>
+						{:else}
+						<td class="amount hide-small">{round(item.calculatedPrices.surcharges)} kr</td>
+						<td class="amount hide-small">{round(item.calculatedPrices.fees)} kr</td>
+						<td class="amount"><strong>{round(item.calculatedPrices.total)} kr</strong></td>
+						{/if}
 					</tr>
 				{/each}
-				{#if includeElectricityTax && $governmentTariffsNow}
-					<tr>
-						<th colspan="2">Elafgift som betales til staten</th>
-					</tr>
-
-					{#each $governmentTariffsNow as item}
-						<tr>
-							<td>{item.name}</td>
-							<td class="amount"
-								>{#if item.amount != undefined}{pricePricisionFormatter(item.amount)} kr.{/if}</td
-							>
-						</tr>
-					{/each}
-				{/if}
-
-				{#if $transmission && $transmissionTariffsNow}
-					<tr>
-						<th colspan="2">Transmissionsudgifter som betales til det danske energinet</th>
-					</tr>
-					{#each $transmissionTariffsNow as item}
-						<tr>
-							<td>{item.name}</td>
-							<td class="amount"
-								>{#if item.amount != undefined}{pricePricisionFormatter(item.amount)} kr.{/if}</td
-							>
-						</tr>
-					{/each}
-				{/if}
-				{#if selectedTariff}
-					<tr>
-						<th colspan="2"
-							>Transportudgifter som betales til dit lokale netselskab - {selectedTariff.name}</th
-						>
-					</tr>
-					{#if tariffNow}
-						{#each tariffNow as item}
-							<tr>
-								<td
-									>kl. {String(item.start).padStart(2, '0')} - {String(item.end + 1).padStart(
-										2,
-										'0'
-									)}</td
-								>
-								<td class="amount"
-									>{#if item.price != undefined}{pricePricisionFormatter(item.price)} kr.{/if}</td
-								>
-							</tr>
-						{/each}
-					{/if}
-				{/if}
 			</table>
-			{#if selectedProduct.fees && selectedProduct.fees.length > 0}
-				<table>
-					<tr>
-						<th colspan="2"
-							>Ud over prisen pr. kWh er der følgende udgifter ved {selectedProduct.name}</th
-						>
-					</tr>
-					{#each selectedProduct.fees as item}
-						<tr>
-							<td
-								>{item.name}
-								{#if item.conditions === null}<img
-										class="item-warning"
-										src="warning.svg"
-										alt="Advarsel"
-										title="Denne pris er uden betingelser fra elselskabet. Elselskabet kan ændre prisen uden varsel"
-										width="16"
-										height="16"
-									/>{/if}
-								{#if item.conditions}<img
-									class="item-warning"
-									src="warning.svg"
-									alt="Advarsel"
-									title={item.conditions}
-									width="16"
-									height="16"
-								/>{/if}
-								{#if item.amount === undefined}<img
-										class="item-warning"
-										src="warning.svg"
-										alt="Advarsel"
-										title="Denne pris er ukendt"
-										width="16"
-										height="16"
-									/>{/if}
-								{#if item.paymentsPerYear}<small>({item.paymentsPerYear} betalinger om året)</small
-									>{/if}</td
-							>
-							<td class="amount"
-								>{#if item.amount != undefined}{pricePricisionFormatter(item.amount)} kr{/if}</td
-							>
-						</tr>
-					{/each}
-				</table>
-			{/if}
-
-			<p>
-				Priserne i udregningen er opgivet ex. moms.<br />Er der fejl i udregningen eller satserne
-				rapporteres dette her:
-				<a
-					href="https://github.com/rndfm/elspotpris/issues/new/choose"
-					target="_blank"
-					rel="noreferrer">github</a
-				>.
-			</p>
 		</div>
 	{/if}
+	
+	<p>Omkostningerne vises årligt for det valgte forbrug. Priser vises {#if withTax}inkl{:else}eksl{/if}. moms.</p>
+	<div class="flexgrid responsive">
+		<div class="col">
+			<h3>Sådan sammenligner du elselskabernes variable priser</h3>
+			<p>En variabel pris består af flere dele, nogle af dele er ens for alle elselskaber, mens andre er forskellige. Der giver derfor kun mening at sammenligne elselskaberne på de dele, som er forskellige.</p>
+			
+			<h4>Dele som er forskellige mellem elselskaberne:</h4>
+			<ul>
+			  <li><strong>Abonnement</strong></li>
+			  <li><strong>Betalingsgebyrer</strong></li>
+			  <li><strong>Tillæg til spotprisen</strong></li>
+			</ul>
+			
+			<h4>Dele som vil være uændret uanset hvilket elselskab du vælger:</h4>
+			<ul>
+			  <li><strong>Spotpris</strong> - Prisen baseres på elbørsen <a href="https://www.nordpoolgroup.com" target="_blank" rel="noreferrer">Nordpool</a>. Prisen varierer time for time, men er ens for alle elselskaber.</li>
+			  <li><strong>Transport</strong> - Transporten betales til dit lokale netselskab, dem som ejer ledningerne i jorden. Transportprisen er derfor ens uanset hvilket elselskab du vælger.</li>
+			  <li><strong>Afgift og transmission</strong> - Betales til staten og er ens uanset elselskab.</li>
+			</ul>
+			
+			<p>
+				Mange elselskaber ønsker ikke at oplyse deres tillæg til spotprisen, og der er intet i lovgivningen der tvinger dem til det.<br>
+				Nogle bruger endda udtryk som "indkøbspris", "kostpris" eller "følger spotprisen" selvom de ligger avance oven på spotprisen.<br>
+			</p>
+			<p>
+				Vi har derfor samlet denne liste, hvor vi har tillæggene til spotprisen, så elselskaberne kan sammenlignes på deres reelle priser.
+			</p>		
+		</div>
+	</div>
 </div>
 
 <style lang="scss">
 	table {
+		tr.disabled {
+			opacity: 0.5;
+			td {
+				padding: 0.2em 1em;
+			}
+		} 
 		margin-top: 1em;
 		td.amount {
 			text-align: right;
@@ -480,98 +215,18 @@
 			text-align: left;
 		}
 	}
-	nav#options {
-		> ul {
-			display: block;
-			list-style: none;
-			margin: 0;
-			padding: 0;
-			display: flex;
-			transition: max-height 0.15s ease-out;
-			border-radius: 10px;
-
-			@media only screen and (min-width: 768px) {
-				justify-content: center;
-			}
-
-			flex-wrap: wrap;
-
-			> li {
-				padding: 10px 10px 0 10px;
-				display: flex;
-				&.full {
-					width: 100%;
-				}
-				align-items: center;
-
-				@media only screen and (min-width: 1200px) {
-					&.full {
-						width: unset;
-					}
-				}
-
-				> label {
-					margin-right: 10px;
-				}
-
-				> select {
-					margin: 0;
-					width: 100%;
-				}
-			}
-		}
-
-		.tab {
-			display: block;
-			position: relative;
-			border: none;
-			border-bottom-left-radius: 33%;
-			border-bottom-right-radius: 33%;
-			border-top-left-radius: 0;
-			border-top-right-radius: 0;
-			margin: 0 auto;
-			width: 50px;
-			height: 30px;
-			cursor: pointer;
-
-			.chevron::before {
-				border-style: solid;
-				border-width: 0.25em 0.25em 0 0;
-				content: '';
-				display: inline-block;
-				height: 0.45em;
-				position: relative;
-				top: 0.15em;
-				transform: rotate(-45deg);
-				vertical-align: top;
-				width: 0.45em;
-			}
-		}
-
-		&.closed {
-			ul {
-				max-height: 0px;
-				overflow: hidden;
-			}
-			.tab {
-				top: -10px;
-				.chevron:before {
-					top: 0;
-					transform: rotate(135deg);
-				}
-			}
-		}
-	}
 
 	.flexgrid {
 		display: flex;
-	}
+	
+		&.responsive {
+			display: block;
+			margin: 0 -1em;
 
-	.flexgrid.responsive {
-		display: block;
-
-		.col {
-			flex: 1;
+			.col {
+				flex: 1;
+				padding: 0 1em;
+			}
 		}
 	}
 
@@ -583,13 +238,13 @@
 
 	.meters {
 		overflow-x: auto;
+
 		> * {
-			margin: 1em 1em 0 0;
+			margin: 0em 1em 0 0;
 		}
 
 		span {
-			font-size: 2em;
-			color: #ff3e00;
+			font-size: 1em;
 		}
 
 		p {
@@ -600,7 +255,7 @@
 		@media only screen and (min-width: 1200px) {
 			justify-content: space-around;
 			span {
-				font-size: 2.5em;
+				font-size: 1.5em;
 			}
 		}
 	}
@@ -614,18 +269,93 @@
 			width: 32px;
 			padding-right: 10px;
 		}
-		ul {
-			text-align: left;
-			.item-warning {
-				width: 16px;
-				padding-left: 0.5em;
-			}
+	}
+
+	div.content {
+		margin: 0 auto;
+		max-width: 1400px;
+	}
+
+	div.box {
+		margin: 1em 0;
+		border: #eee 1px solid;
+		padding: 1em;
+	}
+
+	.collapsable
+	{
+		display: none;
+		&.open {
+			display: block;
 		}
 	}
 
-	.info {
-		max-width: 800px;
-		margin: 0 auto;
-		padding: 0 1em;
+	.details {
+		max-width: 400px;
+		font-size: 0.8;
+	}
+
+	button.product {
+		all: unset;
+		cursor: pointer;
+		padding: .5em;
+	}
+
+	.table-scroll {
+		overflow-x: auto;
+	}
+
+	.chevron::before {
+		border-style: solid;
+		border-width: 0.25em 0.25em 0 0;
+		content: '';
+		display: inline-block;
+		position: relative;
+		
+		vertical-align: top;
+		width: 0.45em;
+		height: 0.45em;
+		
+
+		left: -0.5em;
+		top: 0.25em;
+		transform: rotate(45deg);
+	}
+
+	.chevron.open::before{
+		top: 0.25em;
+		left: -0.4em;
+		transform: rotate(135deg);
+	}
+
+	@media only screen and (max-width: 768px) {
+		.hide-small {
+			display: none;
+		}
+
+		table {
+			font-size: 0.8em;
+		}
+
+		.table-scroll {
+			margin: 0 -1em;
+		}
+
+		.details {
+			font-size: 1em;
+		}
+	}
+
+	table {
+		td {
+			img.warning {
+				padding-left: 0.5em;
+			}
+			&.amount {
+				text-align: right;
+				white-space: nowrap;
+				vertical-align: top;
+			}
+		}
 	}
 </style>
