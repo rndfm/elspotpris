@@ -1,10 +1,25 @@
 <script>
+    import {
+		tax
+	} from '../stores.js';
+    import { taxRate } from '../data.js';
+
     export let product;
+
+    let withTax;
+	tax.subscribe((value) => {
+		withTax = value;
+	});
 
     let pricePricisionFormatter = new Intl.NumberFormat('da-DK', {
 		minimumFractionDigits: 5,
 		maximumFractionDigits: 5
 	}).format;
+
+    function taxAndFormat(price) {
+		price = price * (withTax ? taxRate : 1);
+		return pricePricisionFormatter(price);
+	}
 </script>
 
 <table class="scrollable">
@@ -54,7 +69,7 @@
                     />{/if}
             </td>
             <td class="amount"
-                >{#if item.amount != undefined}{pricePricisionFormatter(item.amount)} kr{/if}</td
+                >{#if item.amount != undefined}{taxAndFormat(item.amount)} kr{/if}</td
             >
         </tr>
     {/each}
@@ -92,7 +107,7 @@
                         ></div>{/if}</td
                 >
                 <td class="amount"
-                    >{#if item.amount != undefined}{pricePricisionFormatter(item.amount)} kr{/if}</td
+                    >{#if item.amount != undefined}{taxAndFormat(item.amount)} kr{/if}</td
                 >
             </tr>
         {/each}
