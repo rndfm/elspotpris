@@ -1298,5 +1298,14 @@ export const products = [
 		prices: null,
 		fees: null,
 		disabled: true
+	},
+	{
+		id: 'samstrom',
+		name: 'Samstrøm',
+		link: 'https://samstrom.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
 	}
 ];
