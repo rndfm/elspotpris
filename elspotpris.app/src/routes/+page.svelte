@@ -98,11 +98,12 @@
 	</div>
 
 	<h2>Find det billigste elselskab for dig.</h2>
-	<p>
-		Herunder kan du se en sammenligning af de reelle udgifter hos de største elselskaber i Danmark.<br>
+	<p class="lead">
+		Sammenligning de reelle udgifter hos de største elselskaber i Danmark.<br>
 	</p>
 	<p>
-		Der sammenlignes kun på <strong>spotpristillæg, abonnementspris og betalingsgebyrer</strong>.
+		Der sammenlignes på <strong>spotpristillæg, abonnementspris og betalingsgebyrer</strong>.<br>
+		Læs mere længere nede på siden om hvorfor det er vigtigt at sammenligne på de reelle udgifter frem for en fiktiv oplyst pris fra elselskabet.
 	</p>
 	<div class="box">
 		<div class="flexgrid responsive">
@@ -274,12 +275,6 @@
 	div.content {
 		margin: 0 auto;
 		max-width: 1400px;
-	}
-
-	div.box {
-		margin: 1em 0;
-		border: #eee 1px solid;
-		padding: 1em;
 	}
 
 	.collapsable

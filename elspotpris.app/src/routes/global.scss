@@ -46,10 +46,10 @@ body {
 		border-spacing: 0;
 		width: 100%;
 		tr {
-			background-color: #efefef;
+			background-color: #f5f5f5;
 		}
 		tr:nth-child(even) {
-			background: #e0e0e0;
+			background: #efefef;
 		}
 
 		thead {
@@ -222,4 +222,16 @@ p.lead {
 .scrollable {
 	overflow-x: auto;
 	overflow-y: hidden;
+}
+
+div.box {
+	margin: 1em 0;
+	border: #eee 1px solid;
+	padding: 1em;
+	background-color: #f9f9f9;
+}
+
+body.dark div.box {
+	border: #333 1px solid;
+	background-color: #1f1f1f;
 }
