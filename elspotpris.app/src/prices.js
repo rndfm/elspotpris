@@ -517,7 +517,7 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.008
+				amount: 0.01
 			}
 		],
 		fees: [
