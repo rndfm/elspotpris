@@ -1333,5 +1333,23 @@ export const products = [
 		prices: null,
 		fees: null,
 		disabled: true
+	},
+	{
+		id: 'grow_energy',
+		name: 'Gorw Energy',
+		link: 'https://growenergy.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'samstrom',
+		name: 'samstrøm',
+		link: 'https://samstrom.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
 	}
 ];
