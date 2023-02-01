@@ -65,8 +65,7 @@
 					height="32"
 				/>{/if}Hjælp med at forbedre elspotpris.dk
 			<a href="https://github.com/rndfm/elspotpris" target="_blank" rel="noreferrer"
-				>https://github.com/rndfm/elspotpris</a
-			>
+				>https://github.com/rndfm/elspotpris</a>
 		</p>
 		<p>
 			Denne side og beregningerne vedligeholdes af frivillige individer. Siden er ikke sponsoreret.
@@ -75,21 +74,18 @@
 			elspotpris.dk bliver udviklet og driftet i min fritid. Hvis elspotpris.dk er brugbar for dig,
 			så overvej at støtte driften og den videre udvikling.<br />
 			-
-			<a
-				href="https://www.linkedin.com/in/christian-reinholdt-76712b45/"
+			<a href="https://www.linkedin.com/in/christian-reinholdt-76712b45/"
 				target="_blank"
-				rel="noreferrer">Christian Reinholdt</a
-			>
+				rel="noreferrer">Christian Reinholdt</a>
 		</p>
-		<a href={donateLink} target="_blank" rel="noreferrer"
-			><img
+		<a href={donateLink} target="_blank" rel="noreferrer">
+			<img
 				src="/donate/donate-mobilepay.png"
 				style="max-width: 100%; height: auto; width: auto;"
 				alt="Støt elspotpris.dk med mobilepay"
 				width="510"
-				height="120"
-			/></a
-		>
+				height="120"/>
+		</a>
 	</div>
 </main>
 

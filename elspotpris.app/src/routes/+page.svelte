@@ -71,6 +71,20 @@
 			) || product.fees.some((f) => f.amount === undefined || f.conditions === null || f.conditions)
 		);
 	}
+
+	const donateLink =
+		'https://products.mobilepay.dk/box/pay-in?id=2263bc16-d568-485c-98bd-b43768a5aa1a&phone=1996KN';
+
+	let donateModalActive = false;
+
+	function goToProduct(link)
+	{
+		donateModalActive = true;
+		setTimeout(() => {
+			window.open(link, '_blank');
+		}, 2500);
+		
+	}
 </script>
 
 <svelte:head>
@@ -194,14 +208,13 @@
 								Abonnement og gebyrer: {round(item.calculatedPrices.fees)} kr
 							</small>
 							
-							{#if item.link}<a class="cta" href={item.link} target="_blank" rel="noreferrer">Gå til produktet</a>{/if}
+							{#if item.link}<a class="cta" href={item.link} target="_blank" rel="noreferrer" on:click|preventDefault={goToProduct(item.link)}>Gå til produktet</a>{/if}
 						{/if}
 					</div>
 				</div>
 			</div>
 		{/each}
 	{/if}
-
 	<p>
 		Omkostningerne vises årligt for det valgte forbrug. Priser vises {#if withTax}inkl{:else}eksl{/if}.
 		moms.<br>
@@ -252,8 +265,69 @@
 		</div>
 	</div>
 </div>
+<div class="modal" class:active={donateModalActive} on:click|self={() => donateModalActive = false} on:keydown|self={() => donateModalActive = false}>
+	<div class="modal-content">
+		<span class="close" on:click={() => donateModalActive = false} on:keydown={() => donateModalActive = false}>&times;</span>
+		<p class="lead">Linket åbnes i en ny fane/vindue</p>
+		<p>
+			elspotpris.dk bliver udviklet og driftet i min fritid. Hvis elspotpris.dk er brugbar for dig,
+			så overvej at støtte driften og den videre udvikling.<br />
+			-
+			<a href="https://www.linkedin.com/in/christian-reinholdt-76712b45/"
+				target="_blank"
+				rel="noreferrer">Christian Reinholdt</a>
+		</p>
+		<a href={donateLink} target="_blank" rel="noreferrer">
+			<img
+				src="/donate/donate-mobilepay.png"
+				style="max-width: 100%; height: auto; width: auto;"
+				alt="Støt elspotpris.dk med mobilepay"
+				width="510"
+				height="120"/>
+		</a>
+	  </div>
+</div>
 
 <style lang="scss">
+
+	.modal {
+		display: none;
+		position: fixed;
+		z-index: 9999;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgb(0,0,0);
+		background-color: rgba(0,0,0,0.4);
+
+		&.active {
+			display: block;
+		}
+
+		.modal-content {
+			background-color: #fefefe;
+			margin: 15% auto;
+			max-width: 500px;
+			padding: 20px;
+			border: 1px solid #888;
+			.close {
+				color: #aaa;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+			}
+			
+			.close:hover,
+			.close:focus {
+				color: black;
+				text-decoration: none;
+				cursor: pointer;
+			}
+		}
+	}
+
 	table {
 		tr.disabled {
 			opacity: 0.5;
