@@ -920,22 +920,6 @@ export const products = [
 				name: 'Betalingsservice pr. regning',
 				paymentsPerYear: 4,
 				amount: 6
-			},
-			{
-				name: 'Gebyr ved kundens skift af leverandør i bindingsperiode',
-				amount: 400
-			},
-			{
-				name: 'Ekstra opgørelse / flytteopgørelse',
-				amount: 80
-			},
-			{
-				name: 'Kopi af faktura (e-mail)',
-				amount: 0
-			},
-			{
-				name: 'Rykkergebyr',
-				amount: 100
 			}
 		]
 	},
@@ -1031,6 +1015,11 @@ export const products = [
 				name: 'Abonnement',
 				amount: 12,
 				paymentsPerYear: 12
+			},
+			{
+				name: 'Betalingsservice pr. regning',
+				paymentsPerYear: 4,
+				amount: 6
 			}
 		]
 	},
