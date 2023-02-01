@@ -127,6 +127,7 @@ export const products = [
 		link: 'https://nrgi.dk/privat/stroem/produkter/bestil-stroem/bevar-mig-el',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
+		bindingPeriod: "6 mdr. binding",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -183,6 +184,7 @@ export const products = [
 		link: 'https://nrgi.dk/privat/stroem/produkter/bestil-stroem/indkoebspris-bestil/elpris/',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
+		bindingPeriod: "6 mdr. binding",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -234,6 +236,7 @@ export const products = [
 		link: 'https://www.nettopower.dk/',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -242,7 +245,6 @@ export const products = [
 			{
 				name: 'Tillæg til spotpris',
 				amount: 0.1,
-				conditions: null
 			}
 		],
 		fees: [
@@ -263,6 +265,7 @@ export const products = [
 		link: 'https://velkommen.dk/',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
+		bindingPeriod: "6 mdr. binding",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -271,7 +274,6 @@ export const products = [
 			{
 				name: 'Tillæg til spotpris',
 				amount: 0.15,
-				conditions: null
 			}
 		],
 		fees: [
@@ -293,6 +295,7 @@ export const products = [
 		logo: 'logo/vindstod.png',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -324,8 +327,10 @@ export const products = [
 		name: 'Vindstød VEstrøm',
 		link: 'https://www.vindstoed.dk/',
 		logo: 'logo/vindstod.png',
+		discountAgreement: true,
 		payments: 'Forbrugsafregnet kvartalsvis',
 		paymentType: "consumption",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -359,6 +364,7 @@ export const products = [
 		logo: 'logo/vindstod.png',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -393,6 +399,7 @@ export const products = [
 		logo: 'logo/vindstod.png',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -400,7 +407,7 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.19
+				amount: 0.152
 			}
 		],
 		fees: [
@@ -425,8 +432,10 @@ export const products = [
 		name: 'Elforbundet.dk 2022 – Vindstød',
 		link: 'https://www.elforbundet.dk/',
 		logo: 'logo/vindstod.png',
+		discountAgreement: true,
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -461,6 +470,7 @@ export const products = [
 		logo: 'logo/ewii.png',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -499,6 +509,7 @@ export const products = [
 		logo: '/logo/gasel.png',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
+		bindingPeriod: "6 mdr. binding",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -527,6 +538,7 @@ export const products = [
 		link: 'https://www.aura.dk/',
 		payments: 'Acontobetaling månedligt',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -554,6 +566,7 @@ export const products = [
 		link: 'https://www.ok.dk/',
 		payments: 'Acontobetaling månedligt',
 		paymentType: "advance",
+		bindingPeriod: "6 mdr. binding",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -590,6 +603,7 @@ export const products = [
 		link: 'https://www.ok.dk/',
 		payments: 'Acontobetaling månedligt',
 		paymentType: "advance",
+		bindingPeriod: "6 mdr. binding",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -626,6 +640,7 @@ export const products = [
 		link: 'https://norlys.dk/',
 		payments: 'Acontobetaling månedligt',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -659,6 +674,7 @@ export const products = [
 		link: 'https://andelenergi.dk/',
 		payments: 'Acontobetaling månedligt',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -686,47 +702,12 @@ export const products = [
 		]
 	},
 	{
-		id: 'gnp_energy_fordel_plus_el',
-		name: 'GNP Energy - Fordel Plus el',
-		link: 'https://dk.gnp.energy/produkter/fordel-plus/',
-		payments: 'Acontobetaling månedligt',
-		paymentType: "advance",
-		prices: [
-			{
-				name: 'Spotpris',
-				amount: null
-			},
-			{
-				name: 'Tillæg til spotpris',
-				amount: 0.048,
-				calculated: true
-			}
-		],
-		fees: [
-			{
-				name: 'Abonnement',
-				amount: 20,
-				paymentsPerYear: 12
-			},
-			{
-				name: 'Betaling - pr. udstedt faktura.',
-				amount: 23.2
-			},
-			{
-				name: 'Betaling via betalingsservice',
-				amount: 0
-			},
-			{
-				name: 'Binding i 6 måneder!'
-			}
-		]
-	},
-	{
 		id: 'sef_energi_as_fleksvind',
 		name: 'SEF Energi A/S - FleksVIND',
 		link: 'https://www.sef.dk/privat/el/fleksvind/',
 		payments: 'Acontobetaling månedligt',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -761,6 +742,7 @@ export const products = [
 		logo: '/logo/clever.png',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -789,6 +771,7 @@ export const products = [
 		link: 'https://dk.karnfull.com/',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -826,6 +809,7 @@ export const products = [
 		link: 'https://www.modstroem.dk/privat/bliv-kunde/',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
+		bindingPeriod: "6 mdr. binding",
 		prices: [
 			{
 				name: 'Spotpris',
@@ -871,6 +855,7 @@ export const products = [
 		link: 'https://www.verdo.com/dk/elsalg-privat/',
 		payments: 'Acontobetaling 2 måneder',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -905,6 +890,8 @@ export const products = [
 		logo: '/logo/jysk-energi.png',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
+		bindingPeriod: null,
+		discountAgreement: true,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -958,6 +945,7 @@ export const products = [
 		link: 'https://www.xn---strm-uuae.dk/elprodukter-fra-oe/stroem/spotel/',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -988,6 +976,7 @@ export const products = [
 		link: 'https://www.energifyn.dk/privat/el/spotel/',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -1026,6 +1015,7 @@ export const products = [
 		logo: '/logo/jysk-energi.png',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -1050,6 +1040,7 @@ export const products = [
 		link: 'https://andelenergi.dk/',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -1083,6 +1074,7 @@ export const products = [
 		link: 'https://www.fh.dk/el/kronborg-el',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -1124,6 +1116,7 @@ export const products = [
 		link: 'https://www.fh.dk/el/kronborg-el',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -1161,6 +1154,7 @@ export const products = [
 		link: 'https://www.beof.dk/privat',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -1191,6 +1185,7 @@ export const products = [
 		paymentType: "consumption",
 		prices: null,
 		fees: null,
+		bindingPeriod: "6 mdr. binding",
 		disabled: true
 	},
 	{
@@ -1336,8 +1331,7 @@ export const products = [
 		prices: null,
 		fees: null,
 		disabled: true
-	}
-	,
+	},
 	{
 		id: 'den_glade_eltavle',
 		name: 'Den Glade Eltavle',
@@ -1346,5 +1340,23 @@ export const products = [
 		prices: null,
 		fees: null,
 		disabled: true
-	}
+	},
+	{
+		id: 'energidrift',
+		name: 'Energidrift',
+		link: 'https://energidrift.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'gnp_energy',
+		name: 'GNP Energy',
+		link: 'https://dk.gnp.energy/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
 ];

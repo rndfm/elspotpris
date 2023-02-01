@@ -23,13 +23,6 @@
 </script>
 
 <table class="scrollable">
-    <tr>
-        <th colspan="2">
-            {#if product.link}<a href={product.link} target="_blank" rel="noreferrer"
-                    >{product.link}</a
-                >{/if}
-        </th>
-    </tr>
     {#if product.prices && product.prices.length > 0}
     {#each product.prices.filter(p => p.amount !== null) as item}
         <tr>
@@ -103,9 +96,8 @@
                             width="16"
                             height="16"
                         />{/if}
-                    {#if item.paymentsPerYear}<div><small>({item.paymentsPerYear} betalinger om året)</small
-                        ></div>{/if}</td
-                >
+                    {#if item.paymentsPerYear}<div><small>({item.paymentsPerYear} betalinger om året)</small></div>{/if}
+                </td>
                 <td class="amount"
                     >{#if item.amount != undefined}{taxAndFormat(item.amount)} kr{/if}</td
                 >
@@ -114,13 +106,13 @@
     {/if}
     <tr>
         <td>Afregning</td>
-        <td>{product.payments}</td>
+        <td class="amount">{product.payments}</td>
     </tr>
 </table>
 
 <style lang="scss">
     table {
-        border: 1px #333 solid;
+        border-radius: 1em;
 		td.amount {
 			text-align: right;
 			white-space: nowrap;
