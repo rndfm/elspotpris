@@ -159,22 +159,6 @@ export const products = [
 				name: 'Betalingsservice pr. regning',
 				amount: 6.4,
 				paymentsPerYear: 12
-			},
-			{
-				name: 'Gebyr ved kundens skift af leverandør i bindingsperiode',
-				amount: 400
-			},
-			{
-				name: 'Ekstra opgørelse / flytteopgørelse',
-				amount: 65
-			},
-			{
-				name: 'Kopi af faktura',
-				amount: 35
-			},
-			{
-				name: 'Rykkergebyr',
-				amount: 100
 			}
 		]
 	},
@@ -211,22 +195,6 @@ export const products = [
 				name: 'Betalingsservice pr. regning',
 				amount: 6.4,
 				paymentsPerYear: 12
-			},
-			{
-				name: 'Gebyr ved kundens skift af leverandør i bindingsperiode',
-				amount: 400
-			},
-			{
-				name: 'Ekstra opgørelse / flytteopgørelse',
-				amount: 65
-			},
-			{
-				name: 'Kopi af faktura',
-				amount: 35
-			},
-			{
-				name: 'Rykkergebyr',
-				amount: 100
 			}
 		]
 	},
@@ -1348,4 +1316,22 @@ export const products = [
 		fees: null,
 		disabled: true
 	},
+	{
+		id: 'preasy',
+		name: 'PREASY',
+		link: 'https://preasy.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'stromtid',
+		name: 'strømtid',
+		link: 'https://stromtid.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	}
 ];
