@@ -1335,7 +1335,7 @@ export const products = [
 	},
 	{
 		id: 'grow_energy',
-		name: 'Gorw Energy',
+		name: 'Grow Energy',
 		link: 'https://growenergy.dk/',
 		payments: 'Ikke oplyst',
 		prices: null,
