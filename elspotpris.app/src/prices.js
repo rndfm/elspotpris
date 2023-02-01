@@ -1179,8 +1179,7 @@ export const products = [
 			},
 			{
 				name: 'Betaling via betalingsservice',
-				amount: 0,
-				conditions: 'Ikke bekræftet'
+				amount: 0
 			}
 		]
 	},
