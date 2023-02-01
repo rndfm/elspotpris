@@ -290,6 +290,7 @@ export const products = [
 		id: 'vindstoed_danskvind',
 		name: 'Vindstød DanskVind',
 		link: 'https://www.vindstoed.dk/',
+		logo: 'logo/vindstod.png',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
 		prices: [
@@ -322,6 +323,7 @@ export const products = [
 		id: 'vindstoed_vestroem',
 		name: 'Vindstød VEstrøm',
 		link: 'https://www.vindstoed.dk/',
+		logo: 'logo/vindstod.png',
 		payments: 'Forbrugsafregnet kvartalsvis',
 		paymentType: "consumption",
 		prices: [
@@ -354,6 +356,7 @@ export const products = [
 		id: 'vindstoed_lokalvind',
 		name: 'Vindstød LokalVind',
 		link: 'https://www.vindstoed.dk/',
+		logo: 'logo/vindstod.png',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
 		prices: [
@@ -387,6 +390,7 @@ export const products = [
 		id: 'vindstoed_spotvind',
 		name: 'Vindstød SpotVind',
 		link: 'https://www.vindstoed.dk/',
+		logo: 'logo/vindstod.png',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
 		prices: [
@@ -420,6 +424,7 @@ export const products = [
 		id: 'vindstoed_elforbundet',
 		name: 'Elforbundet.dk 2022 – Vindstød',
 		link: 'https://www.elforbundet.dk/',
+		logo: 'logo/vindstod.png',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
 		prices: [
@@ -453,6 +458,7 @@ export const products = [
 		id: 'ewii_groen_indkoebspris',
 		name: 'EWII Grøn Indkøbspris',
 		link: 'https://www.ewii.dk/privat/el/groen-el/groen-indkoebspris/',
+		logo: 'logo/ewii.png',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
 		prices: [
@@ -490,6 +496,7 @@ export const products = [
 		id: 'gasel',
 		name: 'Gasel',
 		link: 'https://www.gasel.dk/',
+		logo: '/logo/gasel.png',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
 		prices: [
@@ -751,6 +758,7 @@ export const products = [
 		id: 'clever',
 		name: 'Clever Power',
 		link: 'https://clever.dk/produkter/clever-power/',
+		logo: '/logo/clever.png',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
 		prices: [
@@ -894,6 +902,7 @@ export const products = [
 		id: 'jysk_energi_fdm-stroem',
 		name: 'Jysk Energi - FDM Strøm',
 		link: 'https://fdm.dk/vi-tilbyder/groen-el-fdm-stroem',
+		logo: '/logo/jysk-energi.png',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
 		prices: [
@@ -1014,6 +1023,7 @@ export const products = [
 		id: 'jysk_energi_min-stroem',
 		name: 'Jysk Energi - Min Strøm',
 		link: 'https://jyskenergi.dk/el/privat/min-stroem/',
+		logo: '/logo/jysk-energi.png',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
 		prices: [
@@ -1146,6 +1156,35 @@ export const products = [
 		]
 	},
 	{
+		id: 'bornholms_energi_og_forsyning',
+		name: 'Bornholms Energi & Forsyning',
+		link: 'https://www.beof.dk/privat',
+		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.08
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 30,
+				paymentsPerYear: 4
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0,
+				conditions: 'Ikke bekræftet'
+			}
+		]
+	},
+	{
 		id: 'nordisk_energy',
 		name: 'Nordisk Energy',
 		link: 'https://nordiskenergy.dk/',
@@ -1195,15 +1234,6 @@ export const products = [
 		id: 'energi_viborg',
 		name: 'Energi Viborg',
 		link: 'https://www.energiviborg.dk/stroem/bestil-stroem',
-		payments: 'Ikke oplyst',
-		prices: null,
-		fees: null,
-		disabled: true
-	},
-	{
-		id: 'bornholms_energi_og_forsyning',
-		name: 'Bornholms Energi & Forsyning',
-		link: 'https://www.beof.dk/privat/strom/ny-kunde-kob-din-el-af-os/ny-kunde-kob-din-el-her',
 		payments: 'Ikke oplyst',
 		prices: null,
 		fees: null,
@@ -1303,6 +1333,16 @@ export const products = [
 		id: 'samstrom',
 		name: 'Samstrøm',
 		link: 'https://samstrom.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	}
+	,
+	{
+		id: 'den_glade_eltavle',
+		name: 'Den Glade Eltavle',
+		link: 'https://dengladeeltavle.dk/',
 		payments: 'Ikke oplyst',
 		prices: null,
 		fees: null,
