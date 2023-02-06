@@ -606,7 +606,7 @@ export const products = [
 		id: 'norlys_flexel',
 		name: 'Norlys FlexEl',
 		link: 'https://norlys.dk/',
-		payments: 'Acontobetaling månedligt',
+		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
 		bindingPeriod: null,
 		prices: [
@@ -623,7 +623,7 @@ export const products = [
 		fees: [
 			{
 				name: 'Abonnement',
-				amount: 23.2,
+				amount: 69.6,
 				paymentsPerYear: 12
 			},
 			{
