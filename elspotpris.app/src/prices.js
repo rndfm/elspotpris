@@ -624,7 +624,7 @@ export const products = [
 			{
 				name: 'Abonnement',
 				amount: 69.6,
-				paymentsPerYear: 12
+				paymentsPerYear: 4
 			},
 			{
 				name: 'Betaling via betalingsservice',
