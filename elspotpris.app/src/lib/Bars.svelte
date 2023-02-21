@@ -223,7 +223,7 @@
 				<text
 					y={height - 20 - price.height * (height - 40)}
 					x="{i * 2.083333333333333}%"
-					class="text price">{priceFormatter(price.price)}</text
+					class="text price" class:inverted={(price.height * height) < 50}>{priceFormatter(price.price)}</text
 				>
 				<text y={height} x="{i * 2.083333333333333}%" class="text"
 					>{price.time.toLocaleTimeString('da-DK', hourDateStringOptions)}</text
@@ -333,6 +333,11 @@
 
 			&.price {
 				fill: #fff;
+			}
+
+			&.inverted {
+				fill: #333;
+				    transform: translate(12px, -36px);
 			}
 		}
 
