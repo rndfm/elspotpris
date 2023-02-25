@@ -1133,6 +1133,93 @@ export const products = [
 		]
 	},
 	{
+		id: 'go-energi_go_spot_energi',
+		name: 'go\'energi go\'spot energi',
+		link: 'https://go-energi.dk/elprodukter/til-private',
+		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
+		bindingPeriod: null,
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.04
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 36,
+				paymentsPerYear: 4
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
+	},
+	{
+		id: 'go-energi_go_spot_maaned',
+		name: 'go\'energi go\'spot måned',
+		link: 'https://go-energi.dk/elprodukter/til-private',
+		payments: 'Acontobetaling månedsvis',
+		paymentType: "advance",
+		bindingPeriod: null,
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.04
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 72,
+				paymentsPerYear: 4
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
+	},
+	{
+		id: 'go-energi_go_vind_energi',
+		name: 'go\'energi go\'vind energi',
+		link: 'https://go-energi.dk/elprodukter/til-private',
+		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
+		bindingPeriod: null,
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.064
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 36,
+				paymentsPerYear: 4
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
+	},
+	{
 		id: 'nordisk_energy',
 		name: 'Nordisk Energy',
 		link: 'https://nordiskenergy.dk/',
@@ -1156,15 +1243,6 @@ export const products = [
 		id: 'gronelforsyning',
 		name: 'Grøn El-Forsyning',
 		link: 'https://gronelforsyning.dk/el/',
-		payments: 'Ikke oplyst',
-		prices: null,
-		fees: null,
-		disabled: true
-	},
-	{
-		id: 'go-energi',
-		name: 'go\'energi',
-		link: 'https://go-energi.dk/elprodukter/til-private',
 		payments: 'Ikke oplyst',
 		prices: null,
 		fees: null,
