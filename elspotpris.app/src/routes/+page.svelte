@@ -2,11 +2,15 @@
 	import {
 		priceNow,
 		co2EmissionNow,
-		transportNow,
 		consumption,
 		customConsumption,
 		calculatedProducts,
-		tax
+		tax,
+		tariff,
+		transport,
+		priceRegion,
+		electricityTax,
+		transmission
 	} from '../stores.js';
 
 	import { consumptionTypes } from '../prices.js';
@@ -32,15 +36,31 @@
 		loading = false;
 	});
 
+	let selectedTariff;
+	let selectedTariffId;
+	let transportTariffs;
+	tariff.subscribe((value) => {
+		selectedTariffId = value;
+		if (value && transportTariffs) {
+			selectedTariff = transportTariffs.find((t) => t.id === value);
+		}
+	});
+
+	transport.subscribe((value) => {
+		transportTariffs = value;
+		if (value && selectedTariffId) {
+			selectedTariff = transportTariffs.find((t) => t.id === selectedTariffId);
+		}
+	});
+
+	let region;
+	priceRegion.subscribe((value) => {
+		region = value;
+	});
 
 	let spotPriceNow;
 	priceNow.subscribe((value) => {
 		spotPriceNow = value;
-	});
-
-	let tariffNow;
-	transportNow.subscribe((value) => {
-		tariffNow = value;
 	});
 
 	let withTax;
@@ -49,7 +69,6 @@
 	});
 
 	let emisNow;
-
 	co2EmissionNow.subscribe((value) => {
 		emisNow = value;
 	});
@@ -114,7 +133,14 @@
 			</div>
 		</div>
 		<Bars height={150} />
-		<a href="/live">Vælg indstillinger og se beregningen</a>
+		<ul class="live-settings">
+			<li>{region ?? ''}</li>
+			<li>{selectedTariff?.name ?? ''}</li>
+			<li>{#if $electricityTax}Med{:else}Uden{/if} elafgift</li>
+			<li>{#if $transmission}Med{:else}Uden{/if} transmission</li>
+			<li>{#if $tax}Med{:else}Uden{/if} moms</li>
+			<li><a href="/live">Vælg indstillinger og se beregningen</a></li>	
+		</ul>
 	</div>
 
 	<h2>Find det billigste elselskab for dig.</h2>
@@ -490,6 +516,19 @@
 
 		.table-scroll {
 			margin: 0 -1em;
+		}
+	}
+
+	.live-settings {
+		display: flex;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		flex-wrap: wrap;
+		li {
+			font-size: 0.8em;
+			padding: 0.5em 1em;
 		}
 	}
 </style>

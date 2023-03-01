@@ -223,6 +223,16 @@ else var socket = io();
 
 socket.on('region', function (data) {
 	priceRegion.set(data);
+
+	// Default to N1 for DK1 and radius_c for DK2.
+	console.log(selectedTariffId);
+	if (selectedTariffId == 'none')
+	{
+		if (data == 'DK1') 
+			tariff.set('n1_c');
+		else
+			tariff.set('radius_c')
+	}
 });
 
 socket.on('prices', function (data) {
