@@ -34,7 +34,7 @@
             src="/donate/donate-mobilepay.png"
             style="max-width: 100%; height: auto; width: auto;"
             alt="Støt elspotpris.dk med mobilepay"
-            width="510"
+            width="500"
             height="120"/>
     </a>
 </div>

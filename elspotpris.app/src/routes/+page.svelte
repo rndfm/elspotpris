@@ -139,7 +139,8 @@
 			<li>{#if $electricityTax}Med{:else}Uden{/if} elafgift</li>
 			<li>{#if $transmission}Med{:else}Uden{/if} transmission</li>
 			<li>{#if $tax}Med{:else}Uden{/if} moms</li>
-			<li><a href="/live">Vælg indstillinger og se beregningen</a></li>	
+			<li><a href="/live">Vælg indstillinger</a></li>
+			<li><a href="/live">Vis som fuldskærm</a></li>	
 		</ul>
 	</div>
 
