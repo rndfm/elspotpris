@@ -81,7 +81,7 @@
 	const donateLink =
 		'https://products.mobilepay.dk/box/pay-in?id=2263bc16-d568-485c-98bd-b43768a5aa1a&phone=1996KN';
 
-	let productLink = null;
+	let productLink = "https://elspotpris.dk";
 	let donateModalActive = false;
 
 	function goToProduct(link)
@@ -107,8 +107,7 @@
 	<div class="box">
 		<div class="flexgrid meters" id="meters">
 			<div class="col">
-				<span><small>Elprisen lige nu</small> {priceFormatter(spotPriceNow)} <small>kr</small></span
-				>
+				<span><small>Elprisen lige nu</small> {priceFormatter(spotPriceNow)} <small>kr</small></span>
 			</div>
 			<div class="col">
 				<span><small>CO<sub>2</sub></small> {emisNow} <small>g/kWh</small></span>
@@ -125,7 +124,7 @@
 	<div class="box">
 		<div class="flexgrid responsive">
 			<div class="col">
-				<h4>Vælg dit estimerede forbrug</h4>
+				<p class="lead">Vælg dit estimerede forbrug</p>
 				<span>Ved forbrug pr. år.:</span>
 				<select bind:value={$consumption}>
 					{#each consumptionTypes as item}
@@ -142,7 +141,7 @@
 				{/if}
 			</div>
 			<div class="col">
-				<h4>Filtre</h4>
+				<p class="lead">Filtre</p>
 				<p>
 					<label for="monthlyPayment">
 						<input id="monthlyPayment" type="checkbox" bind:checked={paymentTypeConsumptionOnly} />
@@ -227,8 +226,7 @@
 	{/if}
 	{#if !loading}
 		<p>
-			Omkostningerne vises årligt for det valgte forbrug. Priser vises {#if withTax}inkl{:else}eksl{/if}.
-			moms.<br>
+			Omkostningerne vises årligt for det valgte forbrug. Priser vises {#if withTax}inkl{:else}eksl{/if}. moms.<br />
 			<small>Er du representant for et elselskab og vil du opdaterer dit produkt eller have dit produkt med i vores sammenligning, så kontakt os på <a href="mailto:info@elspotpris.dk">info@elspotpris.dk</a></small>
 		</p>
 		<div class="flexgrid responsive">
@@ -419,7 +417,7 @@
 			a.cta {
 				display:block;
 				text-align: center;
-				background: #0a0;
+				background: #080;
 				color: #fff;
 				border: none;
 				padding: 0.5em 1em;
@@ -467,7 +465,7 @@
 		padding: 0.25em 0.5em;
 
 		&.good {
-			background-color: #0a0;
+			background-color: #080;
 		}
 		&.bad {
 			background-color: #b74932;
