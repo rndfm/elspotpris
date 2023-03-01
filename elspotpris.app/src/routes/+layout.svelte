@@ -20,9 +20,6 @@
 			gtag('event', 'keepalive');
 		}, 240000);
 	}
-
-	const donateLink =
-		'https://products.mobilepay.dk/box/pay-in?id=2263bc16-d568-485c-98bd-b43768a5aa1a&phone=1996KN';
 </script>
 
 <nav id="navigation" class:closed={$mainMenuClosed} class:active={menuActive}>
@@ -55,38 +52,6 @@
 </div>
 <main>
 	<slot />
-	
-	<div class="github">
-		<p>
-			{#if $darkMode}<img src="/github-dark.png" alt="github" width="32" height="32" />{:else}<img
-					src="/github.png"
-					alt="github"
-					width="32"
-					height="32"
-				/>{/if}Hjælp med at forbedre elspotpris.dk
-			<a href="https://github.com/rndfm/elspotpris" target="_blank" rel="noreferrer"
-				>https://github.com/rndfm/elspotpris</a>
-		</p>
-		<p>
-			Denne side og beregningerne vedligeholdes af frivillige individer. Siden er ikke sponsoreret.
-		</p>
-		<p>
-			elspotpris.dk bliver udviklet og driftet i min fritid. Hvis elspotpris.dk er brugbar for dig,
-			så overvej at støtte driften og den videre udvikling.<br />
-			-
-			<a href="https://www.linkedin.com/in/christian-reinholdt-76712b45/"
-				target="_blank"
-				rel="noreferrer">Christian Reinholdt</a>
-		</p>
-		<a href={donateLink} target="_blank" rel="noreferrer">
-			<img
-				src="/donate/donate-mobilepay.png"
-				style="max-width: 100%; height: auto; width: auto;"
-				alt="Støt elspotpris.dk med mobilepay"
-				width="510"
-				height="120"/>
-		</a>
-	</div>
 </main>
 
 <style lang="scss">
@@ -229,14 +194,5 @@
 		flex: 1;
 		overflow-y: auto;
 		padding: 0 1em;
-
-		.github {
-			padding: 5em 1em;
-
-			img {
-				vertical-align: middle;
-				padding-right: 10px;
-			}
-		}
 	}
 </style>

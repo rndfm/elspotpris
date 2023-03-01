@@ -13,6 +13,9 @@
 	import {} from '../data.js';
 	import ProductDetails from '../lib/ProductDetails.svelte';
 	import Bars from '../lib/Bars.svelte';
+	import Contribute from '../lib/Contribute.svelte';
+
+	let loading = true;
 
 	let productCalculations;
 	calculatedProducts.subscribe((value) => {
@@ -25,7 +28,10 @@
 			if (b.calculatedPrices.total === NaN) return -1;
 			return a.calculatedPrices.total < b.calculatedPrices.total ? -1 : 1;
 		});
+
+		loading = false;
 	});
+
 
 	let spotPriceNow;
 	priceNow.subscribe((value) => {
@@ -75,11 +81,13 @@
 	const donateLink =
 		'https://products.mobilepay.dk/box/pay-in?id=2263bc16-d568-485c-98bd-b43768a5aa1a&phone=1996KN';
 
+	let productLink = null;
 	let donateModalActive = false;
 
 	function goToProduct(link)
 	{
 		donateModalActive = true;
+		productLink = link;
 		setTimeout(() => {
 			window.open(link, '_blank');
 		}, 2500);
@@ -157,7 +165,9 @@
 				<div class="flexgrid responsive">
 					<div class="col information">
 						{#if item.logo}
-							<img src={item.logo} alt={item.name} />
+						<div class="logo">
+							<img src={item.logo} alt={item.name} height="50" width="166" />
+						</div>
 						{/if}
 						<h2 class:bigger={!item.logo}>
 							{item.name}
@@ -215,81 +225,74 @@
 			</div>
 		{/each}
 	{/if}
-	<p>
-		Omkostningerne vises årligt for det valgte forbrug. Priser vises {#if withTax}inkl{:else}eksl{/if}.
-		moms.<br>
-		<small>Er du representant for et elselskab og vil du opdaterer dit produkt eller have dit produkt med i vores sammenligning, så kontakt os på <a href="mailto:info@elspotpris.dk">info@elspotpris.dk</a></small>
-	</p>
-	<div class="flexgrid responsive">
-		<div class="col">
-			<h3>Sådan sammenligner du elselskabernes variable priser</h3>
-			<p>
-				En variabel pris består af flere dele, nogle af dele er ens for alle elselskaber, mens andre
-				er forskellige. Der giver derfor kun mening at sammenligne elselskaberne på de dele, som er
-				forskellige.
-			</p>
+	{#if !loading}
+		<p>
+			Omkostningerne vises årligt for det valgte forbrug. Priser vises {#if withTax}inkl{:else}eksl{/if}.
+			moms.<br>
+			<small>Er du representant for et elselskab og vil du opdaterer dit produkt eller have dit produkt med i vores sammenligning, så kontakt os på <a href="mailto:info@elspotpris.dk">info@elspotpris.dk</a></small>
+		</p>
+		<div class="flexgrid responsive">
+			<div class="col">
+				<h3>Sådan sammenligner du elselskabernes variable priser</h3>
+				<p>
+					En variabel pris består af flere dele, nogle af dele er ens for alle elselskaber, mens andre
+					er forskellige. Der giver derfor kun mening at sammenligne elselskaberne på de dele, som er
+					forskellige.
+				</p>
 
-			<h4>Dele som er forskellige mellem elselskaberne:</h4>
-			<ul>
-				<li><strong>Abonnement</strong></li>
-				<li><strong>Betalingsgebyrer</strong></li>
-				<li><strong>Tillæg til spotprisen</strong></li>
-			</ul>
+				<h4>Dele som er forskellige mellem elselskaberne:</h4>
+				<ul>
+					<li><strong>Abonnement</strong></li>
+					<li><strong>Betalingsgebyrer</strong></li>
+					<li><strong>Tillæg til spotprisen</strong></li>
+				</ul>
 
-			<h4>Dele som vil være uændret uanset hvilket elselskab du vælger:</h4>
-			<ul>
-				<li>
-					<strong>Spotpris</strong> - Prisen baseres på elbørsen
-					<a href="https://www.nordpoolgroup.com" target="_blank" rel="noreferrer">Nordpool</a>.
-					Prisen varierer time for time, men er ens for alle elselskaber.
-				</li>
-				<li>
-					<strong>Transport</strong> - Transporten betales til dit lokale netselskab, dem som ejer ledningerne
-					i jorden. Transportprisen er derfor ens uanset hvilket elselskab du vælger.
-				</li>
-				<li>
-					<strong>Afgift og transmission</strong> - Betales til staten og er ens uanset elselskab.
-				</li>
-			</ul>
+				<h4>Dele som vil være uændret uanset hvilket elselskab du vælger:</h4>
+				<ul>
+					<li>
+						<strong>Spotpris</strong> - Prisen baseres på elbørsen
+						<a href="https://www.nordpoolgroup.com" target="_blank" rel="noreferrer">Nordpool</a>.
+						Prisen varierer time for time, men er ens for alle elselskaber.
+					</li>
+					<li>
+						<strong>Transport</strong> - Transporten betales til dit lokale netselskab, dem som ejer ledningerne
+						i jorden. Transportprisen er derfor ens uanset hvilket elselskab du vælger.
+					</li>
+					<li>
+						<strong>Afgift og transmission</strong> - Betales til staten og er ens uanset elselskab.
+					</li>
+				</ul>
 
-			<p>
-				Mange elselskaber ønsker ikke at oplyse deres tillæg til spotprisen, og der er intet i
-				lovgivningen der tvinger dem til det.<br />
-				Nogle bruger endda udtryk som "indkøbspris", "kostpris" eller "følger spotprisen" selvom de ligger
-				avance oven på spotprisen.<br />
-			</p>
-			<p>
-				Vi har derfor samlet denne liste, hvor vi har tillæggene til spotprisen, så elselskaberne
-				kan sammenlignes på deres reelle priser.
-			</p>
+				<p>
+					Mange elselskaber ønsker ikke at oplyse deres tillæg til spotprisen, og der er intet i
+					lovgivningen der tvinger dem til det.<br />
+					Nogle bruger endda udtryk som "indkøbspris", "kostpris" eller "følger spotprisen" selvom de ligger
+					avance oven på spotprisen.<br />
+				</p>
+				<p>
+					Vi har derfor samlet denne liste, hvor vi har tillæggene til spotprisen, så elselskaberne
+					kan sammenlignes på deres reelle priser.
+				</p>
+			</div>
 		</div>
-	</div>
+		<Contribute></Contribute>
+	{/if}
 </div>
 <div class="modal" class:active={donateModalActive} on:click|self={() => donateModalActive = false} on:keydown|self={() => donateModalActive = false}>
 	<div class="modal-content">
 		<span class="close" on:click={() => donateModalActive = false} on:keydown={() => donateModalActive = false}>&times;</span>
 		<p class="lead">Linket åbnes i en ny fane/vindue</p>
-		<p>
-			elspotpris.dk bliver udviklet og driftet i min fritid. Hvis elspotpris.dk er brugbar for dig,
-			så overvej at støtte driften og den videre udvikling.<br />
-			-
-			<a href="https://www.linkedin.com/in/christian-reinholdt-76712b45/"
-				target="_blank"
-				rel="noreferrer">Christian Reinholdt</a>
-		</p>
-		<a href={donateLink} target="_blank" rel="noreferrer">
-			<img
-				src="/donate/donate-mobilepay.png"
-				style="max-width: 100%; height: auto; width: auto;"
-				alt="Støt elspotpris.dk med mobilepay"
-				width="510"
-				height="120"/>
-		</a>
-	  </div>
+		<p>Hvis linket ikke automatisk åbner så <a href={productLink} target="_blank" rel="noreferrer">tryk her</a></p>
+		<Contribute></Contribute>
+	</div>
 </div>
 
+{#if loading}
+	<div class="loading">
+		<div class="lds-ripple"><div></div><div></div></div>
+	</div>
+{/if}
 <style lang="scss">
-
 	.modal {
 		display: none;
 		position: fixed;
@@ -381,6 +384,15 @@
 		.col.information {
 			position: relative;
 			padding-bottom: 2em;
+
+			.logo {
+				height: 50px;
+
+				img {
+					height: 100%;
+					width: auto;
+				}
+			}
 			
 			.pills {
 				position: absolute;

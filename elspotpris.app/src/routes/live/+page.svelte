@@ -21,6 +21,7 @@
 	import { products } from '../../prices.js';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
+	import Contribute from '../../lib/Contribute.svelte';
 
 	let selectedProduct;
 	product.subscribe((value) => {
@@ -274,6 +275,7 @@
 			spotprisen, men tillægges fortjeneste mm. af dit elselskab.<br />
 			Vælg transportselskab og elselskab produkt i menuen øverst for at se totalprisen.
 		</p>
+		<Contribute></Contribute>
 	</div>
 	{#if selectedProduct}
 		<div class="calculation col">
