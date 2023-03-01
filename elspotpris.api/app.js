@@ -102,7 +102,7 @@ async function update(refresh) {
         prices = data.prices;
         pricesDate = data.lastDate;
       }
-    });
+    }).catch((err) => console.error(err));
   }
 
   io.emit("prices", prices);

@@ -254,7 +254,7 @@
 						x="{emission.position}%"
 						height="2px"
 						width="1%"
-						fill="aqua"
+						fill="rgb(49, 123, 248)"
 						opacity="0.8"
 					/>
 				{/each}
@@ -265,7 +265,7 @@
 						x="{emission.position}%"
 						height="2px"
 						width="2%"
-						fill="aqua"
+						fill="rgb(49, 123, 248)"
 						opacity="0.5"
 					/>
 				{/each}
@@ -403,7 +403,7 @@
 				}
 
 				&.co2 {
-					background-color: aqua;
+					background-color: rgb(49, 123, 248);
 				}
 			}
 		}
