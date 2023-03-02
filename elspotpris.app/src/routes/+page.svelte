@@ -117,7 +117,7 @@
 <svelte:head>
 	<title>elspotpris.dk - Find det elselskab der reelt er billigst for dig.</title>
 	<meta name="description" content="Sammenlign på de reelle udgifter hos elselskaberne. Se alle spotpristillæg, abonnement, betalingsgebyrer mv."	/>
-	<meta property="og:image" content="/facebook-preview-frontpage.png">
+	<meta property="og:image" content="https://elspotpris.dk/facebook-preview-frontpage.png">
 </svelte:head>
 <div class="content">
 	<h1>elspotpris.dk</h1>
