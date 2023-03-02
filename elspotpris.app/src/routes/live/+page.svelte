@@ -150,10 +150,8 @@
 
 <svelte:head>
 	<title>elspotpris.dk - Se din elpris pr. kWh time for time - i dag og det næste døgn frem.</title>
-	<meta
-		name="description"
-		content="Se elprisen inkl. transport tariffer, elafgift og moms i overskuelig graf så du kan planlægge dit strømforbrug. Se også nuværende og prognose for Co2 udledning."
-	/>
+	<meta name="description" content="Se elprisen inkl. transport tariffer, elafgift og moms i overskuelig graf så du kan planlægge dit strømforbrug. Se også nuværende og prognose for Co2 udledning."	/>
+	<meta property="og:image" content="/facebook-preview-live.png">
 </svelte:head>
 
 <svelte:window on:resize={onResize} />
