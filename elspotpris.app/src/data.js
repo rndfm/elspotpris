@@ -39,10 +39,9 @@ const getActiveTariffs = (datetime) => {
 		return null;
 	}
 
-	const activeEntries = selectedTariff.entries.filter(
-		(e) =>
-			(e.validFrom === null || new Date(e.validFrom) <= datetime) &&
-			(e.validTo === null || new Date(e.validTo) > datetime)
+	const activeEntries = selectedTariff.entries.filter((e) =>
+		(e.validFrom === null || new Date(e.validFrom) <= datetime) &&
+		(e.validTo === null || new Date(e.validTo) > datetime)
 	);
 
 	let hour = datetime.getHours();
@@ -60,12 +59,16 @@ const getActiveTariffs = (datetime) => {
 
 const getActiveGovernmentTariffs = (datetime) => {
 	return governmentTariffs
-		.filter(t => (t.validFrom === null || new Date(t.validFrom) <= datetime) && (t.validTo === null || new Date(t.validTo) > datetime))
+		.filter(t =>
+			(t.validFrom === null || new Date(t.validFrom) <= datetime) && 
+			(t.validTo === null || new Date(t.validTo) > datetime))
 };
 
 const getActiveTransmissionTariffs = (datetime) => {
 	return transmissionTariffs
-		.filter(t => (t.validFrom === null || new Date(t.validFrom) <= datetime) && (t.validTo === null || new Date(t.validTo) > datetime))
+		.filter(t => 
+			(t.validFrom === null || new Date(t.validFrom) <= datetime) && 
+			(t.validTo === null || new Date(t.validTo) > datetime))
 };
 
 const calculateTariffs = (datetime) => {
@@ -170,9 +173,24 @@ const calculatePrices = () => {
 				)
 			);
 
-			const transportEntries = getActiveTariffs(now);
-			transportNow.set(transportEntries);
+			if (selectedTariff)
+			{
+				const activeTransportEntries = selectedTariff.entries.filter((e) =>
+					(e.validFrom === null || new Date(e.validFrom) <= now) &&
+					(e.validTo === null || new Date(e.validTo) > now) &&
+					(e.prices.some((p) => p.price))
+				);
+			
+				let hour = now.getHours();
+				activeTransportEntries.forEach((entry) => {
+					entry.prices
+						.forEach((p) => {
+							p.active = p.start <= hour && p.end >= hour;
+						});
+				});
 
+				transportNow.set(activeTransportEntries);
+			}
 			const activeGovernmentTariffs = getActiveGovernmentTariffs(now);
 			governmentTariffsNow.set(activeGovernmentTariffs);
 

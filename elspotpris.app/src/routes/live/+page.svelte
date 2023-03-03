@@ -171,33 +171,21 @@
 	<ul>
 		<li>
 			<label for="priceAreaDK1">
-				<input
-					id="priceAreaDK1"
-					type="radio"
-					bind:group={region}
-					value="DK1"
-					on:change={updateRegion}
-				/> DK1(vest)</label
-			>
+				<input id="priceAreaDK1" type="radio" bind:group={region} value="DK1" on:change={updateRegion} /> DK1(vest)
+			</label>
 			<label for="priceAreaDK2">
-				<input
-					id="priceAreaDK2"
-					type="radio"
-					bind:group={region}
-					value="DK2"
-					on:change={updateRegion}
-				/> DK2(øst)</label
-			>
+				<input id="priceAreaDK2" type="radio" bind:group={region} value="DK2" on:change={updateRegion} /> DK2(øst)
+			</label>
 		</li>
 		<li>
 			<label for="electricityTax">
-				<input type="checkbox" id="electricityTax" bind:checked={$electricityTax} /> Elafgift</label
-			>
+				<input type="checkbox" id="electricityTax" bind:checked={$electricityTax} /> Elafgift
+			</label>
 		</li>
 		<li>
 			<label for="transmission">
-				<input type="checkbox" id="transmission" bind:checked={$transmission} /> Transmission</label
-			>
+				<input type="checkbox" id="transmission" bind:checked={$transmission} /> Transmission
+			</label>
 		</li>
 		<li>
 			<label for="tax"><input type="checkbox" id="tax" bind:checked={$tax} /> Moms</label>
@@ -215,11 +203,7 @@
 		</li>
 		<li>
 			<p>
-				<a
-					href="https://greenpowerdenmark.dk/vejledning-teknik/nettilslutning/find-netselskab"
-					target="_blank"
-					rel="noreferrer">Find netselskab</a
-				>
+				<a href="https://greenpowerdenmark.dk/vejledning-teknik/nettilslutning/find-netselskab" target="_blank" rel="noreferrer">Find netselskab</a>
 			</p>
 		</li>
 		<li class="full">
@@ -244,25 +228,17 @@
 			</select>
 		</li>
 		<li>
-			<label for="darkMode"
-				><input type="checkbox" id="darkMode" bind:checked={$darkMode} /> Mørk</label
-			>
+			<label for="darkMode"><input type="checkbox" id="darkMode" bind:checked={$darkMode} /> Mørk</label>
 		</li>
 	</ul>
-	<button class="tab" on:click={() => ($menuClosed = !$menuClosed)} aria-label="Åben og luk menu"
-		><span class="chevron up" /></button
-	>
+	<button class="tab" on:click={() => ($menuClosed = !$menuClosed)} aria-label="Åben og luk menu"><span class="chevron up" /></button>
 </nav>
 <div class="flexgrid responsive">
 	<div class="info col">
 		<h1>elspotpris.dk</h1>
 		<p class="lead">Få overblik over spotpriserne på el det næste døgn.</p>
 		<p>
-			På denne side vises elpriserne for elaftaler med variabel pris baseret på spotprisen ved <a
-				href="https://www.nordpoolgroup.com"
-				target="_blank"
-				rel="noreferrer">Nordpool</a
-			>.<br />
+			På denne side vises elpriserne for elaftaler med variabel pris baseret på spotprisen ved <a href="https://www.nordpoolgroup.com" target="_blank" rel="noreferrer">Nordpool</a>.<br />
 			Prisen for næste dag bliver frigivet omkring kl. 13.00.<br />
 			Se prisen med elafgift, tariffer/transport, moms alle tillæg inkluderet ved at vælge dit netselskab og elprodukt i menuen ovenfor.
 			Alle dine indstillinger vil blive gemt til næste gang, du besøger siden.
@@ -300,8 +276,8 @@
 				</tr>
 				{#each selectedProduct.prices as item}
 					<tr>
-						<td
-							>{item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}
+						<td>
+							{item.name}{#if item.region != undefined}&nbsp;{item.region}{/if}
 							{#if item.calculated}<img
 									class="item-warning"
 									src="warning.svg"
@@ -335,9 +311,9 @@
 									height="16"
 								/>{/if}
 						</td>
-						<td class="amount"
-							>{#if item.amount != undefined}{taxAndFormat(item.amount)} kr{/if}</td
-						>
+						<td class="amount">
+							{#if item.amount != undefined}{taxAndFormat(item.amount)} kr{/if}
+						</td>
 					</tr>
 				{/each}
 				{#if includeElectricityTax && $governmentTariffsNow}
@@ -348,9 +324,9 @@
 					{#each $governmentTariffsNow as item}
 						<tr>
 							<td>{item.name}</td>
-							<td class="amount"
-								>{#if item.amount != undefined}{taxAndFormat(item.amount)} kr.{/if}</td
-							>
+							<td class="amount">
+								{#if item.amount != undefined}{taxAndFormat(item.amount)} kr.{/if}
+							</td>
 						</tr>
 					{/each}
 				{/if}
@@ -362,31 +338,33 @@
 					{#each $transmissionTariffsNow as item}
 						<tr>
 							<td>{item.name}</td>
-							<td class="amount"
-								>{#if item.amount != undefined}{taxAndFormat(item.amount)} kr.{/if}</td
-							>
+							<td class="amount">
+								{#if item.amount != undefined}{taxAndFormat(item.amount)} kr.{/if}
+							</td>
 						</tr>
 					{/each}
 				{/if}
 				{#if selectedTariff}
 					<tr>
-						<th colspan="2"
-							>Transportudgifter som betales til dit lokale netselskab - {selectedTariff.name}</th
-						>
+						<th colspan="2">Transportudgifter som betales til dit lokale netselskab - {selectedTariff.name}</th>
 					</tr>
 					{#if tariffNow}
-						{#each tariffNow as item}
+						{#each tariffNow as entry}
 							<tr>
-								<td
-									>kl. {String(item.start).padStart(2, '0')} - {String(item.end + 1).padStart(
-										2,
-										'0'
-									)}</td
-								>
-								<td class="amount"
-									>{#if item.price != undefined}{taxAndFormat(item.price)} kr.{/if}</td
-								>
+								<td colspan="2">
+									<strong>{entry.note}</strong>
+								</td>
 							</tr>
+							{#each entry.prices as item}
+							<tr class="tariff" class:disabled={!item.active}>
+								<td>
+									kl. {String(item.start).padStart(2, '0')} - {String(item.end + 1).padStart(2, '0')}
+								</td>
+								<td class="amount">
+									{#if item.price != undefined}{taxAndFormat(item.price)} kr.{/if}
+								</td>
+							</tr>
+							{/each}
 						{/each}
 					{/if}
 				{/if}
@@ -394,14 +372,11 @@
 			{#if selectedProduct.fees && selectedProduct.fees.length > 0}
 				<table>
 					<tr>
-						<th colspan="2"
-							>Ud over prisen pr. kWh er der følgende udgifter ved {selectedProduct.name}</th
-						>
+						<th colspan="2">Ud over prisen pr. kWh er der følgende udgifter ved {selectedProduct.name}</th>
 					</tr>
 					{#each selectedProduct.fees as item}
 						<tr>
-							<td
-								>{item.name}
+							<td>{item.name}
 								{#if item.conditions === null}<img
 										class="item-warning"
 										src="warning.svg"
@@ -426,12 +401,9 @@
 										width="16"
 										height="16"
 									/>{/if}
-								{#if item.paymentsPerYear}<small>({item.paymentsPerYear} betalinger om året)</small
-									>{/if}</td
-							>
-							<td class="amount"
-								>{#if item.amount != undefined}{taxAndFormat(item.amount)} kr{/if}</td
-							>
+								{#if item.paymentsPerYear}<small>({item.paymentsPerYear} betalinger om året)</small>{/if}
+							</td>
+							<td class="amount">{#if item.amount != undefined}{taxAndFormat(item.amount)} kr{/if}</td>
 						</tr>
 					{/each}
 				</table>
@@ -439,12 +411,7 @@
 
 			<p>
 				Priserne i udregningen vises {#if withTax}inkl{:else}eksl{/if}. moms.<br />Er der fejl i udregningen eller satserne
-				rapporteres dette her:
-				<a
-					href="https://github.com/rndfm/elspotpris/issues/new/choose"
-					target="_blank"
-					rel="noreferrer">github</a
-				>.
+				rapporteres dette her: <a href="https://github.com/rndfm/elspotpris/issues/new/choose" target="_blank" rel="noreferrer">github</a>.
 			</p>
 		</div>
 	{/if}
@@ -456,6 +423,12 @@
 		td.amount {
 			text-align: right;
 			white-space: nowrap;
+		}
+
+		tr.tariff {
+			&.disabled {
+				opacity: 0.5;
+			}
 		}
 		th {
 			padding: 2em 1em 1em 1em;
