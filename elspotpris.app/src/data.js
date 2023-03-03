@@ -49,7 +49,7 @@ const getActiveTariffs = (datetime) => {
 	const activeTariffs = [];
 	activeEntries.forEach((entry) => {
 		entry.prices
-			.filter((t) => t.start <= hour && t.end >= hour)
+			.filter((t) => t.start <= hour && t.end >= hour && t.price)
 			.forEach((p) => {
 				activeTariffs.push(p);
 			});
@@ -170,8 +170,8 @@ const calculatePrices = () => {
 				)
 			);
 
-			const transportEntry = getActiveTariffs(now);
-			transportNow.set(transportEntry);
+			const transportEntries = getActiveTariffs(now);
+			transportNow.set(transportEntries);
 
 			const activeGovernmentTariffs = getActiveGovernmentTariffs(now);
 			governmentTariffsNow.set(activeGovernmentTariffs);
