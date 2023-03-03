@@ -141,8 +141,7 @@ export const products = [
 			},
 			{
 				name: 'Grønt tiltag - plante træer',
-				amount: 0.08,
-				conditions: 'fast pris i aftalen'
+				amount: 0.08
 			}
 		],
 		fees: [
@@ -1226,12 +1225,33 @@ export const products = [
 		id: 'nordisk_energy',
 		name: 'Nordisk Energy',
 		link: 'https://nordiskenergy.dk/',
-		payments: 'Forbrugsafregnet månedsvis',
-		paymentType: "consumption",
-		prices: null,
-		fees: null,
-		bindingPeriod: "6 mdr. binding",
-		disabled: true
+		payments: '10 måneders aconto betaling!',
+		bindingPeriod: null,
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.01
+			},
+			{
+				name: 'Skjult tillæg til spotpris',
+				amount: 0.96
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 0
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
 	},
 	{
 		id: 'nef',
