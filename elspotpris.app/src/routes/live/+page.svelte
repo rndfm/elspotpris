@@ -203,7 +203,7 @@
 		</li>
 		<li>
 			<p>
-				<a href="https://greenpowerdenmark.dk/vejledning-teknik/nettilslutning/find-netselskab" target="_blank" rel="noreferrer">Find netselskab</a>
+				<a href="https://tariffer.dk?utm_source=elspotpris" target="_blank" rel="noreferrer">Find netselskab</a>
 			</p>
 		</li>
 		<li class="full">
