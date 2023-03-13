@@ -184,7 +184,7 @@
 		kan du læse om nederst på siden
 	</p>
 	{#if productCalculations}
-		{#each productCalculations.filter((p) => (!paymentTypeConsumptionOnly || p.paymentType == 'consumption') && (!hideDiscountAgreements || p.discountAgreement !== true)) as item}
+		{#each productCalculations.filter((p) => !p.disabled && (!paymentTypeConsumptionOnly || p.paymentType == 'consumption') && (!hideDiscountAgreements || p.discountAgreement !== true)) as item}
 			<div class="box product" class:disabled={item.disabled}>
 				<div class="flexgrid responsive">
 					<div class="col information">
@@ -222,14 +222,14 @@
 									<span class="bad">Acontoafregnet</span>
 								{/if}
 							</div>
-						{:else}
-							<small>Kan ikke beregnes da {item.name} ikke oplyser deres priser.</small>
 						{/if}
 					</div>
 					{#if !item.disabled}
 					<div class="col details table-scroll">
 						<ProductDetails product={item} />
 					</div>
+					{:else}
+						<small>Kan ikke beregnes da {item.name} ikke oplyser deres priser.</small>
 					{/if}
 					<div class="col calculations">
 						{#if !item.disabled}
@@ -254,6 +254,13 @@
 			Omkostningerne vises årligt for det valgte forbrug. Priser vises {#if withTax}inkl{:else}eksl{/if}. moms.<br />
 			<small>Er du representant for et elselskab og vil du opdaterer dit produkt eller have dit produkt med i vores sammenligning, så kontakt os på <a href="mailto:info@elspotpris.dk">info@elspotpris.dk</a></small>
 		</p>
+		<h3>Disse selskaber kan ikke vises da deres reelle priser ikke er oplyst.</h3>
+		<p>For at kunne udregne den reelle pris man som forbruger kommer til at betale skal elselskabet oplyse alle deres tillæg til elspotprisen. Ved nogle selskaber regner vi det samlede tillæg ud via elregninger indsendt af forbrugerne. Hvis vi ikke kan få oplyst og bekræftet alle tillæg kan prisen for elselskabet ikke udregnes.</p>
+		<ul class="list-wrap">
+			{#each productCalculations.filter((p) => p.disabled) as item}
+			<li>{item.name}</li>
+			{/each}
+		</ul>
 		<div class="flexgrid responsive">
 			<div class="col">
 				<h3>Sådan sammenligner du elselskabernes variable priser</h3>
@@ -316,6 +323,14 @@
 	</div>
 {/if}
 <style lang="scss">
+
+	ul.list-wrap {
+		display: flex;
+		flex-wrap: wrap;
+		li {
+			margin-right: 2em;
+		}
+	}
 	.modal {
 		display: none;
 		position: fixed;
