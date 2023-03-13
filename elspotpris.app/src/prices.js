@@ -1251,6 +1251,222 @@ export const products = [
 			},
 			{
 				name: 'Betaling via betalingsservice',
+			}
+		]
+	},
+	{
+		id: 'grow_energy_zero_hero_netto_39',
+		name: 'Grow Energy - Zero Hero Netto 39',
+		link: 'https://growenergy.dk/',
+		logo: '/logo/grow-energy.png',
+		maxConsumption: 2000,
+		payments: 'Acontobetaling månedsvis',
+		bindingPeriod: "6 mdr. binding",
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0
+			}
+		],
+		fees: [
+			{
+				name: 'Oprettelse',
+				amount: 159.2,
+				paymentsPerYear: 1
+			},
+			{
+				name: 'Abonnement',
+				amount: 31.2,
+				paymentsPerYear: 12
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
+	},
+	{
+		id: 'grow_energy_zero_hero_netto_49',
+		name: 'Grow Energy - Zero Hero Netto 49',
+		link: 'https://growenergy.dk/',
+		logo: '/logo/grow-energy.png',
+		minConsumption: 2001,
+		maxConsumption: 6000,
+		payments: 'Acontobetaling månedsvis',
+		bindingPeriod: "6 mdr. binding",
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0
+			}
+		],
+		fees: [
+			{
+				name: 'Oprettelse',
+				amount: 159.2,
+				paymentsPerYear: 1
+			},
+			{
+				name: 'Abonnement',
+				amount: 39.2,
+				paymentsPerYear: 12
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
+	},
+	{
+		id: 'grow_energy_zero_hero_netto_79',
+		name: 'Grow Energy - Zero Hero Netto 79',
+		link: 'https://growenergy.dk/',
+		logo: '/logo/grow-energy.png',
+		minConsumption: 6001,
+		maxConsumption: 10000,
+		payments: 'Acontobetaling månedsvis',
+		bindingPeriod: "6 mdr. binding",
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0
+			}
+		],
+		fees: [
+			{
+				name: 'Oprettelse',
+				amount: 159.2,
+				paymentsPerYear: 1
+			},
+			{
+				name: 'Abonnement',
+				amount: 63.2,
+				paymentsPerYear: 12
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
+	},
+	{
+		id: 'grow_energy_zero_hero_netto_99',
+		name: 'Grow Energy - Zero Hero Netto 99',
+		link: 'https://growenergy.dk/',
+		logo: '/logo/grow-energy.png',
+		minConsumption: 10001,
+		maxConsumption: 15000,
+		payments: 'Acontobetaling månedsvis',
+		bindingPeriod: "6 mdr. binding",
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0
+			}
+		],
+		fees: [
+			{
+				name: 'Oprettelse',
+				amount: 159.2,
+				paymentsPerYear: 1
+			},
+			{
+				name: 'Abonnement',
+				amount: 79.2,
+				paymentsPerYear: 12
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
+	},
+	{
+		id: 'grow_energy_zero_hero',
+		name: 'Grow Energy - Zero Hero',
+		link: 'https://growenergy.dk/',
+		logo: '/logo/grow-energy.png',
+		maxConsumption: 4500,
+		payments: 'Acontobetaling månedsvis',
+		bindingPeriod: "6 mdr. binding",
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.248
+			}
+		],
+		fees: [
+			{
+				name: 'Oprettelse',
+				amount: 159.2,
+				paymentsPerYear: 1
+			},
+			{
+				name: 'Abonnement',
+				amount: 0
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
+	},
+	{
+		id: 'grow_energy_zero_hero_plus',
+		name: 'Grow Energy - Zero Hero+',
+		link: 'https://growenergy.dk/',
+		logo: '/logo/grow-energy.png',
+		minConsumption: 4501,
+		payments: 'Acontobetaling månedsvis',
+		bindingPeriod: "6 mdr. binding",
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.16
+			}
+		],
+		fees: [
+			{
+				name: 'Oprettelse',
+				amount: 159.2,
+				paymentsPerYear: 1
+			},
+			{
+				name: 'Abonnement',
+				amount: 0
+			},
+			{
+				name: 'Betaling via betalingsservice',
 				amount: 0
 			}
 		]
@@ -1430,15 +1646,6 @@ export const products = [
 		id: 'stromtid',
 		name: 'strømtid',
 		link: 'https://stromtid.dk/',
-		payments: 'Ikke oplyst',
-		prices: null,
-		fees: null,
-		disabled: true
-	},
-	{
-		id: 'grow_energy',
-		name: 'Grow Energy',
-		link: 'https://growenergy.dk/',
 		payments: 'Ikke oplyst',
 		prices: null,
 		fees: null,

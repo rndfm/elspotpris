@@ -184,7 +184,7 @@
 		kan du læse om nederst på siden
 	</p>
 	{#if productCalculations}
-		{#each productCalculations.filter((p) => !p.disabled && (!paymentTypeConsumptionOnly || p.paymentType == 'consumption') && (!hideDiscountAgreements || p.discountAgreement !== true)) as item}
+		{#each productCalculations.filter((p) => !p.disabled && (!p.maxConsumption || p.maxConsumption >= ($consumption.amount || $customConsumption)) && (!p.minConsumption || p.minConsumption <= ($consumption.amount || $customConsumption)) && (!paymentTypeConsumptionOnly || p.paymentType == 'consumption') && (!hideDiscountAgreements || p.discountAgreement !== true)) as item}
 			<div class="box product" class:disabled={item.disabled}>
 				<div class="flexgrid responsive">
 					<div class="col information">
