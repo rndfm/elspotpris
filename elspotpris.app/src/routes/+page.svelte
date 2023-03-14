@@ -207,6 +207,9 @@
 						</h2>
 						{#if !item.disabled}
 							<div class="pills">
+								{#if item.checked }
+									<a href="/kontrol" class="good">&#10004; Elregninger kontrolleres</a>
+								{/if}
 								{#if item.bindingPeriod }
 									<span class="bad">{item.bindingPeriod}</span>
 								{:else if item.bindingPeriod === null}
@@ -219,7 +222,7 @@
 									<span class="good">Forbrugsafregnet</span>
 								{/if}
 								{#if item.paymentType == 'advance'}
-									<span class="bad">Acontoafregnet</span>
+									<span class="neutral">Acontoafregnet</span>
 								{/if}
 							</div>
 						{/if}
@@ -491,11 +494,6 @@
 				font-size: 1.5em;
 			}
 		}
-	}
-
-	div.content {
-		margin: 0 auto;
-		max-width: 1400px;
 	}
 
 	.pills > * {
