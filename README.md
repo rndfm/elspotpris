@@ -1,5 +1,5 @@
 # Elspotpris
-Elspotpris.dk er et fællesskabsdrevet website, der viser variable elpriser og giver mulighed for at sammenligne elselskaber med variabel pris. 
+[Elspotpris.dk](https://elspotpris.dk) er et fællesskabsdrevet website, der viser variable elpriser og giver mulighed for at sammenligne elselskaber med variabel pris. 
 Priser for elselskaberne vedligeholdes manuelt. 
 Priser, tillæg og gebyrer verificeres og stikprøvekontrolleres på elregninger, der indsendes af forbrugerne.
 
