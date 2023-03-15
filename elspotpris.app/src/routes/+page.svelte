@@ -102,15 +102,16 @@
 
 	let productLink = "https://elspotpris.dk";
 	let donateModalActive = false;
+	let firstClick = true;
 
-	function goToProduct(link)
+	function showDonateModal(link)
 	{
-		donateModalActive = true;
-		productLink = link;
-		setTimeout(() => {
-			window.open(link, '_blank');
-		}, 2500);
-		
+		if (firstClick)
+		{
+			donateModalActive = true;
+			productLink = link;
+			firstClick = false;
+		}
 	}
 </script>
 
@@ -245,7 +246,7 @@
 								Abonnement og gebyrer: {round(item.calculatedPrices.fees)} kr
 							</small>
 							
-							{#if item.link}<a class="cta" href={item.link} target="_blank" rel="noreferrer" on:click|preventDefault={goToProduct(item.link)}>Gå til produktet</a>{/if}
+							{#if item.link}<a class="cta" href={item.link} target="_blank" rel="noreferrer" on:click={showDonateModal(item.link)}>Gå til produktet</a>{/if}
 						{/if}
 					</div>
 				</div>
