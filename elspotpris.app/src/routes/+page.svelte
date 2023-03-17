@@ -155,7 +155,7 @@
 
 	<div class="controls">
 		<div class="control">
-			<label for="consumption">Forbrug årligt</label>
+			<label for="consumption" class="header">Forbrug årligt</label>
 			<select id="consumption" bind:value={$consumption}>
 				{#each consumptionTypes as item}
 					<option value={item}>
@@ -342,6 +342,14 @@
 		}
 	}
 
+	.dark {
+		.controls {
+			.control {
+				background-color: #1f1f1f;
+			}
+		}
+	}
+
 	ul.list-wrap {
 		display: flex;
 		flex-wrap: wrap;
@@ -428,8 +436,6 @@
 
 	.product {
 		margin-bottom: 2em;
-		border-top: 1px solid #eee;
-		border-bottom: 1px solid #eee;
 		h2 {
 			margin: 1em 0;
 			font-size: 1.2em;

@@ -373,7 +373,7 @@
 					{/if}
 				{/if}
 				<tr class="total">
-					<td class="total"><strong>Pris pr. kWh</strong></td>
+					<td class="total"><strong>Pris i alt pr. kWh</strong></td>
 					<td class="amount total">{pricePricisionFormatter($priceNow)} kr.</td>
 				</tr>
 			</table>
@@ -426,6 +426,14 @@
 </div>
 
 <style lang="scss">
+	.dark {
+		table {
+			td.total {
+				border-top: 1px solid #ccc;
+				border-bottom: 2px solid #ccc;
+			}
+		}
+	}
 	table {
 		margin-top: 1em;
 		td.amount {
