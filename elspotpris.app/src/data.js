@@ -115,11 +115,8 @@ const calculateProductPrice = (product, spotPrice, region) => {
 };
 
 const calculateTotalPrice = (product, spotPrice, datetime) => {
-	const pricePerKwh =
-		(calculateProductPrice(product, spotPrice, region) + calculateTariffs(datetime)) *
+	return (calculateProductPrice(product, spotPrice, region) + calculateTariffs(datetime)) *
 		(includeTax ? taxRate : 1);
-
-	return Math.round((pricePerKwh + Number.EPSILON) * 100) / 100;
 };
 
 const calculatePrices = () => {

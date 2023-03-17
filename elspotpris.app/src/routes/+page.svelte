@@ -82,7 +82,7 @@
 
 	let priceFormatter = new Intl.NumberFormat('da-DK', {
 		minimumFractionDigits: 2,
-		maximumFractionDigits: 5
+		maximumFractionDigits: 2
 	}).format;
 
 	function shouldWarn(product) {
@@ -145,48 +145,44 @@
 
 	<h2>Find det billigste elselskab for dig.</h2>
 	<p class="lead">
-		Sammenligning de reelle udgifter hos de største elselskaber i Danmark.<br />
+		Sammenligning de reelle udgifter hos de største elselskaber i Danmark.
 	</p>
-	<div class="box">
-		<div class="flexgrid responsive">
-			<div class="col">
-				<p class="lead">Vælg dit estimerede forbrug</p>
-				<span>Ved forbrug pr. år.:</span>
-				<select bind:value={$consumption}>
-					{#each consumptionTypes as item}
-						<option value={item}>
-							{item.name}
-						</option>
-					{/each}
-				</select>
-				{#if $consumption.amount === null}
-					<p>
-						<label for="customConsumption">Indtast årligt forbrug (kWh)</label>
-						<input id="customConsumption" type="number" bind:value={$customConsumption} />
-					</p>
-				{/if}
-			</div>
-			<div class="col">
-				<p class="lead">Filtre</p>
-				<p>
-					<label for="monthlyPayment">
-						<input id="monthlyPayment" type="checkbox" bind:checked={paymentTypeConsumptionOnly} />
-						Vis kun forbrugsafregnede</label>
-					<label for="hideDiscountAgreement">
-						<input id="hideDiscountAgreement" type="checkbox" bind:checked={hideDiscountAgreements} />
-						Vis ikke rabataftaler</label>
-				</p>
-			</div>
-		</div>
-	</div>
 	<p>
 		Der sammenlignes på <strong>spotpristillæg, abonnementspris og betalingsgebyrer</strong>.<br />
 		Hvorfor det er vigtigt at sammenligne de reelle udgifter i stedet for en oplyst pris fra elselskabet,
 		kan du læse om nederst på siden
 	</p>
+
+	<div class="controls">
+		<div class="control">
+			<label for="consumption">Forbrug årligt</label>
+			<select id="consumption" bind:value={$consumption}>
+				{#each consumptionTypes as item}
+					<option value={item}>
+						{item.name}
+					</option>
+				{/each}
+			</select>
+		</div>
+		{#if $consumption.amount === null}
+		<div class="control">
+			<label for="customConsumption" class="header">Indtast årligt forbrug (kWh)</label>
+			<input id="customConsumption" type="number" bind:value={$customConsumption} />
+		</div>
+		{/if}
+		<div class="control">
+			<span class="header">Filtre</span>
+			<label for="monthlyPayment">
+				<input id="monthlyPayment" type="checkbox" bind:checked={paymentTypeConsumptionOnly} />
+				Vis kun forbrugsafregnede</label>
+				<label for="hideDiscountAgreement">
+					<input id="hideDiscountAgreement" type="checkbox" bind:checked={hideDiscountAgreements} />
+					Vis ikke rabataftaler</label>
+		</div>
+	</div>
 	{#if productCalculations}
 		{#each productCalculations.filter((p) => !p.disabled && (!p.maxConsumption || p.maxConsumption >= ($consumption.amount || $customConsumption)) && (!p.minConsumption || p.minConsumption <= ($consumption.amount || $customConsumption)) && (!paymentTypeConsumptionOnly || p.paymentType == 'consumption') && (!hideDiscountAgreements || p.discountAgreement !== true)) as item}
-			<div class="box product" class:disabled={item.disabled}>
+			<div class="product box" class:disabled={item.disabled}>
 				<div class="flexgrid responsive">
 					<div class="col information">
 						{#if item.logo}
@@ -327,6 +323,24 @@
 	</div>
 {/if}
 <style lang="scss">
+	.controls {
+		display: flex;
+		margin-top: 3em;
+		.control {
+			background-color: #f9f9f9;
+			padding: .5em 1em;
+			margin-right: 1em;
+			border-radius: .6em;
+
+			.header {
+				display: block;
+				margin-bottom: .5em;
+				text-transform: uppercase;
+				font-size: .8em;
+				font-weight: 600;
+			}
+		}
+	}
 
 	ul.list-wrap {
 		display: flex;
@@ -335,6 +349,7 @@
 			margin-right: 2em;
 		}
 	}
+
 	.modal {
 		display: none;
 		position: fixed;
@@ -413,7 +428,8 @@
 
 	.product {
 		margin-bottom: 2em;
-
+		border-top: 1px solid #eee;
+		border-bottom: 1px solid #eee;
 		h2 {
 			margin: 1em 0;
 			font-size: 1.2em;

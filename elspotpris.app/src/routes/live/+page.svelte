@@ -90,7 +90,7 @@
 
 	let priceFormatter = new Intl.NumberFormat('da-DK', {
 		minimumFractionDigits: 2,
-		maximumFractionDigits: 5
+		maximumFractionDigits: 2
 	}).format;
 
 	let pricePricisionFormatter = new Intl.NumberFormat('da-DK', {
@@ -372,6 +372,10 @@
 						{/each}
 					{/if}
 				{/if}
+				<tr class="total">
+					<td class="total"><strong>Pris pr. kWh</strong></td>
+					<td class="amount total">{pricePricisionFormatter($priceNow)} kr.</td>
+				</tr>
 			</table>
 			{#if selectedProduct.fees && selectedProduct.fees.length > 0}
 				<table>
@@ -434,6 +438,12 @@
 				opacity: 0.5;
 			}
 		}
+
+		td.total {
+			border-top: 1px solid #000;
+			border-bottom: 2px solid #000;
+		}
+
 		th {
 			padding: 2em 1em 1em 1em;
 			text-align: left;

@@ -39,7 +39,7 @@
 
 	let priceFormatter = new Intl.NumberFormat('da-DK', {
 		minimumFractionDigits: 2,
-		maximumFractionDigits: 5
+		maximumFractionDigits: 2
 	}).format;
 
 	let pricesUnsubscribe;
@@ -119,15 +119,9 @@
 	onDestroy(() => {
 		if (timer) clearInterval(timer);
 		if (autoScrollDisabledTimer) clearInterval(autoScrollDisabledTimer);
-		if (pricesUnsubscribe) {
-			pricesUnsubscribe();
-		}
-		if (co2EmissionsUnsubscribe) {
-			co2EmissionsUnsubscribe();
-		}
-		if (co2EmissionsPrognosisUnsubscribe) {
-			co2EmissionsPrognosisUnsubscribe();
-		}
+		if (pricesUnsubscribe) pricesUnsubscribe();
+		if (co2EmissionsUnsubscribe) co2EmissionsUnsubscribe();
+		if (co2EmissionsPrognosisUnsubscribe) co2EmissionsPrognosisUnsubscribe();
 	});
 
 	const isActive = (date, dateNow) => {
