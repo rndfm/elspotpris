@@ -476,7 +476,7 @@ export const products = [
 		logo: '/logo/gasel.png',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
-		bindingPeriod: "6 mdr. binding",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -1655,6 +1655,15 @@ export const products = [
 		id: 'samstrom',
 		name: 'samstrøm',
 		link: 'https://samstrom.dk/',
+		payments: 'Ikke oplyst',
+		prices: null,
+		fees: null,
+		disabled: true
+	},
+	{
+		id: 'greenbow',
+		name: 'Greeenbow',
+		link: 'https://greenbow.dk/',
 		payments: 'Ikke oplyst',
 		prices: null,
 		fees: null,
