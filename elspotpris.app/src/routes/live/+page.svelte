@@ -97,7 +97,7 @@
 		maximumFractionDigits: 5
 	}).format;
 
-	function taxAndFormat(price) {
+	$: taxAndFormat = (price) => {
 		price = price * (withTax ? taxRate : 1);
 		return pricePricisionFormatter(price);
 	}
