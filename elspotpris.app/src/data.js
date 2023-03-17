@@ -16,7 +16,8 @@ import {
 	transport,
 	transportNow,
 	governmentTariffsNow,
-	transmissionTariffsNow
+	transmissionTariffsNow,
+	spotNow
 } from './stores.js';
 import { governmentTariffs, transmissionTariffs, products } from './prices';
 import { io } from 'socket.io-client';
@@ -172,6 +173,12 @@ const calculatePrices = () => {
 					new Date(priceEntry.hour)
 				)
 			);
+
+			spotNow.set({
+				price: priceEntry.prices.filter((p) => p.area == region)[0].price / 1000,
+				area: region,
+				hour: new Date(priceEntry.hour).getHours()
+			});
 
 			if (selectedTariff)
 			{

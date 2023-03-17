@@ -15,7 +15,8 @@
 		transport,
 		transportNow,
 		governmentTariffsNow,
-		transmissionTariffsNow
+		transmissionTariffsNow,
+		spotNow
 	} from '../../stores.js';
 	import { taxRate } from '../../data.js';
 	import { products } from '../../prices.js';
@@ -310,9 +311,12 @@
 									width="16"
 									height="16"
 								/>{/if}
+								
+							{#if item.amount === null}{$spotNow.area} kl {$spotNow.hour}{/if}
 						</td>
 						<td class="amount">
 							{#if item.amount != undefined}{taxAndFormat(item.amount)} kr{/if}
+							{#if item.amount === null}{taxAndFormat($spotNow.price)} kr{/if}
 						</td>
 					</tr>
 				{/each}
