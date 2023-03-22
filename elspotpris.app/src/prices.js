@@ -401,7 +401,7 @@ export const products = [
 		logo: 'logo/vindstod.png',
 		discountAgreement: true,
 		payments: 'Acontobetaling kvartalsvis',
-		paymentType: "advance",
+		paymentType: "adxvance",
 		bindingPeriod: null,
 		prices: [
 			{
@@ -578,7 +578,7 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.2057
+					amount: 0.2057
 			}
 		],
 		fees: [
@@ -621,7 +621,8 @@ export const products = [
 		fees: [
 			{
 				name: 'Abonnement',
-				amount: 29
+				amount: 23.2,
+				paymentsPerYear: 12
 			},
 			{
 				name: 'Betaling via betalingsservice',
@@ -633,7 +634,7 @@ export const products = [
 			},
 			{
 				name: 'Rykkergebyr',
-				amount: 100
+				amount: 80
 			}
 			
 		]
@@ -658,7 +659,8 @@ export const products = [
 		fees: [
 			{
 				name: 'Abonnement',
-				amount: 29
+				amount: 23.2,
+				paymentsPerYear: 12
 			},
 			{
 				name: 'Betaling via betalingsservice',
@@ -670,7 +672,7 @@ export const products = [
 			},
 			{
 				name: 'Rykkergebyr',
-				amount: 100
+				amount: 80
 			}
 			
 		]
