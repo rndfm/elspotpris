@@ -602,6 +602,82 @@ export const products = [
 		]
 	},
 	{
+		id: 'groen_ok_el_spot',
+		name: 'Grøn OK El Spot',
+		link: 'https://www.ok.dk/privat/produkter/el/spotpris',
+		payments: 'Acontobetaling månedligt',
+		paymentType: "advance",
+		bindingPeriod: "6 mdr. binding",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.132
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 23.2,
+				paymentsPerYear: 12
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			},
+			{
+				name: 'Indbetalingskort',
+				amount: 0
+			},
+			{
+				name: 'Rykkergebyr',
+				amount: 80
+			}
+			
+		]
+	},
+	{
+		id: 'ok_el_spot',
+		name: 'OK El Spot',
+		link: 'https://www.ok.dk/privat/produkter/el/spotpris',
+		payments: 'Acontobetaling månedligt',
+		paymentType: "advance",
+		bindingPeriod: "6 mdr. binding",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.03
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 23.2,
+				paymentsPerYear: 12
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			},
+			{
+				name: 'Indbetalingskort',
+				amount: 0
+			},
+			{
+				name: 'Rykkergebyr',
+				amount: 80
+			}
+			
+		]
+	},
+	{
 		id: 'norlys_flexel',
 		name: 'Norlys FlexEl',
 		link: 'https://norlys.dk/',
