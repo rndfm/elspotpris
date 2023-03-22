@@ -401,7 +401,7 @@ export const products = [
 		logo: 'logo/vindstod.png',
 		discountAgreement: true,
 		payments: 'Acontobetaling kvartalsvis',
-		paymentType: "adxvance",
+		paymentType: "advance",
 		bindingPeriod: null,
 		prices: [
 			{
@@ -578,7 +578,7 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-					amount: 0.2057
+				amount: 0.2057
 			}
 		],
 		fees: [
