@@ -24,19 +24,33 @@ async function getPrices() {
     console.log(e);
   });
 
+  // if tomorrow is not available, get yesterday
   if (
     pricesTomorrow == null ||
     pricesTomorrow.some((p) => p.prices.some((ap) => isNaN(ap.price)))
   ) {
     console.log("Some prices for tomorrow are NaN.");
-    // get prices for yesterday
-    var yesterday = today.addDays(-1);
-    var pricesYesterday = await getPricesForDate(yesterday).catch((e) => {
-      console.log(e);
-      return pricesToday;
-    });
 
-    return { prices: pricesYesterday.concat(pricesToday), lastDate: today };
+    // check for special case where we are changing from vinter to sommer time.
+    const nanPrices = pricesTomorrow.filter((p) => p.prices.some((ap) => isNaN(ap.price)));
+    if (nanPrices.length > 1) {
+      // get prices for yesterday
+      var yesterday = today.addDays(-1);
+      var pricesYesterday = await getPricesForDate(yesterday).catch((e) => {
+        console.log(e);
+        return pricesToday;
+      });
+
+      return { prices: pricesYesterday.concat(pricesToday), lastDate: today };
+    }
+    else
+    {
+      console.log("Special case where we are changing from vinter to sommer time. Filtering out NaN prices");
+      pricesTomorrow = pricesTomorrow.filter(p => !p.prices.some((ap) => isNaN(ap.price)));
+      pricesTomorrow.forEach(element => {
+        console.log(element);
+      });
+    }
   }
 
   return { prices: pricesToday.concat(pricesTomorrow), lastDate: tomorrow };
