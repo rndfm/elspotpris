@@ -11,7 +11,14 @@ export const governmentTariffs = [
 		name: 'Elafgift 2023',
 		amount: 0.008,
 		validFrom: "2023-01-01T00:00:00",
-		validTo: "2023-06-01T00:00:00",
+		validTo: "2023-07-01T00:00:00",
+	},
+	{
+		id: 'elafgift2023h2',
+		name: 'Elafgift 2023 H2',
+		amount: 0.697,
+		validFrom: "2023-07-01T00:00:00",
+		validTo: "2024-01-01T00:00:00",
 	}
 ];
 
