@@ -145,7 +145,7 @@
 
 	<h2>Find det billigste elselskab for dig.</h2>
 	<p class="lead">
-		Sammenligning de reelle udgifter hos de største elselskaber i Danmark.
+		Sammenlign de reelle udgifter hos elselskaber i Danmark.
 	</p>
 	<p>
 		Der sammenlignes på <strong>spotpristillæg, abonnementspris og betalingsgebyrer</strong>.<br />
