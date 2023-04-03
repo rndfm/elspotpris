@@ -1735,9 +1735,9 @@ export const products = [
 		disabled: true
 	},
 	{
-		id: 'samstrom',
-		name: 'samstrøm',
-		link: 'https://samstrom.dk/',
+		id: 'edison',
+		name: 'EDISON',
+		link: 'https://edisonel.dk/',
 		payments: 'Ikke oplyst',
 		prices: null,
 		fees: null,
