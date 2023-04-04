@@ -251,11 +251,11 @@
 	{/if}
 	{#if !loading}
 		<p>
-			Omkostningerne vises årligt for det valgte forbrug. Priser vises {#if withTax}inkl{:else}eksl{/if}. moms.<br />
-			<small>Er du representant for et elselskab og vil du opdaterer dit produkt eller have dit produkt med i vores sammenligning, så kontakt os på <a href="mailto:info@elspotpris.dk">info@elspotpris.dk</a></small>
+			Omkostningerne vises årligt for det valgte forbrug. Priser vises {#if withTax}inkl{:else}ekskl{/if}. moms.<br />
+			<small>Er du repræsentant for et elselskab og vil du opdatere dit produkt eller have dit produkt med i vores sammenligning, så kontakt os på <a href="mailto:info@elspotpris.dk">info@elspotpris.dk</a></small>
 		</p>
-		<h3>Disse selskaber kan ikke vises da deres reelle priser ikke er oplyst.</h3>
-		<p>For at kunne udregne den reelle pris man som forbruger kommer til at betale skal elselskabet oplyse alle deres tillæg til elspotprisen. Ved nogle selskaber regner vi det samlede tillæg ud via elregninger indsendt af forbrugerne. Hvis vi ikke kan få oplyst og bekræftet alle tillæg kan prisen for elselskabet ikke udregnes.</p>
+		<h3>Disse selskaber kan ikke vises, da deres reelle priser ikke er oplyst.</h3>
+		<p>For at kunne udregne den reelle pris man som forbruger kommer til at betale, skal elselskabet oplyse alle deres tillæg til elspotprisen. Ved nogle selskaber regner vi det samlede tillæg ud via elregninger indsendt af forbrugerne. Hvis vi ikke kan få oplyst og bekræftet alle tillæg kan prisen for elselskabet ikke udregnes.</p>
 		<ul class="list-wrap">
 			{#each productCalculations.filter((p) => p.disabled) as item}
 			<li>{item.name}</li>
@@ -265,8 +265,8 @@
 			<div class="col">
 				<h3>Sådan sammenligner du elselskabernes variable priser</h3>
 				<p>
-					En variabel pris består af flere dele, nogle af dele er ens for alle elselskaber, mens andre
-					er forskellige. Der giver derfor kun mening at sammenligne elselskaberne på de dele, som er
+					En variabel pris består af flere dele, nogle dele er ens for alle elselskaber, mens andre
+					er forskellige. Det giver derfor kun mening at sammenligne elselskaberne på de dele, som er
 					forskellige.
 				</p>
 
@@ -295,8 +295,8 @@
 
 				<p>
 					Mange elselskaber ønsker ikke at oplyse deres tillæg til spotprisen, og der er intet i
-					lovgivningen der tvinger dem til det.<br />
-					Nogle bruger endda udtryk som "indkøbspris", "kostpris" eller "følger spotprisen" selvom de ligger
+					lovgivningen, der tvinger dem til det.<br />
+					Nogle bruger endda udtryk som "indkøbspris", "kostpris" eller "følger spotprisen" selvom de lægger
 					avance oven på spotprisen.<br />
 				</p>
 				<p>
