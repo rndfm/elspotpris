@@ -92,7 +92,7 @@ async function update(refresh) {
   var tomorrow = today.addDays(1);
   if (
     pricesDate == null ||
-    (pricesDate < tomorrow && new Date().getHours() >= 12) ||
+    (pricesDate < tomorrow && new Date().getHours() >= 11) ||
     pricesDate < today
   ) {
     console.log(`Prices stale. Getting prices for ${tomorrow}`);
