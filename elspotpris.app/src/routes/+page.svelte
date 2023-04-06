@@ -165,19 +165,21 @@
 			</select>
 		</div>
 		{#if $consumption.amount === null}
-		<div class="control">
-			<label for="customConsumption" class="header">Indtast årligt forbrug (kWh)</label>
-			<input id="customConsumption" type="number" bind:value={$customConsumption} />
-		</div>
+			<div class="control">
+				<label for="customConsumption" class="header">Indtast årligt forbrug (kWh)</label>
+				<input id="customConsumption" type="number" bind:value={$customConsumption} />
+			</div>
 		{/if}
 		<div class="control">
 			<span class="header">Filtre</span>
 			<label for="monthlyPayment">
 				<input id="monthlyPayment" type="checkbox" bind:checked={paymentTypeConsumptionOnly} />
-				Vis kun forbrugsafregnede</label>
-				<label for="hideDiscountAgreement">
-					<input id="hideDiscountAgreement" type="checkbox" bind:checked={hideDiscountAgreements} />
-					Vis ikke rabataftaler</label>
+				Vis kun forbrugsafregnede
+			</label>
+			<label for="hideDiscountAgreement">
+				<input id="hideDiscountAgreement" type="checkbox" bind:checked={hideDiscountAgreements} />
+				Vis ikke rabataftaler
+			</label>
 		</div>
 	</div>
 	{#if productCalculations}
@@ -325,18 +327,18 @@
 <style lang="scss">
 	.controls {
 		display: flex;
-		margin-top: 3em;
+		flex-wrap: wrap;
+		gap: 1em;
 		.control {
+			flex: 1;
 			background-color: #f9f9f9;
-			padding: .5em 1em;
-			margin-right: 1em;
-			border-radius: .6em;
-
+			padding: 1em 1em;
+			border-radius: 0.6em;
 			.header {
 				display: block;
-				margin-bottom: .5em;
+				margin-bottom: 0.5em;
 				text-transform: uppercase;
-				font-size: .8em;
+				font-size: 0.8em;
 				font-weight: 600;
 			}
 		}
