@@ -2,6 +2,7 @@
 	import './global.scss';
 	import { mainMenuClosed, darkMode } from '../stores.js';
 	import { browser } from '$app/environment';
+	import { beforeNavigate, goto } from '$app/navigation';
 
 	let menuActive = false;
 
@@ -20,6 +21,22 @@
 			gtag('event', 'keepalive');
 		}, 240000);
 	}
+
+	/**
+	 * This is a workaround for the fact that SvelteKit does not preserve query parameters when navigating to a new page.
+	 * This is a problem for us because we use query parameters to store parts of the state of the app.
+	 * This code will copy all query parameters from the current URL to the new URL when navigating to a new page.
+	 */
+	beforeNavigate(({ from, to, type, cancel }) => {
+		if (type === 'link') {
+			cancel();
+			const url = new URL(window.location.toString());
+			url.searchParams.forEach((value, key) => {
+				to.url.searchParams.set(key, value);
+			});
+			goto(to.url);
+		}
+	});
 </script>
 
 <nav id="navigation" class:closed={$mainMenuClosed} class:active={menuActive}>
