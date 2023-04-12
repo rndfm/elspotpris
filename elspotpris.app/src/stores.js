@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { createWritableBoolFromUrl, createWritableNumberFromUrl, createWritableStringFromUrl } from './urlStore.js';
 import { products, consumptionTypes } from './prices.js';
 
 import Table from './lib/Table.svelte';
@@ -19,12 +20,6 @@ export const graphTypes = [
 	}
 ];
 
-let storedPriceRegion = browser ? localStorage.getItem('priceRegion') ?? null : null;
-export const priceRegion = writable(storedPriceRegion);
-priceRegion.subscribe((value) => {
-	if (browser) localStorage.setItem('priceRegion', value);
-});
-
 export const calculatedProducts = writable();
 
 export const prices = writable();
@@ -39,32 +34,6 @@ export const co2EmissionNow = writable(0);
 export const co2Emissions = writable();
 export const co2EmissionsPrognosis = writable();
 
-function createWriteableBoolFromLocalStorage(key, defaultValue) {
-	var value = defaultValue;
-	const storedValue = browser ? localStorage.getItem(key) : null;
-	if (storedValue !== null) value = storedValue === 'true';
-
-	let writeableBool = writable(value);
-	writeableBool.subscribe((value) => {
-		if (browser) localStorage.setItem(key, value);
-	});
-
-	return writeableBool;
-}
-
-function createWriteableNumberFromLocalStorage(key, defaultValue) {
-	var value = Number(defaultValue);
-	const storedValue = browser ? localStorage.getItem(key) : null;
-	if (storedValue !== null) value = Number(storedValue);
-
-	let writeableNumber = writable(value);
-	writeableNumber.subscribe((value) => {
-		if (browser) localStorage.setItem(key, value);
-	});
-
-	return writeableNumber;
-}
-
 function createWriteableObjectFromLocalStorage(key, options) {
 	const storedObjectId = browser ? localStorage.getItem(key) ?? null : null;
 	const storedObject = storedObjectId
@@ -78,27 +47,16 @@ function createWriteableObjectFromLocalStorage(key, options) {
 	return writeableObject;
 }
 
-function createWriteableStringFromLocalStorage(key, defaultValue) {
-	const storedString = browser ? localStorage.getItem(key) ?? defaultValue : null;
-
-	let writeableString = writable(storedString);
-	writeableString.subscribe((value) => {
-		if (browser) localStorage.setItem(key, value);
-	});
-
-	return writeableString;
-}
-
-export const tax = createWriteableBoolFromLocalStorage('tax', true);
-export const electricityTax = createWriteableBoolFromLocalStorage('electricityTax', true);
-export const tariff = createWriteableStringFromLocalStorage('tariff', 'none');
+export const tax = createWritableBoolFromUrl('tax', true);
+export const electricityTax = createWritableBoolFromUrl('electricityTax', true);
+export const tariff = createWritableStringFromUrl('tariff', 'none');
 export const product = createWriteableObjectFromLocalStorage('product', products);
-export const darkMode = createWriteableBoolFromLocalStorage('darkMode', false);
-export const menuClosed = createWriteableBoolFromLocalStorage('menuClosed', false);
-export const mainMenuClosed = createWriteableBoolFromLocalStorage('mainMenuClosed', false);
-export const transmission = createWriteableBoolFromLocalStorage('transmission', true);
-
-export const co2Enabled = createWriteableBoolFromLocalStorage('co2Enabled', false);
+export const darkMode = createWritableBoolFromUrl('darkMode', false);
+export const menuClosed = createWritableBoolFromUrl('menuClosed', false);
+export const mainMenuClosed = createWritableBoolFromUrl('mainMenuClosed', false);
+export const transmission = createWritableBoolFromUrl('transmission', true);
+export const co2Enabled = createWritableBoolFromUrl('co2Enabled', false);
+export const priceRegion = createWritableStringFromUrl('priceRegion');
 
 const storedConsumptionId = browser ? localStorage.getItem('consumption') : null;
 const storedConsumption = storedConsumptionId
@@ -109,7 +67,7 @@ consumption.subscribe((value) => {
 	if (browser) localStorage.setItem('consumption', value.id);
 });
 
-export const customConsumption = createWriteableNumberFromLocalStorage('customConsumption');
+export const customConsumption = createWritableNumberFromUrl('customConsumption');
 
 let storedGraphId = browser ? localStorage.getItem('graph') : null;
 if (storedGraphId === 'graph') {
