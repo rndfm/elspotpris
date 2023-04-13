@@ -10,7 +10,7 @@
 		menuClosed,
 		electricityTax,
 		graphTypes,
-		graph,
+		graphId,
 		transmission,
 		transport,
 		transportNow,
@@ -145,9 +145,9 @@
 		onResize();
 	});
 
-	let selectedGraph = graphTypes[0];
-	graph.subscribe((value) => {
-		selectedGraph = value;
+	let selectedGraph;
+	graphId.subscribe((value) => {
+		selectedGraph = graphTypes.find((graph) => graph.id === value);
 	});
 </script>
 
@@ -241,9 +241,9 @@
 			</p>
 		</li>
 		<li>
-			<select bind:value={$graph}>
+			<select bind:value={$graphId}>
 				{#each graphTypes as option}
-					<option value={option}>{option.name}</option>
+					<option value={option.id}>{option.name}</option>
 				{/each}
 			</select>
 		</li>

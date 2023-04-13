@@ -44,6 +44,7 @@ export const mainMenuClosed = createWritableBoolFromUrl('mainMenuClosed', false)
 export const transmission = createWritableBoolFromUrl('transmission', true);
 export const co2Enabled = createWritableBoolFromUrl('co2Enabled', false);
 export const priceRegion = createWritableStringFromUrl('priceRegion');
+export const graphId = createWritableStringFromUrl('graphId', graphTypes[0].id);
 
 const storedConsumptionId = browser ? localStorage.getItem('consumption') : null;
 const storedConsumption = storedConsumptionId
@@ -58,14 +59,4 @@ const storedCustomConsumption = browser ? localStorage.getItem('customConsumptio
 export const customConsumption = writable(storedCustomConsumption);
 customConsumption.subscribe((value) => {
 	if (browser) localStorage.setItem('customConsumption', value);
-});
-
-let storedGraphId = browser ? localStorage.getItem('graph') : null;
-if (storedGraphId === 'graph') {
-	storedGraphId = 'bars';
-}
-const storedGraph = storedGraphId ? graphTypes.find((t) => t.id == storedGraphId) : graphTypes[0];
-export const graph = writable(storedGraph ? storedGraph : graphTypes[0]);
-graph.subscribe((value) => {
-	if (browser) localStorage.setItem('graph', value.id);
 });
