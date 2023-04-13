@@ -25,10 +25,10 @@
 	/**
 	 * This is a workaround for the fact that SvelteKit does not preserve query parameters when navigating to a new page.
 	 * This is a problem for us because we use query parameters to store parts of the state of the app.
-	 * This code will copy all query parameters from the current URL to the new URL when navigating to a new page.
+	 * This code will copy all query parameters from the current URL to the new URL when navigating to a new page on the same host.
 	 */
-	beforeNavigate(({ from, to, type, cancel }) => {
-		if (type === 'link') {
+	beforeNavigate(({ to, type, cancel }) => {
+		if (type === 'link' && to.url.host === window.location.host) {
 			cancel();
 			const url = new URL(window.location.toString());
 			url.searchParams.forEach((value, key) => {
