@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
-import { createWritableBoolFromUrl, createWritableNumberFromUrl, createWritableStringFromUrl } from './urlStore.js';
-import { consumptionTypes } from './prices.js';
+import { createWritableBoolFromUrl, createWritableStringFromUrl } from './urlStore.js';
+import { consumptionTypes, products } from './prices.js';
 
 import Table from './lib/Table.svelte';
 import Bars from './lib/Bars.svelte';
@@ -37,7 +37,7 @@ export const co2EmissionsPrognosis = writable();
 export const tax = createWritableBoolFromUrl('tax', true);
 export const electricityTax = createWritableBoolFromUrl('electricityTax', true);
 export const tariff = createWritableStringFromUrl('tariff', 'none');
-export const productId = createWritableStringFromUrl('productId');
+export const productId = createWritableStringFromUrl('productId', products[0].id);
 export const darkMode = createWritableBoolFromUrl('darkMode', false);
 export const menuClosed = createWritableBoolFromUrl('menuClosed', false);
 export const mainMenuClosed = createWritableBoolFromUrl('mainMenuClosed', false);
@@ -54,7 +54,11 @@ consumption.subscribe((value) => {
 	if (browser) localStorage.setItem('consumption', value.id);
 });
 
-export const customConsumption = createWritableNumberFromUrl('customConsumption');
+const storedCustomConsumption = browser ? localStorage.getItem('customConsumption') : null;
+export const customConsumption = writable(storedCustomConsumption);
+customConsumption.subscribe((value) => {
+	if (browser) localStorage.setItem('customConsumption', value);
+});
 
 let storedGraphId = browser ? localStorage.getItem('graph') : null;
 if (storedGraphId === 'graph') {
