@@ -7,7 +7,7 @@ import {
 	priceRegion,
 	tax,
 	tariff,
-	product,
+	productId,
 	calculatedProducts,
 	consumption,
 	customConsumption,
@@ -304,8 +304,8 @@ tariff.subscribe((value) => {
 	}
 });
 
-product.subscribe((value) => {
-	selectedProduct = value;
+productId.subscribe((value) => {
+	selectedProduct = products.find((p) => p.id === value);
 	calculatePrices();
 });
 

@@ -5,7 +5,7 @@
 		priceRegion,
 		tax,
 		tariff,
-		product,
+		productId,
 		darkMode,
 		menuClosed,
 		electricityTax,
@@ -25,8 +25,8 @@
 	import Contribute from '../../lib/Contribute.svelte';
 
 	let selectedProduct;
-	product.subscribe((value) => {
-		selectedProduct = value;
+	productId.subscribe((value) => {
+		selectedProduct = products.find((product) => product.id === value);
 	});
 
 	let selectedTariff;
@@ -101,7 +101,7 @@
 	$: taxAndFormat = (price) => {
 		price = price * (withTax ? taxRate : 1);
 		return pricePricisionFormatter(price);
-	}
+	};
 
 	function onResize() {
 		if (browser) {
@@ -128,7 +128,9 @@
 			return false;
 		}
 		return (
-			product.prices?.some((p) => p.conditions === null || p.conditions || p.calculated || p.amount === undefined) ||
+			product.prices?.some(
+				(p) => p.conditions === null || p.conditions || p.calculated || p.amount === undefined
+			) ||
 			product.fees?.some((f) => f.amount === undefined || f.conditions === null || f.conditions)
 		);
 	}
@@ -151,8 +153,11 @@
 
 <svelte:head>
 	<title>elspotpris.dk - Se din elpris pr. kWh time for time - i dag og det næste døgn frem.</title>
-	<meta name="description" content="Se elprisen inkl. transport tariffer, elafgift og moms i overskuelig graf så du kan planlægge dit strømforbrug. Se også nuværende og prognose for Co2 udledning."	/>
-	<meta property="og:image" content="https://elspotpris.dk/facebook-preview-live.png">
+	<meta
+		name="description"
+		content="Se elprisen inkl. transport tariffer, elafgift og moms i overskuelig graf så du kan planlægge dit strømforbrug. Se også nuværende og prognose for Co2 udledning."
+	/>
+	<meta property="og:image" content="https://elspotpris.dk/facebook-preview-live.png" />
 </svelte:head>
 
 <svelte:window on:resize={onResize} />
@@ -172,10 +177,22 @@
 	<ul>
 		<li>
 			<label for="priceAreaDK1">
-				<input id="priceAreaDK1" type="radio" bind:group={region} value="DK1" on:change={updateRegion} /> DK1(vest)
+				<input
+					id="priceAreaDK1"
+					type="radio"
+					bind:group={region}
+					value="DK1"
+					on:change={updateRegion}
+				/> DK1(vest)
 			</label>
 			<label for="priceAreaDK2">
-				<input id="priceAreaDK2" type="radio" bind:group={region} value="DK2" on:change={updateRegion} /> DK2(øst)
+				<input
+					id="priceAreaDK2"
+					type="radio"
+					bind:group={region}
+					value="DK2"
+					on:change={updateRegion}
+				/> DK2(øst)
 			</label>
 		</li>
 		<li>
@@ -204,13 +221,15 @@
 		</li>
 		<li>
 			<p>
-				<a href="https://tariffer.dk?utm_source=elspotpris" target="_blank" rel="noreferrer">Find netselskab</a>
+				<a href="https://tariffer.dk?utm_source=elspotpris" target="_blank" rel="noreferrer"
+					>Find netselskab</a
+				>
 			</p>
 		</li>
 		<li class="full">
-			<select bind:value={$product}>
-				{#each sortedProducts.filter(p => !p.disabled) as product (product.id)}
-					<option value={product}>
+			<select bind:value={$productId}>
+				{#each sortedProducts.filter((product) => !product.disabled) as product}
+					<option value={product.id}>
 						{product.name}
 					</option>
 				{/each}
@@ -311,7 +330,7 @@
 									width="16"
 									height="16"
 								/>{/if}
-								
+
 							{#if item.amount === null}{$spotNow.area} kl {$spotNow.hour}{/if}
 						</td>
 						<td class="amount">
@@ -350,7 +369,9 @@
 				{/if}
 				{#if selectedTariff}
 					<tr>
-						<th colspan="2">Transportudgifter som betales til dit lokale netselskab - {selectedTariff.name}</th>
+						<th colspan="2"
+							>Transportudgifter som betales til dit lokale netselskab - {selectedTariff.name}</th
+						>
 					</tr>
 					{#if tariffNow}
 						{#each tariffNow as entry}
@@ -360,14 +381,14 @@
 								</td>
 							</tr>
 							{#each entry.prices as item}
-							<tr class="tariff" class:disabled={!item.active}>
-								<td>
+								<tr class="tariff" class:disabled={!item.active}>
+									<td>
 									kl. {String(item.start).padStart(2, '0')} - {String(item.end + 1).padStart(2, '0')}
-								</td>
-								<td class="amount">
-									{#if item.price != undefined}{taxAndFormat(item.price)} kr.{/if}
-								</td>
-							</tr>
+									</td>
+									<td class="amount">
+										{#if item.price != undefined}{taxAndFormat(item.price)} kr.{/if}
+									</td>
+								</tr>
 							{/each}
 						{/each}
 					{/if}
@@ -394,13 +415,13 @@
 										height="16"
 									/>{/if}
 								{#if item.conditions}<img
-									class="item-warning"
-									src="warning.svg"
-									alt="Advarsel"
-									title={item.conditions}
-									width="16"
-									height="16"
-								/>{/if}
+										class="item-warning"
+										src="warning.svg"
+										alt="Advarsel"
+										title={item.conditions}
+										width="16"
+										height="16"
+									/>{/if}
 								{#if item.amount === undefined}<img
 										class="item-warning"
 										src="warning.svg"

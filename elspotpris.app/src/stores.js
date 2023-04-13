@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 import { createWritableBoolFromUrl, createWritableNumberFromUrl, createWritableStringFromUrl } from './urlStore.js';
-import { products, consumptionTypes } from './prices.js';
+import { consumptionTypes } from './prices.js';
 
 import Table from './lib/Table.svelte';
 import Bars from './lib/Bars.svelte';
@@ -34,23 +34,10 @@ export const co2EmissionNow = writable(0);
 export const co2Emissions = writable();
 export const co2EmissionsPrognosis = writable();
 
-function createWriteableObjectFromLocalStorage(key, options) {
-	const storedObjectId = browser ? localStorage.getItem(key) ?? null : null;
-	const storedObject = storedObjectId
-		? options.find((o) => o.id == storedObjectId) ?? options[0]
-		: options[0];
-	let writeableObject = writable(storedObject);
-	writeableObject.subscribe((value) => {
-		if (browser) localStorage.setItem(key, value.id);
-	});
-
-	return writeableObject;
-}
-
 export const tax = createWritableBoolFromUrl('tax', true);
 export const electricityTax = createWritableBoolFromUrl('electricityTax', true);
 export const tariff = createWritableStringFromUrl('tariff', 'none');
-export const product = createWriteableObjectFromLocalStorage('product', products);
+export const productId = createWritableStringFromUrl('productId');
 export const darkMode = createWritableBoolFromUrl('darkMode', false);
 export const menuClosed = createWritableBoolFromUrl('menuClosed', false);
 export const mainMenuClosed = createWritableBoolFromUrl('mainMenuClosed', false);
