@@ -35,25 +35,6 @@ export function createWritableBoolFromUrl(key, defaultValue) {
 }
 
 /**
- * Creates a writable number that is stored in the URL
- * @returns 
- */
-export function createWritableNumberFromUrl(key, defaultValue) {
-    const urlValue = browser ? new URL(window.location.toString()).searchParams.get(key) : null;
-
-    var value = urlValue !== null
-        ? Number(urlValue)
-        : defaultValue;
-
-    let writableNumber = writable(value);
-    writableNumber.subscribe((value) => {
-        updateUrl(key, value, defaultValue);
-    });
-
-    return writableNumber;
-}
-
-/**
  * Creates a writable string that is stored in the URL
  */
 export function createWritableStringFromUrl(key, defaultValue) {
