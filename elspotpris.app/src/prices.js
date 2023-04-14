@@ -520,13 +520,13 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.05
+				amount: 0.10
 			}
 		],
 		fees: [
 			{
 				name: 'Abonnement',
-				amount: 16.664,
+				amount: 16.8,
 				paymentsPerYear: 12
 			},
 			{
