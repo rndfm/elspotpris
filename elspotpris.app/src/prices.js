@@ -502,7 +502,8 @@ export const products = [
 			},
 			{
 				name: 'Betaling via betalingsservice',
-				amount: 4.656
+				amount: 4.656,
+				paymentsPerYear: 12
 			}
 		]
 	},
