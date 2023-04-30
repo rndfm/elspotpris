@@ -1043,9 +1043,9 @@ export const products = [
 		]
 	},
 	{
-		id: 'jysk_energi_min-stroem',
-		name: 'Jysk Energi - Min Strøm',
-		link: 'https://jyskenergi.dk/el/privat/min-stroem/',
+		id: 'jysk_energi_det-grønne-liv',
+		name: 'Jysk Energi - Det Grønne Liv',
+		link: 'https://jyskenergi.dk/el/privat/det-groenne-liv/',
 		logo: '/logo/jysk-energi.png',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
@@ -1057,13 +1057,13 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.04
+				amount: 0.0725
 			}
 		],
 		fees: [
 			{
 				name: 'Abonnement',
-				amount: 12,
+				amount: 10,
 				paymentsPerYear: 12
 			},
 			{
