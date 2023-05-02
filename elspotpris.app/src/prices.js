@@ -1029,11 +1029,11 @@ export const products = [
 			{
 				name: 'Betaling via betalingsservice',
 				amount: 4.984,
-				paymentsPerYear: 12
 			},
 			{
 				name: 'MobilePay pr. regning',
-				amount: 2.6
+				amount: 2.6,
+				paymentsPerYear: 12
 			},
 			{
 				name: 'Abonnement',
