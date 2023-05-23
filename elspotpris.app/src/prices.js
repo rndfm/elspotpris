@@ -11,7 +11,14 @@ export const governmentTariffs = [
 		name: 'Elafgift 2023',
 		amount: 0.008,
 		validFrom: "2023-01-01T00:00:00",
-		validTo: "2023-06-01T00:00:00",
+		validTo: "2023-07-01T00:00:00",
+	},
+	{
+		id: 'elafgift2023h2',
+		name: 'Elafgift 2023 H2',
+		amount: 0.697,
+		validFrom: "2023-07-01T00:00:00",
+		validTo: "2024-01-01T00:00:00",
 	}
 ];
 
@@ -141,8 +148,7 @@ export const products = [
 			},
 			{
 				name: 'Grønt tiltag - plante træer',
-				amount: 0.08,
-				conditions: 'fast pris i aftalen'
+				amount: 0.08
 			}
 		],
 		fees: [
@@ -477,7 +483,7 @@ export const products = [
 		logo: '/logo/gasel.png',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
-		bindingPeriod: "6 mdr. binding",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
@@ -485,7 +491,7 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.01
+				amount: 0.05
 			}
 		],
 		fees: [
@@ -496,7 +502,8 @@ export const products = [
 			},
 			{
 				name: 'Betaling via betalingsservice',
-				amount: 4.656
+				amount: 4.656,
+				paymentsPerYear: 12
 			}
 		]
 	},
@@ -514,13 +521,13 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.05
+				amount: 0.08
 			}
 		],
 		fees: [
 			{
 				name: 'Abonnement',
-				amount: 16.664,
+				amount: 16.8,
 				paymentsPerYear: 12
 			},
 			{
@@ -603,6 +610,82 @@ export const products = [
 		]
 	},
 	{
+		id: 'groen_ok_el_spot',
+		name: 'Grøn OK El Spot',
+		link: 'https://www.ok.dk/privat/produkter/el/spotpris',
+		payments: 'Acontobetaling månedligt',
+		paymentType: "advance",
+		bindingPeriod: "6 mdr. binding",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.132
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 23.2,
+				paymentsPerYear: 12
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			},
+			{
+				name: 'Indbetalingskort',
+				amount: 0
+			},
+			{
+				name: 'Rykkergebyr',
+				amount: 80
+			}
+			
+		]
+	},
+	{
+		id: 'ok_el_spot',
+		name: 'OK El Spot',
+		link: 'https://www.ok.dk/privat/produkter/el/spotpris',
+		payments: 'Acontobetaling månedligt',
+		paymentType: "advance",
+		bindingPeriod: "6 mdr. binding",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.032
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 23.2,
+				paymentsPerYear: 12
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			},
+			{
+				name: 'Indbetalingskort',
+				amount: 0
+			},
+			{
+				name: 'Rykkergebyr',
+				amount: 80
+			}
+			
+		]
+	},
+	{
 		id: 'norlys_flexel',
 		name: 'Norlys FlexEl',
 		link: 'https://norlys.dk/',
@@ -616,7 +699,7 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.035
+				amount: 0.035488
 			}
 		],
 		fees: [
@@ -717,7 +800,7 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.008
+				amount: 0.01232
 			}
 		],
 		fees: [
@@ -946,11 +1029,11 @@ export const products = [
 			{
 				name: 'Betaling via betalingsservice',
 				amount: 4.984,
-				paymentsPerYear: 12
 			},
 			{
 				name: 'MobilePay pr. regning',
-				amount: 2.6
+				amount: 2.6,
+				paymentsPerYear: 12
 			},
 			{
 				name: 'Abonnement',
@@ -960,9 +1043,9 @@ export const products = [
 		]
 	},
 	{
-		id: 'jysk_energi_min-stroem',
-		name: 'Jysk Energi - Min Strøm',
-		link: 'https://jyskenergi.dk/el/privat/min-stroem/',
+		id: 'jysk_energi_det-grønne-liv',
+		name: 'Jysk Energi - Det Grønne Liv',
+		link: 'https://jyskenergi.dk/el/privat/det-groenne-liv/',
 		logo: '/logo/jysk-energi.png',
 		payments: 'Acontobetaling kvartalsvis',
 		paymentType: "advance",
@@ -974,13 +1057,13 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.04
+				amount: 0.0725
 			}
 		],
 		fees: [
 			{
 				name: 'Abonnement',
-				amount: 12,
+				amount: 10,
 				paymentsPerYear: 12
 			},
 			{
@@ -1004,7 +1087,8 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.16
+				amount: 0.17824,
+				conditions: 'Tillægget ændres hver måned uden varsel'
 			}
 		],
 		fees: [
@@ -1207,7 +1291,7 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.064
+				amount: 0.12
 			}
 		],
 		fees: [
@@ -1226,12 +1310,251 @@ export const products = [
 		id: 'nordisk_energy',
 		name: 'Nordisk Energy',
 		link: 'https://nordiskenergy.dk/',
-		payments: 'Forbrugsafregnet månedsvis',
-		paymentType: "consumption",
-		prices: null,
-		fees: null,
+		payments: '10 måneders aconto betaling!',
+		bindingPeriod: null,
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.10
+			},
+			{
+				name: 'Skjult tillæg til spotpris',
+				amount: 0.87,
+				calculated: true,
+				conditions: "Skjult tillæg som ændre sig måned for måned.",
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 0
+			},
+			{
+				name: 'Betaling via betalingsservice',
+			}
+		]
+	},
+	{
+		id: 'grow_energy_zero_hero_netto_39',
+		name: 'Grow Energy - Zero Hero Netto 39',
+		link: 'https://growenergy.dk/',
+		logo: '/logo/grow-energy.png',
+		maxConsumption: 2000,
+		payments: 'Acontobetaling månedsvis',
 		bindingPeriod: "6 mdr. binding",
-		disabled: true
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0
+			}
+		],
+		fees: [
+			{
+				name: 'Oprettelse',
+				amount: 159.2,
+				paymentsPerYear: 1
+			},
+			{
+				name: 'Abonnement',
+				amount: 31.2,
+				paymentsPerYear: 12
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
+	},
+	{
+		id: 'grow_energy_zero_hero_netto_49',
+		name: 'Grow Energy - Zero Hero Netto 49',
+		link: 'https://growenergy.dk/',
+		logo: '/logo/grow-energy.png',
+		minConsumption: 2001,
+		maxConsumption: 6000,
+		payments: 'Acontobetaling månedsvis',
+		bindingPeriod: "6 mdr. binding",
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0
+			}
+		],
+		fees: [
+			{
+				name: 'Oprettelse',
+				amount: 159.2,
+				paymentsPerYear: 1
+			},
+			{
+				name: 'Abonnement',
+				amount: 39.2,
+				paymentsPerYear: 12
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
+	},
+	{
+		id: 'grow_energy_zero_hero_netto_79',
+		name: 'Grow Energy - Zero Hero Netto 79',
+		link: 'https://growenergy.dk/',
+		logo: '/logo/grow-energy.png',
+		minConsumption: 6001,
+		maxConsumption: 10000,
+		payments: 'Acontobetaling månedsvis',
+		bindingPeriod: "6 mdr. binding",
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0
+			}
+		],
+		fees: [
+			{
+				name: 'Oprettelse',
+				amount: 159.2,
+				paymentsPerYear: 1
+			},
+			{
+				name: 'Abonnement',
+				amount: 63.2,
+				paymentsPerYear: 12
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
+	},
+	{
+		id: 'grow_energy_zero_hero_netto_99',
+		name: 'Grow Energy - Zero Hero Netto 99',
+		link: 'https://growenergy.dk/',
+		logo: '/logo/grow-energy.png',
+		minConsumption: 10001,
+		maxConsumption: 15000,
+		payments: 'Acontobetaling månedsvis',
+		bindingPeriod: "6 mdr. binding",
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0
+			}
+		],
+		fees: [
+			{
+				name: 'Oprettelse',
+				amount: 159.2,
+				paymentsPerYear: 1
+			},
+			{
+				name: 'Abonnement',
+				amount: 79.2,
+				paymentsPerYear: 12
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
+	},
+	{
+		id: 'grow_energy_zero_hero',
+		name: 'Grow Energy - Zero Hero',
+		link: 'https://growenergy.dk/',
+		logo: '/logo/grow-energy.png',
+		maxConsumption: 4500,
+		payments: 'Acontobetaling månedsvis',
+		bindingPeriod: "6 mdr. binding",
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.248
+			}
+		],
+		fees: [
+			{
+				name: 'Oprettelse',
+				amount: 159.2,
+				paymentsPerYear: 1
+			},
+			{
+				name: 'Abonnement',
+				amount: 0
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
+	},
+	{
+		id: 'grow_energy_zero_hero_plus',
+		name: 'Grow Energy - Zero Hero+',
+		link: 'https://growenergy.dk/',
+		logo: '/logo/grow-energy.png',
+		minConsumption: 4501,
+		payments: 'Acontobetaling månedsvis',
+		bindingPeriod: "6 mdr. binding",
+		paymentType: "advance",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.16
+			}
+		],
+		fees: [
+			{
+				name: 'Oprettelse',
+				amount: 159.2,
+				paymentsPerYear: 1
+			},
+			{
+				name: 'Abonnement',
+				amount: 0
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0
+			}
+		]
 	},
 	{
 		id: 'nef',
@@ -1414,18 +1737,18 @@ export const products = [
 		disabled: true
 	},
 	{
-		id: 'grow_energy',
-		name: 'Grow Energy',
-		link: 'https://growenergy.dk/',
+		id: 'edison',
+		name: 'EDISON',
+		link: 'https://edisonel.dk/',
 		payments: 'Ikke oplyst',
 		prices: null,
 		fees: null,
 		disabled: true
 	},
 	{
-		id: 'samstrom',
-		name: 'samstrøm',
-		link: 'https://samstrom.dk/',
+		id: 'greenbow',
+		name: 'Greeenbow',
+		link: 'https://greenbow.dk/',
 		payments: 'Ikke oplyst',
 		prices: null,
 		fees: null,

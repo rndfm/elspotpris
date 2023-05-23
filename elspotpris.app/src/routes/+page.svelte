@@ -2,17 +2,24 @@
 	import {
 		priceNow,
 		co2EmissionNow,
-		transportNow,
 		consumption,
 		customConsumption,
 		calculatedProducts,
-		tax
+		tax,
+		tariff,
+		transport,
+		priceRegion,
+		electricityTax,
+		transmission
 	} from '../stores.js';
 
 	import { consumptionTypes } from '../prices.js';
 	import {} from '../data.js';
 	import ProductDetails from '../lib/ProductDetails.svelte';
 	import Bars from '../lib/Bars.svelte';
+	import Contribute from '../lib/Contribute.svelte';
+
+	let loading = true;
 
 	let productCalculations;
 	calculatedProducts.subscribe((value) => {
@@ -25,16 +32,35 @@
 			if (b.calculatedPrices.total === NaN) return -1;
 			return a.calculatedPrices.total < b.calculatedPrices.total ? -1 : 1;
 		});
+
+		loading = false;
+	});
+
+	let selectedTariff;
+	let selectedTariffId;
+	let transportTariffs;
+	tariff.subscribe((value) => {
+		selectedTariffId = value;
+		if (value && transportTariffs) {
+			selectedTariff = transportTariffs.find((t) => t.id === value);
+		}
+	});
+
+	transport.subscribe((value) => {
+		transportTariffs = value;
+		if (value && selectedTariffId) {
+			selectedTariff = transportTariffs.find((t) => t.id === selectedTariffId);
+		}
+	});
+
+	let region;
+	priceRegion.subscribe((value) => {
+		region = value;
 	});
 
 	let spotPriceNow;
 	priceNow.subscribe((value) => {
 		spotPriceNow = value;
-	});
-
-	let tariffNow;
-	transportNow.subscribe((value) => {
-		tariffNow = value;
 	});
 
 	let withTax;
@@ -43,7 +69,6 @@
 	});
 
 	let emisNow;
-
 	co2EmissionNow.subscribe((value) => {
 		emisNow = value;
 	});
@@ -57,7 +82,7 @@
 
 	let priceFormatter = new Intl.NumberFormat('da-DK', {
 		minimumFractionDigits: 2,
-		maximumFractionDigits: 5
+		maximumFractionDigits: 2
 	}).format;
 
 	function shouldWarn(product) {
@@ -75,89 +100,97 @@
 	const donateLink =
 		'https://products.mobilepay.dk/box/pay-in?id=2263bc16-d568-485c-98bd-b43768a5aa1a&phone=1996KN';
 
+	let productLink = "https://elspotpris.dk";
 	let donateModalActive = false;
+	let firstClick = true;
 
-	function goToProduct(link)
+	function showDonateModal(link)
 	{
-		donateModalActive = true;
-		setTimeout(() => {
-			window.open(link, '_blank');
-		}, 2500);
-		
+		if (firstClick)
+		{
+			donateModalActive = true;
+			productLink = link;
+			firstClick = false;
+		}
 	}
 </script>
 
 <svelte:head>
 	<title>elspotpris.dk - Find det elselskab der reelt er billigst for dig.</title>
-	<meta
-		name="description"
-		content="Sammenlign på de reelle udgifter hos elselskaberne. Se alle spotpristillæg, abonnement, betalingsgebyrer mv."
-	/>
+	<meta name="description" content="Sammenlign på de reelle udgifter hos elselskaberne. Se alle spotpristillæg, abonnement, betalingsgebyrer mv."	/>
+	<meta property="og:image" content="https://elspotpris.dk/facebook-preview-frontpage.png">
 </svelte:head>
 <div class="content">
 	<h1>elspotpris.dk</h1>
 	<div class="box">
 		<div class="flexgrid meters" id="meters">
 			<div class="col">
-				<span><small>Elprisen lige nu</small> {priceFormatter(spotPriceNow)} <small>kr</small></span
-				>
+				<span><small>Elprisen lige nu</small> {priceFormatter(spotPriceNow)} <small>kr</small></span>
 			</div>
 			<div class="col">
 				<span><small>CO<sub>2</sub></small> {emisNow} <small>g/kWh</small></span>
 			</div>
 		</div>
 		<Bars height={150} />
-		<a href="/live">Vælg indstillinger og se beregningen</a>
+		<ul class="live-settings">
+			<li>{region ?? ''}</li>
+			<li>{selectedTariff?.name ?? ''}</li>
+			<li>{#if $electricityTax}Med{:else}Uden{/if} elafgift</li>
+			<li>{#if $transmission}Med{:else}Uden{/if} transmission</li>
+			<li>{#if $tax}Med{:else}Uden{/if} moms</li>
+			<li><a href="/live">Vælg indstillinger</a></li>
+			<li><a href="/live">Vis som fuldskærm</a></li>	
+		</ul>
 	</div>
 
 	<h2>Find det billigste elselskab for dig.</h2>
 	<p class="lead">
-		Sammenligning de reelle udgifter hos de største elselskaber i Danmark.<br />
+		Sammenlign de reelle udgifter hos elselskaber i Danmark.
 	</p>
-	<div class="box">
-		<div class="flexgrid responsive">
-			<div class="col">
-				<h4>Vælg dit estimerede forbrug</h4>
-				<span>Ved forbrug pr. år.:</span>
-				<select bind:value={$consumption}>
-					{#each consumptionTypes as item}
-						<option value={item}>
-							{item.name}
-						</option>
-					{/each}
-				</select>
-				{#if $consumption.amount === null}
-					<p>
-						<label for="customConsumption">Indtast årligt forbrug (kWh)</label>
-						<input id="customConsumption" type="number" bind:value={$customConsumption} />
-					</p>
-				{/if}
-			</div>
-			<div class="col">
-				<h4>Filtre</h4>
-				<p>
-					<label for="monthlyPayment">
-						<input id="monthlyPayment" type="checkbox" bind:checked={paymentTypeConsumptionOnly} />
-						Vis kun forbrugsafregnede</label>
-					<label for="hideDiscountAgreement">
-						<input id="hideDiscountAgreement" type="checkbox" bind:checked={hideDiscountAgreements} />
-						Vis ikke rabataftaler</label>
-				</p>
-			</div>
-		</div>
-	</div>
 	<p>
 		Der sammenlignes på <strong>spotpristillæg, abonnementspris og betalingsgebyrer</strong>.<br />
 		Hvorfor det er vigtigt at sammenligne de reelle udgifter i stedet for en oplyst pris fra elselskabet,
 		kan du læse om nederst på siden
 	</p>
+
+	<div class="controls">
+		<div class="control">
+			<label for="consumption" class="header">Forbrug årligt</label>
+			<select id="consumption" bind:value={$consumption}>
+				{#each consumptionTypes as item}
+					<option value={item}>
+						{item.name}
+					</option>
+				{/each}
+			</select>
+		</div>
+		{#if $consumption.amount === null}
+			<div class="control">
+				<label for="customConsumption" class="header">Indtast årligt forbrug (kWh)</label>
+				<input id="customConsumption" type="number" bind:value={$customConsumption} />
+			</div>
+		{/if}
+		<div class="control">
+			<span class="header">Filtre</span>
+			<label for="monthlyPayment">
+				<input id="monthlyPayment" type="checkbox" bind:checked={paymentTypeConsumptionOnly} />
+				Vis kun forbrugsafregnede
+			</label>
+			<label for="hideDiscountAgreement">
+				<input id="hideDiscountAgreement" type="checkbox" bind:checked={hideDiscountAgreements} />
+				Vis ikke rabataftaler
+			</label>
+		</div>
+	</div>
 	{#if productCalculations}
-		{#each productCalculations.filter((p) => (!paymentTypeConsumptionOnly || p.paymentType == 'consumption') && (!hideDiscountAgreements || p.discountAgreement !== true)) as item}
-			<div class="box product" class:disabled={item.disabled}>
+		{#each productCalculations.filter((p) => !p.disabled && (!p.maxConsumption || p.maxConsumption >= ($consumption.amount || $customConsumption)) && (!p.minConsumption || p.minConsumption <= ($consumption.amount || $customConsumption)) && (!paymentTypeConsumptionOnly || p.paymentType == 'consumption') && (!hideDiscountAgreements || p.discountAgreement !== true)) as item}
+			<div class="product box" class:disabled={item.disabled}>
 				<div class="flexgrid responsive">
 					<div class="col information">
 						{#if item.logo}
-							<img src={item.logo} alt={item.name} />
+						<div class="logo">
+							<img src={item.logo} alt={item.name} height="50" width="166" />
+						</div>
 						{/if}
 						<h2 class:bigger={!item.logo}>
 							{item.name}
@@ -173,6 +206,9 @@
 						</h2>
 						{#if !item.disabled}
 							<div class="pills">
+								{#if item.checked }
+									<a href="/kontrol" class="good">&#10004; Elregninger kontrolleres</a>
+								{/if}
 								{#if item.bindingPeriod }
 									<span class="bad">{item.bindingPeriod}</span>
 								{:else if item.bindingPeriod === null}
@@ -185,17 +221,17 @@
 									<span class="good">Forbrugsafregnet</span>
 								{/if}
 								{#if item.paymentType == 'advance'}
-									<span class="bad">Acontoafregnet</span>
+									<span class="neutral">Acontoafregnet</span>
 								{/if}
 							</div>
-						{:else}
-							<small>Kan ikke beregnes da {item.name} ikke oplyser deres priser.</small>
 						{/if}
 					</div>
 					{#if !item.disabled}
 					<div class="col details table-scroll">
 						<ProductDetails product={item} />
 					</div>
+					{:else}
+						<small>Kan ikke beregnes da {item.name} ikke oplyser deres priser.</small>
 					{/if}
 					<div class="col calculations">
 						{#if !item.disabled}
@@ -208,87 +244,121 @@
 								Abonnement og gebyrer: {round(item.calculatedPrices.fees)} kr
 							</small>
 							
-							{#if item.link}<a class="cta" href={item.link} target="_blank" rel="noreferrer" on:click|preventDefault={goToProduct(item.link)}>Gå til produktet</a>{/if}
+							{#if item.link}<a class="cta" href={item.link} target="_blank" rel="noreferrer" on:click={showDonateModal(item.link)}>Gå til produktet</a>{/if}
 						{/if}
 					</div>
 				</div>
 			</div>
 		{/each}
 	{/if}
-	<p>
-		Omkostningerne vises årligt for det valgte forbrug. Priser vises {#if withTax}inkl{:else}eksl{/if}.
-		moms.<br>
-		<small>Er du representant for et elselskab og vil du opdaterer dit produkt eller have dit produkt med i vores sammenligning, så kontakt os på <a href="mailto:info@elspotpris.dk">info@elspotpris.dk</a></small>
-	</p>
-	<div class="flexgrid responsive">
-		<div class="col">
-			<h3>Sådan sammenligner du elselskabernes variable priser</h3>
-			<p>
-				En variabel pris består af flere dele, nogle af dele er ens for alle elselskaber, mens andre
-				er forskellige. Der giver derfor kun mening at sammenligne elselskaberne på de dele, som er
-				forskellige.
-			</p>
+	{#if !loading}
+		<p>
+			Omkostningerne vises årligt for det valgte forbrug. Priser vises {#if withTax}inkl{:else}ekskl{/if}. moms.<br />
+			<small>Er du repræsentant for et elselskab og vil du opdatere dit produkt eller have dit produkt med i vores sammenligning, så kontakt os på <a href="mailto:info@elspotpris.dk">info@elspotpris.dk</a></small>
+		</p>
+		<h3>Disse selskaber kan ikke vises, da deres reelle priser ikke er oplyst.</h3>
+		<p>For at kunne udregne den reelle pris man som forbruger kommer til at betale, skal elselskabet oplyse alle deres tillæg til elspotprisen. Ved nogle selskaber regner vi det samlede tillæg ud via elregninger indsendt af forbrugerne. Hvis vi ikke kan få oplyst og bekræftet alle tillæg kan prisen for elselskabet ikke udregnes.</p>
+		<ul class="list-wrap">
+			{#each productCalculations.filter((p) => p.disabled) as item}
+			<li>{item.name}</li>
+			{/each}
+		</ul>
+		<div class="flexgrid responsive">
+			<div class="col">
+				<h3>Sådan sammenligner du elselskabernes variable priser</h3>
+				<p>
+					En variabel pris består af flere dele, nogle dele er ens for alle elselskaber, mens andre
+					er forskellige. Det giver derfor kun mening at sammenligne elselskaberne på de dele, som er
+					forskellige.
+				</p>
 
-			<h4>Dele som er forskellige mellem elselskaberne:</h4>
-			<ul>
-				<li><strong>Abonnement</strong></li>
-				<li><strong>Betalingsgebyrer</strong></li>
-				<li><strong>Tillæg til spotprisen</strong></li>
-			</ul>
+				<h4>Dele som er forskellige mellem elselskaberne:</h4>
+				<ul>
+					<li><strong>Abonnement</strong></li>
+					<li><strong>Betalingsgebyrer</strong></li>
+					<li><strong>Tillæg til spotprisen</strong></li>
+				</ul>
 
-			<h4>Dele som vil være uændret uanset hvilket elselskab du vælger:</h4>
-			<ul>
-				<li>
-					<strong>Spotpris</strong> - Prisen baseres på elbørsen
-					<a href="https://www.nordpoolgroup.com" target="_blank" rel="noreferrer">Nordpool</a>.
-					Prisen varierer time for time, men er ens for alle elselskaber.
-				</li>
-				<li>
-					<strong>Transport</strong> - Transporten betales til dit lokale netselskab, dem som ejer ledningerne
-					i jorden. Transportprisen er derfor ens uanset hvilket elselskab du vælger.
-				</li>
-				<li>
-					<strong>Afgift og transmission</strong> - Betales til staten og er ens uanset elselskab.
-				</li>
-			</ul>
+				<h4>Dele som vil være uændret uanset hvilket elselskab du vælger:</h4>
+				<ul>
+					<li>
+						<strong>Spotpris</strong> - Prisen baseres på elbørsen
+						<a href="https://www.nordpoolgroup.com" target="_blank" rel="noreferrer">Nordpool</a>.
+						Prisen varierer time for time, men er ens for alle elselskaber.
+					</li>
+					<li>
+						<strong>Transport</strong> - Transporten betales til dit lokale netselskab, dem som ejer ledningerne
+						i jorden. Transportprisen er derfor ens uanset hvilket elselskab du vælger.
+					</li>
+					<li>
+						<strong>Afgift og transmission</strong> - Betales til staten og er ens uanset elselskab.
+					</li>
+				</ul>
 
-			<p>
-				Mange elselskaber ønsker ikke at oplyse deres tillæg til spotprisen, og der er intet i
-				lovgivningen der tvinger dem til det.<br />
-				Nogle bruger endda udtryk som "indkøbspris", "kostpris" eller "følger spotprisen" selvom de ligger
-				avance oven på spotprisen.<br />
-			</p>
-			<p>
-				Vi har derfor samlet denne liste, hvor vi har tillæggene til spotprisen, så elselskaberne
-				kan sammenlignes på deres reelle priser.
-			</p>
+				<p>
+					Mange elselskaber ønsker ikke at oplyse deres tillæg til spotprisen, og der er intet i
+					lovgivningen, der tvinger dem til det.<br />
+					Nogle bruger endda udtryk som "indkøbspris", "kostpris" eller "følger spotprisen" selvom de lægger
+					avance oven på spotprisen.<br />
+				</p>
+				<p>
+					Vi har derfor samlet denne liste, hvor vi har tillæggene til spotprisen, så elselskaberne
+					kan sammenlignes på deres reelle priser.
+				</p>
+			</div>
 		</div>
-	</div>
+		<Contribute></Contribute>
+	{/if}
 </div>
 <div class="modal" class:active={donateModalActive} on:click|self={() => donateModalActive = false} on:keydown|self={() => donateModalActive = false}>
 	<div class="modal-content">
 		<span class="close" on:click={() => donateModalActive = false} on:keydown={() => donateModalActive = false}>&times;</span>
 		<p class="lead">Linket åbnes i en ny fane/vindue</p>
-		<p>
-			elspotpris.dk bliver udviklet og driftet i min fritid. Hvis elspotpris.dk er brugbar for dig,
-			så overvej at støtte driften og den videre udvikling.<br />
-			-
-			<a href="https://www.linkedin.com/in/christian-reinholdt-76712b45/"
-				target="_blank"
-				rel="noreferrer">Christian Reinholdt</a>
-		</p>
-		<a href={donateLink} target="_blank" rel="noreferrer">
-			<img
-				src="/donate/donate-mobilepay.png"
-				style="max-width: 100%; height: auto; width: auto;"
-				alt="Støt elspotpris.dk med mobilepay"
-				width="510"
-				height="120"/>
-		</a>
-	  </div>
+		<p>Hvis linket ikke automatisk åbner så <a href={productLink} target="_blank" rel="noreferrer">tryk her</a></p>
+		<Contribute></Contribute>
+	</div>
 </div>
 
+{#if loading}
+	<div class="loading">
+		<div class="lds-ripple"><div></div><div></div></div>
+	</div>
+{/if}
 <style lang="scss">
+	.controls {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1em;
+		.control {
+			flex: 1;
+			background-color: #f9f9f9;
+			padding: 1em 1em;
+			border-radius: 0.6em;
+			.header {
+				display: block;
+				margin-bottom: 0.5em;
+				text-transform: uppercase;
+				font-size: 0.8em;
+				font-weight: 600;
+			}
+		}
+	}
+
+	.dark {
+		.controls {
+			.control {
+				background-color: #1f1f1f;
+			}
+		}
+	}
+
+	ul.list-wrap {
+		display: flex;
+		flex-wrap: wrap;
+		li {
+			margin-right: 2em;
+		}
+	}
 
 	.modal {
 		display: none;
@@ -368,7 +438,6 @@
 
 	.product {
 		margin-bottom: 2em;
-
 		h2 {
 			margin: 1em 0;
 			font-size: 1.2em;
@@ -381,6 +450,15 @@
 		.col.information {
 			position: relative;
 			padding-bottom: 2em;
+
+			.logo {
+				height: 50px;
+
+				img {
+					height: 100%;
+					width: auto;
+				}
+			}
 			
 			.pills {
 				position: absolute;
@@ -407,7 +485,7 @@
 			a.cta {
 				display:block;
 				text-align: center;
-				background: #0a0;
+				background: #080;
 				color: #fff;
 				border: none;
 				padding: 0.5em 1em;
@@ -443,11 +521,6 @@
 		}
 	}
 
-	div.content {
-		margin: 0 auto;
-		max-width: 1400px;
-	}
-
 	.pills > * {
 		font-size: 0.8em;
 		color: white;
@@ -455,7 +528,7 @@
 		padding: 0.25em 0.5em;
 
 		&.good {
-			background-color: #0a0;
+			background-color: #080;
 		}
 		&.bad {
 			background-color: #b74932;
@@ -480,6 +553,19 @@
 
 		.table-scroll {
 			margin: 0 -1em;
+		}
+	}
+
+	.live-settings {
+		display: flex;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		flex-wrap: wrap;
+		li {
+			font-size: 0.8em;
+			padding: 0.5em 1em;
 		}
 	}
 </style>

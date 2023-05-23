@@ -9,7 +9,7 @@
 
 	let priceFormatter = new Intl.NumberFormat('da-DK', {
 		minimumFractionDigits: 2,
-		maximumFractionDigits: 5
+		maximumFractionDigits: 2
 	}).format;
 
 	const dayDateStringOptions = { weekday: 'long', day: 'numeric' };

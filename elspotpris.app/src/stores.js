@@ -29,6 +29,7 @@ export const calculatedProducts = writable();
 
 export const prices = writable();
 export const priceNow = writable(0);
+export const spotNow = writable(0);
 export const transport = writable();
 export const transportNow = writable();
 export const governmentTariffsNow = writable();

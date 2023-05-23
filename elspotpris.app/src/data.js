@@ -16,7 +16,8 @@ import {
 	transport,
 	transportNow,
 	governmentTariffsNow,
-	transmissionTariffsNow
+	transmissionTariffsNow,
+	spotNow
 } from './stores.js';
 import { governmentTariffs, transmissionTariffs, products } from './prices';
 import { io } from 'socket.io-client';
@@ -39,17 +40,16 @@ const getActiveTariffs = (datetime) => {
 		return null;
 	}
 
-	const activeEntries = selectedTariff.entries.filter(
-		(e) =>
-			(e.validFrom === null || new Date(e.validFrom) <= datetime) &&
-			(e.validTo === null || new Date(e.validTo) > datetime)
+	const activeEntries = selectedTariff.entries.filter((e) =>
+		(e.validFrom === null || new Date(e.validFrom) <= datetime) &&
+		(e.validTo === null || new Date(e.validTo) > datetime)
 	);
 
 	let hour = datetime.getHours();
 	const activeTariffs = [];
 	activeEntries.forEach((entry) => {
 		entry.prices
-			.filter((t) => t.start <= hour && t.end >= hour)
+			.filter((t) => t.start <= hour && t.end >= hour && t.price)
 			.forEach((p) => {
 				activeTariffs.push(p);
 			});
@@ -60,12 +60,16 @@ const getActiveTariffs = (datetime) => {
 
 const getActiveGovernmentTariffs = (datetime) => {
 	return governmentTariffs
-		.filter(t => (t.validFrom === null || new Date(t.validFrom) <= datetime) && (t.validTo === null || new Date(t.validTo) > datetime))
+		.filter(t =>
+			(t.validFrom === null || new Date(t.validFrom) <= datetime) && 
+			(t.validTo === null || new Date(t.validTo) > datetime))
 };
 
 const getActiveTransmissionTariffs = (datetime) => {
 	return transmissionTariffs
-		.filter(t => (t.validFrom === null || new Date(t.validFrom) <= datetime) && (t.validTo === null || new Date(t.validTo) > datetime))
+		.filter(t => 
+			(t.validFrom === null || new Date(t.validFrom) <= datetime) && 
+			(t.validTo === null || new Date(t.validTo) > datetime))
 };
 
 const calculateTariffs = (datetime) => {
@@ -111,11 +115,8 @@ const calculateProductPrice = (product, spotPrice, region) => {
 };
 
 const calculateTotalPrice = (product, spotPrice, datetime) => {
-	const pricePerKwh =
-		(calculateProductPrice(product, spotPrice, region) + calculateTariffs(datetime)) *
+	return (calculateProductPrice(product, spotPrice, region) + calculateTariffs(datetime)) *
 		(includeTax ? taxRate : 1);
-
-	return Math.round((pricePerKwh + Number.EPSILON) * 100) / 100;
 };
 
 const calculatePrices = () => {
@@ -170,9 +171,30 @@ const calculatePrices = () => {
 				)
 			);
 
-			const transportEntry = getActiveTariffs(now);
-			transportNow.set(transportEntry);
+			spotNow.set({
+				price: priceEntry.prices.filter((p) => p.area == region)[0].price / 1000,
+				area: region,
+				hour: new Date(priceEntry.hour).getHours()
+			});
 
+			if (selectedTariff)
+			{
+				const activeTransportEntries = selectedTariff.entries.filter((e) =>
+					(e.validFrom === null || new Date(e.validFrom) <= now) &&
+					(e.validTo === null || new Date(e.validTo) > now) &&
+					(e.prices.some((p) => p.price))
+				);
+			
+				let hour = now.getHours();
+				activeTransportEntries.forEach((entry) => {
+					entry.prices
+						.forEach((p) => {
+							p.active = p.start <= hour && p.end >= hour;
+						});
+				});
+
+				transportNow.set(activeTransportEntries);
+			}
 			const activeGovernmentTariffs = getActiveGovernmentTariffs(now);
 			governmentTariffsNow.set(activeGovernmentTariffs);
 
@@ -223,6 +245,16 @@ else var socket = io();
 
 socket.on('region', function (data) {
 	priceRegion.set(data);
+
+	// Default to N1 for DK1 and radius_c for DK2.
+	console.log(selectedTariffId);
+	if (selectedTariffId == 'none')
+	{
+		if (data == 'DK1') 
+			tariff.set('n1_c');
+		else
+			tariff.set('radius_c')
+	}
 });
 
 socket.on('prices', function (data) {
