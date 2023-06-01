@@ -297,6 +297,39 @@ export const products = [
 		]
 	},
 	{
+		id: 'nordisk_energi',
+		name: 'Nordisk Energi Variabel',
+		link: 'https://nordiskenergy.dk/',
+		logo: 'logo/',
+		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
+		bindingPeriod: null,
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.10
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 0
+			},
+			{
+				name: 'Omkostning/gebyr pr. regning. ved betaling via netbank.',
+				amount: 0
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 0,
+				paymentsPerYear: 12
+			}
+		]
+	},	{
 		id: 'vindstoed_vestroem',
 		name: 'Vindstød VEstrøm',
 		link: 'https://www.vindstoed.dk/',
