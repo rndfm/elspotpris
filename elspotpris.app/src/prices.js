@@ -1557,6 +1557,35 @@ export const products = [
 		]
 	},
 	{
+		id: 'looad',
+		name: 'LOOAD',
+		link: 'https://looad.dk/el-til-hjemmet/',
+		logo: '/logo/grow-energy.png',
+		payments: 'Acontobetaling månedligt',
+		paymentType: "advance",
+		bindingPeriod: "Ingen binding",
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.08
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 0
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 10
+			}
+		]
+	},
+	{
 		id: 'nef',
 		name: 'nef',
 		link: 'https://nef.dk/elprodukter/',
@@ -1587,15 +1616,6 @@ export const products = [
 		id: 'energi_viborg',
 		name: 'Energi Viborg',
 		link: 'https://www.energiviborg.dk/stroem/bestil-stroem',
-		payments: 'Ikke oplyst',
-		prices: null,
-		fees: null,
-		disabled: true
-	},
-	{
-		id: 'looad',
-		name: 'LOOAD',
-		link: 'https://looad.dk/el-til-hjemmet/',
 		payments: 'Ikke oplyst',
 		prices: null,
 		fees: null,
