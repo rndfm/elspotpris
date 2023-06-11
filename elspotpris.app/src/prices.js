@@ -1562,7 +1562,7 @@ export const products = [
 		link: 'https://looad.dk/el-til-hjemmet/',
 		payments: 'Acontobetaling månedligt',
 		paymentType: "advance",
-		bindingPeriod: "Ingen binding",
+		bindingPeriod: null,
 		prices: [
 			{
 				name: 'Spotpris',
