@@ -1560,7 +1560,6 @@ export const products = [
 		id: 'looad',
 		name: 'LOOAD',
 		link: 'https://looad.dk/el-til-hjemmet/',
-		logo: '/logo/grow-energy.png',
 		payments: 'Acontobetaling månedligt',
 		paymentType: "advance",
 		bindingPeriod: "Ingen binding",
@@ -1571,7 +1570,7 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.08
+				amount: 0.064
 			}
 		],
 		fees: [
