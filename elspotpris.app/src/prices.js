@@ -653,6 +653,7 @@ export const products = [
 		link: 'https://www.ok.dk/privat/produkter/el/spotpris',
 		payments: 'Forbrugsafregnet månedligt',
 		paymentType: "consumption",
+		bindingPeriod: "6 mdr. binding",
 		prices: [
 			{
 				name: 'Spotpris',
