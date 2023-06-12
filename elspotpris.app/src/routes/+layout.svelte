@@ -33,6 +33,7 @@
 		<ul>
 			<li><a href="/" on:click={() => (menuActive = false)}>Forside</a></li>
 			<li><a href="/live" on:click={() => (menuActive = false)}>Live</a></li>
+			<li><a href="https://strømligning.dk/elregning" on:click={() => (menuActive = false)} target="_blank" rel="noreferrer">Tjek elregning</a></li>
 			<li><a href="/nyheder" on:click={() => (menuActive = false)}>Nyheder</a></li>
 			<!-- <li><a href="/guide" on:click={() => (menuActive = false)}>Guide</a></li> -->
 			<!-- <li><a href="/automatisering">Automatisering</a></li>
