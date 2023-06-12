@@ -539,8 +539,8 @@ export const products = [
 		id: 'ok_el_flex',
 		name: 'OK El Flex',
 		link: 'https://www.ok.dk/',
-		payments: 'Acontobetaling månedligt',
-		paymentType: "advance",
+		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		bindingPeriod: "6 mdr. binding",
 		prices: [
 			{
@@ -576,8 +576,8 @@ export const products = [
 		id: 'groen_ok_el_flex',
 		name: 'Grøn OK El Flex',
 		link: 'https://www.ok.dk/',
-		payments: 'Acontobetaling månedligt',
-		paymentType: "advance",
+		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		bindingPeriod: "6 mdr. binding",
 		prices: [
 			{
@@ -613,8 +613,8 @@ export const products = [
 		id: 'groen_ok_el_spot',
 		name: 'Grøn OK El Spot',
 		link: 'https://www.ok.dk/privat/produkter/el/spotpris',
-		payments: 'Acontobetaling månedligt',
-		paymentType: "advance",
+		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		bindingPeriod: "6 mdr. binding",
 		prices: [
 			{
@@ -651,9 +651,8 @@ export const products = [
 		id: 'ok_el_spot',
 		name: 'OK El Spot',
 		link: 'https://www.ok.dk/privat/produkter/el/spotpris',
-		payments: 'Acontobetaling månedligt',
-		paymentType: "advance",
-		bindingPeriod: "6 mdr. binding",
+		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		prices: [
 			{
 				name: 'Spotpris',
