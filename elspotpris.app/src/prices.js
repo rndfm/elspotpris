@@ -1087,14 +1087,14 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.17824,
+				amount: 0.1583,
 				conditions: 'Tillægget ændres hver måned uden varsel'
 			}
 		],
 		fees: [
 			{
 				name: 'Abonnement',
-				amount: 12.8,
+				amount: 14.4,
 				paymentsPerYear: 12
 			},
 			{
