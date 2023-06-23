@@ -913,7 +913,7 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.12
+				amount: 0.06
 			}
 		],
 		fees: [
