@@ -903,8 +903,8 @@ export const products = [
 		id: 'verdo_variabel_timepris',
 		name: 'Verdo Variabel Timepris',
 		link: 'https://www.verdo.com/dk/elsalg-privat/',
-		payments: 'Acontobetaling 2 måneder',
-		paymentType: "advance",
+		payments: 'Forbrugsafregnet månedligt',
+		paymentType: "consumption",
 		bindingPeriod: null,
 		prices: [
 			{
@@ -913,7 +913,7 @@ export const products = [
 			},
 			{
 				name: 'Tillæg til spotpris',
-				amount: 0.06
+				amount: 0.12
 			}
 		],
 		fees: [
