@@ -1613,6 +1613,36 @@ export const products = [
 		disabled: true
 	},
 	{
+		id: 'stromlinet_prisgaranti',
+		name: 'Strømlinet Prisgaranti Variabel',
+		link: 'https://stromlinet.dk/',
+		payments: 'Acontobetaling kvartalsvis',
+		paymentType: "advance",
+		bindingPeriod: null,
+		prices: [
+			{
+				name: 'Spotpris',
+				amount: null
+			},
+			{
+				name: 'Tillæg til spotpris',
+				amount: 0.11,
+			}
+		],
+		fees: [
+			{
+				name: 'Abonnement',
+				amount: 23.2,
+				paymentsPerYear: 12
+			},
+			{
+				name: 'Betaling via betalingsservice',
+				amount: 6.4,
+				paymentsPerYear: 4
+			}		
+		]
+	},
+	{
 		id: 'energi_viborg',
 		name: 'Energi Viborg',
 		link: 'https://www.energiviborg.dk/stroem/bestil-stroem',
